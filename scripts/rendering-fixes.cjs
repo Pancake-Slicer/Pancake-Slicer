@@ -6,27 +6,57 @@ function applyRenderingFixes(source) {
     source = source.replace(before, () => after);
   };
   replace('const v=H-x<150?A?.5:.75:1;', 'const v=1;');
+  // Keep a stable, screen-resolution image rather than supersampling every
+  // full-scene redraw at up to four times the display's CSS pixel count.
+  replace('nt=Math.min(window.devicePixelRatio||1,2);', 'nt=1;');
+  replace('const Pt=Math.min(A?2:4,b.capabilities.maxSamples);', 'const Pt=Math.min(2,b.capabilities.maxSamples);');
+  replace('shadowSize:Math.min(A?2048:4096,b.capabilities.maxTextureSize)', 'shadowSize:Math.min(A?1024:2048,b.capabilities.maxTextureSize)');
+  replace('let Ze=performance.now();return b.setAnimationLoop', 'let pcShadowViewAt=-Infinity;let Ze=performance.now();return b.setAnimationLoop');
+  replace('I.updateView(ut,yt.target,X),_&&(x=H,_=!1);', `(_||H-x<150)?(H-pcShadowViewAt>=100&&(I.updateView(ut,yt.target,X),pcShadowViewAt=H)):(I.updateView(ut,yt.target,X),pcShadowViewAt=H),_&&(x=H,_=!1);`);
 
-  // Validate width/area as before, but only triangular plots use the old
-  // erosion/dilation and acute-corner treatment. Other footprints stay sharp.
-  replace('function dh(n,{minimumWidth:t=3,minimumArea:e=45,preserveBoundary:i=!1}={}){', `function dh(n,options={}){
-    const {minimumWidth=3,minimumArea=45,preserveBoundary=false}=options;
+  // Rendered road fillets must not become rounded building plot boundaries.
+  // Use an independent mitered setback mask for development, without touching
+  // the visible roads or their render caches.
+  replace('function Yb(n){', `const pcDevelopmentMasks=new WeakMap;
+    function pcRoundTrianglePlots(mask){
+      const fill=[];
+      for(const part of xn(mask))for(const hole of part.holes){
+        const outline=yg(hole);
+        if(outline.length!==3)continue;
+        const plot=Te(outline),inset=cn(plot,-1.5);
+        if(!inset.length)continue;
+        const rounded=Ee(plot,cn(inset,1.5));
+        fill.push(...je(plot,rounded));
+      }
+      return fill.length?ve([...mask,...fill]):mask;
+    }
+    function Yb(n){`);
+  replace('e=Nd.get(n);if(e&&e.roads.length===t.length', 'e=pcDevelopmentMasks.get(n);if(e&&e.roads.length===t.length');
+  replace('r=(c,u)=>cn(cn(ve(c),u),-u),o=ve([', 'r=(c,u)=>Bo(Bo(ve(c),u),-u),o=ve([');
+  replace('l=cn(a,1.5);return _g(n,t,l)}', 'l=pcRoundTrianglePlots(Bo(a,1.5));return _g(n,t,l,pcDevelopmentMasks)}');
+  replace('function _g(n,t,e){', 'function _g(n,t,e,cache=Nd){');
+  replace('return Nd.set(n,s),s}function Hb', 'return cache.set(n,s),s}function Hb');
+  // Subtracting rounded buffers around an earlier building can also curve its
+  // neighbours. These are collision/setback masks, not rendered geometry.
+  replace('mask:Hc.get(N)??cn(Te(N.footprint),.025)', 'mask:Hc.get(N)??Bo(Te(N.footprint),.025)');
+  replace('Hc.set(N,cn(Te(N.footprint),.025))', 'Hc.set(N,Bo(Te(N.footprint),.025))');
+
+  // Rounded boundaries are decided at the enclosed PLOT level above. Never
+  // infer a triangular plot from an individual subdivided building footprint.
+  const oldFootprint=source.slice(source.indexOf('function dh(n,'),source.indexOf('function Pp(n,'));
+  replace(oldFootprint, `function dh(n,options={}){
+    const {minimumWidth=3,minimumArea=45}=options;
     const frame=br(n);
     const clean=oa(ps.Clipper.SimplifyPolygons(frame.groups[0],ps.PolyFillType.pftNonZero),frame);
     return xn(clean).filter(part=>!part.holes.length).flatMap(part=>{
       const outer=yg(part.outer),paths=Te(outer);
       if(outer.length<3||sn(paths)<minimumArea||!Bo(paths,-minimumWidth/2).length)return [];
-      return outer.length===3&&!preserveBoundary
-        ? pcV52Footprint(paths,options)
-        : [{...part,outer}];
+      return [{...part,outer}];
     });
-  }
-  function pcV52Footprint(n,{minimumWidth:t=3,minimumArea:e=45,preserveBoundary:i=!1}={}){`);
+  }`);
   replace('i=Bo(e,-.15);return xn(Ee(e,Bo(i,.15))).filter(s=>!s.holes.length&&sn(Te(s.outer))>=45).map(s=>yg(s.outer))}', `i=xn(e);return i.filter(part=>!part.holes.length).flatMap(part=>{
     const outer=yg(part.outer);
-    if(outer.length!==3)return sn(Te(outer))>=45?[outer]:[];
-    const paths=Te(outer),inset=Bo(paths,-.15);
-    return xn(Ee(paths,Bo(inset,.15))).filter(shape=>!shape.holes.length&&sn(Te(shape.outer))>=45).map(shape=>yg(shape.outer));
+    return sn(Te(outer))>=45?[outer]:[];
   })}`);
 
   replace('function Ql(n,t,e){', `function Ql(n,t,e,{top=true,bottom=true}={}){`);
@@ -49,3 +79,10 @@ function applyRenderingFixes(source) {
   return source;
 }
 module.exports = { applyRenderingFixes };
+if(require.main===module){
+  const fs=require('node:fs'),path=require('node:path');
+  const root=path.resolve(__dirname,'..');
+  const original=fs.readFileSync(path.join(root,'original/Pancake (52).html'),'utf8');
+  const script=original.match(/<script\b[^>]*type=["']module["'][^>]*>([\s\S]*?)<\/script>/i)[1];
+  fs.writeFileSync(path.join(root,'web/assets/game.bundle.js'),applyRenderingFixes(script));
+}

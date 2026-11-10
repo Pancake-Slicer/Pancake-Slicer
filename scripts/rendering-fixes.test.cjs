@@ -8,17 +8,16 @@ const current = fs.readFileSync(path.join(root, 'web/assets/game.bundle.js'), 'u
 const original = fs.readFileSync(path.join(root, 'original/Pancake (52).html'), 'utf8');
 const baseline = original.match(/<script\b[^>]*type=["']module["'][^>]*>([\s\S]*?)<\/script>/i)[1];
 function load(source) {
-  const context = vm.createContext({ console, performance, document: { createElement: () => ({ relList: { supports: () => true }, getContext: () => ({fillRect(){}}) }) } });
+  const context = vm.createContext({ console, performance, structuredClone, document: { createElement: () => ({ relList: { supports: () => true }, getContext: () => ({fillRect(){}}) }) } });
   const end = source.indexOf('const LP=');
   assert.ok(end > 0, 'Locate the end of runtime definitions before starting the UI');
-  vm.runInContext(source.slice(0, end) + ';globalThis.geometry={Ql,dh,Ep,Te,xn,sn,pS,Se};', context);
+  vm.runInContext(source.slice(0, end) + ';globalThis.geometry={Ql,dh,Ep,Te,xn,sn,pS,Se,zb,Wb,Od,Hb,Dd,cn};', context);
   return context.geometry;
 }
 const live = load(current), old = load(baseline);
 const square = [{x:0,z:0},{x:20,z:0},{x:20,z:12},{x:0,z:12}];
 const acuteQuad = [{x:0,z:0},{x:30,z:0},{x:12,z:8},{x:0,z:8}];
 const triangle = [{x:0,z:0},{x:24,z:0},{x:5,z:16}];
-const plain = value => JSON.parse(JSON.stringify(value));
 test('camera rendering stays at full resolution during motion and after stopping', () => {
   const begin = current.indexOf('const v=', current.indexOf('j.updateLOD(ut)'));
   const end = current.indexOf('if((m||Jt)', begin);
@@ -46,9 +45,9 @@ test('rectangular and acute quadrilateral parcels retain their exact sharp footp
   }
   assert.ok(old.dh(old.Te(acuteQuad))[0].outer.length>4,'The fixture must reproduce v52 corner rounding');
 });
-test('triangular footprint rounding and narrow/sliver rejection remain available', () => {
-  assert.deepEqual(plain(live.dh(live.Te(triangle))),plain(old.dh(old.Te(triangle))));
-  assert.deepEqual(plain(live.Ep(triangle)),plain(old.Ep(triangle)));
+test('a triangular building subdivision does not by itself authorize a rounded plot', () => {
+  assert.equal(live.dh(live.Te(triangle))[0].outer.length,3);
+  assert.equal(live.Ep(triangle)[0].length,3);
   for (const polygon of [[{x:0,z:0},{x:30,z:0},{x:30,z:1},{x:0,z:1}], [{x:0,z:0},{x:2,z:0},{x:2,z:2},{x:0,z:2}]])assert.equal(live.dh(live.Te(polygon)).length,0);
 });
 function faces(geometry) {
@@ -94,4 +93,56 @@ test('the actual neighborhood renderer uses the open internal caps and retains f
   for(const geometry of shells)for(const face of faces(geometry))if(Math.abs(face.normal)>.5){
     assert.ok(face.points.every(p=>Math.abs(p[1]+.18)<1e-5||Math.abs(p[1]-11.16)<1e-5),'Only the exterior bottom and top caps should be rendered');
   }
+});
+function generate(api,points,{renderCache=false}={}){
+  const network=new api.zb();
+  assert.equal(network.addBatch(points.map((point,i)=>[point,points[(i+1)%points.length]])).ok,true);
+  if(renderCache)api.Hb(network,network.roads,api.Dd(network).corridor);
+  return api.Wb(network,{rowhouses:api.Od(network)});
+}
+test('full road-to-building pipeline produces sharp rectangular street corners, including after road rendering',()=>{
+  const points=[{x:-60,z:-60},{x:60,z:-60},{x:60,z:60},{x:-60,z:60}];
+  const diagonalEdges=building=>building.footprint.filter((p,i,ring)=>{
+    const q=ring[(i+1)%ring.length];return Math.abs(p.x-q.x)>1e-4&&Math.abs(p.z-q.z)>1e-4;
+  }).length;
+  assert.ok(generate(old,points).some(b=>b.corner&&diagonalEdges(b)>0),'Reproduce inherited curved plot boundaries from v52');
+  for(const renderCache of [false,true]){
+    const buildings=generate(live,points,{renderCache});
+    assert.ok(buildings.length>50);
+    assert.ok(buildings.some(b=>b.corner));
+    assert.ok(buildings.every(b=>diagonalEdges(b)===0),'Every wall on this axis-aligned rectangular block must remain axis-aligned');
+  }
+});
+test('a genuinely triangular enclosed plot retains rounded building corners',()=>{
+  const buildings=generate(live,[{x:0,z:0},{x:50,z:0},{x:25,z:50}]);
+  const triangularPlot=buildings.filter(b=>b.wholeBlock);
+  assert.ok(triangularPlot.length>0);
+  assert.ok(triangularPlot.some(b=>b.footprint.length>3),'Triangular plots should still have corner arc segments');
+});
+test('camera quality stays stable without high-DPI supersampling or four-sample targets',()=>{
+  const begin=current.indexOf('const tt=1,nt='),end=current.indexOf('St.addPass(new RS',begin);
+  assert.ok(begin>0&&end>begin);
+  for(const devicePixelRatio of [1,2,3])for(const maxSamples of [1,4])for(const A of [true,false]){
+    let rendererRatio,composerRatio;
+    const context={A,window:{devicePixelRatio},b:{capabilities:{maxSamples},setPixelRatio:value=>{rendererRatio=value;}},zS:class{
+      constructor(){this.renderTarget1={};this.renderTarget2={};}
+      setPixelRatio(value){composerRatio=value;}
+    }};
+    vm.runInNewContext(current.slice(begin,end).replace(/,$/,';')+'globalThis.targets=[St.renderTarget1,St.renderTarget2];',context);
+    assert.equal(rendererRatio,1);
+    assert.equal(composerRatio,1);
+    for(const target of context.targets)assert.equal(target.samples,Math.min(2,maxSamples));
+  }
+});
+test('camera motion bounds expensive shadow-view updates and refreshes after settling',()=>{
+  const begin=current.indexOf('(_||H-x<150)?');
+  const end=current.indexOf(',_&&(x=H,_=!1);',begin);
+  assert.ok(begin>0&&end>begin);
+  let calls=0;
+  const context=vm.createContext({I:{updateView:()=>{calls++;}},ut:{},yt:{target:{}},X:[],pcShadowViewAt:-Infinity,H:0,x:0,_:true});
+  const code=current.slice(begin,end);
+  for(let frame=0;frame<60;frame++){context.H=frame*1000/60;context.x=context.H;vm.runInContext(code,context);}
+  assert.ok(calls>=9&&calls<=10,`Expected at most ten shadow recalculations, got ${calls}`);
+  context._=false;context.H=1200;vm.runInContext(code,context);
+  assert.equal(context.pcShadowViewAt,1200,'The settled camera must immediately receive a fresh shadow view');
 });
