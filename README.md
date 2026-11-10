@@ -7,7 +7,8 @@ This project was reconstructed **only** from the user-provided `Pancake (52).htm
 - `original/Pancake (52).html` — exact original playable build, unchanged. Keep this as the immutable fallback.
 - `web/index.html` — HTML shell pointing to extracted files.
 - `web/assets/game.bundle.js` — recovered bundled/minified JavaScript with the reviewed rendering fixes described below.
-- `web/assets/game.css` — original stylesheet, extracted **without modifying the contents**.
+- `web/assets/game.css` — original stylesheet plus the Office tab styling.
+- `web/features/offices.js` and `offices.css` — editable Office zoning source, embedded in the generated runtime and standalone export.
 - `reference/third-party-notices.txt` — copy of embedded third-party notices (the notices remain in `web/index.html`).
 - `docs/RECOVERY_NOTES.md` — verification details, limitations and suggested next steps.
 
@@ -33,6 +34,10 @@ Run `npm run export:html` to build and package the current game as `dist/Pancake
 Run `npm run export:html -- --downloads` to also copy the result to your Windows account's Downloads folder. This refuses to overwrite an existing Downloads playtest; keep or rename that file before exporting another copy. The protected original HTML is never used as an output destination.
 
 ## Development workflow
+
+Office zoning adds a second **Office** tab beside Brick rowhouses. Choose **Zoning → Office**, then paint adjoining properties to form larger office sites, or use Bucket fill on one property for a smaller building. The mix includes Art Deco setback towers, International-style curtain walls, and modernist ribbon windows, spanning 10–80 storeys. Heights are deterministic and depend on site area; narrow individual plots produce lower offices. Undo/redo, demolition, repainting, and rezoning use the existing tools.
+
+Edit Office source in `web/features/`, then run `npm run assemble` to regenerate the development runtime. Build and export commands assemble automatically. The immutable v52 artifact and `approved-v52` Git tag remain the fallback; new Office development is not part of that approved checkpoint.
 
 The local Windows setup adds `npm run check` (original preservation, reviewed runtime changes, syntax, and rendering regression checks), `npm run build` (validated packaging into `dist/`), and `npm run preview` (built game at port 4174). See `AGENTS.md` for milestone rules; each push requires your approval.
 

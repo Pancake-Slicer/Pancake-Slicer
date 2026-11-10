@@ -80,9 +80,5 @@ function applyRenderingFixes(source) {
 }
 module.exports = { applyRenderingFixes };
 if(require.main===module){
-  const fs=require('node:fs'),path=require('node:path');
-  const root=path.resolve(__dirname,'..');
-  const original=fs.readFileSync(path.join(root,'original/Pancake (52).html'),'utf8');
-  const script=original.match(/<script\b[^>]*type=["']module["'][^>]*>([\s\S]*?)<\/script>/i)[1];
-  fs.writeFileSync(path.join(root,'web/assets/game.bundle.js'),applyRenderingFixes(script));
+  require('./assemble-runtime.cjs');
 }

@@ -12,6 +12,8 @@ The launcher starts the development copy in `web/`. It never modifies the origin
 
 ## Commands for development
 
+The Office playtest is `C:\Users\camsh\Downloads\Pancake City - Office Playtest.html`. Open it with Chrome, create terrain and streets, then select **Zoning → Office**. Paint a run of neighboring properties for larger towers; Bucket fill on one narrow plot makes a smaller office. Offices vary from 10 to 80 storeys across Art Deco, International, and modernist designs. The earlier playtest files do not include Office zoning.
+
 For a single-file offline copy, open `C:\Users\camsh\Downloads\Pancake City - Playtest.html` with Google Chrome. No server window is needed. The first export was generated on 2026-11-10; Chrome automation was blocked by permissions, so its interactive launch still needs a hands-on check.
 
 To generate a fresh standalone build, run `npm.cmd run export:html`. The result is `dist/Pancake City - Playtest.html`. To also copy it to Downloads, use `npm.cmd run export:html -- --downloads`; an existing Downloads file must first be kept under a different name. Exporting never edits the original v52 HTML.
