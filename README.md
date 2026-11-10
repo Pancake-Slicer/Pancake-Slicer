@@ -26,7 +26,13 @@ npm start
 
 Then open `http://127.0.0.1:4173`. The local server is important because browsers may block JavaScript modules loaded directly from `file://` paths.
 
-## Continue development
+## Standalone offline playtest
+
+Run `npm run export:html` to build and package the current game as `dist/Pancake City - Playtest.html`. Double-click that file to play in Chrome without a server or internet connection. JavaScript, CSS, and license notices are embedded without changing gameplay.
+
+Run `npm run export:html -- --downloads` to also copy the result to your Windows account's Downloads folder. This refuses to overwrite an existing Downloads playtest; keep or rename that file before exporting another copy. The protected original HTML is never used as an output destination.
+
+## Development workflow
 
 The local Windows setup adds `npm run check` (v52 preservation and syntax checks), `npm run build` (validated packaging into `dist/`), and `npm run preview` (built game at port 4174). No original modular source or gameplay changes are introduced. See `AGENTS.md` for milestone rules; each push requires your approval.
 
