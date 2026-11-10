@@ -11,9 +11,10 @@ const scripts = [...html.matchAll(/<script\b[^>]*type=["']module["'][^>]*>([\s\S
 const styles = [...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)];
 assert.equal(scripts.length, 1);
 assert.equal(styles.length, 1);
-assert.deepEqual(read('web/assets/game.bundle.js'), Buffer.from(scripts[0][1]), 'Recovered JavaScript differs from v52');
+const { applyRenderingFixes } = require('./rendering-fixes.cjs');
+assert.deepEqual(read('web/assets/game.bundle.js'), Buffer.from(applyRenderingFixes(scripts[0][1])), 'Runtime differs from the reviewed rendering fixes applied to v52');
 assert.deepEqual(read('web/assets/game.css'), Buffer.from(styles[0][1]), 'Recovered CSS differs from v52');
 const shell = read('web/index.html').toString('utf8');
 assert.ok(shell.includes('./assets/game.bundle.js') && shell.includes('./assets/game.css'));
 assert.ok(shell.includes(read('reference/third-party-notices.txt').toString('utf8').trim()), 'License notices missing');
-console.log('PASS: original SHA-256, byte-exact v52 JavaScript/CSS, HTML references, and license notices.');
+console.log('PASS: original SHA-256, reviewed rendering fixes, byte-exact v52 CSS, HTML references, and license notices.');
