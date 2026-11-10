@@ -13,18 +13,22 @@ This project was reconstructed **only** from the user-provided `Pancake (52).htm
 
 ## Run
 
+**Windows quick start:** double-click `Play Pancake City.cmd`, keep its window open, and open `http://127.0.0.1:4173` in Chrome or Edge. See [the Windows guide](docs/WINDOWS_GUIDE.md) for controls, development commands, and the commit-and-approval workflow.
+
 Option A: Open `original/Pancake (52).html` directly in a modern browser, exactly as before.
 
 Option B: Run the extracted version with a local web server. From the project directory:
 
 ```bash
-npm install
+npm ci
 npm start
 ```
 
 Then open `http://127.0.0.1:4173`. The local server is important because browsers may block JavaScript modules loaded directly from `file://` paths.
 
 ## Continue development
+
+The local Windows setup adds `npm run check` (v52 preservation and syntax checks), `npm run build` (validated packaging into `dist/`), and `npm run preview` (built game at port 4174). No original modular source or gameplay changes are introduced. See `AGENTS.md` for milestone rules; each push requires your approval.
 
 1. Keep a backup of this ZIP and the original HTML.
 2. Create a Git repository from this folder and push it to GitHub.

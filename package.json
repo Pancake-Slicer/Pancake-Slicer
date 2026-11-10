@@ -5,7 +5,9 @@
   "description": "Recovered Pancake City v52 browser build; not the original development source tree",
   "scripts": {
     "start": "http-server web -a 127.0.0.1 -p 4173 -c-1",
-    "check": "node --check web/assets/game.bundle.js"
+    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs",
+    "build": "npm run check && node scripts/build.cjs",
+    "preview": "http-server dist -a 127.0.0.1 -p 4174 -c-1"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

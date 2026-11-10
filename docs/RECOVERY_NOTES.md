@@ -21,3 +21,14 @@ Not validated:
 - Recovery of local Git tags, commits, or checkpoints.
 
 Suggested smoke tests: load the world, camera movement, freeform road placement, road editing, zoning, property tools, save/load and any other latest v52 features.
+
+## Windows recovery setup — 2026-11-10
+
+- Read all seven recovered project files, including the original HTML, extracted runtime, styles, HTML shell, and notices; the bundle remains minified.
+- Original HTML SHA-256 matches the fingerprint above. Runtime JavaScript and CSS remain byte-identical to the embedded v52 blocks.
+- Installed Node.js v26.13.0 (npm 11.20.0) and Git 2.56.0.windows.4 using Windows Package Manager.
+- Added a Windows launcher, dependency lock file, build packaging, preservation checks, Git ignore rules, and development instructions. No gameplay assets were edited.
+- `npm install` completed with zero reported vulnerabilities. `npm run build` passed syntax and preservation checks and created `dist/`.
+- GitHub main at setup: `681fc2b7d3a22235bce52b07a3be0eb0a87571b4` (Add files via upload). It contains the seven recovery files. Existing remote history is retained.
+- Visual browser testing was blocked by the browser tool's saved permission policy, including a retry after user approval. Interactive play remains unverified. Do not interpret the successful build as full gameplay regression coverage.
+- See WINDOWS_GUIDE.md for launch instructions and the milestone commit/push approval workflow. No push is authorized by setup alone.
