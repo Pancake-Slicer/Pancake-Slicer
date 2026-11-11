@@ -6,8 +6,6 @@ const { applyRenderingFixes } = require('./rendering-fixes.cjs');
 const { applyOfficeZoning } = require('./office-zoning.cjs');
 const { applyLandmarkPerformance } = require('./landmark-performance.cjs');
 const root = path.resolve(__dirname, '..');
-const localArtwork=path.join(root,'web/assets/sc4-originals.local.js');
-if(!fs.existsSync(localArtwork))fs.writeFileSync(localArtwork,'globalThis.pcSC4Originals=null;\n');
 const original = fs.readFileSync(path.join(root, 'original/Pancake (52).html'));
 assert.equal(createHash('sha256').update(original).digest('hex'), 'c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c');
 const html = original.toString('utf8');

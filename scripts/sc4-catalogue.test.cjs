@@ -5,7 +5,7 @@ const vm=require('node:vm');
 const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../web/assets/game.bundle.js'),'utf8');
 const context=vm.createContext({console,performance,structuredClone,window:{addEventListener(){}},document:{createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}});
-vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={zb,qb,Se,pS,Te,Ee,sn,pcSC4Catalogue,pcCatalogueTiers,pcCatalogueRoofMesh,pcCatalogueInitMenu};',context);
+vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={zb,qb,Se,pS,Te,Ee,sn,pcSC4Catalogue,pcSC4Model,pcCatalogueTiers,pcCatalogueRoofMesh,pcCatalogueInitMenu};',context);
 const api=context.api,plain=x=>JSON.parse(JSON.stringify(x));
 function city(){
   const network=new api.zb,points=[{x:-100,z:-60},{x:100,z:-60},{x:100,z:60},{x:-100,z:60}];
@@ -21,14 +21,14 @@ test('all 98 public catalogue IDs remain independently selectable, including rep
   const select={addEventListener(type,handler){this[type]=handler;}},help={};
   const {zoning}=city();api.pcCatalogueInitMenu({querySelector:s=>s==='#commercial-catalogue'?select:help},zoning,()=>{});
   assert.equal((select.innerHTML.match(/<option /g)||[]).length,99);
-  for(const entry of entries){select.value=String(entry.id);select.change();assert.equal(zoning.pcCatalogueChoice,entry.id);assert.ok(help.textContent.includes(entry.name));assert.ok(help.textContent.includes(entry.lots.join(', ')));}
+  for(const entry of entries){select.value=String(entry.id);select.change();assert.equal(zoning.pcCatalogueChoice,entry.id);assert.ok(help.textContent.includes(entry.name));assert.ok(help.textContent.includes('SC4-inspired rebuild'));}
   select.value='';select.change();assert.equal(zoning.pcCatalogueChoice,null);
 });
 test('every catalogue building actually renders finite geometry with picking IDs and contained floor plates',()=>{
   const {zoning}=city(),site=zoning.properties[0],scene=new api.Se,renderer=api.pS(scene),signatures=new Set;
   for(const entry of api.pcSC4Catalogue.entries){
     zoning.pcCatalogueChoice=entry.id;assert.equal(zoning.fillProperty(site.id,'offices'),true);
-    const building=zoning.buildings[0];assert.equal(building.office.catalogueId,entry.id);assert.equal(building.floors,entry.estimatedFloors);
+    const building=zoning.buildings[0];assert.equal(building.office.catalogueId,entry.id);assert.equal(building.floors,api.pcSC4Model(entry.id).floors);
     const tiers=api.pcCatalogueTiers(building);assert.equal(tiers.reduce((sum,t)=>sum+t.floors,0),building.floors);
     for(const tier of tiers)for(const ring of tier.parts){const shape=api.Te(ring);assert.ok(api.sn(shape)>1);assert.ok(Math.abs(api.sn(api.Ee(shape,api.Te(site.footprint)))-api.sn(shape))<.01);}
     signatures.add(building.signature);assert.equal(renderer.render(zoning),true);

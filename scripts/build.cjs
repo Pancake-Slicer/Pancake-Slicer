@@ -3,7 +3,7 @@ const path = require('node:path');
 require('./assemble-runtime.cjs');
 require('./verify-recovery.cjs');
 const root = path.resolve(__dirname, '..');
-for (const name of ['index.html', 'assets/game.bundle.js', 'assets/game.css','assets/sc4-originals.local.js']) {
+for (const name of ['index.html', 'assets/game.bundle.js', 'assets/game.css']) {
   const destination = path.join(root, 'dist', name);
   fs.mkdirSync(path.dirname(destination), { recursive: true });
   fs.copyFileSync(path.join(root, 'web', name), destination);

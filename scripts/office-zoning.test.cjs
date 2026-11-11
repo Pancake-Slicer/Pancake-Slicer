@@ -48,7 +48,7 @@ test('Office selection exposes independent, deep parcels instead of merged rowho
   for(const building of zoning.buildings) {
     assert.equal(building.zone,'offices');
     assert.ok(building.frontage>=32&&building.depth>=30);
-    assert.ok(building.area>=960&&building.area<=3132);
+    assert.ok(building.area>=960&&building.area<=5776);
     assert.ok(Math.max(building.frontage,building.depth)/Math.min(building.frontage,building.depth)<=1.2);
     const members=building.propertyIds.map(id=>zoning.propertyById.get(id));
     const allowance=api.Bo(api.ve(members.flatMap(p=>api.Te(p.footprint))),.08);
@@ -221,7 +221,7 @@ test('the real zoning menu exposes and switches the Office tab by click and keyb
   assert.ok(container.html.includes('role="tablist"'));
   assert.equal(tabs[1].dataset.zone,'offices'); assert.equal(tabs[1].attributes.role,'tab');
   tabs[1].click(); assert.equal(ui.info().type,'offices'); assert.equal(tabs[1].attributes['aria-selected'],'true');
-  assert.ok(elements.get('#zoning-type-help').textContent.includes('30–58 m deep'));
+  assert.ok(elements.get('#zoning-type-help').textContent.includes('76 × 76 m'));
   assert.ok(zoning.properties.every(property=>property.zone==='offices'&&property.depth>=30));
   tabs[1].key('ArrowLeft'); assert.equal(ui.info().type,'rowhouses'); assert.equal(tabs[0].tabIndex,0);
   tabs[0].key('End'); assert.equal(ui.info().type,'offices'); assert.equal(tabs[1].focused,true);

@@ -1,5 +1,7 @@
 # Original SimCity 4 asset import
 
+Historical workflow: the active game now uses [new solid rebuilds and fresh materials](SC4_REBUILDS.md). Imported files remain local references and are no longer loaded or embedded in the playable game.
+
 The original installation was found at `C:\Program Files (x86)\Steam\steamapps\common\SimCity 4 Deluxe`. The importer reads SimCity_1.dat through SimCity_5.dat, EP1.dat and SimCityLocale.DAT without modifying them. It does not read city saves or copy the user's mods.
 
 ## What is imported
