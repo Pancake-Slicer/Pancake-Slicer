@@ -52,14 +52,14 @@ function pcDetailedOfficeTiers(building){
   });
 }
 function pcDetailedOfficeMaterials(spec){
-  const key=spec.style+':'+spec.palette;
+  const key=spec.catalogueId?'catalogue:'+spec.facade+':'+spec.colour:spec.style+':'+spec.palette;
   if(pcOfficeMaterialCache.has(key))return pcOfficeMaterialCache.get(key);
   const palette={
     'art-deco':[['#c6b79a','#d9cdb1'],['#9c775e','#c4ad89'],['#b1aaa0','#dbd5c6'],['#ba956a','#e0c69e']],
     international:[['#3f6479','#9eb6bf'],['#4e615f','#b0bcb6'],['#665b4c','#b6aa91'],['#303e4b','#8e9fab']],
     modernist:[['#b7b8b0','#e3e2d8'],['#a99d88','#d8ccb5'],['#899e9f','#cad8d4'],['#999a96','#d3d4cd']]
   };
-  const [base,trim]=palette[spec.style][spec.palette];
+  const [base,trim]=spec.catalogueId?[spec.colour,'#c9c6b8']:palette[spec.style][spec.palette];
   const canvas=document.createElement('canvas'),bump=document.createElement('canvas');
   canvas.width=bump.width=512;canvas.height=bump.height=1024;
   const c=canvas.getContext('2d'),h=bump.getContext('2d');
@@ -75,7 +75,7 @@ function pcDetailedOfficeMaterials(spec){
   for(let floor=0;floor<8;floor++)for(let bay=0;bay<4;bay++){
     const x=bay*128,y=floor*128,seed=pcOfficeHash(key+':'+floor+':'+bay);
     const lit=seed%13===0,glass=lit?'#c4ae78':spec.style==='international'?['#35566c','#486d82','#5b7c89','#304957'][seed%4]:['#253a45','#344a53','#455962','#283e49'][seed%4];
-    const masonry=spec.style==='art-deco',ribbon=spec.style==='modernist';
+    const masonry=spec.catalogueId?['classic','deco','brick'].includes(spec.facade):spec.style==='art-deco',ribbon=spec.catalogueId?spec.facade==='ribbon':spec.style==='modernist';
     const wx=x+(masonry?24:4),wy=y+(masonry?17:ribbon?32:5),ww=masonry?80:120,wh=masonry?93:ribbon?78:110;
     c.fillStyle='#182a32';c.fillRect(wx-3,wy-3,ww+6,wh+7);h.fillStyle='#303030';h.fillRect(wx-3,wy-3,ww+6,wh+7);
     c.fillStyle=glass;c.fillRect(wx,wy,ww,wh);
@@ -84,6 +84,10 @@ function pcDetailedOfficeMaterials(spec){
     if(seed%4===0){c.fillStyle='#c5c3acaa';c.fillRect(wx+2,wy+2,ww-4,12+seed%24);}
     c.fillStyle=masonry?'#baa98d':'#a4b4ba';
     c.fillRect(wx+ww/2-1,wy,2,wh);c.fillRect(wx,wy+wh*.62,ww,2);
+    if(spec.facade==='classic'){
+      c.fillStyle=base;h.fillStyle='#888888';
+      for(let u=0;u<ww;u+=2){const d=(u-ww/2)/(ww/2),height=wh*.24*(1-Math.sqrt(Math.max(0,1-d*d)));c.fillRect(wx+u,wy,2,height);h.fillRect(wx+u,wy,2,height);}
+    }
     if(masonry){
       c.fillStyle=trim;c.fillRect(x+8,y,8,128);c.fillRect(x+112,y,7,128);c.fillRect(wx-5,wy+wh+3,ww+10,5);
       h.fillStyle='#dddddd';h.fillRect(x+8,y,8,128);h.fillRect(wx-5,wy+wh+3,ww+10,5);
@@ -117,11 +121,11 @@ function pcDetailedOfficeMaterials(spec){
   pcOfficeMaterialCache.set(key,materials);return materials;
 }
 function pcDetailedOfficeRender(building,B,U,statistics){
-  const material=pcOfficeMaterials(building.office),id=building.id;
-  B(Ql(building.footprint,building.ground-.18,building.y-building.ground+.18,{top:false}),material.stone,id);
+  const material=pcOfficeMaterials(building.office),id=building.id,catalogue=pcCatalogueFind(building.office.catalogueId);
+  B(Ql(building.footprint,building.ground-.18,building.y-building.ground+.18,{top:!!catalogue}),catalogue?material.roof:material.stone,id);
   const tiers=pcOfficeTiers(building);
   for(const tier of tiers)for(const ring of tier.parts){
-    B(pcOfficeWalls(ring,tier.y,tier.height,building.office.floorHeight),tier.index===0?material.glass:material.facade,id);
+    B(pcOfficeWalls(ring,tier.y,tier.height,building.office.floorHeight),tier.index===0&&!catalogue?material.glass:material.facade,id);
     B(Ql(ring,tier.y+tier.height,.18,{bottom:false}),material.roof,id);
     const orientation=Math.sign(ring.reduce((sum,p,i)=>sum+p.x*ring[(i+1)%ring.length].z-ring[(i+1)%ring.length].x*p.z,0));
     for(let edge=0;edge<ring.length;edge++){
@@ -150,13 +154,14 @@ function pcDetailedOfficeRender(building,B,U,statistics){
       const fan=new Dn(size*.12,size*.12,.2,12);fan.translate(x,roofY+2.9,z);const face=fan.toNonIndexed();fan.dispose();B(face,material.dark,id);
       for(let slat=0;slat<4;slat++)U({x,y:roofY+.5+slat*.35,z:z+size*.405},size*.42,.08,.04,0,material.dark,id);
     }
-    if(building.office.style==='art-deco'&&centre.clearance>3){
+    if(building.office.style==='art-deco'&&centre.clearance>3&&!catalogue){
       U({x:centre.x,y:roofY+3.5,z:centre.z},size*.5,1.4,size*.5,building.rotation,material.trim,id);
       if((building.office.variant||0)%2===0)U({x:centre.x,y:roofY+5.4,z:centre.z},.2,3,.2,0,material.metal,id);
     }
   }
-  const front=building.towardRoad,entry=building.entrance,yaw=Math.atan2(front.x,front.z);
-  U({x:entry.x+front.x*.15,y:building.y+2.3,z:entry.z+front.z*.15},5.2,4.6,.24,yaw,material.glass,id);
-  U({x:entry.x-front.x,y:building.y+4.8,z:entry.z-front.z},7,.28,3.2,yaw,material.trim,id);
-  U({x:entry.x,y:building.y+5.5,z:entry.z},5,.65,.3,yaw,material.dark,id);
+  const front=building.towardRoad,entry=building.entrance,yaw=Math.atan2(front.x,front.z),lobby=Math.min(4.6,building.height*.7);
+  U({x:entry.x+front.x*.15,y:building.y+lobby/2,z:entry.z+front.z*.15},5.2,lobby,.24,yaw,material.glass,id);
+  U({x:entry.x-front.x,y:building.y+lobby+.2,z:entry.z-front.z},7,.28,3.2,yaw,material.trim,id);
+  U({x:entry.x,y:building.y+lobby+.9,z:entry.z},5,.65,.3,yaw,material.dark,id);
+  if(catalogue)pcCatalogueDetails(building,tiers,B,U,material);
 }

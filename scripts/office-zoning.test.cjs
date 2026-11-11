@@ -40,7 +40,7 @@ test('Office selection exposes independent, deep parcels instead of merged rowho
   assert.ok(zoning.buildings.length>5&&zoning.buildings.length<properties.length);
   assert.equal(zoning.buildings.length,zoning.properties.length);
   assert.equal(new Set(zoning.buildings.map(b=>b.office.style)).size,3);
-  assert.ok(Math.max(...zoning.buildings.map(b=>b.floors))>=60);
+  assert.ok(zoning.buildings.every(b=>Number.isInteger(b.office.catalogueId)&&b.floors>=1&&b.floors<=80));
   assert.equal(zoning.info().offices,zoning.buildings.length);
   assert.equal(zoning.info().homes,0);
   assert.deepEqual(plain(zoning.properties),officeProperties);

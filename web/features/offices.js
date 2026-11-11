@@ -121,10 +121,11 @@ function pcResolveOfficeConflicts(collection, regions, selected, zone, erase) {
   if (conflicts.length) regions[other] = je(regions[other], ve(conflicts.flatMap(Ip)));
 }
 
-function pcOfficeParcels(properties) {
+function pcOfficeParcels(properties, collection) {
   return properties.map(property => {
     const key = property.id, area = property.area;
-    const spec = pcOfficeSpec(key, area, property.officeProfile);
+    let spec = pcOfficeSpec(key, area, property.officeProfile);
+    if(collection)spec=pcCatalogueSpec(collection,property,spec);
     const building = {
       ...property, id: 'office:' + key, propertyIds: [property.id],
       floors: spec.floors, height: spec.floors * spec.floorHeight, office: spec
@@ -144,7 +145,7 @@ function pcZonedBuildings(collection) {
   for (const property of collection.pcOfficeProperties || []) {
     if (!collection.suppressed.has(property.id) && sn(Ee(Ip(property), collection.regions.offices || [])) >= property.area - .02) offices.push(property);
   }
-  return [...homes, ...pcOfficeParcels(offices)].filter(building => !collection.suppressed.has(building.id));
+  return [...homes, ...pcOfficeParcels(offices,collection)].filter(building => !collection.suppressed.has(building.id));
 }
 
 function pcSuppressOffice(collection, building) {
@@ -154,7 +155,7 @@ function pcSuppressOffice(collection, building) {
   }
 }
 
-function pcOfficeTiers(building) { return pcDetailedOfficeTiers(building); }
+function pcOfficeTiers(building) { return building.office.catalogueId?pcCatalogueTiers(building):pcDetailedOfficeTiers(building); }
 
 const pcOfficeMaterialCache = new Map;
 function pcOfficeMaterials(spec) { return pcDetailedOfficeMaterials(spec); }
