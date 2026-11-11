@@ -5,6 +5,15 @@ function applyRenderingFixes(source) {
     if (source.split(before).length !== 2) throw Error(`Expected one patch location: ${before.slice(0,90)}`);
     source = source.replace(before, () => after);
   };
+  const fs=require('node:fs'),path=require('node:path');
+  const cel=fs.readFileSync(path.join(__dirname,'../web/features/cel-style.js'),'utf8');
+  const finish=fs.readFileSync(path.join(__dirname,'../web/features/comic-finish.glsl'),'utf8');
+  replace('const Lg=Object.freeze([.24,.58,1])',cel+'\nconst Lg=Object.freeze([.12,.44,1])');
+  replace('function $w(n=1.35)', 'function $w(n=1.9)');
+  replace('function ph(n,{width:t=1.35}', 'function ph(n,{width:t=1.9}');
+  replace('color:2436144,side:ci', 'color:1054235,side:ci');
+  replace('cel-physical-sun-horizon-v1','cel-physical-sun-horizon-comic-v2');
+  replace('void main() {\n\n\t\t\tgl_FragColor = ApplyFXAA( tDiffuse, resolution.xy, vUv );',finish+'\nvoid main() {\n\n\t\t\tvec4 pcAA=ApplyFXAA(tDiffuse,resolution.xy,vUv);\n gl_FragColor=vec4(pcComicFinish(pcAA.rgb,vUv,tDiffuse,resolution.xy),pcAA.a);');
   replace('const v=H-x<150?A?.5:.75:1;', 'const v=1;');
   // Keep a stable, screen-resolution image rather than supersampling every
   // full-scene redraw at up to four times the display's CSS pixel count.

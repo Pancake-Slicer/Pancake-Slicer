@@ -35,6 +35,8 @@ Run `npm run export:html -- --downloads` to also copy the result to your Windows
 
 ## Development workflow
 
+The current rendering uses a stronger comic/cel treatment: three-step sunlight on offices, a higher-contrast toon ramp, darker/thicker existing silhouettes, and a saturated ink-edge finish in the existing FXAA pass. Building geometry, gameplay, camera timing and animations are unchanged by this style milestone. Authoring files are `web/features/cel-style.js` and `comic-finish.glsl`; the exact assembly patches remain in `scripts/rendering-fixes.cjs`.
+
 Office zoning adds a second **Office** tab beside Brick rowhouses. Choose **Zoning → Office**, then **Bucket fill** and click inside a street block to zone the entire block. Lots divide automatically into adjoining sites; the paint brush still zones individual lots. Every building has a textured ground floor occupying its whole lot up to the sidewalk, with upper shafts and setbacks fitted inside it. Narrow corner remnants merge into neighbouring lots. Enclosed blocks fill completely on suitable terrain; open streets get a continuous 64 m development belt. Residential plots retain their original dimensions. Undo/redo, demolition, repainting, and rezoning use the existing tools. See [the block layout notes](docs/OFFICE_BLOCKS.md) and [earlier footprint research](docs/OFFICE_FOOTPRINT_REFERENCES.md).
 
 Edit Office source in `web/features/`, then run `npm run assemble` to regenerate the development runtime. Build and export commands assemble automatically. The immutable v52 artifact and `approved-v52` Git tag remain the fallback; new Office development is not part of that approved checkpoint.

@@ -4,7 +4,7 @@ const pcRebuiltById=new Map(pcRebuiltDesigns.entries.map(entry=>[entry.id,entry]
 function pcSC4Model(id){return pcRebuiltById.get(Number(id))||null;}
 function pcSC4Fits(property,model){return !!model&&property.area>=4;}
 const pcRebuiltMaterialCache=new Map,pcRebuiltSharedCache=new Map;
-function pcRebuiltLighting(material){material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\nreflectedLight.directDiffuse *= 1.7;\nreflectedLight.indirectDiffuse *= 2.3;');};material.userData.pcRebuiltLighting=true;return material;}
+function pcRebuiltLighting(material){material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\nreflectedLight.directDiffuse *= 1.7;\nreflectedLight.indirectDiffuse *= 2.3;');pcCelPhysicalShader(shader);};material.customProgramCacheKey=()=> 'pc-comic-office-v1';material.userData.pcRebuiltLighting=true;return material;}
 function pcRebuiltSolid(key,colour,roughness=.8,metalness=0){if(!pcRebuiltSharedCache.has(key))pcRebuiltSharedCache.set(key,pcRebuiltLighting(new Re({color:colour,roughness,metalness})));return pcRebuiltSharedCache.get(key);}
 function pcRebuiltMaterials(design){
  if(pcRebuiltMaterialCache.has(design.id))return pcRebuiltMaterialCache.get(design.id);
