@@ -5,7 +5,7 @@ function applyOfficeZoning(source) {
     if (source.split(before).length !== 2) throw Error(`Expected one office patch location: ${before.slice(0, 100)}`);
     source = source.replace(before, () => after);
   };
-  const helpers = fs.readFileSync(path.join(__dirname, '../web/features/offices.js'), 'utf8');
+  const helpers = fs.readFileSync(path.join(__dirname, '../web/features/offices.js'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '../web/features/office-architecture.js'), 'utf8');
   replace('const vi=Object.freeze([{id:"rowhouses",name:"Brick rowhouses",color:7911573,description:"Attached 2–3 storey homes · narrow frontage"}])',
     helpers + '\nconst vi=Object.freeze([{id:"rowhouses",name:"Brick rowhouses",color:7911573,description:"Attached 2–3 storey homes · narrow frontage"},{id:"offices",name:"Office",color:5486785,description:"Art Deco · International · Modernist · 10–80 storeys"}])');
   // Keep the original property layout independent of the selected zone type.
@@ -21,6 +21,7 @@ function applyOfficeZoning(source) {
   replace('this.suppressed.set(t,Lp(e)),this.revision++', 'pcSuppressOffice(this,e),this.suppressed.set(t,Lp(e)),this.revision++');
   replace('homes:this.buildings.length,paintedArea:', 'offices:this.buildings.filter(t=>t.zone==="offices").length,homes:this.buildings.filter(t=>t.zone==="rowhouses").length,paintedArea:');
   replace('for(const J of R){const at=Math.floor(J.variation', 'for(const J of R){if(J.zone==="offices"){pcRenderOffice(J,B,U,F);continue}const at=Math.floor(J.variation');
+  replace('R.y+R.height+1.5,Math.max(...R.footprint', 'R.y+R.height+(R.zone==="offices"?8:1.5),Math.max(...R.footprint');
   replace('ZONING / NORTHEASTERN US', 'ZONING / NORTH AMERICA');
   replace('<div class="zoning-options">${vi.map', '<div class="zoning-options"><div class="zoning-tabs" role="tablist" aria-label="Zone type">${vi.map');
   replace('<button data-zone="${D.id}" aria-pressed="${D.id==="rowhouses"}">', '<button data-zone="${D.id}" role="tab" aria-selected="${D.id==="rowhouses"}" tabindex="${D.id==="rowhouses"?0:-1}" aria-pressed="${D.id==="rowhouses"}">');
