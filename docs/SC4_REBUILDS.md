@@ -14,7 +14,7 @@ The authoring tool `node scripts/author-sc4-rebuilds.cjs` can refresh the refere
 
 Colour, bump and roughness maps are freshly drawn on local canvases, with regular window grids, frames, masonry courses, fluting, subtle grain and restrained blind variation. Reference colour statistics guide the palette; shadowed glass values are lifted to a neutral daylight albedo range. No imported picture is painted onto a wall, and no fixed sun-facing gradient or SC4 shadow is baked into the new textures.
 
-Materials are opaque MeshStandardMaterials and respond to the game's existing hemisphere light, sun and shadows. A consistent diffuse-response calibration (1.7 direct, 2.3 indirect) makes these PBR materials readable under the recovered game's lighting without modifying other objects' lighting or adding emissive facades. Roof textures use non-collapsed planar coordinates. Materials, textures and batched meshes are cached. Camera motion does not swap direction-dependent building images or regenerate meshes.
+Materials are opaque MeshStandardMaterials and respond to the hemisphere light, sun and shadows. The current illustrated treatment uses pale reference-derived palettes, cleaner window grids, restrained bump/grain, matte highlights and diffuse calibration (1.7 direct, 3.0 indirect, followed by 0.90 indirect shaping). Scene daylight and cast-shadow strength are tuned to the user's RT.jpg reference. No emissive facades are added. Roof textures use non-collapsed planar coordinates. Materials, textures and batched meshes are cached. Camera motion does not swap direction-dependent building images or regenerate meshes. Fine architectural crease lines are batched once per neighbourhood chunk and excluded from picking.
 
 ## Integration and limits
 
