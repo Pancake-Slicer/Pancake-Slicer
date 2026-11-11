@@ -38,62 +38,7 @@ function pcOfficePlots(network, landmarks = []) {
   const landmarkKey = JSON.stringify(landmarks.map(item => [item.id, item.x, item.z, item.rotation]));
   const cache = pcOfficePlotCache.get(network);
   if (cache && cache.revision === network.revision && cache.terrain === terrain && cache.heightAt === terrain?.heightAt && cache.terrainRevision === (terrain?.revision || 0) && cache.boundsKey === boundsKey && cache.landmarkKey === landmarkKey) return cache.plots;
-  const mask = Yb(network), plots = [], cells = new Map;
-  const buildable = je(Od(network), ve([...mask.paths, ...landmarks.flatMap(Gb)]));
-  const heightAt = (x, z) => terrain?.heightAt(x, z) || 0;
-  function eachCell(bounds, visit) {
-    for (let x = Math.floor((bounds.minX - 2) / 64); x <= Math.floor((bounds.maxX + 2) / 64); x++)
-      for (let z = Math.floor((bounds.minZ - 2) / 64); z <= Math.floor((bounds.maxZ + 2) / 64); z++) visit(x + ':' + z);
-  }
-  for (const road of [...network.roads].filter(Gc).sort((a, b) => a.id - b.id)) {
-    const sample = Hn(Qo(road)), roadWidth = Ut(road.typeId).width;
-    for (const side of [-1, 1]) {
-      let cursor = 8, slot = 0;
-      while (cursor + 32 < sample.length - 8) {
-        const seed = pcOfficeHash(road.id + ':' + side + ':' + slot++);
-        const options=pcSC4ProfileOptions(),preferred = options[seed % options.length];
-        const profiles = [preferred, ...options.filter(profile => profile !== preferred).sort((a, b) => b.width * b.depth - a.width * a.depth)];
-        let placed = null;
-        for (const profile of profiles) {
-          if (cursor + profile.width > sample.length - 8) continue;
-          const station = cursor + profile.width / 2, point = sample.at(station);
-          if (Math.abs(ft(point)) > .2) continue;
-          const normal = { x: -point.dz * side, z: point.dx * side };
-          const front = { x: point.x + normal.x * (roadWidth / 2 + 3.5), z: point.z + normal.z * (roadWidth / 2 + 3.5) };
-          const at = (x, z) => ({ x: front.x + point.dx * x + normal.x * z, z: front.z + point.dz * x + normal.z * z });
-          const footprint = [at(-profile.width / 2, 0), at(profile.width / 2, 0), at(profile.width / 2, profile.depth), at(-profile.width / 2, profile.depth)];
-          const paths = Te(footprint), area = profile.width * profile.depth, bounds = En(footprint);
-          if (sn(Ee(paths, buildable)) < area - .02) continue;
-          const neighbours = new Set;
-          eachCell(bounds, key => { for (const plot of cells.get(key) || []) neighbours.add(plot); });
-          if ([...neighbours].some(plot => sn(Ee(paths, plot.clearance)) > .001)) continue;
-          const heights = [];
-          for (let x = 0; x <= 4; x++) for (let z = 0; z <= 4; z++) {
-            const p = at((x / 4 - .5) * profile.width, z / 4 * profile.depth);
-            heights.push(heightAt(p.x, p.z));
-          }
-          const low = Math.min(...heights), high = Math.max(...heights);
-          if (terrain && (low < 1.4 || high - low > 3.6)) continue;
-          const centre = at(0, profile.depth / 2);
-          const id = `office-plot:${road.id}:${side}:${station.toFixed(2)}:${profile.id}`;
-          placed = {
-            id, zone: 'offices', roadId: road.id, side, station, footprint, bounds, area,
-            x: centre.x, z: centre.z, y: high + .57, ground: low,
-            foundationDepth: high - low + .75, entrance: { ...front, y: heightAt(front.x, front.z) },
-            towardRoad: { x: -normal.x, z: -normal.z }, rotation: Math.atan2(-point.dz, point.dx),
-            variation: (seed >>> 8) / 0x1000000, frontage: profile.width, depth: profile.depth, officeProfile: profile
-          };
-          placed.signature = JSON.stringify([id, footprint, placed.y, low]);
-          placed.clearance = Bo(paths, 2);
-          plots.push(placed);
-          eachCell(bounds, key => { if (!cells.has(key)) cells.set(key, []); cells.get(key).push(placed); });
-          cursor += profile.width + 4;
-          break;
-        }
-        if (!placed) cursor += 12;
-      }
-    }
-  }
+  const plots = pcOfficeBlockLayout(network, landmarks);
   pcOfficePlotCache.set(network, { revision: network.revision, terrain, heightAt: terrain?.heightAt, terrainRevision: terrain?.revision || 0, boundsKey, landmarkKey, plots });
   return plots;
 }
@@ -107,11 +52,9 @@ function pcActiveProperties(collection) {
 
 function pcOfficeSelection(collection, properties, zone,erase=false) {
   collection.setPropertyZone(zone);
-  const original=zone==='offices'&&!erase?pcSC4Model(collection.pcCatalogueChoice):null;
-  const available=list=>original?list.filter(property=>pcSC4Fits(property,original)):list;
-  if (properties.every(property => property.zone === zone)) return available(properties);
+  if (properties.every(property => property.zone === zone)) return properties;
   const selected = ve(properties.flatMap(Ip));
-  return available(collection.properties.filter(property => sn(Ee(Ip(property), selected)) > .01));
+  return collection.properties.filter(property => sn(Ee(Ip(property), selected)) > .01);
 }
 
 function pcResolveOfficeConflicts(collection, regions, selected, zone, erase) {

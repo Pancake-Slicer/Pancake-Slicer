@@ -3,7 +3,10 @@ function pcCatalogueFind(id){return pcSC4Catalogue.entries.find(entry=>entry.id=
 function pcCatalogueReference(collection,property){
   const assigned=collection.pcCatalogueAssignments?.get(property.id);
   const fixed=pcCatalogueFind(assigned)||pcCatalogueFind(collection.pcCatalogueChoice);if(fixed)return fixed;
-  const options=pcSC4Catalogue.entries.filter(entry=>!pcSC4Model(entry.id)||pcSC4Fits(property,pcSC4Model(entry.id)));
+  // Match the plan area to the automatically generated lot, avoiding tiny
+  // boutiques on tower sites. Explicit choices still work on any office lot.
+  const ranked=pcSC4Catalogue.entries.map(entry=>({entry,score:Math.abs(Math.log(Math.max(1,pcSC4Model(entry.id).size[0]*pcSC4Model(entry.id).size[2])/property.area))})).sort((a,b)=>a.score-b.score||a.entry.id-b.entry.id);
+  const options=ranked.slice(0,16).map(item=>item.entry);
   return options[pcOfficeHash(property.id+':catalogue')%options.length];
 }
 function pcCatalogueNeedsChange(collection,properties,zone,erase){
@@ -142,7 +145,7 @@ function pcCatalogueInitMenu(container,collection,redraw){
     collection.pcCatalogueChoice=select.value?Number(select.value):null;
     const entry=pcCatalogueFind(select.value),help=container.querySelector('#catalogue-help');
     const original=entry&&pcSC4Model(entry.id);
-    help.textContent=original?`${entry.name} · SC4-inspired rebuild · ${original.size[0]} × ${original.size[2]} m building, ${original.size[1]} m reference height. Paint a parcel large enough for this building; small parcels stay empty.`:entry?`${entry.name} · ${entry.tileset} · reference lots ${entry.lots.join(', ')} · approximately ${entry.estimatedFloors} storeys. Paint or refill an Office parcel to apply this design.`:'Mix all 98 referenced offices, shops, hotels and services. Existing buildings keep their chosen design.';
+    help.textContent=original?`${entry.name} · SC4-inspired rebuild · ${original.size[0]} × ${original.size[2]} m building, ${original.size[1]} m reference height. A full-lot ground floor meets the sidewalk; upper floors adapt to the site.`:entry?`${entry.name} · ${entry.tileset} · reference lots ${entry.lots.join(', ')} · approximately ${entry.estimatedFloors} storeys. Paint or refill an Office parcel to apply this design.`:'Mix all 98 referenced offices, shops, hotels and services. Existing buildings keep their chosen design.';
     redraw();
   });
 }

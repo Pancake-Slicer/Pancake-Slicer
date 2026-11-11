@@ -27,7 +27,7 @@ test('all 98 public catalogue IDs remain independently selectable, including rep
 test('every catalogue building actually renders finite geometry with picking IDs and contained floor plates',()=>{
   const {zoning}=city(),site=zoning.properties[0],scene=new api.Se,renderer=api.pS(scene),signatures=new Set;
   for(const entry of api.pcSC4Catalogue.entries){
-    zoning.pcCatalogueChoice=entry.id;assert.equal(zoning.fillProperty(site.id,'offices'),true);
+    zoning.pcCatalogueChoice=entry.id;assert.equal(zoning.applyProperties([site],'offices'),true);
     const building=zoning.buildings[0];assert.equal(building.office.catalogueId,entry.id);assert.equal(building.floors,api.pcSC4Model(entry.id).floors);
     const tiers=api.pcCatalogueTiers(building);assert.equal(tiers.reduce((sum,t)=>sum+t.floors,0),building.floors);
     for(const tier of tiers)for(const ring of tier.parts){const shape=api.Te(ring);assert.ok(api.sn(shape)>1);assert.ok(Math.abs(api.sn(api.Ee(shape,api.Te(site.footprint)))-api.sn(shape))<.01);}
@@ -43,10 +43,10 @@ test('every catalogue building actually renders finite geometry with picking IDs
 });
 test('catalogue choice only changes painted sites, and undo/redo restores design identity',()=>{
   const {network,zoning}=city(),[a,b]=zoning.properties;
-  zoning.pcCatalogueChoice=424;zoning.fillProperty(a.id,'offices');const initial=plain(zoning.buildings);
+  zoning.pcCatalogueChoice=424;zoning.applyProperties([a],'offices');const initial=plain(zoning.buildings);
   zoning.pcCatalogueChoice=273;zoning.rebuild();assert.deepEqual(plain(zoning.buildings),initial);
-  zoning.fillProperty(b.id,'offices');assert.equal(zoning.buildings.find(x=>x.propertyIds.includes(a.id)).office.catalogueId,424);
-  const before=plain(zoning.buildings);zoning.fillProperty(a.id,'offices');
+  zoning.applyProperties([b],'offices');assert.equal(zoning.buildings.find(x=>x.propertyIds.includes(a.id)).office.catalogueId,424);
+  const before=plain(zoning.buildings);zoning.applyProperties([a],'offices');
   assert.equal(zoning.buildings.find(x=>x.propertyIds.includes(a.id)).office.catalogueId,273);
   assert.equal(network.undo(),true);zoning.rebuild();assert.deepEqual(plain(zoning.buildings),before);
   assert.equal(network.redo(),true);zoning.rebuild();assert.ok(zoning.buildings.every(x=>x.office.catalogueId===273));

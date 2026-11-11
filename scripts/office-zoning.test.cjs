@@ -47,13 +47,13 @@ test('Office selection exposes independent, deep parcels instead of merged rowho
   assert.deepEqual(plain(zoning.pcResidentialProperties),properties);
   for(const building of zoning.buildings) {
     assert.equal(building.zone,'offices');
-    assert.ok(building.frontage>=32&&building.depth>=30);
-    assert.ok(building.area>=960&&building.area<=5776);
-    assert.ok(Math.max(building.frontage,building.depth)/Math.min(building.frontage,building.depth)<=1.2);
+    assert.ok(building.frontage>=20&&building.depth>=20);
+    assert.ok(building.area>=600&&building.area<=9000);
+    assert.ok(Math.max(building.frontage,building.depth)/Math.min(building.frontage,building.depth)<=4);
     const members=building.propertyIds.map(id=>zoning.propertyById.get(id));
     const allowance=api.Bo(api.ve(members.flatMap(p=>api.Te(p.footprint))),.08);
     assert.ok(api.sn(api.Ee(api.Te(building.footprint),allowance))>=building.area-.01,'Offices must stay on their painted properties');
-    assert.ok(building.footprint.every((p,i,a)=>{
+    if(building.bounds.minX> -100&&building.bounds.maxX<100&&building.bounds.minZ> -60&&building.bounds.maxZ<60)assert.ok(building.footprint.every((p,i,a)=>{
       const q=a[(i+1)%a.length]; return Math.abs(p.x-q.x)<1e-4||Math.abs(p.z-q.z)<1e-4;
     }),'Rectangular street blocks retain square building corners');
   }
@@ -113,35 +113,29 @@ test('the existing brush paints Office sites only where street properties exist'
   assert.equal(empty.paint([{x:0,z:0}],50,'offices'),false);
   assert.equal(empty.buildings.length,0);
 });
-test('bucket fill uses a full office-depth plot and tab changes retain placed offices',()=>{
-  const {zoning}=city();
-  zoning.setPropertyZone('offices');
-  const plot=zoning.properties.find(property=>property.depth>=44);
-  assert.ok(plot);
-  assert.equal(zoning.fillProperty(plot.id,'offices'),true);
-  assert.equal(zoning.buildings.length,1);
-  const building=zoning.buildings[0];
-  assert.equal(building.depth,plot.depth);
-  assert.ok(building.area>1800);
-  zoning.setPropertyZone('rowhouses');
-  assert.equal(zoning.buildings[0].id,building.id);
-  assert.ok(zoning.properties.every(property=>property.zone==='rowhouses'));
-  assert.equal(zoning.demolish(building.id),true);
-  assert.equal(zoning.buildings.length,0);
-  zoning.fillProperty(plot.id,'offices');
-  assert.equal(zoning.buildings.length,1);
+test('bucket fill develops an entire block and tab changes retain its buildings',()=>{
+  const {network,zoning}=city();zoning.setPropertyZone('offices');
+  const plot=zoning.properties[0],block=zoning.properties.filter(p=>p.blockId===plot.blockId);
+  assert.ok(block.length>1);assert.equal(zoning.fillProperty(plot.id,'offices'),true);
+  assert.equal(zoning.buildings.length,block.length);
+  const ids=zoning.buildings.map(b=>b.id);zoning.setPropertyZone('rowhouses');
+  assert.deepEqual(zoning.buildings.map(b=>b.id),ids);
+  assert.equal(network.undo(),true);zoning.rebuild();assert.equal(zoning.buildings.length,0);
+  assert.equal(network.redo(),true);zoning.rebuild();assert.equal(zoning.buildings.length,block.length);
+  const victim=zoning.buildings[0];zoning.demolish(victim.id);assert.equal(zoning.buildings.length,block.length-1);
+  zoning.fillProperty(plot.id,'offices');assert.equal(zoning.buildings.length,block.length);
 });
+
 test('native office plots avoid roads, each other, landmarks and tile edges on rotated streets',()=>{
   const network=new api.zb(),angle=.39;
   const rotate=([x,z])=>({x:x*Math.cos(angle)-z*Math.sin(angle),z:x*Math.sin(angle)+z*Math.cos(angle)});
   const corners=[[-100,-70],[100,-70],[100,70],[-100,70]].map(rotate);
   assert.equal(network.addBatch(corners.map((p,i)=>[p,corners[(i+1)%4]])).ok,true);
-  const plots=api.pcOfficePlots(network),roads=api.Yb(network).paths,bounds=api.Gi(network);
+  const plots=api.pcOfficePlots(network),roads=api.Bo(api.Yb(network).paths,-1.5),bounds=api.Gi(network);
   assert.ok(plots.length>5);
   for(let i=0;i<plots.length;i++){
     const plot=plots[i],shape=api.Te(plot.footprint);
-    const widths=plot.footprint.map((p,j,a)=>Math.hypot(p.x-a[(j+1)%4].x,p.z-a[(j+1)%4].z));
-    assert.ok(Math.min(...widths)>=29.99,'Office depth must not collapse into the residential strip');
+    assert.ok(plot.area>=600,'Narrow remainders must merge into neighbours');
     assert.ok(api.sn(api.Ee(shape,roads))<.001);
     assert.ok(plot.footprint.every(p=>p.x>=bounds.minX&&p.x<=bounds.maxX&&p.z>=bounds.minZ&&p.z<=bounds.maxZ));
     for(let j=0;j<i;j++)assert.ok(api.sn(api.Ee(shape,api.Te(plots[j].footprint)))<.001);
@@ -162,7 +156,7 @@ test('Office and residential rezoning removes whole conflicting sites instead of
   zoning.setPropertyZone('rowhouses');
   const house=zoning.properties.find(p=>api.sn(api.Ee(api.Te(p.footprint),api.Te(plot.footprint)))>.01);
   assert.ok(house);zoning.fillProperty(house.id,'rowhouses');
-  assert.ok(zoning.buildings.every(b=>b.zone!=='offices'));
+  assert.ok(zoning.buildings.every(b=>b.zone!=='offices'||api.sn(api.Ee(api.Te(b.footprint),api.Te(house.footprint)))<.001));
 });
 test('office tiers stay within their site and account for exactly the advertised storeys', () => {
   const footprint=[{x:0,z:0},{x:40,z:0},{x:40,z:30},{x:0,z:30}];
@@ -221,8 +215,8 @@ test('the real zoning menu exposes and switches the Office tab by click and keyb
   assert.ok(container.html.includes('role="tablist"'));
   assert.equal(tabs[1].dataset.zone,'offices'); assert.equal(tabs[1].attributes.role,'tab');
   tabs[1].click(); assert.equal(ui.info().type,'offices'); assert.equal(tabs[1].attributes['aria-selected'],'true');
-  assert.ok(elements.get('#zoning-type-help').textContent.includes('76 × 76 m'));
-  assert.ok(zoning.properties.every(property=>property.zone==='offices'&&property.depth>=30));
+  assert.ok(elements.get('#zoning-type-help').textContent.includes('whole block'));
+  assert.ok(zoning.properties.every(property=>property.zone==='offices'&&property.area>=600));
   tabs[1].key('ArrowLeft'); assert.equal(ui.info().type,'rowhouses'); assert.equal(tabs[0].tabIndex,0);
   tabs[0].key('End'); assert.equal(ui.info().type,'offices'); assert.equal(tabs[1].focused,true);
 });

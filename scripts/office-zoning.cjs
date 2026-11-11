@@ -7,7 +7,7 @@ function applyOfficeZoning(source) {
   };
   const catalogue=JSON.parse(fs.readFileSync(path.join(__dirname,'../reference/sc4-commercial-wealth3.json'),'utf8'));
   const designs=JSON.parse(fs.readFileSync(path.join(__dirname,'../reference/sc4-rebuilt-designs.json'),'utf8'));
-  const helpers = 'const pcSC4Catalogue='+JSON.stringify(catalogue)+';\nconst pcRebuiltDesigns='+JSON.stringify(designs)+';\n'+fs.readFileSync(path.join(__dirname, '../web/features/offices.js'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '../web/features/office-architecture.js'), 'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'../web/features/sc4-catalogue.js'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'../web/features/sc4-rebuilds.js'),'utf8');
+  const helpers = fs.readFileSync(path.join(__dirname,'../web/features/office-blocks.js'),'utf8')+'\n'+'const pcSC4Catalogue='+JSON.stringify(catalogue)+';\nconst pcRebuiltDesigns='+JSON.stringify(designs)+';\n'+fs.readFileSync(path.join(__dirname, '../web/features/offices.js'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '../web/features/office-architecture.js'), 'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'../web/features/sc4-catalogue.js'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'../web/features/sc4-rebuilds.js'),'utf8');
   replace('const vi=Object.freeze([{id:"rowhouses",name:"Brick rowhouses",color:7911573,description:"Attached 2–3 storey homes · narrow frontage"}])',
     helpers + '\nconst vi=Object.freeze([{id:"rowhouses",name:"Brick rowhouses",color:7911573,description:"Attached 2–3 storey homes · narrow frontage"},{id:"offices",name:"Office",color:5486785,description:"Commercial Wealth $$$ · 98 reference designs"}])');
   // Keep the original property layout independent of the selected zone type.
@@ -18,6 +18,7 @@ function applyOfficeZoning(source) {
   replace('const o=new Set(t.map(l=>l.id)),a=!i', 'pcResolveOfficeConflicts(this,r,s,e,i);const o=new Set(t.map(l=>l.id)),a=!i');
   replace('this.syncProperties(),t=t.filter((l,c)=>', 'this.setPropertyZone(i),this.syncProperties(),t=t.filter((l,c)=>');
   replace('if(!t)return!1;this.syncProperties();const s=typeof t=="string"', 'if(!t)return!1;this.setPropertyZone(e);this.syncProperties();const s=typeof t=="string"');
+  replace('return this.applyProperties(s?[s]:[],e,i)', 'return this.applyProperties(s?(e==="offices"?this.properties.filter(p=>p.blockId===s.blockId):[s]):[],e,i)');
   replace('r=this.properties.filter(o=>!this.suppressed.has(o.id)&&Vb(this.regions[o.zone],Lp(o)))', 'r=pcZonedBuildings(this)');
   replace('this.regions=i?.regions??Object.fromEntries(vi.map(r=>[r.id,[]]))', 'this.regions=Object.fromEntries(vi.map(r=>[r.id,i?.regions?.[r.id]??[]]))');
   replace('capture:()=>({regions:this.regions,suppressed:[...this.suppressed]})', 'capture:()=>({regions:this.regions,suppressed:[...this.suppressed],catalogueAssignments:[...(this.pcCatalogueAssignments||new Map)]})');
@@ -35,9 +36,9 @@ function applyOfficeZoning(source) {
   replace('</label></div><div class="zoning-bottom">', '</label></div><label class="catalogue-picker">Commercial $$$ building<select id="commercial-catalogue" aria-label="Commercial wealth three building"></select></label><p id="catalogue-help">Mix all 98 referenced offices, shops, hotels and services.</p><div class="zoning-bottom">');
   replace('<p>Property lines show the exact future building footprint.', '<p id="zoning-type-help">Property lines show the exact future building footprint.');
   replace('${D.rowhouses} rowhouses · ${(D.paintedArea/1e4)', '${D.rowhouses} rowhouses · ${D.offices} offices · ${(D.paintedArea/1e4)');
-  replace('n.querySelectorAll("[data-zone]").forEach(N=>N.setAttribute("aria-pressed",String(N===D)))', 'e.setPropertyZone(c),b(),n.querySelectorAll("[data-zone]").forEach(N=>{N.setAttribute("aria-pressed",String(N===D));N.setAttribute("aria-selected",String(N===D));N.tabIndex=N===D?0:-1}),n.querySelector("#zoning-type-help").textContent=c==="offices"?"Office plots are 32–56 m wide and 30–58 m deep. Paint or bucket-fill these larger sites for 10–80-storey offices. Streets must leave room for a full office footprint; shallow sites remain unbuilt.":"Property lines show the future residential footprints. Paint an area or fill one property beside a surface street."');
-  replace('Paint or bucket-fill these larger sites for 10–80-storey offices.', 'Choose a Commercial $$$ design, then paint or bucket-fill these larger sites.');
-  replace('Office plots are 32–56 m wide and 30–58 m deep.', 'Office parcels range up to 76 × 76 m.');
+  replace('n.querySelectorAll("[data-zone]").forEach(N=>N.setAttribute("aria-pressed",String(N===D)))', 'e.setPropertyZone(c),b(),n.querySelectorAll("[data-zone]").forEach(N=>{N.setAttribute("aria-pressed",String(N===D));N.setAttribute("aria-selected",String(N===D));N.tabIndex=N===D?0:-1}),n.querySelector("#zoning-type-help").textContent=c==="offices"?"Office plots are 32–56 m wide and 30–58 m deep. Paint or bucket-fill these larger sites for 10–80-storey offices. Lot sizes are divided automatically, without grass gaps.":"Property lines show the future residential footprints. Paint an area or fill one property beside a surface street."');
+  replace('Paint or bucket-fill these larger sites for 10–80-storey offices.', 'Paint lots or bucket-fill a whole block; buildings fill each lot to the sidewalk.');
+  replace('Office plots are 32–56 m wide and 30–58 m deep.', 'Office zoning fills continuous blocks with adjoining lots.');
   replace('return t.canvas.addEventListener("pointerleave",()=>{l&&!f', 'pcInitZoneTabs(n);pcCatalogueInitMenu(n,e,w);return t.canvas.addEventListener("pointerleave",()=>{l&&!f');
   replace('(l.zone==="rowhouses"?"brick rowhouse":"apartment building")', '(l.zone==="rowhouses"?"brick rowhouse":l.zone==="offices"?(pcCatalogueFind(l.office?.catalogueId)?.name||"office tower"):"apartment building")');
   return source;

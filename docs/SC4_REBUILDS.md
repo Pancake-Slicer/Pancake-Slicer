@@ -18,7 +18,7 @@ Materials are opaque MeshStandardMaterials and respond to the game's existing he
 
 ## Integration and limits
 
-Native sites extend up to 76 × 76 m. Selected designs require a fitting site, and are never squeezed sideways into a small plot. Rebuild height and proportions follow the reference recipes. Floor counts are design estimates derived from the rebuilt body height, not claimed SC4 facts. The existing zoning, road/terrain constraints, forest clearance, picking, demolition, history, residential generation and landmark protections remain active.
+Office sites now partition continuous blocks, as described in [OFFICE_BLOCKS.md](OFFICE_BLOCKS.md). Buildings have full-lot street-wall bases; upper plans fit uniformly inside the site, and support plans eliminate detached/unsupported survey offsets. Reference heights remain unchanged, while horizontal proportions adapt uniformly to lot size. This supersedes the earlier isolated 32–76 m native-site fit restriction. Floor counts remain design estimates, not claimed SC4 facts. Existing road/terrain constraints, forest clearance, picking, demolition, history, residential generation and landmark protections remain active.
 
 These are SC4-inspired reconstructions, not exact replicas. Fine ornament, signage, surrounding lot props and some complex architectural details remain approximations. The improvement is genuine geometry and consistent lighting across arbitrary camera angles, rather than imported view-specific pictures. No full-city FPS measurement is claimed.
 

@@ -3,7 +3,7 @@ const source=fs.readFileSync(path.join(__dirname,'../web/assets/game.bundle.js')
 const sandbox={console,performance,structuredClone,window:{addEventListener(){}},Image:function(){throw Error('Rebuilt buildings must not load image assets');},document:{createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}};
 Object.defineProperty(sandbox,'pcSC4Originals',{get(){throw Error('Imported asset dependency must not return');}});
 const context=vm.createContext(sandbox);
-vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={pcRebuiltDesigns,pcSC4Model,pcSC4Fits,pcRebuiltRender,pcRebuiltMaterials,pcRebuiltCap,pcRebuiltRoofMesh,Te,je,sn,cS,Se,pS,zb,qb};',context);
+vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={pcRebuiltDesigns,pcSC4Model,pcSC4Fits,pcRebuiltRender,pcRebuiltMaterials,pcRebuiltCap,pcRebuiltRoofMesh,pcRebuiltSupportedBands,pcRebuiltTransform,Te,je,sn,cS,Se,pS,zb,qb};',context);
 const api=context.api,entries=api.pcRebuiltDesigns.entries;
 function fixture(d){return {id:'rebuilt:'+d.id,signature:'rebuilt:'+d.id,zone:'offices',office:{catalogueId:d.id,style:d.style},x:100,z:200,y:5,ground:4.43,rotation:0,frontage:76,depth:76,height:d.height,floors:d.floors,towardRoad:{x:0,z:-1},entrance:{x:100,z:162,y:5},footprint:[{x:62,z:162},{x:138,z:162},{x:138,z:238},{x:62,z:238}]};}
 function collect(d){const building=fixture(d),geometries=[],boxes=[];assert.equal(api.pcRebuiltRender(building,(geometry,material,id)=>{assert.equal(id,building.id);geometries.push({geometry,material});},(point,w,h,depth,yaw,material,id)=>{assert.equal(id,building.id);assert.ok([point.x,point.y,point.z,w,h,depth,yaw].every(Number.isFinite));boxes.push({point,w,h,depth,material});},{windows:0}),true);return {building,geometries,boxes};}
@@ -23,9 +23,9 @@ test('all rebuilt buildings have finite geometry and textured faces have non-col
  for(const d of entries){const {geometries}=collect(d);for(const {geometry,material} of geometries){const p=geometry.attributes.position,n=geometry.attributes.normal,u=geometry.attributes.uv;assert.equal(p.count%3,0);for(const value of p.array)assert.ok(Number.isFinite(value),d.name);for(const value of n.array)assert.ok(Number.isFinite(value),d.name);if(material.map)for(let f=0;f<p.count;f+=3){const a=[p.getX(f+1)-p.getX(f),p.getY(f+1)-p.getY(f),p.getZ(f+1)-p.getZ(f)],b=[p.getX(f+2)-p.getX(f),p.getY(f+2)-p.getY(f),p.getZ(f+2)-p.getZ(f)],area=Math.hypot(a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]);if(area<1e-5)continue;const uvArea=Math.abs((u.getX(f+1)-u.getX(f))*(u.getY(f+2)-u.getY(f))-(u.getY(f+1)-u.getY(f))*(u.getX(f+2)-u.getX(f)));assert.ok(uvArea>1e-12,d.name+' has a collapsed texture face');}geometry.dispose();}}
 });
 test('rebuilt walls face outward and enclose volume from all eight camera headings',()=>{
- for(const d of entries){const result=collect(d),band=d.bands[Math.floor(d.bands.length/2)],ring=band.parts[0].map(([x,z])=>({x:x+100,z:z+200})),centre=api.cS(ring),y=5+(band.y+band.top)/2;assert.ok(centre,d.name);
+ for(const d of entries){const result=collect(d),band=api.pcRebuiltSupportedBands(d)[Math.floor(d.bands.length/2)],transform=api.pcRebuiltTransform(result.building,d),ring=band.plans[0].outer.map(p=>transform.point([p.x,p.z])),centre=api.cS(ring),y=5+(band.y+band.top)/2;assert.ok(centre,d.name);
   for(let heading=0;heading<8;heading++){const x=Math.cos(heading*Math.PI/4),z=Math.sin(heading*Math.PI/4);assert.ok(rayHit(result.geometries,[centre.x+x*200,y,centre.z+z*200],[-x,0,-z]),d.name+' is missing an outward-facing wall');}
-  const top=d.bands.at(-1),target=api.cS((top.upper||top.parts)[0].map(([x,z])=>({x:x+100,z:z+200})));assert.ok(rayHit(result.geometries,[target.x,d.height+100,target.z],[0,-1,0]),d.name+' is missing a roof');for(const g of result.geometries)g.geometry.dispose();
+  const top=api.pcRebuiltSupportedBands(d).at(-1),target=api.cS(top.plans[0].outer.map(p=>transform.point([p.x,p.z])));assert.ok(rayHit(result.geometries,[target.x,d.height+100,target.z],[0,-1,0]),d.name+' is missing a roof');for(const g of result.geometries)g.geometry.dispose();
  }
 });
 test('terrace caps exclude upper volumes instead of stacking coplanar internal faces',()=>{
@@ -41,5 +41,19 @@ test('camera motion retains the same actual neighborhood meshes and picking IDs'
  const after=[];scene.traverse(o=>{if(o.geometry)after.push(o);});assert.deepEqual(after,before);assert.equal(renderer.render({buildings:[building]}),false);
 });
 test('native placement, demolition and undo/redo retain rebuild identity without source assets',()=>{
- const network=new api.zb,points=[{x:-100,z:-60},{x:100,z:-60},{x:100,z:60},{x:-100,z:60}];network.addBatch(points.map((p,i)=>[p,points[(i+1)%4]]));const zoning=new api.qb(network,{items:[]});zoning.setPropertyZone('offices');zoning.pcCatalogueChoice=424;const site=zoning.properties.find(p=>api.pcSC4Fits(p,api.pcSC4Model(424)));assert.ok(site);zoning.fillProperty(site.id,'offices');const b=zoning.buildings[0];assert.equal(b.height,326);assert.equal(zoning.demolish(b.id),true);assert.equal(network.undo(),true);zoning.rebuild();assert.equal(zoning.buildings[0].signature,b.signature);assert.equal(network.redo(),true);zoning.rebuild();assert.equal(zoning.buildings.length,0);
+ const network=new api.zb,points=[{x:-100,z:-60},{x:100,z:-60},{x:100,z:60},{x:-100,z:60}];network.addBatch(points.map((p,i)=>[p,points[(i+1)%4]]));const zoning=new api.qb(network,{items:[]});zoning.setPropertyZone('offices');zoning.pcCatalogueChoice=424;const site=zoning.properties.find(p=>api.pcSC4Fits(p,api.pcSC4Model(424)));assert.ok(site);zoning.fillProperty(site.id,'offices');const count=zoning.buildings.length,b=zoning.buildings[0];assert.equal(b.height,326);assert.equal(zoning.demolish(b.id),true);assert.equal(network.undo(),true);zoning.rebuild();assert.equal(zoning.buildings[0].signature,b.signature);assert.equal(network.redo(),true);zoning.rebuild();assert.equal(zoning.buildings.length,count-1);
+});
+
+test('glass roof shells touch their supporting roof and portal lintels meet their posts',()=>{
+ for(const d of entries.filter(d=>['glass-pyramid','glasshouse','skylights','solar'].includes(d.roof))){
+  const {building,geometries}=collect(d),glass=api.pcRebuiltMaterials(d).glass;
+  const shells=geometries.filter(g=>g.material===glass);assert.ok(shells.length,d.name);
+  for(const {geometry} of shells){geometry.computeBoundingBox();assert.ok(Math.abs(geometry.boundingBox.min.y-building.y-d.bodyHeight)<.001,d.name+' skylight floats above roof');}
+  for(const {geometry} of geometries)geometry.dispose();
+ }
+ for(const d of entries.filter(d=>['portal','notch'].includes(d.roof))){
+  const {geometries}=collect(d),[left,right,beam]=geometries.slice(-3).map(({geometry})=>{geometry.computeBoundingBox();return geometry.boundingBox;});
+  assert.ok(left.max.y>=beam.min.y-.001&&right.max.y>=beam.min.y-.001,d.name+' roof beam floats above posts');
+  for(const {geometry} of geometries)geometry.dispose();
+ }
 });
