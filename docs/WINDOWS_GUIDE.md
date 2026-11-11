@@ -12,7 +12,7 @@ The launcher starts the development copy in `web/`. It never modifies the origin
 
 ## Commands for development
 
-The Office playtest is `C:\Users\camsh\Downloads\Pancake City - Office Playtest.html`. Open it with Chrome, create terrain and streets, then select **Zoning → Office**. Paint a run of neighboring properties for larger towers; Bucket fill on one narrow plot makes a smaller office. Offices vary from 10 to 80 storeys across Art Deco, International, and modernist designs. The earlier playtest files do not include Office zoning.
+The latest Office playtest is `C:\Users\camsh\Downloads\Pancake City - Larger Office Plots Playtest.html`. Open it with Chrome, create terrain and streets, then select **Zoning → Office**. The property outlines change to large office sites, 32–56 m wide and 30–58 m deep. Paint these sites or use Bucket fill on one full office parcel; adjoining rowhouse lots no longer need to be combined. Leave enough room between streets for a full office-depth site. Offices vary from 10 to 80 storeys across Art Deco, International, and modernist designs. The older Office playtest contains the superseded shallow plots.
 
 For a single-file offline copy, open `C:\Users\camsh\Downloads\Pancake City - Playtest.html` with Google Chrome. No server window is needed. The first export was generated on 2026-11-10; Chrome automation was blocked by permissions, so its interactive launch still needs a hands-on check.
 

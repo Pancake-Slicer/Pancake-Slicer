@@ -9,7 +9,7 @@ const context = vm.createContext({
   window: { addEventListener() {} },
   document: { createElement: () => ({ relList: { supports: () => true }, getContext: () => ({ fillRect() {} }) }) }
 });
-vm.runInContext(source.slice(0, source.indexOf('const LP=')) + ';globalThis.api={zb,qb,Se,pS,yw,Te,Bo,Ee,sn,ve,pcOfficeSpec,pcOfficeTiers,pcOfficeMaterials};', context);
+vm.runInContext(source.slice(0, source.indexOf('const LP=')) + ';globalThis.api={zb,qb,Se,pS,yw,Te,Bo,Ee,sn,ve,Yb,Gi,pcOfficePlots,pcOfficeSpec,pcOfficeTiers,pcOfficeMaterials};', context);
 const api = context.api;
 const plain = value => JSON.parse(JSON.stringify(value));
 function city() {
@@ -23,26 +23,33 @@ function city() {
 test('Office designs deterministically span all three styles and 10 through 80 storeys', () => {
   const styles = new Set, floors = new Set;
   for (let i=0;i<1000;i++) {
-    const spec=api.pcOfficeSpec('office-fixture-'+i,1100);
-    assert.deepEqual(plain(spec),plain(api.pcOfficeSpec('office-fixture-'+i,1100)));
+    const spec=api.pcOfficeSpec('office-fixture-'+i,3200);
+    assert.deepEqual(plain(spec),plain(api.pcOfficeSpec('office-fixture-'+i,3200)));
     assert.ok(Number.isInteger(spec.floors)&&spec.floors>=10&&spec.floors<=80);
     styles.add(spec.style); floors.add(spec.floors);
-    assert.ok(api.pcOfficeSpec('small-'+i,100).floors<=20);
+    assert.ok(api.pcOfficeSpec('small-'+i,960).floors<=24);
   }
   assert.equal(styles.size,3); assert.ok(floors.has(10)&&floors.has(80));
 });
-test('painting Office zones creates varied towers on adjacent street properties, without altering the original plots', () => {
+test('Office selection exposes independent, deep parcels instead of merged rowhouse strips', () => {
   const {zoning}=city();
   const properties=plain(zoning.properties);
+  zoning.setPropertyZone('offices');
+  const officeProperties=plain(zoning.properties);
   assert.equal(zoning.applyProperties(zoning.properties,'offices'),true);
-  assert.ok(zoning.buildings.length>5&&zoning.buildings.length<zoning.properties.length);
+  assert.ok(zoning.buildings.length>5&&zoning.buildings.length<properties.length);
+  assert.equal(zoning.buildings.length,zoning.properties.length);
   assert.equal(new Set(zoning.buildings.map(b=>b.office.style)).size,3);
-  assert.ok(Math.max(...zoning.buildings.map(b=>b.floors))>=70);
+  assert.ok(Math.max(...zoning.buildings.map(b=>b.floors))>=60);
   assert.equal(zoning.info().offices,zoning.buildings.length);
   assert.equal(zoning.info().homes,0);
-  assert.deepEqual(plain(zoning.properties),properties);
+  assert.deepEqual(plain(zoning.properties),officeProperties);
+  assert.deepEqual(plain(zoning.pcResidentialProperties),properties);
   for(const building of zoning.buildings) {
     assert.equal(building.zone,'offices');
+    assert.ok(building.frontage>=32&&building.depth>=30);
+    assert.ok(building.area>=960&&building.area<=3132);
+    assert.ok(Math.max(building.frontage,building.depth)/Math.min(building.frontage,building.depth)<=1.2);
     const members=building.propertyIds.map(id=>zoning.propertyById.get(id));
     const allowance=api.Bo(api.ve(members.flatMap(p=>api.Te(p.footprint))),.08);
     assert.ok(api.sn(api.Ee(api.Te(building.footprint),allowance))>=building.area-.01,'Offices must stay on their painted properties');
@@ -76,7 +83,8 @@ test('Office and rowhouse zoning coexist; rezoning back restores the residential
   const homes=zoning.buildings.filter(b=>b.zone==='rowhouses'),offices=zoning.buildings.filter(b=>b.zone==='offices');
   assert.ok(homes.length>0&&offices.length>0);
   for(const home of homes)for(const office of offices)assert.ok(api.sn(api.Ee(api.Te(home.footprint),api.Te(office.footprint)))<.001);
-  zoning.applyProperties(officeSites,'rowhouses');
+  zoning.setPropertyZone('rowhouses');
+  zoning.applyProperties(zoning.properties,'rowhouses');
   assert.deepEqual(plain(zoning.buildings),residential);
   // Older snapshots without an offices key remain usable.
   zoning.network.historyParticipants.get('zoning').restore({regions:{rowhouses:[]},suppressed:[]});
@@ -104,6 +112,57 @@ test('the existing brush paints Office sites only where street properties exist'
   const empty=new api.qb(new api.zb(),{items:[]});
   assert.equal(empty.paint([{x:0,z:0}],50,'offices'),false);
   assert.equal(empty.buildings.length,0);
+});
+test('bucket fill uses a full office-depth plot and tab changes retain placed offices',()=>{
+  const {zoning}=city();
+  zoning.setPropertyZone('offices');
+  const plot=zoning.properties.find(property=>property.depth>=44);
+  assert.ok(plot);
+  assert.equal(zoning.fillProperty(plot.id,'offices'),true);
+  assert.equal(zoning.buildings.length,1);
+  const building=zoning.buildings[0];
+  assert.equal(building.depth,plot.depth);
+  assert.ok(building.area>1800);
+  zoning.setPropertyZone('rowhouses');
+  assert.equal(zoning.buildings[0].id,building.id);
+  assert.ok(zoning.properties.every(property=>property.zone==='rowhouses'));
+  assert.equal(zoning.demolish(building.id),true);
+  assert.equal(zoning.buildings.length,0);
+  zoning.fillProperty(plot.id,'offices');
+  assert.equal(zoning.buildings.length,1);
+});
+test('native office plots avoid roads, each other, landmarks and tile edges on rotated streets',()=>{
+  const network=new api.zb(),angle=.39;
+  const rotate=([x,z])=>({x:x*Math.cos(angle)-z*Math.sin(angle),z:x*Math.sin(angle)+z*Math.cos(angle)});
+  const corners=[[-100,-70],[100,-70],[100,70],[-100,70]].map(rotate);
+  assert.equal(network.addBatch(corners.map((p,i)=>[p,corners[(i+1)%4]])).ok,true);
+  const plots=api.pcOfficePlots(network),roads=api.Yb(network).paths,bounds=api.Gi(network);
+  assert.ok(plots.length>5);
+  for(let i=0;i<plots.length;i++){
+    const plot=plots[i],shape=api.Te(plot.footprint);
+    const widths=plot.footprint.map((p,j,a)=>Math.hypot(p.x-a[(j+1)%4].x,p.z-a[(j+1)%4].z));
+    assert.ok(Math.min(...widths)>=29.99,'Office depth must not collapse into the residential strip');
+    assert.ok(api.sn(api.Ee(shape,roads))<.001);
+    assert.ok(plot.footprint.every(p=>p.x>=bounds.minX&&p.x<=bounds.maxX&&p.z>=bounds.minZ&&p.z<=bounds.maxZ));
+    for(let j=0;j<i;j++)assert.ok(api.sn(api.Ee(shape,api.Te(plots[j].footprint)))<.001);
+  }
+  assert.equal(api.pcOfficePlots(network),plots,'Unchanged roads and terrain must reuse the plot cache');
+  const landmark={id:'test-landmark',x:plots[0].x,z:plots[0].z,rotation:0};
+  const protectedPlots=api.pcOfficePlots(network,[landmark]);
+  assert.notEqual(protectedPlots,plots);
+  const exclusion=api.Te([{x:landmark.x-48,z:landmark.z-48},{x:landmark.x+48,z:landmark.z-48},{x:landmark.x+48,z:landmark.z+48},{x:landmark.x-48,z:landmark.z+48}]);
+  assert.ok(protectedPlots.every(plot=>api.sn(api.Ee(api.Te(plot.footprint),exclusion))<.001));
+});
+test('Office and residential rezoning removes whole conflicting sites instead of overlapping buildings',()=>{
+  const {zoning}=city();
+  zoning.applyProperties(zoning.properties,'rowhouses');
+  zoning.setPropertyZone('offices');
+  const plot=zoning.properties[0];zoning.fillProperty(plot.id,'offices');
+  assert.ok(zoning.buildings.some(b=>b.zone==='offices'));
+  zoning.setPropertyZone('rowhouses');
+  const house=zoning.properties.find(p=>api.sn(api.Ee(api.Te(p.footprint),api.Te(plot.footprint)))>.01);
+  assert.ok(house);zoning.fillProperty(house.id,'rowhouses');
+  assert.ok(zoning.buildings.every(b=>b.zone!=='offices'));
 });
 test('office tiers stay within their site and account for exactly the advertised storeys', () => {
   const footprint=[{x:0,z:0},{x:40,z:0},{x:40,z:30},{x:0,z:30}];
@@ -156,13 +215,14 @@ test('the real zoning menu exposes and switches the Office tab by click and keyb
   }});
   container.querySelector=selector=>{if(!elements.has(selector))elements.set(selector,new Element);return elements.get(selector);};
   container.querySelectorAll=selector=>selector==='[data-zone]'?tabs:[];
-  const world={canvas:new Element,controls:{enabled:true},setLandscapeBrush(){},highlightProperty(){},highlightDevelopment(){}};
+  const world={canvas:new Element,controls:{enabled:true},setLandscapeBrush(){},highlightProperty(){},highlightDevelopment(){},drawZoning(){}};
   const ui=api.yw({container,world,collection:zoning,onChange(){},onClose(){},onMessage(){},getTool:()=> 'zoning'});
   assert.equal(tabs.length,2);
   assert.ok(container.html.includes('role="tablist"'));
   assert.equal(tabs[1].dataset.zone,'offices'); assert.equal(tabs[1].attributes.role,'tab');
   tabs[1].click(); assert.equal(ui.info().type,'offices'); assert.equal(tabs[1].attributes['aria-selected'],'true');
-  assert.ok(elements.get('#zoning-type-help').textContent.includes('larger sites')||elements.get('#zoning-type-help').textContent.includes('Larger sites'));
+  assert.ok(elements.get('#zoning-type-help').textContent.includes('30–58 m deep'));
+  assert.ok(zoning.properties.every(property=>property.zone==='offices'&&property.depth>=30));
   tabs[1].key('ArrowLeft'); assert.equal(ui.info().type,'rowhouses'); assert.equal(tabs[0].tabIndex,0);
   tabs[0].key('End'); assert.equal(ui.info().type,'offices'); assert.equal(tabs[1].focused,true);
 });

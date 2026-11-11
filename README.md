@@ -35,7 +35,7 @@ Run `npm run export:html -- --downloads` to also copy the result to your Windows
 
 ## Development workflow
 
-Office zoning adds a second **Office** tab beside Brick rowhouses. Choose **Zoning → Office**, then paint adjoining properties to form larger office sites, or use Bucket fill on one property for a smaller building. The mix includes Art Deco setback towers, International-style curtain walls, and modernist ribbon windows, spanning 10–80 storeys. Heights are deterministic and depend on site area; narrow individual plots produce lower offices. Undo/redo, demolition, repainting, and rezoning use the existing tools.
+Office zoning adds a second **Office** tab beside Brick rowhouses. Choose **Zoning → Office** to display dedicated office parcels, then paint or bucket-fill them. Office sites are 32–56 m wide and 30–58 m deep (960–3,132 m²), rather than shallow joined rowhouse lots. The mix includes Art Deco setback towers, International-style curtain walls, and modernist ribbon windows, spanning 10–80 storeys. Heights vary by profile and site area. Shallow blocks that cannot fit a full office footprint remain unbuilt. Residential plots retain their original dimensions. Undo/redo, demolition, repainting, and rezoning use the existing tools. See [the footprint references](docs/OFFICE_FOOTPRINT_REFERENCES.md) for the published building data and its interpretation.
 
 Edit Office source in `web/features/`, then run `npm run assemble` to regenerate the development runtime. Build and export commands assemble automatically. The immutable v52 artifact and `approved-v52` Git tag remain the fallback; new Office development is not part of that approved checkpoint.
 
