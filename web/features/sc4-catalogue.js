@@ -2,7 +2,9 @@
 function pcCatalogueFind(id){return pcSC4Catalogue.entries.find(entry=>entry.id===Number(id));}
 function pcCatalogueReference(collection,property){
   const assigned=collection.pcCatalogueAssignments?.get(property.id);
-  return pcCatalogueFind(assigned)||pcCatalogueFind(collection.pcCatalogueChoice)||pcSC4Catalogue.entries[pcOfficeHash(property.id+':catalogue')%pcSC4Catalogue.entries.length];
+  const fixed=pcCatalogueFind(assigned)||pcCatalogueFind(collection.pcCatalogueChoice);if(fixed)return fixed;
+  const options=pcSC4Catalogue.entries.filter(entry=>!pcSC4Model(entry.id)||pcSC4Fits(property,pcSC4Model(entry.id)));
+  return options[pcOfficeHash(property.id+':catalogue')%options.length];
 }
 function pcCatalogueNeedsChange(collection,properties,zone,erase){
   if(erase||zone!=='offices'||!collection.pcCatalogueChoice)return false;
@@ -16,8 +18,9 @@ function pcCatalogueAssign(collection,properties,zone,erase){
 }
 function pcCatalogueSpec(collection,property,spec){
   const entry=pcCatalogueReference(collection,property);
+  const original=pcSC4Model(entry.id),sourceHeight=original?original.bounds.maxY-original.bounds.minY:undefined;
   return {...spec,catalogueId:entry.id,catalogueName:entry.name,style:entry.style,facade:entry.facade,colour:entry.colour,
-    floors:entry.estimatedFloors,floorHeight:entry.type==='services'&&entry.estimatedFloors<6?4.2:3.9,variant:0};
+    floors:entry.estimatedFloors,floorHeight:sourceHeight?sourceHeight/entry.estimatedFloors:entry.type==='services'&&entry.estimatedFloors<6?4.2:3.9,sourceHeight,variant:0};
 }
 function pcCatalogueOutline(building,entry,scale=1,offsetX=0,offsetZ=0){
   const shape=entry.shape;
@@ -130,14 +133,16 @@ function pcCatalogueInitMenu(container,collection,redraw){
   const select=container.querySelector('#commercial-catalogue');if(!select)return;
   // The catalogue includes one-storey services as well as high-rise offices.
   const helpText=container.querySelector('#zoning-type-help');
-  const refreshHelp=()=>{if(collection.propertyZone==='offices'&&helpText)helpText.textContent='Office plots are 32–56 m wide and 30–58 m deep. Choose a Commercial $$$ building, then paint or bucket-fill an Office parcel. The catalogue includes low-rise shops and hotels as well as towers.';};
+  const refreshHelp=()=>{if(collection.propertyZone==='offices'&&helpText)helpText.textContent=globalThis.pcSC4Originals?.models?'Original buildings retain their size. Parcels range up to 76 × 76 m; choose a large enough parcel for the selected building. Paint or bucket-fill to apply it.':'Office plots are 32–56 m wide and 30–58 m deep. Choose a Commercial $$$ building, then paint or bucket-fill an Office parcel. The catalogue includes low-rise shops and hotels as well as towers.';};
   for(const tab of container.querySelectorAll?.('[data-zone]')||[])tab.addEventListener('click',refreshHelp);
   const option=entry=>`<option value="${entry.id}">${entry.name.replace(/&/g,'&amp;').replace(/</g,'&lt;')} [${entry.id}]</option>`;
   select.innerHTML='<option value="">Mix all 98 commercial $$$ buildings</option>'+['office','services'].map(type=>`<optgroup label="${type==='office'?'Offices (64)':'Shops, hotels and services (34)'}">${pcSC4Catalogue.entries.filter(entry=>entry.type===type).map(option).join('')}</optgroup>`).join('');
+  select.value=collection.pcCatalogueChoice?String(collection.pcCatalogueChoice):'';
   select.addEventListener('change',()=>{
     collection.pcCatalogueChoice=select.value?Number(select.value):null;
     const entry=pcCatalogueFind(select.value),help=container.querySelector('#catalogue-help');
-    help.textContent=entry?`${entry.name} · ${entry.tileset} · reference lots ${entry.lots.join(', ')} · approximately ${entry.estimatedFloors} storeys. Paint or refill an Office parcel to apply this design.`:'Mix all 98 referenced offices, shops, hotels and services. Existing buildings keep their chosen design.';
+    const original=entry&&pcSC4Model(entry.id);
+    help.textContent=original?`${entry.name} · original SimCity 4 model and textures · ${original.size[0]} × ${original.size[2]} m building, ${original.size[1]} m reference height. Paint a parcel large enough for this building; small parcels stay empty.`:entry?`${entry.name} · ${entry.tileset} · reference lots ${entry.lots.join(', ')} · approximately ${entry.estimatedFloors} storeys. Paint or refill an Office parcel to apply this design.`:'Mix all 98 referenced offices, shops, hotels and services. Existing buildings keep their chosen design.';
     redraw();
   });
 }

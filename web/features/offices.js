@@ -51,8 +51,8 @@ function pcOfficePlots(network, landmarks = []) {
       let cursor = 8, slot = 0;
       while (cursor + 32 < sample.length - 8) {
         const seed = pcOfficeHash(road.id + ':' + side + ':' + slot++);
-        const preferred = pcOfficeProfiles[seed % pcOfficeProfiles.length];
-        const profiles = [preferred, ...pcOfficeProfiles.filter(profile => profile !== preferred).sort((a, b) => b.width * b.depth - a.width * a.depth)];
+        const options=pcSC4ProfileOptions(),preferred = options[seed % options.length];
+        const profiles = [preferred, ...options.filter(profile => profile !== preferred).sort((a, b) => b.width * b.depth - a.width * a.depth)];
         let placed = null;
         for (const profile of profiles) {
           if (cursor + profile.width > sample.length - 8) continue;
@@ -105,11 +105,13 @@ function pcActiveProperties(collection) {
   return collection.propertyZone === 'offices' ? collection.pcOfficeProperties : collection.pcResidentialProperties;
 }
 
-function pcOfficeSelection(collection, properties, zone) {
+function pcOfficeSelection(collection, properties, zone,erase=false) {
   collection.setPropertyZone(zone);
-  if (properties.every(property => property.zone === zone)) return properties;
+  const original=zone==='offices'&&!erase?pcSC4Model(collection.pcCatalogueChoice):null;
+  const available=list=>original?list.filter(property=>pcSC4Fits(property,original)):list;
+  if (properties.every(property => property.zone === zone)) return available(properties);
   const selected = ve(properties.flatMap(Ip));
-  return collection.properties.filter(property => sn(Ee(Ip(property), selected)) > .01);
+  return available(collection.properties.filter(property => sn(Ee(Ip(property), selected)) > .01));
 }
 
 function pcResolveOfficeConflicts(collection, regions, selected, zone, erase) {
@@ -128,7 +130,7 @@ function pcOfficeParcels(properties, collection) {
     if(collection)spec=pcCatalogueSpec(collection,property,spec);
     const building = {
       ...property, id: 'office:' + key, propertyIds: [property.id],
-      floors: spec.floors, height: spec.floors * spec.floorHeight, office: spec
+      floors: spec.floors, height: spec.sourceHeight||spec.floors * spec.floorHeight, office: spec
     };
     building.signature = JSON.stringify([key, property.footprint, building.y, building.ground, spec]);
     return building;
@@ -170,7 +172,7 @@ function pcOfficeWalls(footprint, y, height, floorHeight) {
   return geometry;
 }
 
-function pcRenderOffice(building, addGeometry, addBox, statistics) { return pcDetailedOfficeRender(building, addGeometry, addBox, statistics); }
+function pcRenderOffice(building, addGeometry, addBox, statistics) { if(pcSC4Render(building,addGeometry,addBox,statistics))return;return pcDetailedOfficeRender(building, addGeometry, addBox, statistics); }
 
 function pcInitZoneTabs(container) {
   const tabs = [...container.querySelectorAll('[data-zone]')];

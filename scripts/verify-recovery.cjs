@@ -18,5 +18,6 @@ assert.deepEqual(read('web/assets/game.bundle.js'), Buffer.from(applyLandmarkPer
 assert.deepEqual(read('web/assets/game.css'), Buffer.from(styles[0][1] + '\n' + read('web/features/offices.css').toString('utf8')), 'CSS differs from v52 plus the Office tabs');
 const shell = read('web/index.html').toString('utf8');
 assert.ok(shell.includes('./assets/game.bundle.js') && shell.includes('./assets/game.css'));
+assert.ok(shell.includes('./assets/sc4-originals.local.js')&&shell.indexOf('./assets/sc4-originals.local.js')<shell.indexOf('./assets/game.bundle.js'),'Original artwork must load before the game module');
 assert.ok(shell.includes(read('reference/third-party-notices.txt').toString('utf8').trim()), 'License notices missing');
 console.log('PASS: original SHA-256, reviewed rendering/landmark/Office changes, original CSS plus Office tabs, HTML references, and license notices.');

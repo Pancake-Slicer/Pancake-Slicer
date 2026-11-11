@@ -6,14 +6,14 @@ function applyOfficeZoning(source) {
     source = source.replace(before, () => after);
   };
   const catalogue=JSON.parse(fs.readFileSync(path.join(__dirname,'../reference/sc4-commercial-wealth3.json'),'utf8'));
-  const helpers = 'const pcSC4Catalogue='+JSON.stringify(catalogue)+';\n'+fs.readFileSync(path.join(__dirname, '../web/features/offices.js'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '../web/features/office-architecture.js'), 'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'../web/features/sc4-catalogue.js'),'utf8');
+  const helpers = 'const pcSC4Catalogue='+JSON.stringify(catalogue)+';\n'+fs.readFileSync(path.join(__dirname, '../web/features/offices.js'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '../web/features/office-architecture.js'), 'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'../web/features/sc4-catalogue.js'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'../web/features/sc4-originals.js'),'utf8');
   replace('const vi=Object.freeze([{id:"rowhouses",name:"Brick rowhouses",color:7911573,description:"Attached 2–3 storey homes · narrow frontage"}])',
     helpers + '\nconst vi=Object.freeze([{id:"rowhouses",name:"Brick rowhouses",color:7911573,description:"Attached 2–3 storey homes · narrow frontage"},{id:"offices",name:"Office",color:5486785,description:"Commercial Wealth $$$ · 98 reference designs"}])');
   // Keep the original property layout independent of the selected zone type.
   replace('g=Object.fromEntries(vi.map(y=>[y.id,Od(e)])),m=Wb', 'g={rowhouses:Od(e)},m=Wb');
   replace('class qb{constructor', 'class qb{setPropertyZone(zone){if(!vi.some(type=>type.id===zone))return false;this.propertyZone=zone;this.syncProperties();this.rebuild();return true}constructor');
   replace('const t=Zb(this.network,this.landmarks.items);if(t===this.properties)', 'const t=pcActiveProperties(this);if(t===this.properties)');
-  replace('const s=ve(t.flatMap(Ip)),r={};', 't=pcOfficeSelection(this,t,e);if(!t.length)return false;const s=ve(t.flatMap(Ip)),r={};');
+  replace('const s=ve(t.flatMap(Ip)),r={};', 't=pcOfficeSelection(this,t,e,i);if(!t.length)return false;const s=ve(t.flatMap(Ip)),r={};');
   replace('const o=new Set(t.map(l=>l.id)),a=!i', 'pcResolveOfficeConflicts(this,r,s,e,i);const o=new Set(t.map(l=>l.id)),a=!i');
   replace('this.syncProperties(),t=t.filter((l,c)=>', 'this.setPropertyZone(i),this.syncProperties(),t=t.filter((l,c)=>');
   replace('if(!t)return!1;this.syncProperties();const s=typeof t=="string"', 'if(!t)return!1;this.setPropertyZone(e);this.syncProperties();const s=typeof t=="string"');
@@ -26,6 +26,9 @@ function applyOfficeZoning(source) {
   replace('this.suppressed.set(t,Lp(e)),this.revision++', 'pcSuppressOffice(this,e),this.suppressed.set(t,Lp(e)),this.revision++');
   replace('homes:this.buildings.length,paintedArea:', 'offices:this.buildings.filter(t=>t.zone==="offices").length,homes:this.buildings.filter(t=>t.zone==="rowhouses").length,paintedArea:');
   replace('for(const J of R){const at=Math.floor(J.variation', 'for(const J of R){if(J.zone==="offices"){pcRenderOffice(J,B,U,F);continue}const at=Math.floor(J.variation');
+  replace('const St=new ae(nt,J);St.castShadow=', 'const St=new ae(nt,J);if(J.userData.pcSC4)St.visible=false;St.castShadow=');
+  replace('const X=N.bounds,W=Math.max(X.minX-R.position.x', 'pcSC4UpdateViews(N.group,R)&&(D=true);const X=N.bounds,W=Math.max(X.minX-R.position.x');
+  replace('j.updateLOD(ut)&&(w(),I.requestShadows())', '(pcSC4Refresh=w,j.updateLOD(ut))&&(w(),I.requestShadows())');
   replace('R.y+R.height+1.5,Math.max(...R.footprint', 'R.y+R.height+(R.zone==="offices"?12:1.5),Math.max(...R.footprint');
   replace('ZONING / NORTHEASTERN US', 'ZONING / NORTH AMERICA');
   replace('<div class="zoning-options">${vi.map', '<div class="zoning-options"><div class="zoning-tabs" role="tablist" aria-label="Zone type">${vi.map');

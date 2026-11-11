@@ -1,0 +1,1965 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": 284,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        98500608
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        82771968
+      ],
+      "size": [
+        12,
+        11,
+        28
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 283,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        98893824
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88276992
+      ],
+      "size": [
+        12,
+        11,
+        28
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 282,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99287040
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        89063424
+      ],
+      "size": [
+        12,
+        14,
+        28
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 281,
+      "name": "Andrew's Fashion Center",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        84672512
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        84672512
+      ],
+      "size": [
+        60,
+        14,
+        52
+      ],
+      "sourceName": "Andrews' Fashion Centre"
+    },
+    {
+      "id": 280,
+      "name": "Kenner Dinner Theatre",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        84869120
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        84869120
+      ],
+      "size": [
+        24,
+        28,
+        30
+      ],
+      "sourceName": "Kenner Dinner Theater"
+    },
+    {
+      "id": 279,
+      "name": "Stratton Spa",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        85065728
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        85065728
+      ],
+      "size": [
+        16,
+        13,
+        12
+      ],
+      "sourceName": "Stratton Spa"
+    },
+    {
+      "id": 278,
+      "name": "Car Care Center",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        85262336
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        85262336
+      ],
+      "size": [
+        14,
+        10,
+        8
+      ],
+      "sourceName": "Car Care Center"
+    },
+    {
+      "id": 277,
+      "name": "Luxury Auto Center",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        85458944
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        85458944
+      ],
+      "size": [
+        24,
+        12,
+        26
+      ],
+      "sourceName": "Luxury Auto Center"
+    },
+    {
+      "id": 276,
+      "name": "Chez Eyler",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        85655552
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        85655552
+      ],
+      "size": [
+        10,
+        11,
+        14
+      ],
+      "sourceName": "Chez Eyler"
+    },
+    {
+      "id": 275,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        98566144
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        84279296
+      ],
+      "size": [
+        24,
+        16,
+        24
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 274,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        98959360
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88473600
+      ],
+      "size": [
+        24,
+        30,
+        24
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 273,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99352576
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        89260032
+      ],
+      "size": [
+        24,
+        24,
+        24
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 369,
+      "name": "Oi Finance",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        89063424
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        89063424
+      ],
+      "size": [
+        12,
+        14,
+        28
+      ],
+      "sourceName": "Oi Finance"
+    },
+    {
+      "id": 370,
+      "name": "Chalmers Co.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        88473600
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88473600
+      ],
+      "size": [
+        24,
+        30,
+        24
+      ],
+      "sourceName": "Chalmers Co."
+    },
+    {
+      "id": 371,
+      "name": "Jenkins Consulting",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        88276992
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88276992
+      ],
+      "size": [
+        12,
+        11,
+        28
+      ],
+      "sourceName": "Jenkins Consulting"
+    },
+    {
+      "id": 373,
+      "name": "Rusewicz Ritzy Plaza",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101187584
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101187584
+      ],
+      "size": [
+        12,
+        8,
+        28
+      ],
+      "sourceName": "Rusewicz Ritzy Plaza"
+    },
+    {
+      "id": 372,
+      "name": "Todd & Co.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        82771968
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        82771968
+      ],
+      "size": [
+        12,
+        11,
+        28
+      ],
+      "sourceName": "Todd and Co."
+    },
+    {
+      "id": 374,
+      "name": "Alvin's Go -N- Grab Plaza",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101253120
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101253120
+      ],
+      "size": [
+        24,
+        18,
+        24
+      ],
+      "sourceName": "Alvin's Go -N- Grab Plaza"
+    },
+    {
+      "id": 367,
+      "name": "Farley Publishing",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        84017152
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        84017152
+      ],
+      "size": [
+        24,
+        20,
+        24
+      ],
+      "sourceName": "Farly Publishing"
+    },
+    {
+      "id": 368,
+      "name": "Landry Co.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        89260032
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        89260032
+      ],
+      "size": [
+        24,
+        24,
+        24
+      ],
+      "sourceName": "Landry Co."
+    },
+    {
+      "id": 379,
+      "name": "Kobylanski Accounting",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        88670208
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88670208
+      ],
+      "size": [
+        24,
+        21,
+        24
+      ],
+      "sourceName": "Kobylanski Accounting"
+    },
+    {
+      "id": 378,
+      "name": "Stompel Printing",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        89456640
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        89456640
+      ],
+      "size": [
+        24,
+        20,
+        24
+      ],
+      "sourceName": "Stompel Printing"
+    },
+    {
+      "id": 377,
+      "name": "McCord Printing",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        84279296
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        84279296
+      ],
+      "size": [
+        24,
+        16,
+        24
+      ],
+      "sourceName": "McCord Printing"
+    },
+    {
+      "id": 376,
+      "name": "Cheng Currency Exchange",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        88211456
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88211456
+      ],
+      "size": [
+        24,
+        16,
+        24
+      ],
+      "sourceName": "Cheng Currency Exchange"
+    },
+    {
+      "id": 380,
+      "name": "Byall Means Travel Agency",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101318656
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101318656
+      ],
+      "size": [
+        24,
+        18,
+        24
+      ],
+      "sourceName": "Byall Means Travel Agency"
+    },
+    {
+      "id": 375,
+      "name": "Chin Corp.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        88145920
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88145920
+      ],
+      "size": [
+        24,
+        17,
+        24
+      ],
+      "sourceName": "Chin Corp."
+    },
+    {
+      "id": 285,
+      "name": "Euro Lux Boutique",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        103219200
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101187584
+      ],
+      "size": [
+        12,
+        8,
+        28
+      ],
+      "sourceName": "Euro Lux Boutique"
+    },
+    {
+      "id": 286,
+      "name": "Holistic Health Center",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        103284736
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101253120
+      ],
+      "size": [
+        24,
+        23,
+        24
+      ],
+      "sourceName": "Holistic Health Center"
+    },
+    {
+      "id": 288,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99024896
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88866816
+      ],
+      "size": [
+        40,
+        33,
+        24
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 289,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        98631680
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        82968576
+      ],
+      "size": [
+        40,
+        23,
+        24
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 287,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99418112
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        89653248
+      ],
+      "size": [
+        40,
+        34,
+        24
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 383,
+      "name": "Curtin Fabrics",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        88866816
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        88866816
+      ],
+      "size": [
+        40,
+        33,
+        24
+      ],
+      "sourceName": "Curtin Fabrics"
+    },
+    {
+      "id": 384,
+      "name": "Kearney LLC",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        82968576
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        82968576
+      ],
+      "size": [
+        40,
+        23,
+        24
+      ],
+      "sourceName": "Kearney LLC"
+    },
+    {
+      "id": 385,
+      "name": "Galvin Techtronics",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101384192
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101384192
+      ],
+      "size": [
+        40,
+        28,
+        24
+      ],
+      "sourceName": "Galvin Techtronics"
+    },
+    {
+      "id": 382,
+      "name": "Modde Inc.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        89653248
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        89653248
+      ],
+      "size": [
+        40,
+        34,
+        24
+      ],
+      "sourceName": "Modde Inc."
+    },
+    {
+      "id": 381,
+      "name": "Fancey Foods",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        83034112
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83034112
+      ],
+      "size": [
+        40,
+        27,
+        24
+      ],
+      "sourceName": "Fancey Foods"
+    },
+    {
+      "id": 296,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        98697216
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83623936
+      ],
+      "size": [
+        14,
+        34,
+        14
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 386,
+      "name": "Meehan Marketing",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        92471296
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92471296
+      ],
+      "size": [
+        14,
+        40,
+        14
+      ],
+      "sourceName": "Meehan Marketing"
+    },
+    {
+      "id": 297,
+      "name": "Peck Cinema",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        85917696
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        85917696
+      ],
+      "size": [
+        26,
+        27,
+        46
+      ],
+      "sourceName": "Peck Cinema"
+    },
+    {
+      "id": 292,
+      "name": "Bilyk Galleria",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        85786624
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        85786624
+      ],
+      "size": [
+        52,
+        14,
+        52
+      ],
+      "sourceName": "Bilyk Galleria"
+    },
+    {
+      "id": 387,
+      "name": "Marshall Printing",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        91684864
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        91684864
+      ],
+      "size": [
+        30,
+        88,
+        22
+      ],
+      "sourceName": "Marshall Printing"
+    },
+    {
+      "id": 388,
+      "name": "Vikayakar Foods",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        83623936
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83623936
+      ],
+      "size": [
+        14,
+        34,
+        14
+      ],
+      "sourceName": "Vikayakar Foods"
+    },
+    {
+      "id": 389,
+      "name": "Brink Real Estate",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        92340224
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92340224
+      ],
+      "size": [
+        30,
+        76,
+        22
+      ],
+      "sourceName": "Brink Real Estate"
+    },
+    {
+      "id": 390,
+      "name": "The McAdams Building",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        91815936
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        91815936
+      ],
+      "size": [
+        14,
+        53,
+        14
+      ],
+      "sourceName": "The McAdams Building"
+    },
+    {
+      "id": 391,
+      "name": "Farly Audio",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        81985536
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        81985536
+      ],
+      "size": [
+        30,
+        65,
+        22
+      ],
+      "sourceName": "Farly Audio"
+    },
+    {
+      "id": 293,
+      "name": "St. Ritzy",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        86048768
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        86048768
+      ],
+      "size": [
+        30,
+        58,
+        26
+      ],
+      "sourceName": "St. Ritzy"
+    },
+    {
+      "id": 392,
+      "name": "Reflect Systems Incorporated",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101711872
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101711872
+      ],
+      "size": [
+        30,
+        90,
+        22
+      ],
+      "sourceName": "Reflect Systems Incorporated"
+    },
+    {
+      "id": 393,
+      "name": "Brickheaven Office Suite",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101777408
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101777408
+      ],
+      "size": [
+        14,
+        32,
+        14
+      ],
+      "sourceName": "Brickhaven Office Suite"
+    },
+    {
+      "id": 294,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99483648
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92471296
+      ],
+      "size": [
+        14,
+        40,
+        14
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 295,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99090432
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        91815936
+      ],
+      "size": [
+        14,
+        53,
+        14
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 291,
+      "name": "Carlin Department Store",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        86179840
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        86179840
+      ],
+      "size": [
+        28,
+        21,
+        28
+      ],
+      "sourceName": "Carlin Department Store"
+    },
+    {
+      "id": 290,
+      "name": "JEK Equestrian Market Place",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        103350272
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101384192
+      ],
+      "size": [
+        40,
+        47,
+        24
+      ],
+      "sourceName": "JEK Equestrian Market Place"
+    },
+    {
+      "id": 395,
+      "name": "West & Co, Inc.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        83230720
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83230720
+      ],
+      "size": [
+        44,
+        96,
+        26
+      ],
+      "sourceName": "West & Co, Inc."
+    },
+    {
+      "id": 394,
+      "name": "Letourneau Architects",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        92078080
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92078080
+      ],
+      "size": [
+        14,
+        28,
+        22
+      ],
+      "sourceName": "LeTourneau Architects"
+    },
+    {
+      "id": 298,
+      "name": "Six Floor Fashion Center",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        103415808
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101777408
+      ],
+      "size": [
+        14,
+        29,
+        14
+      ],
+      "sourceName": "Sixth Floor Fashion Center"
+    },
+    {
+      "id": 397,
+      "name": "Paull Inc.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        91947008
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        91947008
+      ],
+      "size": [
+        14,
+        63,
+        14
+      ],
+      "sourceName": "Paull Inc."
+    },
+    {
+      "id": 301,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        98762752
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83689472
+      ],
+      "size": [
+        44,
+        52,
+        26
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 300,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99155968
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92209152
+      ],
+      "size": [
+        44,
+        87,
+        26
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 299,
+      "name": "Boutiques",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        99549184
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92864512
+      ],
+      "size": [
+        44,
+        88,
+        26
+      ],
+      "sourceName": "Boutiques"
+    },
+    {
+      "id": 396,
+      "name": "Xia Publishing",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        92733440
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92733440
+      ],
+      "size": [
+        14,
+        20,
+        22
+      ],
+      "sourceName": "Xia Publishing"
+    },
+    {
+      "id": 398,
+      "name": "Hedman Planners",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        83689472
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83689472
+      ],
+      "size": [
+        44,
+        52,
+        26
+      ],
+      "sourceName": "Hedman Planners"
+    },
+    {
+      "id": 399,
+      "name": "Despret Consulting",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        92602368
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92602368
+      ],
+      "size": [
+        14,
+        46,
+        14
+      ],
+      "sourceName": "Despret Consulting"
+    },
+    {
+      "id": 400,
+      "name": "The Freytag Building",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        83755008
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83755008
+      ],
+      "size": [
+        14,
+        50,
+        22
+      ],
+      "sourceName": "The Freytag Building"
+    },
+    {
+      "id": 401,
+      "name": "Ben Tower",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101842944
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101842944
+      ],
+      "size": [
+        14,
+        46,
+        14
+      ],
+      "sourceName": "Ben Tower"
+    },
+    {
+      "id": 402,
+      "name": "Box Top Real Estate Office",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101908480
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101908480
+      ],
+      "size": [
+        14,
+        23,
+        22
+      ],
+      "sourceName": "Box Top Real Estate Office"
+    },
+    {
+      "id": 302,
+      "name": "Blue Platter Limited",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        103481344
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101974016
+      ],
+      "size": [
+        47.900001525878906,
+        89,
+        31.899999618530273
+      ],
+      "sourceName": "Blue Platter Limited  "
+    },
+    {
+      "id": 407,
+      "name": "Vu Blue Denim Headquarters",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        101974016
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        101974016
+      ],
+      "size": [
+        47.900001525878906,
+        89,
+        31.899999618530273
+      ],
+      "sourceName": "Vu Blue Denim Headquarters"
+    },
+    {
+      "id": 403,
+      "name": "Ajjanagadde Inc.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        92864512
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92864512
+      ],
+      "size": [
+        44,
+        88,
+        26
+      ],
+      "sourceName": "Ajjanagadde Inc."
+    },
+    {
+      "id": 404,
+      "name": "Walton Plaza",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        92209152
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        92209152
+      ],
+      "size": [
+        44,
+        87,
+        26
+      ],
+      "sourceName": "Walton Plaza"
+    },
+    {
+      "id": 405,
+      "name": "Bunch Engineering",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        91619328
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        91619328
+      ],
+      "size": [
+        44,
+        52,
+        26
+      ],
+      "sourceName": "Bunch Engineering"
+    },
+    {
+      "id": 406,
+      "name": "Ferrara Inc.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        84344832
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        84344832
+      ],
+      "size": [
+        44,
+        55,
+        26
+      ],
+      "sourceName": "Ferrrara Inc."
+    },
+    {
+      "id": 410,
+      "name": "Houstonrvitz Accounting",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        94306304
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        94306304
+      ],
+      "size": [
+        44,
+        92,
+        26
+      ],
+      "sourceName": "Hourvitz Accounting"
+    },
+    {
+      "id": 306,
+      "name": "Nanale Shopping Center",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        86310912
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        86310912
+      ],
+      "size": [
+        60,
+        26,
+        44
+      ],
+      "sourceName": "Nanale Shopping Center"
+    },
+    {
+      "id": 409,
+      "name": "Yates Real Estate",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        95092736
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        95092736
+      ],
+      "size": [
+        44,
+        151,
+        26
+      ],
+      "sourceName": "Yates Real Estate"
+    },
+    {
+      "id": 411,
+      "name": "Barthelet Corporation",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        95158272
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        95158272
+      ],
+      "size": [
+        44,
+        151,
+        26
+      ],
+      "sourceName": "Barthelet Corporation"
+    },
+    {
+      "id": 304,
+      "name": "Maxis Theatre",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        86441984
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        86441984
+      ],
+      "size": [
+        37,
+        27,
+        22
+      ],
+      "sourceName": "Maxis Theatre"
+    },
+    {
+      "id": 408,
+      "name": "Goldman Building",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        84213760
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        84213760
+      ],
+      "size": [
+        44,
+        92,
+        26
+      ],
+      "sourceName": "Goldman Building"
+    },
+    {
+      "id": 305,
+      "name": "White's Clothier",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        86704128
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        86704128
+      ],
+      "size": [
+        40,
+        35,
+        28
+      ],
+      "sourceName": "White's Clothier"
+    },
+    {
+      "id": 412,
+      "name": "Wren Insurance",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        94568448
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        94568448
+      ],
+      "size": [
+        44,
+        176,
+        26
+      ],
+      "sourceName": "Wren Insurance"
+    },
+    {
+      "id": 413,
+      "name": "Simon and Frank Associates",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        102367232
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        102367232
+      ],
+      "size": [
+        47.900001525878906,
+        186,
+        31.899999618530273
+      ],
+      "sourceName": "Simon and Frank Associates"
+    },
+    {
+      "id": 303,
+      "name": "Grand Hotel",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        86573056
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        86573056
+      ],
+      "size": [
+        60,
+        98,
+        30
+      ],
+      "sourceName": "Grand Hotel"
+    },
+    {
+      "id": 414,
+      "name": "Graber Corporate Suites",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        102301696
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        102301696
+      ],
+      "size": [
+        47.900001525878906,
+        100,
+        30
+      ],
+      "sourceName": "Graber Corporate Suites"
+    },
+    {
+      "id": 415,
+      "name": "Brock Furnishings",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        95223808
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        95223808
+      ],
+      "size": [
+        44,
+        132,
+        36
+      ],
+      "sourceName": "Brock Furnishings"
+    },
+    {
+      "id": 428,
+      "name": "Khoury Art Foundation Building",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        102563840
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        102563840
+      ],
+      "size": [
+        56,
+        174,
+        36
+      ],
+      "sourceName": "Khoury Art Foundation Building  "
+    },
+    {
+      "id": 416,
+      "name": "Cameron Cameras",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        94830592
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        94830592
+      ],
+      "size": [
+        56,
+        175,
+        36
+      ],
+      "sourceName": "Cameron Cameras"
+    },
+    {
+      "id": 417,
+      "name": "Cahalane Communications",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        95485952
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        95485952
+      ],
+      "size": [
+        56,
+        245,
+        56
+      ],
+      "sourceName": "Cahalane Communications"
+    },
+    {
+      "id": 422,
+      "name": "Trottier Trading",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        95354880
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        95354880
+      ],
+      "size": [
+        56,
+        133,
+        36
+      ],
+      "sourceName": "Trottier Trading"
+    },
+    {
+      "id": 430,
+      "name": "Hogan Wallace and White Insurance",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        102694912
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        102694912
+      ],
+      "size": [
+        56,
+        262,
+        56
+      ],
+      "sourceName": "Hogan Wallace and White Insurance "
+    },
+    {
+      "id": 429,
+      "name": "Hurt Enterprise Headquarters",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        102629376
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        102629376
+      ],
+      "size": [
+        56,
+        328,
+        56
+      ],
+      "sourceName": "Hurt Enterprise Headquarters"
+    },
+    {
+      "id": 427,
+      "name": "Brown's Record Inc.",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        102432768
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        102432768
+      ],
+      "size": [
+        44,
+        132,
+        36
+      ],
+      "sourceName": "Brown's Record Inc."
+    },
+    {
+      "id": 426,
+      "name": "Mid-Knight Office Suites",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        102498304
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        102498304
+      ],
+      "size": [
+        44,
+        118,
+        36
+      ],
+      "sourceName": "Mid-Knight Office Suites "
+    },
+    {
+      "id": 425,
+      "name": "Futa Consulting",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        82182144
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        82182144
+      ],
+      "size": [
+        44,
+        125,
+        36
+      ],
+      "sourceName": "Futa Consulting"
+    },
+    {
+      "id": 423,
+      "name": "Lind Entertainment",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        94961664
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        94961664
+      ],
+      "size": [
+        56,
+        266,
+        56
+      ],
+      "sourceName": "Lind Entertainment"
+    },
+    {
+      "id": 421,
+      "name": "van Prooijen Trading",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        95551488
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        95551488
+      ],
+      "size": [
+        56,
+        208,
+        56
+      ],
+      "sourceName": "van Prooijen Trading"
+    },
+    {
+      "id": 420,
+      "name": "Reamon Plaza",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        83296256
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83296256
+      ],
+      "size": [
+        56,
+        151,
+        36
+      ],
+      "sourceName": "Reamon Plaza"
+    },
+    {
+      "id": 419,
+      "name": "The Galvin Corp",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        94699520
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        94699520
+      ],
+      "size": [
+        44,
+        152,
+        36
+      ],
+      "sourceName": "The Galvin Corp"
+    },
+    {
+      "id": 418,
+      "name": "Lillard Audio",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        95289344
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        95289344
+      ],
+      "size": [
+        44,
+        132,
+        36
+      ],
+      "sourceName": "Lillard Audio"
+    },
+    {
+      "id": 424,
+      "name": "Pedriana Pharmaceuticals",
+      "exemplar": [
+        1697917002,
+        1203625746,
+        83361792
+      ],
+      "resource": [
+        1523640343,
+        3134937073,
+        83361792
+      ],
+      "size": [
+        56,
+        326,
+        56
+      ],
+      "sourceName": "Pedriana Pharmaceuticals"
+    }
+  ]
+}
