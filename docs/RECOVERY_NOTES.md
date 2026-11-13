@@ -1,5 +1,14 @@
 # Recovery notes
 
+## Standalone Lind Art Deco benchmark — 2026-11-13
+
+- Working folder: `C:\Users\camsh\Desktop\Pancake-City-restored-v53-20261112-153759`. Added a separate reference-led model and orbitable comparison scene in `benchmark/art-deco/`; city runtime, assets, gameplay, and existing engine version are unchanged. Original v52 hash and all existing equality checks remain mandatory.
+- Actual inputs are the three user-supplied images in `Assets/Architecture/Art Deco/`. `prepare-art-deco.cjs` aliases the descriptive PNG names to reference.png/facade.png in ignored generated output, extracts the existing recovered r180 engine, and retains license notices. No Quaternius or external texture/model assets are used.
+- Built articulated podium, unequal stepped wings, narrow central shaft, masonry piers and buttresses, facade grid, parapets, entry, louvers and green-grey pyramidal roof. Cropped/downsampled the supplied facade to reusable window and stone textures. Preserved window crop proportions on every side and batched the model into seven material meshes.
+- Visual comparison led to wider piers, shortened shoulder fins, tall crown louvers, stronger corner buttresses, corrected floor rounding and metric stone UVs. Captured actual southeast, southwest, rear and crown views in `.tools/art-deco-*.png`. Full technical notes and remaining fidelity gaps are in ART_DECO_BENCHMARK.md; this is not an exact architectural replica.
+- Browser test passed UI controls, four views, responsive layout, indexed/finite geometry, physical window proportions, floor elevations, image decoding, engine isolation and zero console/runtime errors. Scene: 9 cached-shadow draw calls, 26,224 triangles, 0.83 MiB material textures, approximately 1.75 MiB model buffers. Iris Xe synchronous render samples: 0.3–0.4 ms median, 0.5–0.8 ms p95 across runs (final 0.3 / 0.5 ms); not full-frame/city FPS. Shadow colour + depth estimate is 32 MiB, excluding driver and framebuffer overhead.
+- `npm run build` passed all 53 existing regressions plus original preservation/expected-runtime checks. Generated output, optional browser-test dependencies, measurements and screenshots stay ignored. A local milestone commit requires separate approval to push; no push is authorized or performed by this implementation request. A local commit alone is not an off-computer backup.
+
 Source file: `Pancake (52).html`
 SHA-256: `c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c`
 

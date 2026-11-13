@@ -57,6 +57,10 @@ The rendering fixes keep a stable image during camera movement, remove internal 
 4. Ask Codex to preserve behavior, add a smoke test, and progressively split the bundled application into maintainable modules.
 5. Require commits pushed to GitHub after each successful milestone. Local checkpoint archives alone are not off-workspace backups.
 
-## Important
+## Standalone Art Deco architectural benchmark
+
+Double-click `Play Art Deco Benchmark.cmd`, then open `http://127.0.0.1:4180` to inspect the reference-led Lind skyscraper. Or run `npm run benchmark:serve`. This separate scene uses the game's recovered Three.js r180 without changing city gameplay. See [the benchmark notes](docs/ART_DECO_BENCHMARK.md) for source images, controls, geometry/material design, measurements, browser checks and remaining architectural differences.
+
+## Recovery limitation
 
 The bundle is minified and includes third-party rendering code. Its exact original modular source, build configuration, and commit history cannot be reliably recovered from this HTML alone. The extracted bundle is still functional JavaScript source, but should be refactored carefully with regression tests.
