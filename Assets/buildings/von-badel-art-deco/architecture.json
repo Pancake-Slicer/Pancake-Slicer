@@ -1,0 +1,140 @@
+{
+  "$schema": "../../../docs/approved-building-metadata.schema.json",
+  "schemaVersion": 1,
+  "assetManifest": "asset.json",
+  "id": "von-badel-art-deco",
+  "version": "2.1.0",
+  "approval": "approved",
+  "architecturalStyle": "International Style",
+  "units": "metres",
+  "origin": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "groundY": 0,
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "front": [
+      0,
+      0,
+      1
+    ],
+    "entrance": [
+      0,
+      0,
+      22.105
+    ]
+  },
+  "suggestedUse": {
+    "category": "commercial",
+    "density": "high",
+    "existingGameZone": "offices",
+    "confirmationOwner": "Game Coding",
+    "note": "Suggested use; existing runtime eligibility remains authoritative and is unchanged by this publication."
+  },
+  "measured": {
+    "bounds": {
+      "min": [
+        -28.674999237060547,
+        0,
+        -21.674999237060547
+      ],
+      "max": [
+        28.674999237060547,
+        187.1999969482422,
+        22.104999542236328
+      ]
+    },
+    "dimensions": {
+      "width": 57.349998474121094,
+      "depth": 43.779998779296875,
+      "height": 187.1999969482422
+    }
+  },
+  "dependencies": {
+    "runtime": [],
+    "authoring": [
+      {
+        "path": "benchmark/von-badel/model.js",
+        "sha256": "3267e4f6f6e924ebc1d7c6e29176e8d7913b89eb84272a2856243470c16cb9b8",
+        "role": "model factory"
+      },
+      {
+        "path": "benchmark/shared/batched-architecture.js",
+        "sha256": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+        "role": "shared authoring helper"
+      },
+      {
+        "path": "benchmark/von-badel/baseline-v2.js",
+        "sha256": "7418f918399566a3a3a90d01ae91626751f67c95f5917c351475ffc40c29f411",
+        "role": "authoring module"
+      },
+      {
+        "path": "benchmark/von-badel/materials.js",
+        "sha256": "a4e45026d36a69d7336e94a26213aa619138ae9d9ccb2d53a0cd4fe7b07fd92a",
+        "role": "authoring module"
+      },
+      {
+        "path": "Assets/Architecture/Art Deco/Von Badel/Art Deco Limestone Window Facade (1).png",
+        "sha256": "073fc68997e1eefc3d817ba63fcb78415f7d4694f58398b7b883a13275dd1dcc",
+        "role": "facade source artwork"
+      }
+    ]
+  },
+  "textures": [
+    {
+      "imageIndex": 0,
+      "mimeType": "image/png",
+      "width": 256,
+      "height": 256,
+      "sha256": "795738a1c057937ef21b58a2a250f1da38ec89c4b74a3c346a7b8e922312e0c9",
+      "embedded": true
+    },
+    {
+      "imageIndex": 1,
+      "mimeType": "image/png",
+      "width": 512,
+      "height": 256,
+      "sha256": "4928f234e86e4b16de368cf2b3b8714a5614c849c60eb21dd46ac341f6576fb6",
+      "embedded": true
+    },
+    {
+      "imageIndex": 2,
+      "mimeType": "image/png",
+      "width": 128,
+      "height": 256,
+      "sha256": "d7d7c9602ef07aaad78882f548e416a233bf6e5a0b70cc3edcc70e6a19fe9dd6",
+      "embedded": true
+    },
+    {
+      "imageIndex": 3,
+      "mimeType": "image/png",
+      "width": 128,
+      "height": 128,
+      "sha256": "3594761628bef0e02c811c47434e74831e89f7dee40590db3239954d920a17ef",
+      "embedded": true
+    }
+  ],
+  "benchmark": {
+    "factory": "benchmark/von-badel/model.js",
+    "exportName": "createModel",
+    "facadeSource": "Assets/Architecture/Art Deco/Von Badel/Art Deco Limestone Window Facade (1).png",
+    "view": {
+      "angle": 35,
+      "pitch": 19,
+      "span": 215,
+      "target": 93,
+      "plinthWidth": 64,
+      "plinthDepth": 50
+    }
+  },
+  "integrity": {
+    "manifestSha256": "e8f6d587392066c0894cd21c2e3791a49ad89c6cc2bf658dc8518a8efd7f0779",
+    "modelSha256": "998000c6aa0011bcb4541517d6cb1375e45e5b1d72360a281c23afab5405a691"
+  }
+}

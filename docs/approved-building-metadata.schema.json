@@ -1,0 +1,19 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "title":"Approved architectural metadata companion to the existing building asset v1 manifest",
+ "description":"Descriptive publication metadata only. asset.json remains the sole game registration contract; this companion is not read by the simulation or growable selector.",
+ "type":"object",
+ "required":["schemaVersion","assetManifest","id","version","approval","architecturalStyle","units","origin","suggestedUse","measured","dependencies","textures","benchmark","integrity"],
+ "properties":{
+  "$schema":{"type":"string"},"schemaVersion":{"const":1},"assetManifest":{"const":"asset.json"},"id":{"type":"string"},"version":{"type":"string"},"approval":{"const":"approved"},"architecturalStyle":{"type":"string","minLength":1},"units":{"const":"metres"},
+  "origin":{"type":"object","required":["position","groundY","up","front","entrance"],"properties":{"position":{"const":[0,0,0]},"groundY":{"const":0},"up":{"const":[0,1,0]},"front":{"const":[0,0,1]},"entrance":{"$ref":"#/$defs/vec3"}}},
+  "suggestedUse":{"type":"object","required":["category","density","existingGameZone","confirmationOwner"],"properties":{"category":{"const":"commercial"},"density":{"const":"high"},"existingGameZone":{"const":"offices"},"confirmationOwner":{"const":"Game Coding"}}},
+  "measured":{"type":"object","required":["bounds","dimensions"]},
+  "dependencies":{"type":"object","required":["runtime","authoring"],"properties":{"runtime":{"type":"array","maxItems":0},"authoring":{"type":"array","items":{"type":"object","required":["path","sha256","role"]}}}},
+  "textures":{"type":"array","items":{"type":"object","required":["imageIndex","mimeType","width","height","sha256","embedded"],"properties":{"embedded":{"const":true},"width":{"type":"integer","minimum":1},"height":{"type":"integer","minimum":1}}}},
+  "benchmark":{"type":"object","required":["factory","exportName","facadeSource","view"]},
+  "integrity":{"type":"object","required":["manifestSha256","modelSha256"],"properties":{"manifestSha256":{"$ref":"#/$defs/sha"},"modelSha256":{"$ref":"#/$defs/sha"}}}
+ },
+ "additionalProperties":false,
+ "$defs":{"vec3":{"type":"array","items":{"type":"number"},"minItems":3,"maxItems":3},"sha":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

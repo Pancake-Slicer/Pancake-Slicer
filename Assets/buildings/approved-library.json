@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "manifestSpecification": "../../docs/building-asset.schema.json",
+  "metadataSpecification": "../../docs/approved-building-metadata.schema.json",
+  "entries": [
+    {
+      "id": "lind-art-deco",
+      "name": "Lind Art Deco",
+      "version": "1.0.0",
+      "manifest": "lind-art-deco/asset.json",
+      "metadata": "lind-art-deco/architecture.json",
+      "model": "lind-art-deco/lind.glb",
+      "sha256": "682076c4408c194b8715e622ee13444ba29e8b922943153a28af8c679646e90c"
+    },
+    {
+      "id": "ohneeohnee-modernist",
+      "name": "Ohneeohnee Modernist Office Tower",
+      "version": "1.0.0",
+      "manifest": "ohneeohnee-modernist/asset.json",
+      "metadata": "ohneeohnee-modernist/architecture.json",
+      "model": "ohneeohnee-modernist/ohneeohnee.glb",
+      "sha256": "2938c48decce49b82fcead7dd831f138597f24828f0155a32f2e8b0894f8f133"
+    },
+    {
+      "id": "von-badel-art-deco",
+      "name": "Von Badel International Style",
+      "version": "2.1.0",
+      "manifest": "von-badel-art-deco/asset.json",
+      "metadata": "von-badel-art-deco/architecture.json",
+      "model": "von-badel-art-deco/von-badel.glb",
+      "sha256": "998000c6aa0011bcb4541517d6cb1375e45e5b1d72360a281c23afab5405a691"
+    }
+  ]
+}

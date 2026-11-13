@@ -57,6 +57,10 @@ The rendering fixes keep a stable image during camera movement, remove internal 
 4. Ask Codex to preserve behavior, add a smoke test, and progressively split the bundled application into maintainable modules.
 5. Require commits pushed to GitHub after each successful milestone. Local checkpoint archives alone are not off-workspace backups.
 
+## Shared approved-building library
+
+The three approved independent GLB packages are in [Assets/buildings](Assets/buildings/README.md), with unchanged standard asset.json manifests, architectural metadata companions and an automatically generated inventory. Run `npm run assets:library` to inspect them at http://127.0.0.1:4186; `npm run assets:library:test` verifies independent loading and rendered fidelity against the unchanged authoring factories. [Publication report and Game Coding handoff](docs/APPROVED_BUILDING_LIBRARY.md). This publication does not change the game or any approved model.
+
 ## Latest playable custom buildings
 
 **Placement fixes:** use `C:\Users\camsh\Downloads\Pancake City - Aligned Growables Demo - 20261113.html` for a populated city showing aligned custom buildings and Von Badel. The matching file without `Demo` starts a new city. [Fix details and checks](docs/GROWABLE_PLACEMENT_FIX.md). Earlier exports below predate this correction.

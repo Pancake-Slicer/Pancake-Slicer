@@ -24,7 +24,10 @@
     "benchmark:ohneeohnee:build": "node scripts/prepare-building-benchmark.cjs ohneeohnee",
     "benchmark:ohneeohnee:test": "node scripts/ohneeohnee-browser.cjs",
     "benchmark:ohneeohnee:export": "node scripts/export-building-benchmark.cjs ohneeohnee",
-    "benchmark:ohneeohnee": "npm run benchmark:ohneeohnee:build && http-server .tools/ohneeohnee -a 127.0.0.1 -p 4185 -c-1"
+    "benchmark:ohneeohnee": "npm run benchmark:ohneeohnee:build && http-server .tools/ohneeohnee -a 127.0.0.1 -p 4185 -c-1",
+    "assets:library:prepare": "node scripts/prepare-approved-library.cjs",
+    "assets:library:test": "npm run assets:library:prepare && node scripts/approved-library-browser.cjs",
+    "assets:library": "npm run assets:library:prepare && http-server .tools/approved-library -a 127.0.0.1 -p 4186 -c-1"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

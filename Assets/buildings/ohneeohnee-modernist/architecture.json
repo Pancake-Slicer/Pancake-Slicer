@@ -1,0 +1,122 @@
+{
+  "$schema": "../../../docs/approved-building-metadata.schema.json",
+  "schemaVersion": 1,
+  "assetManifest": "asset.json",
+  "id": "ohneeohnee-modernist",
+  "version": "1.0.0",
+  "approval": "approved",
+  "architecturalStyle": "International Style / Modernist",
+  "units": "metres",
+  "origin": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "groundY": 0,
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "front": [
+      0,
+      0,
+      1
+    ],
+    "entrance": [
+      -4,
+      0,
+      9.485
+    ]
+  },
+  "suggestedUse": {
+    "category": "commercial",
+    "density": "high",
+    "existingGameZone": "offices",
+    "confirmationOwner": "Game Coding",
+    "note": "Suggested use; existing runtime eligibility remains authoritative and is unchanged by this publication."
+  },
+  "measured": {
+    "bounds": {
+      "min": [
+        -18.19499969482422,
+        0,
+        -9.194999694824219
+      ],
+      "max": [
+        18.19499969482422,
+        53.20000076293945,
+        9.484999656677246
+      ]
+    },
+    "dimensions": {
+      "width": 36.38999938964844,
+      "depth": 18.679999351501465,
+      "height": 53.20000076293945
+    }
+  },
+  "dependencies": {
+    "runtime": [],
+    "authoring": [
+      {
+        "path": "benchmark/ohneeohnee/model.js",
+        "sha256": "3ce0bbf0e7d376c275e9adede8c3f8c95a2555eb7b50ae4d1b21c7b68918c1c6",
+        "role": "model factory"
+      },
+      {
+        "path": "benchmark/shared/batched-architecture.js",
+        "sha256": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+        "role": "shared authoring helper"
+      },
+      {
+        "path": "Assets/Architecture/Modern/ohneeohnee/Symmetrical Glass Office Facade.png",
+        "sha256": "efc57e6d97b4433825dc650a87a3d9d76b34e48417f647153fefdbc0e4f32c0b",
+        "role": "facade source artwork"
+      }
+    ]
+  },
+  "textures": [
+    {
+      "imageIndex": 0,
+      "mimeType": "image/png",
+      "width": 256,
+      "height": 128,
+      "sha256": "9692574a10cc7b81a7a18a26ddeedf1d2d9ac66fcc9850e0d284bf8857964cbd",
+      "embedded": true
+    },
+    {
+      "imageIndex": 1,
+      "mimeType": "image/png",
+      "width": 512,
+      "height": 512,
+      "sha256": "186b8007f41464a569f6b4cc6953b00cd76a0ebdd2470bb2d4c9ff8119b507b1",
+      "embedded": true
+    },
+    {
+      "imageIndex": 2,
+      "mimeType": "image/png",
+      "width": 128,
+      "height": 128,
+      "sha256": "1c74923c4896f66b5d4c74172c141a1e974f934f071718879c014646cb145528",
+      "embedded": true
+    }
+  ],
+  "benchmark": {
+    "factory": "benchmark/ohneeohnee/model.js",
+    "exportName": "createModel",
+    "facadeSource": "Assets/Architecture/Modern/ohneeohnee/Symmetrical Glass Office Facade.png",
+    "view": {
+      "angle": 25,
+      "pitch": 27,
+      "span": 68,
+      "target": 25,
+      "plinthWidth": 41,
+      "plinthDepth": 23
+    }
+  },
+  "integrity": {
+    "manifestSha256": "d7eb5f49bd1b8317415f130c43eb2793f3ac69023c5cf858d2342321022aed43",
+    "modelSha256": "2938c48decce49b82fcead7dd831f138597f24828f0155a32f2e8b0894f8f133"
+  }
+}
