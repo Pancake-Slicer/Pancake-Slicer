@@ -3,7 +3,7 @@ import * as T from './engine.js';
 // Proportional reconstruction in metres; measured drawings are unavailable.
 // One 3.7m storey, one 3.7m bay, 44.4m street wall, 183.9m total height.
 export const architecture={floor:3.7,bay:3.7,width:44.4,depth:29.6,height:183.9,
-  levels:[18.5,77.7,88.8,92.5,103.6,107.3,122.1,140.6,159.1,177.6]};
+  levels:[18.5,77.7,88.8,92.5,122.1,140.6,159.1,177.6]};
 
 function canvasTexture(image,x,y,w,h,width,height){
   const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
@@ -104,9 +104,10 @@ export function createArtDeco(materials){
   volume('street podium',0,0,44.4,29.6,0,18.5);
   // Central mass stays narrow and continuous behind the shoulders.
   volume('central shaft',0,-1.85,22.2,18.5,18.5,122.1);
-  volume('left main wing',-16.65,0,11.1,25.9,18.5,92.5);
-  volume('left shoulder',-15.73,-.92,9.25,22.2,92.5,103.6);
-  volume('left termination',-14.8,-1.85,7.4,18.5,103.6,107.3);
+  // Match the existing right wing elevations; retain every original footprint.
+  volume('left main wing',-16.65,0,11.1,25.9,18.5,77.7);
+  volume('left shoulder',-15.73,-.92,9.25,22.2,77.7,88.8);
+  volume('left termination',-14.8,-1.85,7.4,18.5,88.8,92.5);
   volume('right main wing',16.65,0,11.1,25.9,18.5,77.7);
   volume('right shoulder',15.73,-.92,9.25,22.2,77.7,88.8);
   volume('right termination',14.8,-1.85,7.4,18.5,88.8,92.5);
@@ -124,10 +125,9 @@ export function createArtDeco(materials){
     }
   }
 
-  // Buttress blades emphasize the long uninterrupted masonry lines visible
-  // in Lind, and connect the taller left and lower right shoulder hierarchy.
+  // Buttress blades follow the matching lower-wing roof elevations.
   for(const sign of [-1,1]){
-    const top=sign<0?94:79.2;
+    const top=79.2;
     for(const z of [-12.8,10.9]){
       box('trim',sign*20.1,top/2,z,.72,top,.82);
       box('trim',sign*20.1,top+.7,z,.95,1.4,1.05);

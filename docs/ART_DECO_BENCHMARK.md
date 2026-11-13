@@ -1,5 +1,15 @@
 # Lind Art Deco standalone benchmark — 2026-11-13
 
+## Targeted wing-height correction — 2026-11-13
+
+The user requested matching lower wings after reviewing the initial benchmark. Lowered only the left wing by four 3.7 m floors (14.8 m); the right wing is the unchanged reference. The three `volume()` calls named `left main wing`, `left shoulder`, and `left termination` now use the right wing's matching elevations: 18.5→77.7 m, 77.7→88.8 m, and 88.8→92.5 m. The left buttress-blade height also follows the right's unchanged 79.2 m parameter. Existing facade generation automatically removes four rows of windows and relocates the associated shoulder cornices, roof surfaces, parapets and detailing. Footprints, widths, materials, window proportions, podium, central tower/crown, camera and lighting are unchanged.
+
+Both upper roof-body planes are 92.5 m; their coping tops are 93.32 m and the highest parapet ornaments are 93.66 m. The browser regression measures actual generated mesh vertices transformed by `matrixWorld`, not just recipe metadata: **left = right = 93.66000366210938 m, difference = 0 m** (Float32 vertex precision). Wing-only bounds use |x| > 12.1 m, outside the central tower and its trim. The test also verifies matching base/top elevations and mirrored footprints for every wing tier, preserves the right termination's original 92.5 m, and keeps the 183.9 m central apex check.
+
+Updated captures: `.tools/art-deco-southeast.png` (existing 35° three-quarter view) and `.tools/art-deco-front.png` (existing 0° front view). Existing camera pitch and scene settings are preserved. Both captures were visually inspected; the wings align in the front view. Browser checks passed with zero console/runtime errors; `npm run build` passed all 53 existing tests and original preservation checks. Current scene: 9 draw calls, 26,064 triangles, 1,762 window bays. Existing architectural-fidelity limitations still apply. Benchmark URL and launcher below remain the same.
+
+The original milestone analysis and measurements below describe the earlier unequal-wing design; the matching-wing elevations and counts above supersede those specific statements.
+
 ## Run and reuse
 
 Double-click `Play Art Deco Benchmark.cmd`, keep its window open, and visit http://127.0.0.1:4180 in Chrome or Edge. Drag to orbit, scroll to zoom, use the view buttons or arrow keys, and press R to reset. The city-building game is not loaded or changed.

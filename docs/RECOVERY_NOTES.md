@@ -1,5 +1,12 @@
 # Recovery notes
 
+## Matching Lind benchmark wing heights — 2026-11-13
+
+- Targeted standalone-only correction: reduced the left wing's three roof levels from 92.5/103.6/107.3 m to the existing right wing's 77.7/88.8/92.5 m. Lowered its matching buttress blades; window rows, cornices, roofs and parapets follow the same existing generators. Removed obsolete left-only elevations from benchmark metadata. Right wing, footprints, materials, window proportions, central tower/crown, podium, lights and cameras are unchanged; no city game files changed.
+- Actual generated world-space wing maxima, including parapet ornaments: left = right = 93.66000366210938 m, exact difference 0. Roof body planes both 92.5 m; coping tops both 93.32 m. Browser regression now checks vertex-derived equality, mirrored tier footprints and elevations, and the unchanged right roof reference.
+- Rebuilt the playable benchmark at http://127.0.0.1:4180. Captured and inspected `.tools/art-deco-southeast.png` and `.tools/art-deco-front.png`; existing view settings retained. Browser checks passed with no errors. Scene now has 26,064 triangles and 1,762 window bays in the same 9 scene draw calls. `npm run build` passed all 53 game regressions and the immutable original hash/expected-runtime checks.
+- This supersedes the initial benchmark's unequal-wing design only. The initial architectural-fidelity limitations remain. Local commit on `codex/art-deco-benchmark`; push still requires separate approval and has not been performed. A local commit is not an off-computer backup.
+
 ## Standalone Lind Art Deco benchmark — 2026-11-13
 
 - Working folder: `C:\Users\camsh\Desktop\Pancake-City-restored-v53-20261112-153759`. Added a separate reference-led model and orbitable comparison scene in `benchmark/art-deco/`; city runtime, assets, gameplay, and existing engine version are unchanged. Original v52 hash and all existing equality checks remain mandatory.
