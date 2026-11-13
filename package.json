@@ -5,6 +5,10 @@
   "description": "Recovered Pancake City v52 browser build; not the original development source tree",
   "scripts": {
     "benchmark:build": "node scripts/prepare-art-deco.cjs",
+    "benchmark:von-badel:build": "node scripts/prepare-building-benchmark.cjs von-badel",
+    "benchmark:von-badel:test": "node scripts/von-badel-browser.cjs",
+    "benchmark:von-badel:export": "node scripts/export-building-benchmark.cjs von-badel",
+    "benchmark:von-badel": "npm run benchmark:von-badel:build && http-server .tools/von-badel -a 127.0.0.1 -p 4184 -c-1",
     "demo:growables": "npm run assemble && npm run check && node scripts/create-growable-demo.cjs",
     "test:growables:browser": "node scripts/growable-browser.cjs",
     "benchmark:test": "node scripts/art-deco-browser.cjs",

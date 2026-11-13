@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "von-badel-art-deco",
+  "version": "1.0.0",
+  "name": "Von Badel Art Deco",
+  "model": {
+    "format": "glb",
+    "path": "von-badel.glb",
+    "sha256": "974bd7c85531fc67f1b1f55a44039f7c385b934a4bf4d1c04d3d5f8192f8b694"
+  },
+  "dimensions": {
+    "width": 57.35,
+    "depth": 43.78,
+    "height": 187.2,
+    "floors": 49,
+    "floorHeight": 3.6,
+    "windowBays": 2140
+  },
+  "footprint": [
+    [
+      -28.675,
+      -21.675
+    ],
+    [
+      28.675,
+      -21.675
+    ],
+    [
+      28.675,
+      22.105
+    ],
+    [
+      -28.675,
+      22.105
+    ]
+  ],
+  "bounds": {
+    "min": [
+      -28.675,
+      0,
+      -21.675
+    ],
+    "max": [
+      28.675,
+      187.2,
+      22.105
+    ]
+  },
+  "selection": {
+    "kind": "model-instances",
+    "bounds": "bounds"
+  },
+  "orientation": {
+    "front": [
+      0,
+      0,
+      1
+    ],
+    "entrance": [
+      0,
+      0,
+      22.105
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ]
+  },
+  "eligibility": {
+    "zone": "offices",
+    "density": "high",
+    "capacityMinFloors": 49,
+    "developmentStage": "immediate",
+    "minLotArea": 2572,
+    "minLotWidth": 57.95,
+    "minLotDepth": 44.38,
+    "setback": 0.3
+  },
+  "selectionWeight": 4,
+  "source": {
+    "kind": "reference-led-procedural-benchmark",
+    "module": "benchmark/von-badel/model.js",
+    "sha256": "104a107b87b05f6af53a0dda5654dea9e0eaedac35c3c8baa04c327869cd0d52",
+    "helper": "benchmark/shared/batched-architecture.js",
+    "helperSha256": "e789c3348ff97fd195edd39653329c042ec38af578fd4d4ec00b8e351471a005",
+    "notes": "Benchmark only. Original screenshot governs character; both lower wings use the concept right wing width. Not registered in city growth."
+  }
+}
