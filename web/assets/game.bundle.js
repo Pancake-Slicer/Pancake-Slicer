@@ -3909,7 +3909,13 @@ function pcOfficeBlockLayout(network, landmarks) {
     if(level<16&&(w>66||d>66||parts.some(p=>p.holes.length))){
       const axis=w>=d?'x':'z',length=axis==='x'?w:d,min=axis==='x'?bounds.minX:bounds.minZ;
       // Balanced cuts distribute the remainder, so no leftover strip is skipped.
-      const count=Math.max(2,Math.ceil(length/60)),cut=min+length*Math.floor(count/2)/count;
+      const count=Math.max(2,Math.ceil(length/60));
+      let span=length*Math.floor(count/2)/count;
+      // Keep a viable native-width site instead of splitting both halves too
+      // narrowly for registered growables. The remainder stays fully zonable.
+      const nativeWidth=Math.min(66,Math.max(0,...pcGrowableDefinitions.map(a=>a.eligibility.minLotWidth)))+.1;
+      if(span<nativeWidth&&length>=nativeWidth+20)span=nativeWidth;
+      const cut=min+span;
       const rectangle=(x0,z0,x1,z1)=>Te([world(x0,z0),world(x1,z0),world(x1,z1),world(x0,z1)]);
       const first=axis==='x'?rectangle(bounds.minX-1,bounds.minZ-1,cut,bounds.maxZ+1):rectangle(bounds.minX-1,bounds.minZ-1,bounds.maxX+1,cut);
       const a=Ee(paths,first),b=je(paths,first);
@@ -4744,13 +4750,20 @@ function pcGrowableResource(asset){
 async function pcGrowablesReady(loadImage=async uri=>{const image=new Image;image.src=uri;await image.decode();return image;}){
  for(const asset of pcGrowableDefinitions){const resource=pcGrowableResource(asset);for(const {map,uri} of resource.images||[]){map.image=await loadImage(uri);map.needsUpdate=true;}}
 }
+// Follow the lot's actual axes. towardRoad points at a sampled road position,
+// which can be slightly off-centre and must not rotate a rigid building.
+function pcGrowableFacing(property){
+ const target=property.towardRoad;let base=property.rotation;
+ if(!Number.isFinite(base)){let edge,length=0;for(let i=0;i<property.footprint.length;i++){const a=property.footprint[i],b=property.footprint[(i+1)%property.footprint.length],d=Math.hypot(b.x-a.x,b.z-a.z);if(d>length){length=d;edge={x:b.x-a.x,z:b.z-a.z};}}base=Math.atan2(-edge.z,edge.x);}
+ let best,score=-Infinity;for(let i=0;i<4;i++){const angle=base+i*Math.PI/2,x=Math.sin(angle),z=Math.cos(angle),dot=x*target.x+z*target.z;if(dot>score){score=dot;best={x,z,angle};}}return best;
+}
 function pcGrowablePlacement(property,asset){
  let cache=pcGrowablePlacements.get(property);if(!cache){cache=new Map;pcGrowablePlacements.set(property,cache);}if(cache.has(asset.key))return cache.get(asset.key);
  const e=asset.eligibility,area=property.area;
  const capacity=Math.min(property.officeProfile?.maxFloors||80,area<1200?24:area<1800?40:area<2500?60:80);
  let result=null;
  if(property.zone===e.zone&&area>=e.minLotArea&&capacity>=e.capacityMinFloors&&property.towardRoad){
-  const dir=property.towardRoad,length=Math.hypot(dir.x,dir.z),angle=Math.atan2(dir.x,dir.z),cos=Math.cos(angle),sin=Math.sin(angle),center=cS(property.footprint)||property;
+  const dir=pcGrowableFacing(property),length=Math.hypot(dir.x,dir.z),angle=dir.angle,cos=Math.cos(angle),sin=Math.sin(angle),center=cS(property.footprint)||property;
   if(length>.999&&length<1.001){
    const projected=property.footprint.map(p=>({x:(p.x-center.x)*cos-(p.z-center.z)*sin,z:(p.x-center.x)*sin+(p.z-center.z)*cos})),bounds=En(projected);
    if(bounds.maxX-bounds.minX>=e.minLotWidth&&bounds.maxZ-bounds.minZ>=e.minLotDepth){

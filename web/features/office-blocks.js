@@ -25,7 +25,13 @@ function pcOfficeBlockLayout(network, landmarks) {
     if(level<16&&(w>66||d>66||parts.some(p=>p.holes.length))){
       const axis=w>=d?'x':'z',length=axis==='x'?w:d,min=axis==='x'?bounds.minX:bounds.minZ;
       // Balanced cuts distribute the remainder, so no leftover strip is skipped.
-      const count=Math.max(2,Math.ceil(length/60)),cut=min+length*Math.floor(count/2)/count;
+      const count=Math.max(2,Math.ceil(length/60));
+      let span=length*Math.floor(count/2)/count;
+      // Keep a viable native-width site instead of splitting both halves too
+      // narrowly for registered growables. The remainder stays fully zonable.
+      const nativeWidth=Math.min(66,Math.max(0,...pcGrowableDefinitions.map(a=>a.eligibility.minLotWidth)))+.1;
+      if(span<nativeWidth&&length>=nativeWidth+20)span=nativeWidth;
+      const cut=min+span;
       const rectangle=(x0,z0,x1,z1)=>Te([world(x0,z0),world(x1,z0),world(x1,z1),world(x0,z1)]);
       const first=axis==='x'?rectangle(bounds.minX-1,bounds.minZ-1,cut,bounds.maxZ+1):rectangle(bounds.minX-1,bounds.minZ-1,bounds.maxX+1,cut);
       const a=Ee(paths,first),b=je(paths,first);

@@ -59,6 +59,8 @@ The rendering fixes keep a stable image during camera movement, remove internal 
 
 ## Latest playable custom buildings
 
+**Placement fixes:** use `C:\Users\camsh\Downloads\Pancake City - Aligned Growables Demo - 20261113.html` for a populated city showing aligned custom buildings and Von Badel. The matching file without `Demo` starts a new city. [Fix details and checks](docs/GROWABLE_PLACEMENT_FIX.md). Earlier exports below predate this correction.
+
 Open `C:\Users\camsh\Downloads\Pancake City - Three Custom Buildings Demo - 20261113.html` in Chrome for the populated game with Lind, Von Badel and the newly integrated Ohneeohnee. The matching file without `Demo` starts a new city. Both are fully embedded offline HTML. See [latest integration notes](docs/LATEST_CUSTOM_BUILDINGS.md).
 
 ## Earlier approved architectural growables

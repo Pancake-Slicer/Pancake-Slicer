@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-13",
+  "testsPassed": 64,
+  "outputs": [
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Aligned Growables - 20261113.html",
+      "bytes": 9829901,
+      "sha256": "aeac0a22d545a59a1f9b787a7a10bd1ca5f283a503272d20d1b2175096e87854"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Aligned Growables Demo - 20261113.html",
+      "bytes": 9831795,
+      "sha256": "47cefb82177a3982ddf51e44ebb1ad9c4089df68aa644dc93e3d7730adcb8985"
+    }
+  ],
+  "protectedFileCount": 31
+}
