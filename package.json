@@ -19,7 +19,8 @@
     "import:sc4": "node scripts/import-sc4-originals.cjs",
     "build": "npm run assemble && npm run check && node scripts/build.cjs",
     "preview": "http-server dist -a 127.0.0.1 -p 4174 -c-1",
-    "export:html": "npm run assemble && npm run check && node scripts/export-html.cjs"
+    "export:html": "npm run assemble && npm run check && node scripts/export-html.cjs",
+    "demo:approved-assets": "npm run assemble && npm run check && node scripts/create-approved-growables-demo.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

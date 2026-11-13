@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-13",
+  "architectureCommit": "526df5e83c6031c3a1b8c22462ff7322b173197d",
+  "newAsset": "asset:von-badel-art-deco@2.1.0",
+  "retained": "asset:lind-art-deco@1.0.0",
+  "sourceModelSha256": "998000c6aa0011bcb4541517d6cb1375e45e5b1d72360a281c23afab5405a691",
+  "registeredModelSha256": "998000c6aa0011bcb4541517d6cb1375e45e5b1d72360a281c23afab5405a691",
+  "protectedFiles": {
+    "benchmark\\art-deco\\index.html": "903efa31803146946b4ab716215866cc12972098b65cef3be0c56a5ba67101ea",
+    "benchmark\\art-deco\\model.js": "bf8ff9dedbb01b9d78e7d0d7ccd51959eddd524d7e3f785ee9ddcfcc471e0e3b",
+    "benchmark\\art-deco\\scene.js": "41f52da1d9f47df55113331bba1b9896c8510ca2edb3f731a8edfefe8b5b6507",
+    "benchmark\\art-deco\\style.css": "7d995c9a45530a419c4964ae342e6b4f3403060737229ce23da096a79fb307f3",
+    "benchmark\\shared\\batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+    "benchmark\\von-badel\\baseline-v2.js": "7418f918399566a3a3a90d01ae91626751f67c95f5917c351475ffc40c29f411",
+    "benchmark\\von-badel\\benchmark.json": "7a3db97ac81ff38fc8fcc447deb21d1040facfc1d978479a39679a25f4bc6095",
+    "benchmark\\von-badel\\materials.js": "a4e45026d36a69d7336e94a26213aa619138ae9d9ccb2d53a0cd4fe7b07fd92a",
+    "benchmark\\von-badel\\model.js": "3267e4f6f6e924ebc1d7c6e29176e8d7913b89eb84272a2856243470c16cb9b8",
+    "benchmark\\von-badel\\registration.template.json": "a42b285c733646d72d41317afcaed638ea1686214797c08da5a4b067664714c5",
+    "benchmark\\von-badel\\von-badel.glb": "998000c6aa0011bcb4541517d6cb1375e45e5b1d72360a281c23afab5405a691",
+    "Assets\\Architecture\\Art Deco\\Kind\\Art Deco Limestone Skyscraper Crown.png": "c9bcda64aa24946a282cd23f71e2d49a37a418de006a2def057d26acb9f2a616",
+    "Assets\\Architecture\\Art Deco\\Kind\\Art Deco Limestone Window Facade.png": "790172b58a08351bf48461c00e2015967952e62e15c1b2a34d534dd373cec8b9",
+    "Assets\\Architecture\\Art Deco\\Kind\\Lind.jpg": "b8bdaf11b59f447fe10a96422c80792c22098785f60426ab5aa9a5a485496e15",
+    "Assets\\Architecture\\Art Deco\\Von Badel\\Art Deco Limestone Skyscraper with Patinated Crown.png": "279599281ad1501b7fbf7f2c058ab890c6c5bd445dd109e810f4f1c93b7537bf",
+    "Assets\\Architecture\\Art Deco\\Von Badel\\Art Deco Limestone Window Facade (1).png": "073fc68997e1eefc3d817ba63fcb78415f7d4694f58398b7b883a13275dd1dcc",
+    "Assets\\Architecture\\Art Deco\\Von Badel\\U-2_von_adel_ag.jpg": "d79e1359a7d7d4a3698915f4bb7d4d2286c71775fef446185e36cc8aa59ed2b7",
+    "Assets\\buildings\\lind-art-deco\\asset.json": "4374ff731ac78ccf242d6ed71bb5643fdb468328f7133b6d317ac7ed39837627",
+    "Assets\\buildings\\lind-art-deco\\lind.glb": "682076c4408c194b8715e622ee13444ba29e8b922943153a28af8c679646e90c",
+    "original/Pancake (52).html": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c"
+  },
+  "outputs": [
+    {
+      "path": "C:/Users/camsh/Downloads/Pancake City - Approved Architecture Playtest - 20261113.html",
+      "bytes": 7129369,
+      "sha256": "13a535e7f7355d43a11540ec5e4d06d87042f3a374affbbda034c0b9f161b9b0"
+    },
+    {
+      "path": "C:/Users/camsh/Downloads/Pancake City - Approved Architecture Demo - 20261113.html",
+      "bytes": 7131090,
+      "sha256": "684b8b29951ea1f9fc76a5556385681e872e282ba094b6ddec31a9a99107297b"
+    }
+  ],
+  "tests": 61,
+  "browser": {
+    "demo": "4 Lind + 4 Von Badel + 28 legacy Office buildings, automatic selection through normal zoning",
+    "pickingHistory": "actual dark tower demolished and Undo/Redo/Undo restored through native controls",
+    "camera": "pan/zoom operational",
+    "standard": "normal new-city terrain dialog opens",
+    "errors": [],
+    "limitations": "Actual embedded exports tested over localhost. Browser file-URL restrictions respected; direct double-click not automated-tested. No new full-city FPS benchmark."
+  }
+}

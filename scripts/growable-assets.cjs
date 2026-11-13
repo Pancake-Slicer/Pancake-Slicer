@@ -46,6 +46,10 @@ function definitions(){
   assert.ok(Number.isFinite(d.eligibility.setback)&&d.eligibility.setback>=0);
   assert.equal(d.selection.kind,'model-instances');assert.equal(d.selection.bounds,'bounds');
   if(d.source?.module&&d.source.sha256){const source=path.resolve(root,d.source.module);assert.ok(source.startsWith(root+path.sep));assert.equal(crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),d.source.sha256,'Approved model source changed; review/version the asset');}
+  const provenance=[];
+  if(d.source?.helper&&d.source.helperSha256)provenance.push([path.resolve(root,d.source.helper),d.source.helperSha256]);
+  for(const [name,hash]of Object.entries(d.source?.dependencies||{}))provenance.push([path.resolve(root,path.dirname(d.source.module),name),hash]);
+  for(const [source,hash]of provenance){assert.ok(source.startsWith(root+path.sep),'Source dependency escapes project');assert.equal(crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),hash,'Approved architecture dependency changed; review/version the asset');}
   const model=path.resolve(path.dirname(file),d.model.path);assert.ok(model.startsWith(path.dirname(file)+path.sep),'Model path outside asset folder');
   if(d.model.sha256)assert.equal(crypto.createHash('sha256').update(fs.readFileSync(model)).digest('hex'),d.model.sha256,'Registered model hash changed');
   if(d.model.format==='glb'){
