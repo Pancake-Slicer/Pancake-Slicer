@@ -27,6 +27,10 @@ npm start
 
 Then open `http://127.0.0.1:4173`. The local server is important because browsers may block JavaScript modules loaded directly from `file://` paths.
 
+## Update future approved buildings
+
+Double-click **Update Approved Buildings.cmd**, or run `npm run update:buildings`. It scans the shared Architecture-approved packages, validates and tests compatible versions, preserves last-known-good registrations, and writes new offline Playtest/Demo HTML files plus readable reports to Downloads. You never need to edit code or manifests. See [the complete command and Codex workflow](docs/APPROVED_BUILDING_WORKFLOW.md) for package ownership, skipped-asset reports and visual-review steps.
+
 ## Standalone offline playtest
 
 Run `npm run export:html` to build and package the current game as `dist/Pancake City - Playtest.html`. Double-click that file to play in Chrome without a server or internet connection. JavaScript, CSS, and license notices are embedded without changing gameplay.

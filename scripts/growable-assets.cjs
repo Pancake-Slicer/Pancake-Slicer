@@ -33,11 +33,8 @@ function compileGLB(file){
  for(const n of doc.scenes[doc.scene||0].nodes)visit(n,identity());assert.ok(parts.length);
  return {parts,materials,sha256:crypto.createHash('sha256').update(data).digest('hex')};
 }
-function definitions(){
- const base=path.join(root,'Assets/buildings');if(!fs.existsSync(base))return [];
- const files=fs.readdirSync(base).sort().map(name=>path.join(base,name,'asset.json')).filter(file=>fs.existsSync(file)),seen=new Set;
- return files.map(file=>{
-  const d=JSON.parse(fs.readFileSync(file,'utf8'));assert.equal(d.schemaVersion,1);assert.match(d.id,/^[a-z][a-z0-9-]+$/);assert.match(d.version,/^\d+\.\d+\.\d+$/);assert.ok(d.name&&d.selectionWeight>0);assert.ok(!seen.has(d.id+'@'+d.version),'Duplicate asset version');seen.add(d.id+'@'+d.version);
+function validateAsset(file,{verifySources=true}={}){
+  const d=JSON.parse(fs.readFileSync(file,'utf8'));assert.equal(d.schemaVersion,1);assert.match(d.id,/^[a-z][a-z0-9-]+$/);assert.match(d.version,/^\d+\.\d+\.\d+$/);assert.ok(d.name&&d.selectionWeight>0);
   assert.equal(d.eligibility.zone,'offices');assert.equal(d.eligibility.developmentStage,'immediate');assert.ok(d.bounds.min.every(Number.isFinite)&&d.bounds.max.every(Number.isFinite));assert.ok(d.dimensions.height>0&&d.dimensions.floorHeight>0&&d.dimensions.floors>0);
   assert.deepEqual(d.orientation.up,[0,1,0]);assert.deepEqual(d.orientation.front,[0,0,1]);assert.equal(d.bounds.min[1],0,'Model origin must sit on ground');
   assert.ok(d.footprint.length>=3&&d.footprint.every(p=>p.length===2&&p.every(Number.isFinite)));
@@ -45,10 +42,10 @@ function definitions(){
   for(const key of ['capacityMinFloors','minLotArea','minLotWidth','minLotDepth'])assert.ok(Number.isFinite(d.eligibility[key])&&d.eligibility[key]>0,'Invalid eligibility '+key);
   assert.ok(Number.isFinite(d.eligibility.setback)&&d.eligibility.setback>=0);
   assert.equal(d.selection.kind,'model-instances');assert.equal(d.selection.bounds,'bounds');
-  if(d.source?.module&&d.source.sha256){const source=path.resolve(root,d.source.module);assert.ok(source.startsWith(root+path.sep));assert.equal(crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),d.source.sha256,'Approved model source changed; review/version the asset');}
+  if(verifySources&&d.source?.module&&d.source.sha256){const source=path.resolve(root,d.source.module);assert.ok(source.startsWith(root+path.sep));assert.equal(crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),d.source.sha256,'Approved model source changed; review/version the asset');}
   const provenance=[];
-  if(d.source?.helper&&d.source.helperSha256)provenance.push([path.resolve(root,d.source.helper),d.source.helperSha256]);
-  for(const [name,hash]of Object.entries(d.source?.dependencies||{}))provenance.push([path.resolve(root,path.dirname(d.source.module),name),hash]);
+  if(verifySources&&d.source?.helper&&d.source.helperSha256)provenance.push([path.resolve(root,d.source.helper),d.source.helperSha256]);
+  for(const [name,hash]of Object.entries(verifySources?d.source?.dependencies||{}:{}))provenance.push([path.resolve(root,path.dirname(d.source.module),name),hash]);
   for(const [source,hash]of provenance){assert.ok(source.startsWith(root+path.sep),'Source dependency escapes project');assert.equal(crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),hash,'Approved architecture dependency changed; review/version the asset');}
   const model=path.resolve(path.dirname(file),d.model.path);assert.ok(model.startsWith(path.dirname(file)+path.sep),'Model path outside asset folder');
   if(d.model.sha256)assert.equal(crypto.createHash('sha256').update(fs.readFileSync(model)).digest('hex'),d.model.sha256,'Registered model hash changed');
@@ -70,7 +67,19 @@ function definitions(){
   // Procedural authors expose the same reusable resource shape as GLB parts.
   assert.equal(d.model.format,'procedural');const code=fs.readFileSync(model,'utf8');assert.ok(!/\b(?:import|export)\b/.test(code),'Procedural factory must be a standalone function expression');
   return {...d,key:'asset:'+d.id+'@'+d.version,factorySource:code};
+}
+function definitions(base=process.env.PANCAKE_GROWABLE_REGISTRY||path.join(root,fs.existsSync(path.join(root,'Assets/growable-registry'))?'Assets/growable-registry':'Assets/buildings'),options){
+ if(!fs.existsSync(base))return [];
+ const portable=path.resolve(base)!==path.join(root,'Assets/buildings'),seen=new Set;
+ return fs.readdirSync(base).sort().map(name=>path.join(base,name,'asset.json')).filter(file=>fs.existsSync(file)).map(file=>{
+  const d=validateAsset(file,options||{verifySources:!portable});assert.ok(!seen.has(d.id+'@'+d.version),'Duplicate asset version');seen.add(d.id+'@'+d.version);
+  if(portable){const folder=path.dirname(file),receipt=JSON.parse(fs.readFileSync(path.join(folder,'accepted.json')));assert.equal(receipt.manifestSha256,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),'Accepted manifest changed');assert.equal(receipt.modelSha256,d.payload.sha256,'Accepted model changed');
+   const notices=receipt.notices||[];for(const n of notices){const p=path.resolve(folder,n.path);assert.ok(p.startsWith(folder+path.sep),'Notice escapes package');assert.equal(crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),n.sha256,'Accepted notice changed');}
+   const bytes=[fs.readFileSync(file),fs.readFileSync(path.resolve(folder,d.model.path)),fs.readFileSync(path.join(folder,'architecture.json')),...(notices.length?[Buffer.from(JSON.stringify(notices))]:[])];assert.equal(crypto.createHash('sha256').update(Buffer.concat(bytes)).digest('hex'),receipt.fingerprint,'Accepted package metadata changed');
+  }
+  return d;
  });
 }
+
 function assetSource(){const defs=definitions(),factories=defs.filter(d=>d.factorySource).map(d=>'pcRegisterGrowableFactory('+JSON.stringify(d.key)+','+d.factorySource+');');const json=JSON.stringify(defs.map(({factorySource,...d})=>d)).replace(/</g,'\\u003c');return 'const pcGrowableDefinitions='+json+';\n'+fs.readFileSync(path.join(root,'web/features/growable-assets.js'),'utf8')+'\n'+factories.join('\n');}
-module.exports={assetSource,definitions,compileGLB};
+module.exports={assetSource,definitions,compileGLB,validateAsset};

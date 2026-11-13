@@ -7,6 +7,13 @@ const read = name => fs.readFileSync(path.join(root, 'dist', name), 'utf8');
 const js = read('assets/game.bundle.js');
 const css = read('assets/game.css');
 let html = read('index.html');
+// Preserve future package-specific attribution in the offline artifact too.
+const registry=process.env.PANCAKE_GROWABLE_REGISTRY||path.join(root,'Assets/growable-registry'),notices=[];
+if(fs.existsSync(registry))for(const folder of fs.readdirSync(registry)){
+  const receiptFile=path.join(registry,folder,'accepted.json');if(!fs.existsSync(receiptFile))continue;
+  const receipt=JSON.parse(fs.readFileSync(receiptFile));for(const notice of receipt.notices||[]){const file=path.resolve(registry,folder,notice.path);assert.ok(file.startsWith(path.resolve(registry,folder)+path.sep));notices.push({id:receipt.id,version:receipt.version,path:notice.path,encoding:'base64',content:fs.readFileSync(file).toString('base64')});}
+}
+if(notices.length)html=html.replace('</body>','<script type="application/json" id="approved-building-notices">'+JSON.stringify(notices).replace(/</g,'\\u003c')+'</script>\n</body>');
 assert.equal((html.match(/<script type="module" src="\.\/assets\/game\.bundle\.js"><\/script>/g) || []).length, 1);
 assert.equal((html.match(/<link rel="stylesheet" href="\.\/assets\/game\.css">/g) || []).length, 1);
 assert.ok(!/<\/script/i.test(js), 'JavaScript must escape closing script tags before embedding');

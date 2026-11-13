@@ -29,7 +29,7 @@ function pcOfficeBlockLayout(network, landmarks) {
       let span=length*Math.floor(count/2)/count;
       // Keep a viable native-width site instead of splitting both halves too
       // narrowly for registered growables. The remainder stays fully zonable.
-      const nativeWidth=Math.min(66,Math.max(0,...pcGrowableDefinitions.map(a=>a.eligibility.minLotWidth)))+.1;
+      const nativeWidth=Math.min(66,Math.max(0,...pcGrowableCurrentDefinitions.map(a=>Math.max(a.eligibility.minLotWidth,a.eligibility.minLotDepth)))+.1);
       if(span<nativeWidth&&length>=nativeWidth+20)span=nativeWidth;
       const cut=min+span;
       const rectangle=(x0,z0,x1,z1)=>Te([world(x0,z0),world(x1,z0),world(x1,z1),world(x0,z1)]);

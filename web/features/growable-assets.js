@@ -1,8 +1,10 @@
 // Shared static building-asset interface. Placement never scales the model.
 const pcGrowableByKey=new Map(pcGrowableDefinitions.map(d=>[d.key,d]));
+// Keep archived versions for save/history keys, but grow only the newest version.
+const pcGrowableCurrentDefinitions=[...pcGrowableDefinitions.reduce((map,d)=>{const old=map.get(d.id),a=d.version.split('.').map(Number),b=old?.version.split('.').map(Number);if(!old||a[0]>b[0]||a[0]===b[0]&&(a[1]>b[1]||a[1]===b[1]&&a[2]>b[2]))map.set(d.id,d);return map;},new Map).values()];
 const pcGrowableResources=new Map,pcGrowableFactories=new Map,pcGrowablePlacements=new WeakMap;
 function pcRegisterGrowableFactory(key,factory){if(!pcGrowableByKey.has(key)||typeof factory!=='function')throw Error('Invalid growable factory');pcGrowableFactories.set(key,factory);}
-function pcGrowableFind(key){return pcGrowableByKey.get(key)||pcGrowableDefinitions.find(d=>d.id===key)||null;}
+function pcGrowableFind(key){return pcGrowableByKey.get(key)||pcGrowableCurrentDefinitions.find(d=>d.id===key)||null;}
 function pcAssetBytes(text){
  const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',bytes=new Uint8Array(Math.floor(text.length*3/4)-(text.endsWith('==')?2:text.endsWith('=')?1:0));let bits=0,value=0,j=0;
  for(const c of text){if(c==='=')break;value=(value<<6)|alphabet.indexOf(c);bits+=6;if(bits>=8){bits-=8;bytes[j++]=(value>>>bits)&255;}}return bytes.buffer;
@@ -76,7 +78,7 @@ function pcGrowableChoose(collection,property,forPaint=false){
  const assigned=collection.pcCatalogueAssignments?.get(property.id);
  if(assigned!==undefined){const asset=pcGrowableFind(assigned);return asset&&pcGrowablePlacement(property,asset)?asset:null;}
  if(collection.pcCatalogueChoice)return null;
- const candidates=pcGrowableDefinitions.filter(d=>pcGrowablePlacement(property,d));
+ const candidates=pcGrowableCurrentDefinitions.filter(d=>pcGrowablePlacement(property,d));
  const total=16+candidates.reduce((n,d)=>n+d.selectionWeight,0);let ticket=pcOfficeHash(property.id+':authored-growable')/4294967296*total;
  for(const asset of candidates){ticket-=asset.selectionWeight;if(ticket<0)return asset;}return null;
 }

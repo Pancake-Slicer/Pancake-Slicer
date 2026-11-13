@@ -5,7 +5,7 @@ const root=path.resolve(__dirname,'..'),base=path.join(root,'Assets/buildings'),
 const hash=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
 const copy=(from,to)=>{fs.mkdirSync(path.dirname(to),{recursive:true});fs.copyFileSync(from,to);};
 const resolveDependency=dep=>{const paths=[dep.path,...(dep.alternatePaths||[])].map(p=>path.resolve(root,p));assert.ok(paths.every(p=>p.startsWith(root+path.sep)));const found=paths.find(p=>fs.existsSync(p));assert.ok(found,'Missing source dependency: '+dep.path);return found;};
-const registered=new Map(definitions().map(d=>[d.id,d])),entries=[];
+const registered=new Map(definitions(base).map(d=>[d.id,d])),entries=[];
 for(const id of fs.readdirSync(base).sort()){
  const folder=path.join(base,id),metaFile=path.join(folder,'architecture.json');if(!fs.existsSync(metaFile))continue;
  const meta=JSON.parse(fs.readFileSync(metaFile));if(meta.approval!=='approved')continue;

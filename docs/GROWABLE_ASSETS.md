@@ -1,5 +1,7 @@
 # Individually authored growable assets
 
+**Current import workflow:** run `npm run update:buildings` or double-click `Update Approved Buildings.cmd`. Architecture publishes to `Assets/buildings`; the game compiles unchanged validated copies from `Assets/growable-registry`, retaining versioned assignments. See [approved-building workflow](APPROVED_BUILDING_WORKFLOW.md). The following records the original Lind milestone and format; future packages need no per-building code edits.
+
 ## Play this milestone
 
 Run `npm run demo:growables`, then open `dist/Pancake City - Lind Growables Demo.html` in Chrome or Edge. It also works through `npm run preview` at port 4174. This is the actual city game with generated terrain, roads, Office zoning, normal automatic building choice, selection, demolition and undo/redo. It starts with **three Linds among 36 mixed Office buildings**. No Lind-specific placement override is used. The normal `dist/Pancake City - Playtest.html` still starts a new world; the normal game also automatically includes Lind in eligible mixed Office development.

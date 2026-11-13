@@ -14,7 +14,7 @@
     "benchmark:test": "node scripts/art-deco-browser.cjs",
     "benchmark:serve": "npm run benchmark:build && http-server .tools/art-deco -a 127.0.0.1 -p 4180 -c-1",
     "start": "http-server web -a 127.0.0.1 -p 4173 -c-1",
-    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs scripts/growable-assets.test.cjs",
+    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs scripts/growable-assets.test.cjs scripts/approved-building-import.test.cjs",
     "assemble": "node scripts/assemble-runtime.cjs",
     "import:sc4": "node scripts/import-sc4-originals.cjs",
     "build": "npm run assemble && npm run check && node scripts/build.cjs",
@@ -27,7 +27,8 @@
     "benchmark:ohneeohnee": "npm run benchmark:ohneeohnee:build && http-server .tools/ohneeohnee -a 127.0.0.1 -p 4185 -c-1",
     "assets:library:prepare": "node scripts/prepare-approved-library.cjs",
     "assets:library:test": "npm run assets:library:prepare && node scripts/approved-library-browser.cjs",
-    "assets:library": "npm run assets:library:prepare && http-server .tools/approved-library -a 127.0.0.1 -p 4186 -c-1"
+    "assets:library": "npm run assets:library:prepare && http-server .tools/approved-library -a 127.0.0.1 -p 4186 -c-1",
+    "update:buildings": "node scripts/update-approved-buildings.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

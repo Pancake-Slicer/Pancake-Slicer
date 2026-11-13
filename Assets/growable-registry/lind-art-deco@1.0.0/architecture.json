@@ -1,0 +1,112 @@
+{
+  "$schema": "../../../docs/approved-building-metadata.schema.json",
+  "schemaVersion": 1,
+  "assetManifest": "asset.json",
+  "id": "lind-art-deco",
+  "version": "1.0.0",
+  "approval": "approved",
+  "architecturalStyle": "Art Deco",
+  "units": "metres",
+  "origin": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "groundY": 0,
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "front": [
+      0,
+      0,
+      1
+    ],
+    "entrance": [
+      0,
+      0,
+      15.75
+    ]
+  },
+  "suggestedUse": {
+    "category": "commercial",
+    "density": "high",
+    "existingGameZone": "offices",
+    "confirmationOwner": "Game Coding",
+    "note": "Suggested use; existing runtime eligibility remains authoritative and is unchanged by this publication."
+  },
+  "measured": {
+    "bounds": {
+      "min": [
+        -22.899999618530273,
+        0,
+        -15.5
+      ],
+      "max": [
+        22.899999618530273,
+        183.89999389648438,
+        15.75
+      ]
+    },
+    "dimensions": {
+      "width": 45.79999923706055,
+      "depth": 31.25,
+      "height": 183.89999389648438
+    }
+  },
+  "dependencies": {
+    "runtime": [],
+    "authoring": [
+      {
+        "path": "benchmark/art-deco/model.js",
+        "sha256": "bf8ff9dedbb01b9d78e7d0d7ccd51959eddd524d7e3f785ee9ddcfcc471e0e3b",
+        "role": "model factory"
+      },
+      {
+        "path": "Assets/Architecture/Art Deco/Art Deco Limestone Window Facade.png",
+        "sha256": "790172b58a08351bf48461c00e2015967952e62e15c1b2a34d534dd373cec8b9",
+        "role": "facade source artwork",
+        "alternatePaths": [
+          "Assets/Architecture/Art Deco/Kind/Art Deco Limestone Window Facade.png"
+        ]
+      }
+    ]
+  },
+  "textures": [
+    {
+      "imageIndex": 0,
+      "mimeType": "image/png",
+      "width": 128,
+      "height": 256,
+      "sha256": "95941cf695f4d46e1ddefb46cc9d00568321829bc65a9ba62d012c71eb95d489",
+      "embedded": true
+    },
+    {
+      "imageIndex": 1,
+      "mimeType": "image/png",
+      "width": 256,
+      "height": 512,
+      "sha256": "8145e73842190610e899c5fa23abc8629af4a837391ba6b87e822359ed84a6f4",
+      "embedded": true
+    }
+  ],
+  "benchmark": {
+    "factory": "benchmark/art-deco/model.js",
+    "exportName": "createArtDeco",
+    "facadeSource": "Assets/Architecture/Art Deco/Art Deco Limestone Window Facade.png",
+    "view": {
+      "angle": 35,
+      "pitch": 19,
+      "span": 211,
+      "target": 91,
+      "plinthWidth": 52,
+      "plinthDepth": 37
+    }
+  },
+  "integrity": {
+    "manifestSha256": "4374ff731ac78ccf242d6ed71bb5643fdb468328f7133b6d317ac7ed39837627",
+    "modelSha256": "682076c4408c194b8715e622ee13444ba29e8b922943153a28af8c679646e90c"
+  }
+}
