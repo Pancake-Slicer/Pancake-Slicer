@@ -5,10 +5,12 @@
   "description": "Recovered Pancake City v52 browser build; not the original development source tree",
   "scripts": {
     "benchmark:build": "node scripts/prepare-art-deco.cjs",
+    "demo:growables": "npm run assemble && npm run check && node scripts/create-growable-demo.cjs",
+    "test:growables:browser": "node scripts/growable-browser.cjs",
     "benchmark:test": "node scripts/art-deco-browser.cjs",
     "benchmark:serve": "npm run benchmark:build && http-server .tools/art-deco -a 127.0.0.1 -p 4180 -c-1",
     "start": "http-server web -a 127.0.0.1 -p 4173 -c-1",
-    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs",
+    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs scripts/growable-assets.test.cjs",
     "assemble": "node scripts/assemble-runtime.cjs",
     "import:sc4": "node scripts/import-sc4-originals.cjs",
     "build": "npm run assemble && npm run check && node scripts/build.cjs",

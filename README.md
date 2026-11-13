@@ -59,6 +59,8 @@ The rendering fixes keep a stable image during camera movement, remove internal 
 
 ## Standalone Art Deco architectural benchmark
 
+Lind is now also an automatically selected Office growable on sufficiently large, high-capacity lots. Its approved model is unchanged. Run `npm run demo:growables` and open `dist/Pancake City - Lind Growables Demo.html` for a playable city with three Linds among 36 mixed Office buildings. See [the growable asset guide](docs/GROWABLE_ASSETS.md) for the reusable manifest/GLB interface, adding future buildings, eligibility rules, measured performance and tests. The original 98-entry catalogue remains available.
+
 Double-click `Play Art Deco Benchmark.cmd`, then open `http://127.0.0.1:4180` to inspect the reference-led Lind skyscraper. Or run `npm run benchmark:serve`. This separate scene uses the game's recovered Three.js r180 without changing city gameplay. See [the benchmark notes](docs/ART_DECO_BENCHMARK.md) for source images, controls, geometry/material design, measurements, browser checks and remaining architectural differences.
 
 ## Recovery limitation

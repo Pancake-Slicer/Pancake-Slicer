@@ -16,10 +16,11 @@ function pcCatalogueNeedsChange(collection,properties,zone,erase){
 function pcCatalogueAssign(collection,properties,zone,erase){
   if(zone!=='offices'||erase)return;
   if(!collection.pcCatalogueAssignments)collection.pcCatalogueAssignments=new Map;
-  for(const property of properties)collection.pcCatalogueAssignments.set(property.id,pcCatalogueReference(collection,property).id);
+  for(const property of properties)collection.pcCatalogueAssignments.set(property.id,pcGrowableChoose(collection,property,true)?.key||pcCatalogueReference(collection,property).id);
   if(collection.pcCatalogueChoice)for(const property of properties)collection.pcCatalogueAssignments.set(property.id,Number(collection.pcCatalogueChoice));
 }
 function pcCatalogueSpec(collection,property,spec){
+  const authored=pcGrowableSpec(collection,property,spec);if(authored)return authored;
   const entry=pcCatalogueReference(collection,property);
   const original=pcSC4Model(entry.id),sourceHeight=original?original.bounds.maxY-original.bounds.minY:undefined;
   return {...spec,catalogueId:entry.id,catalogueName:entry.name,style:entry.style,facade:entry.facade,colour:entry.colour,

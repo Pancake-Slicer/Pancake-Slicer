@@ -75,6 +75,7 @@ function pcOfficeParcels(properties, collection) {
       ...property, id: 'office:' + key, propertyIds: [property.id],
       floors: spec.floors, height: spec.sourceHeight||spec.floors * spec.floorHeight, office: spec
     };
+    if(spec.assetPlacement){building.rotation=spec.assetPlacement.angle;building.entrance=spec.assetPlacement.entrance;}
     building.signature = JSON.stringify([key, property.footprint, building.y, building.ground, spec]);
     return building;
   });
@@ -100,7 +101,7 @@ function pcSuppressOffice(collection, building) {
   }
 }
 
-function pcOfficeTiers(building) { return building.office.catalogueId?pcCatalogueTiers(building):pcDetailedOfficeTiers(building); }
+function pcOfficeTiers(building) { if(building.office.assetKey)return [{parts:[building.office.assetPlacement.footprint],footprint:building.office.assetPlacement.footprint,y:building.y,height:building.height,floors:building.floors,index:0}];return building.office.catalogueId?pcCatalogueTiers(building):pcDetailedOfficeTiers(building); }
 
 const pcOfficeMaterialCache = new Map;
 function pcOfficeMaterials(spec) { return pcDetailedOfficeMaterials(spec); }

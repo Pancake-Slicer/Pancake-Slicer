@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pancake City growable building asset v1",
+  "type": "object",
+  "required": ["schemaVersion","id","version","name","model","dimensions","footprint","bounds","selection","orientation","eligibility","selectionWeight","source"],
+  "properties": {
+    "$schema": {"type":"string"},
+    "schemaVersion": {"const":1},
+    "id": {"type":"string","pattern":"^[a-z][a-z0-9-]+$"},
+    "version": {"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "name": {"type":"string","minLength":1},
+    "model": {"type":"object","required":["format","path"],"properties":{"format":{"enum":["glb","procedural"]},"path":{"type":"string","minLength":1},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}},"additionalProperties":false},
+    "dimensions": {"type":"object","required":["width","depth","height","floors","floorHeight"],"properties":{"width":{"type":"number","exclusiveMinimum":0},"depth":{"type":"number","exclusiveMinimum":0},"height":{"type":"number","exclusiveMinimum":0},"floors":{"type":"integer","minimum":1},"floorHeight":{"type":"number","exclusiveMinimum":0},"windowBays":{"type":"integer","minimum":0}},"additionalProperties":false},
+    "footprint": {"type":"array","minItems":3,"items":{"$ref":"#/$defs/vec2"}},
+    "bounds": {"type":"object","required":["min","max"],"properties":{"min":{"$ref":"#/$defs/vec3"},"max":{"$ref":"#/$defs/vec3"}},"additionalProperties":false},
+    "selection": {"type":"object","required":["kind","bounds"],"properties":{"kind":{"const":"model-instances"},"bounds":{"const":"bounds"}},"additionalProperties":false},
+    "orientation": {"type":"object","required":["front","entrance","up"],"properties":{"front":{"const":[0,0,1]},"up":{"const":[0,1,0]},"entrance":{"$ref":"#/$defs/vec3"}},"additionalProperties":false},
+    "eligibility": {"type":"object","required":["zone","density","capacityMinFloors","developmentStage","minLotArea","minLotWidth","minLotDepth","setback"],"properties":{"zone":{"const":"offices"},"density":{"const":"high"},"capacityMinFloors":{"type":"integer","minimum":1},"developmentStage":{"const":"immediate"},"minLotArea":{"type":"number","exclusiveMinimum":0},"minLotWidth":{"type":"number","exclusiveMinimum":0},"minLotDepth":{"type":"number","exclusiveMinimum":0},"setback":{"type":"number","minimum":0}},"additionalProperties":false},
+    "selectionWeight": {"type":"number","exclusiveMinimum":0},
+    "source": {"type":"object","required":["kind"],"properties":{"kind":{"type":"string"},"module":{"type":"string"},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"commit":{"type":"string"},"notes":{"type":"string"}}}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "vec2": {"type":"array","items":{"type":"number"},"minItems":2,"maxItems":2},
+    "vec3": {"type":"array","items":{"type":"number"},"minItems":3,"maxItems":3}
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "lind-art-deco",
+  "version": "1.0.0",
+  "name": "Lind Art Deco",
+  "model": {"format": "glb", "path": "lind.glb", "sha256": "682076c4408c194b8715e622ee13444ba29e8b922943153a28af8c679646e90c"},
+  "dimensions": {"width": 45.8, "depth": 31.25, "height": 183.9, "floors": 48, "floorHeight": 3.7, "windowBays": 1762},
+  "footprint": [[-22.9,-15.5],[22.9,-15.5],[22.9,15.75],[-22.9,15.75]],
+  "bounds": {"min": [-22.9,0,-15.5], "max": [22.9,183.9,15.75]},
+  "selection": {"kind": "model-instances", "bounds": "bounds"},
+  "orientation": {"front": [0,0,1], "entrance": [0,0,15.75], "up": [0,1,0]},
+  "eligibility": {"zone": "offices", "density": "high", "capacityMinFloors": 48, "developmentStage": "immediate", "minLotArea": 1800, "minLotWidth": 46.4, "minLotDepth": 31.85, "setback": 0.3},
+  "selectionWeight": 4,
+  "source": {"kind": "approved-procedural-model", "module": "benchmark/art-deco/model.js", "sha256": "bf8ff9dedbb01b9d78e7d0d7ccd51959eddd524d7e3f785ee9ddcfcc471e0e3b", "commit": "aea08edd8ae73663a8a9560edde27832818c996a", "notes": "Approved symmetric-wing Lind; exported unchanged through Three.js r180 GLTFExporter. Supplied architectural images are the source references."}
+}

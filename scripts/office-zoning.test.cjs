@@ -9,7 +9,7 @@ const context = vm.createContext({
   window: { addEventListener() {} },
   document: { createElement: () => ({ relList: { supports: () => true }, getContext: () => ({ fillRect() {} }) }) }
 });
-vm.runInContext(source.slice(0, source.indexOf('const LP=')) + ';globalThis.api={zb,qb,Se,pS,yw,Te,Bo,Ee,sn,ve,Yb,Gi,pcOfficePlots,pcOfficeSpec,pcOfficeTiers,pcOfficeMaterials};', context);
+vm.runInContext(source.slice(0, source.indexOf('const LP=')) + ';globalThis.api={zb,qb,Se,pS,yw,Te,Bo,Ee,sn,ve,Yb,Gi,pcOfficePlots,pcOfficeSpec,pcOfficeTiers,pcOfficeMaterials,pcGrowableFind};', context);
 const api = context.api;
 const plain = value => JSON.parse(JSON.stringify(value));
 function city() {
@@ -40,7 +40,7 @@ test('Office selection exposes independent, deep parcels instead of merged rowho
   assert.ok(zoning.buildings.length>5&&zoning.buildings.length<properties.length);
   assert.equal(zoning.buildings.length,zoning.properties.length);
   assert.equal(new Set(zoning.buildings.map(b=>b.office.style)).size,3);
-  assert.ok(zoning.buildings.every(b=>Number.isInteger(b.office.catalogueId)&&b.floors>=1&&b.floors<=80));
+  assert.ok(zoning.buildings.every(b=>(Number.isInteger(b.office.catalogueId)||api.pcGrowableFind(b.office.assetKey))&&b.floors>=1&&b.floors<=80));
   assert.equal(zoning.info().offices,zoning.buildings.length);
   assert.equal(zoning.info().homes,0);
   assert.deepEqual(plain(zoning.properties),officeProperties);
