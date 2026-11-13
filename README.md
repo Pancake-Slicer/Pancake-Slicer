@@ -57,7 +57,11 @@ The rendering fixes keep a stable image during camera movement, remove internal 
 4. Ask Codex to preserve behavior, add a smoke test, and progressively split the bundled application into maintainable modules.
 5. Require commits pushed to GitHub after each successful milestone. Local checkpoint archives alone are not off-workspace backups.
 
-## Approved architectural growables (current integration)
+## Latest playable custom buildings
+
+Open `C:\Users\camsh\Downloads\Pancake City - Three Custom Buildings Demo - 20261113.html` in Chrome for the populated game with Lind, Von Badel and the newly integrated Ohneeohnee. The matching file without `Demo` starts a new city. Both are fully embedded offline HTML. See [latest integration notes](docs/LATEST_CUSTOM_BUILDINGS.md).
+
+## Earlier approved architectural growables
 
 The normal current game is `C:\Users\camsh\Downloads\Pancake City - Approved Architecture Playtest - 20261113.html`. Open it with Google Chrome. For an immediately playable populated city, open `Pancake City - Approved Architecture Demo - 20261113.html` from Downloads: four unchanged Linds, four refined Von Badels and 28 legacy offices grow through normal zoning. The new Von Badel GLB is copied unchanged from the Architecture handoff; no benchmark/model/material/texture source was edited. See [integration verification and asset provenance](docs/APPROVED_ARCHITECTURE_INTEGRATION.md).
 
@@ -65,7 +69,7 @@ Run `npm run demo:approved-assets` to reproduce the demo. New models register th
 
 ## Architecture Study 03 — Ohneeohnee
 
-Run `Play Ohneeohnee Benchmark.cmd` or `npm run benchmark:ohneeohnee`, then open http://127.0.0.1:4185. This isolated modernist office study includes reference-led curtain walls, true front/side/rear elevations, roof inspection, performance reporting and a 25-copy instancing preview. [Source files, measurements, screenshots and limitations](docs/OHNEEOHNEE_BENCHMARK.md). Its GLB/template are prepared for the shared asset format but are not registered in city growth; Lind, Von Badel and the game remain unchanged.
+Run `Play Ohneeohnee Benchmark.cmd` or `npm run benchmark:ohneeohnee`, then open http://127.0.0.1:4185. This isolated modernist office study includes reference-led curtain walls, true front/side/rear elevations, roof inspection, performance reporting and a 25-copy instancing preview. [Source files, measurements, screenshots and limitations](docs/OHNEEOHNEE_BENCHMARK.md). Its unchanged GLB is now registered through the shared growable interface for the latest playable release; the isolated benchmark remains unchanged.
 
 ## Standalone Art Deco architectural benchmark
 

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "id": "ohneeohnee-modernist",
+  "version": "1.0.0",
+  "name": "Ohneeohnee Modernist Office Tower",
+  "model": {
+    "format": "glb",
+    "path": "ohneeohnee.glb",
+    "sha256": "2938c48decce49b82fcead7dd831f138597f24828f0155a32f2e8b0894f8f133"
+  },
+  "dimensions": {
+    "width": 36.39,
+    "depth": 18.68,
+    "height": 53.201,
+    "floors": 14,
+    "floorHeight": 3.6,
+    "windowBays": 594
+  },
+  "footprint": [
+    [
+      -18.195,
+      -9.195
+    ],
+    [
+      18.195,
+      -9.195
+    ],
+    [
+      18.195,
+      9.485
+    ],
+    [
+      -18.195,
+      9.485
+    ]
+  ],
+  "bounds": {
+    "min": [
+      -18.195,
+      0,
+      -9.195
+    ],
+    "max": [
+      18.195,
+      53.201,
+      9.485
+    ]
+  },
+  "selection": {
+    "kind": "model-instances",
+    "bounds": "bounds"
+  },
+  "orientation": {
+    "front": [
+      0,
+      0,
+      1
+    ],
+    "entrance": [
+      -4,
+      0,
+      9.485
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ]
+  },
+  "eligibility": {
+    "zone": "offices",
+    "density": "high",
+    "capacityMinFloors": 14,
+    "developmentStage": "immediate",
+    "minLotArea": 714,
+    "minLotWidth": 36.99,
+    "minLotDepth": 19.28,
+    "setback": 0.3
+  },
+  "selectionWeight": 4,
+  "source": {
+    "kind": "approved-architectural-model",
+    "module": "benchmark/ohneeohnee/model.js",
+    "sha256": "3ce0bbf0e7d376c275e9adede8c3f8c95a2555eb7b50ae4d1b21c7b68918c1c6",
+    "helper": "benchmark/shared/batched-architecture.js",
+    "helperSha256": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+    "dependencies": {},
+    "notes": "Study 03: original U-3 screenshot is authoritative; supplementary concept and facade artwork. 14 nominal storeys including opaque upper service levels; 11 visible curtain-wall floor rows plus lobby. Rear is inferred. Native scale, +Z front, Y up. Integration authorized by the user request to provide the latest playable game incorporating the latest custom buildings; source model unchanged.",
+    "commit": "e6b1a3f7eade6204c8757acba1586f6c25ea73a1"
+  }
+}

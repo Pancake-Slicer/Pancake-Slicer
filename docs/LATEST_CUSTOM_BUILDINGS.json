@@ -1,0 +1,17 @@
+{
+  "architectureCommit": "e6b1a3f7eade6204c8757acba1586f6c25ea73a1",
+  "modelSha256": "2938c48decce49b82fcead7dd831f138597f24828f0155a32f2e8b0894f8f133",
+  "testsPassed": 62,
+  "outputs": [
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Three Custom Buildings - 20261113.html",
+      "bytes": 9828799,
+      "sha256": "0b46692f93db4d055fcb77c5de93fef61d3a2b9f0b10da021fa9953ceb035c7a"
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Three Custom Buildings Demo - 20261113.html",
+      "bytes": 9830693,
+      "sha256": "81cf19cab958f3c9f00b49022e030a52e406838ce96d023edc40e6c34ea2fc12"
+    }
+  ]
+}
