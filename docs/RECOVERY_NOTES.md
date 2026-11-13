@@ -1,3 +1,7 @@
+## Von Badel dark facade refinement — 2026-11-13
+
+Applied the missing straight-shaft, flat-roof, charcoal International Style revision after explicit user confirmation, then refined actual recessed apertures, chamfered piers, coordinated facade atlas, storefront entrance and connected roof equipment. Corrected baseline is preserved separately for honest before/after comparisons. Checkpoint tag/bundle preserve the old Art Deco version. Model stays 187.2 m high with equal 7 m wings; no live game, registry or Lind changes. Nine model batches / 11 scene calls / 25,786 triangles / 1.25 MiB textures. Seven actual views per variant plus comparisons; browser geometry/recess/symmetry/controls tests and GLB byte equality pass. Build passes 58 regressions. See VON_BADEL_FACADE_REFINEMENT.md. Branch codex/von-badel-facade-refinement; local commit pending review, no push performed. Local recovery is not an off-computer backup.
+
 # Recovery notes
 
 ## Separate Von Badel architectural benchmark — 2026-11-13

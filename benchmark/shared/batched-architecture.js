@@ -20,6 +20,7 @@ export class ArchitectureBatch {
   quad(key,points,uv=[0,0,1,0,1,1,0,1]){
     const b=this.bucket(key),base=b.p.length/3;b.p.push(...points.flat());b.uv.push(...uv);b.i.push(base,base+1,base+2,base,base+2,base+3);
   }
+  triangle(key,points){const b=this.bucket(key),start=b.p.length/3;b.p.push(...points.flat());b.uv.push(0,0,1,0,.5,1);b.i.push(start,start+1,start+2);}
   beam(key,start,end,width,depth){
     const b=this.bucket(key),base=b.p.length/3,a=this.unit.attributes;
     const delta=end.map((v,i)=>v-start[i]),length=Math.hypot(...delta),axis=delta.map(v=>v/length);
@@ -31,6 +32,13 @@ export class ArchitectureBatch {
       b.p.push(...center.map((c,j)=>c+u[j]*x+axis[j]*y+v[j]*z));b.uv.push(a.uv.getX(i),a.uv.getY(i));
     }
     for(const i of this.unit.index.array)b.i.push(base+i);this.boxes++;
+  }
+  chamferedPier(key,x,y,z,w,h,d,bevel=.065){
+    const a=w/2,c=d/2,r=Math.min(bevel,a/3,c/3),ring=[[-a+r,-c],[a-r,-c],[a,-c+r],[a,c-r],[a-r,c],[-a+r,c],[-a,c-r],[-a,-c+r]];
+    const p=(i,yy)=>[x+ring[i][0],yy,z+ring[i][1]];
+    for(let i=0;i<8;i++){const j=(i+1)%8;this.quad(key,[p(j,y-h/2),p(i,y-h/2),p(i,y+h/2),p(j,y+h/2)],[0,0,1,0,1,h/3.6,0,h/3.6]);}
+    const b=this.bucket(key);for(let i=1;i<7;i++)for(const [yy,order] of [[y+h/2,[0,i+1,i]],[y-h/2,[0,i,i+1]]]){const start=b.p.length/3;for(const j of order){b.p.push(...p(j,yy));b.uv.push(ring[j][0],ring[j][1]);}b.i.push(start,start+1,start+2);}
+    this.boxes++;
   }
   finish(materials,name){
     const group=new T.Group;group.name=name;

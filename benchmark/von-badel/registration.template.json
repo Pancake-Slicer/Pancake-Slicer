@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "id": "von-badel-art-deco",
-  "version": "1.0.0",
-  "name": "Von Badel Art Deco",
+  "version": "2.1.0",
+  "name": "Von Badel International Style",
   "model": {
     "format": "glb",
     "path": "von-badel.glb",
-    "sha256": "974bd7c85531fc67f1b1f55a44039f7c385b934a4bf4d1c04d3d5f8192f8b694"
+    "sha256": "998000c6aa0011bcb4541517d6cb1375e45e5b1d72360a281c23afab5405a691"
   },
   "dimensions": {
     "width": 57.35,
     "depth": 43.78,
     "height": 187.2,
-    "floors": 49,
+    "floors": 51,
     "floorHeight": 3.6,
-    "windowBays": 2140
+    "windowBays": 2300
   },
   "footprint": [
     [
@@ -70,7 +70,7 @@
   "eligibility": {
     "zone": "offices",
     "density": "high",
-    "capacityMinFloors": 49,
+    "capacityMinFloors": 51,
     "developmentStage": "immediate",
     "minLotArea": 2572,
     "minLotWidth": 57.95,
@@ -81,9 +81,13 @@
   "source": {
     "kind": "reference-led-procedural-benchmark",
     "module": "benchmark/von-badel/model.js",
-    "sha256": "104a107b87b05f6af53a0dda5654dea9e0eaedac35c3c8baa04c327869cd0d52",
+    "sha256": "3267e4f6f6e924ebc1d7c6e29176e8d7913b89eb84272a2856243470c16cb9b8",
     "helper": "benchmark/shared/batched-architecture.js",
-    "helperSha256": "e789c3348ff97fd195edd39653329c042ec38af578fd4d4ec00b8e351471a005",
-    "notes": "Benchmark only. Original screenshot governs character; both lower wings use the concept right wing width. Not registered in city growth."
+    "helperSha256": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+    "dependencies": {
+      "baseline-v2.js": "7418f918399566a3a3a90d01ae91626751f67c95f5917c351475ffc40c29f411",
+      "materials.js": "a4e45026d36a69d7336e94a26213aa619138ae9d9ccb2d53a0cd4fe7b07fd92a"
+    },
+    "notes": "The concept is a facade-detail reference only. The International Style revision removes the former crown. Podium, equal wings, entrance centre and 187.2 m overall height are retained. Not registered in city growth."
   }
 }

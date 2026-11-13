@@ -1,3 +1,7 @@
+# Current revision: dark International Style, version 2.1.0
+
+The historical Art Deco notes below describe version 1 and are superseded by this revision. See [facade refinement](VON_BADEL_FACADE_REFINEMENT.md) for the current design, verification and metrics. The same launcher/port now opens the refined flat-roof benchmark. Rooftop, Facade, Podium and Gameplay distance controls replace the old crown inspection; baseline/refined links compare the same corrected massing.
+
 # Von Badel Art Deco benchmark — 2026-11-13
 
 ## Play and inspect

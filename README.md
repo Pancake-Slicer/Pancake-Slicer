@@ -59,7 +59,7 @@ The rendering fixes keep a stable image during camera movement, remove internal 
 
 ## Standalone Art Deco architectural benchmark
 
-The separate **Von Badel** study is available through `Play Von Badel Benchmark.cmd` or `npm run benchmark:von-badel` at port 4184. It uses its own source images and model, corrects the concept's unequal wing widths, and does not alter Lind or city growth. See [the Von Badel notes](docs/VON_BADEL_BENCHMARK.md) for measured symmetry, captures, portable GLB and remaining fidelity limits.
+The separate **Von Badel** study is available through `Play Von Badel Benchmark.cmd` or `npm run benchmark:von-badel` at port 4184. It uses its own source images and model, now has a dark International Style facade, a straight shaft, flat mechanical roof and equal wings, and does not alter Lind or city growth. See [the Von Badel notes](docs/VON_BADEL_BENCHMARK.md) for measured symmetry, captures, portable GLB and remaining fidelity limits.
 
 Lind is now also an automatically selected Office growable on sufficiently large, high-capacity lots. Its approved model is unchanged. Run `npm run demo:growables` and open `dist/Pancake City - Lind Growables Demo.html` for a playable city with three Linds among 36 mixed Office buildings. See [the growable asset guide](docs/GROWABLE_ASSETS.md) for the reusable manifest/GLB interface, adding future buildings, eligibility rules, measured performance and tests. The original 98-entry catalogue remains available.
 

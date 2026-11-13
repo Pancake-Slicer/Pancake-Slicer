@@ -8,15 +8,36 @@
     "reference.png": "Art Deco Limestone Skyscraper with Patinated Crown.png",
     "facade.png": "Art Deco Limestone Window Facade (1).png"
   },
-  "correction": "Corrected symmetrical wings",
-  "caption": "PALE LIMESTONE / PATINATED HIPPED CROWN",
+  "correction": "Flat roof · preserved symmetrical wings",
+  "caption": "CHARCOAL PRECAST / RECESSED BLUE-GREY GLAZING",
   "facts": [
-    {"value": "187.2 m", "label": "inferred roof height"},
-    {"value": "56 × 42 m", "label": "podium body footprint"},
-    {"value": "7 m / 7 m", "label": "equal wing body widths"},
-    {"value": "3.6 / 3.5 m", "label": "floor / bay grid"}
+    {
+      "value": "187.2 m",
+      "label": "inferred roof height"
+    },
+    {
+      "value": "56 × 42 m",
+      "label": "podium body footprint"
+    },
+    {
+      "value": "7 m / 7 m",
+      "label": "equal wing body widths"
+    },
+    {
+      "value": "3.6 / 3.5 m",
+      "label": "floor / bay grid"
+    }
   ],
-  "description": "The original screenshot governs character. The concept’s narrower right wing defines both lower wings. Dimensions are proportional estimates. Rear details are inferred. This study is not registered in city growth.",
-  "exportNotes": "Benchmark only. Original screenshot governs character; both lower wings use the concept right wing width. Not registered in city growth.",
-  "view": {"span": 215, "target": 93, "detailTarget": 166, "plinthWidth": 64, "plinthDepth": 50}
+  "description": "The concept is a facade-detail reference only. The International Style revision removes the former crown. Podium, equal wings, entrance centre and 187.2 m overall height are retained. Not registered in city growth.",
+  "exportNotes": "The concept is a facade-detail reference only. The International Style revision removes the former crown. Podium, equal wings, entrance centre and 187.2 m overall height are retained. Not registered in city growth.",
+  "view": {
+    "span": 215,
+    "target": 93,
+    "detailTarget": 166,
+    "plinthWidth": 64,
+    "plinthDepth": 50
+  },
+  "style": "International Style",
+  "assetName": "Von Badel International Style",
+  "assetVersion": "2.1.0"
 }
