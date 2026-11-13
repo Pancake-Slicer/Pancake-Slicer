@@ -63,6 +63,10 @@ The normal current game is `C:\Users\camsh\Downloads\Pancake City - Approved Arc
 
 Run `npm run demo:approved-assets` to reproduce the demo. New models register through standard manifests; there is no Von Badel-specific game code or lot-generation change. Existing catalogue choices and saved/history asset assignments remain authoritative.
 
+## Architecture Study 03 — Ohneeohnee
+
+Run `Play Ohneeohnee Benchmark.cmd` or `npm run benchmark:ohneeohnee`, then open http://127.0.0.1:4185. This isolated modernist office study includes reference-led curtain walls, true front/side/rear elevations, roof inspection, performance reporting and a 25-copy instancing preview. [Source files, measurements, screenshots and limitations](docs/OHNEEOHNEE_BENCHMARK.md). Its GLB/template are prepared for the shared asset format but are not registered in city growth; Lind, Von Badel and the game remain unchanged.
+
 ## Standalone Art Deco architectural benchmark
 
 The separate **Von Badel** study is available through `Play Von Badel Benchmark.cmd` or `npm run benchmark:von-badel` at port 4184. It uses its own source images and model, now has a dark International Style facade, a straight shaft, flat mechanical roof and equal wings, and does not alter Lind. The refined model is now separately registered for city growth through the shared asset interface. See [the Von Badel notes](docs/VON_BADEL_BENCHMARK.md) for measured symmetry, captures, portable GLB and remaining fidelity limits.

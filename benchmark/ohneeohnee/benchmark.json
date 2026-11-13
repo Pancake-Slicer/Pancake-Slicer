@@ -1,0 +1,58 @@
+{
+  "id": "ohneeohnee",
+  "assetId": "ohneeohnee-modernist",
+  "assetName": "Ohneeohnee Modernist Office Tower",
+  "assetVersion": "1.0.0",
+  "name": "Ohneeohnee",
+  "study": "03",
+  "style": "Modernist Office",
+  "sourceDirectory": "Assets/Architecture/Modern/ohneeohnee",
+  "images": {
+    "original.jpg": "U-3_ohneeohnee_gmbh.jpg",
+    "reference.png": "Modernist Office Tower with Rooftop HVAC.png",
+    "facade.png": "Symmetrical Glass Office Facade.png"
+  },
+  "correction": "Single rectangular volume · reference-led curtain wall",
+  "caption": "GREY CURTAIN WALL / CHARCOAL SIDES / FLAT MECHANICAL ROOF",
+  "facts": [
+    {
+      "value": "36 × 18 m",
+      "label": "inferred body footprint"
+    },
+    {
+      "value": "49.8 / 53.2 m",
+      "label": "wall / equipment height"
+    },
+    {
+      "value": "14 storeys",
+      "label": "including opaque service levels"
+    },
+    {
+      "value": "18 / 9 bays",
+      "label": "front / side grid"
+    }
+  ],
+  "description": "The original screenshot governs the rectangular silhouette, grey facade, deep roof fascia, dark side elevations and compact rooftop plant. Dimensions and rear details are inferred. Architecture-only asset; not registered in city growth.",
+  "exportNotes": "Study 03: original U-3 screenshot is authoritative; supplementary concept and facade artwork. 14 nominal storeys including opaque upper service levels; 11 visible curtain-wall floor rows plus lobby. Rear is inferred. Native scale, +Z front, Y up. Not approved for game integration.",
+  "view": {
+    "span": 68,
+    "target": 25,
+    "detailTarget": 49,
+    "plinthWidth": 41,
+    "plinthDepth": 23
+  },
+  "detailSpan": 45,
+  "detailPitch": 42,
+  "elevationAngles": [
+    0,
+    90,
+    180
+  ],
+  "entrance": [
+    -4,
+    0,
+    9.485
+  ],
+  "initialAngle": 25,
+  "initialPitch": 27
+}

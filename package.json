@@ -20,7 +20,11 @@
     "build": "npm run assemble && npm run check && node scripts/build.cjs",
     "preview": "http-server dist -a 127.0.0.1 -p 4174 -c-1",
     "export:html": "npm run assemble && npm run check && node scripts/export-html.cjs",
-    "demo:approved-assets": "npm run assemble && npm run check && node scripts/create-approved-growables-demo.cjs"
+    "demo:approved-assets": "npm run assemble && npm run check && node scripts/create-approved-growables-demo.cjs",
+    "benchmark:ohneeohnee:build": "node scripts/prepare-building-benchmark.cjs ohneeohnee",
+    "benchmark:ohneeohnee:test": "node scripts/ohneeohnee-browser.cjs",
+    "benchmark:ohneeohnee:export": "node scripts/export-building-benchmark.cjs ohneeohnee",
+    "benchmark:ohneeohnee": "npm run benchmark:ohneeohnee:build && http-server .tools/ohneeohnee -a 127.0.0.1 -p 4185 -c-1"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
