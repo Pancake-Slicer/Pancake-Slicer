@@ -1,4 +1,11 @@
-export const ASSEMBLY_VERSION='2.0.0';
+export const ASSEMBLY_VERSION='2.1.0';
+export const LOBBY_GLAZING=Object.freeze({
+ 'opaque-reflective':Object.freeze({interior:false}),
+ 'clear-interior':Object.freeze({interior:true})
+});
+export function lobbyGlazingProfile(option='opaque-reflective'){
+ const profile=LOBBY_GLAZING[option];if(!profile)throw Error('Unknown lobby glazing option');return profile;
+}
 export const LOBBY_TYPES=Object.freeze({
  A:Object.freeze({name:'Recessed lobby',minBays:8,requiresPodium:false,entranceBays:2,recess:1.1,columns:false,canopy:false}),
  B:Object.freeze({name:'Expressed lobby',minBays:12,requiresPodium:false,entranceBays:2,recess:1.4,columns:true,canopy:true}),

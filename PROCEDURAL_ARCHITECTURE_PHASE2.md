@@ -1,5 +1,28 @@
 # Phase 2 — Building 07 facade and podium lobby comparison
 
+## Current revision — opaque lobby glass (assembly 2.1.0)
+
+The user approved the overall 07B detailing and requested opaque lobby glazing. The current comparison uses blue-grey **MeshStandardMaterial** glazing with opacity 1, transparency disabled and depth writes enabled. Lobby panes and doors share one small 128 × 64 static sky/horizon reflection map, with restrained roughness/tint variation. It is an approximation of reflected surroundings, not a live scene reflection or a transparent interior.
+
+The reusable `createAssemblyMaterials(base, {lobbyGlazing: 'opaque-reflective'})` option is now the default; the builder reads that option and omits the hidden interior floor/ceiling, core, reception counter, wall fins and emissive strips. Only exterior paving and the soffit inside the entrance recess remain. `clear-interior` retains the previous assembly as an explicit optional mode; it is not active in 07B. Existing exterior mullion/frame geometry, entrances, columns, canopy and all glazing plane positions are preserved. No massing, roof, 07A, other benchmark or game changes.
+
+Actual browser checks confirmed opaque doors with soft reflected tonal variation and no visible interior, preserved entrance detailing, matched full-building massing and the unchanged ten-building lineup (99 calls / 188,852 triangles). Screenshots in Downloads: **Pancake City - Building 07 Opaque Lobby - Street / Entrance / Full - 20261114.png**. Browser warnings/errors were empty. All **19 architecture checks**, **74 game checks** and `npm run build` pass. A regression compares the opaque and clear variants' glazing positions and unchanged exterior geometry, tests the opaque material flags and verifies hidden interior removal.
+
+| Current model statistic | 07A | Opaque 07B |
+| --- | ---: | ---: |
+| Meshes / materials | 9 / 9 | 21 / 21 |
+| Triangles | 40,804 | 26,004 |
+| Maps | 3 | Same three source maps + one lobby reflection map |
+| Full-view calls including ground | 10 | 22 |
+
+The new reflection texture adds 32 KiB of source pixel data; the renderer additionally caches a filtered environment map. Texture totals in the report are estimates, not complete GPU allocations. The prior transparent 07B had 23 meshes/materials and 26,208 triangles; removing its interior reduces geometry and draws, but this is not a city-scale performance certification. Current measurement and screenshot details are recorded in `docs/OPAQUE_LOBBY_VALIDATION.json`.
+
+Assembly 2.1.0 has a new review key, so earlier review decisions are preserved without silently approving this revised appearance. The opaque revision awaits visual review. The local safety branch `safety/pre-opaque-lobby-c4095c7` retains the previous prototype. No push or rollout has been performed.
+
+## Historical 2.0.0 prototype record
+
+The details below document the preceding transparent-interior prototype. Its lobby material, interior and performance figures are superseded by the opaque revision above; its massing, external detailing and general comparison controls still apply.
+
 Open **http://127.0.0.1:4187/?comparison=07** in Chrome. If the server is not running, double-click **Play Procedural Architecture Lab.cmd**, leave its window open, then open the link. Use Ctrl+F5 if an older lab page is already open. The header's **07A / 07B comparison** and **Ten-building lineup** buttons switch modes.
 
 ## Frozen prototype

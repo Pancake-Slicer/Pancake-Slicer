@@ -1,15 +1,29 @@
 import * as T from '../engine.js';
 import {ArchitectureBatch} from '../batched-architecture.js';
 import {tiers,floorBase,validateSpecification} from '../spec.mjs';
-import {ASSEMBLY_VERSION,lobbyProfile,paneModule} from './systems.mjs';
+import {ASSEMBLY_VERSION,lobbyProfile,lobbyGlazingProfile,paneModule} from './systems.mjs';
 
-export function createAssemblyMaterials(base){
+// Small, shared static sky/horizon reflection; no scene capture or per-pane maps.
+function lobbyReflection(){
+ const width=128,height=64,data=new Uint8Array(width*height*4);
+ for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+  const v=y/(height-1),horizon=Math.exp(-Math.pow((v-.48)/.18,2)),sky=Math.max(0,1-v*1.6),az=x/width*Math.PI*2;
+  const skyline=v>.49&&v<.56+.05*Math.sin(Math.floor(x/9)*2.7),shade=skyline?-.15:0;
+  const level=.30+.22*sky+.24*horizon+.025*Math.cos(az*3)+shade,i=(y*width+x)*4;
+  data[i]=Math.round(255*(level-.045));data[i+1]=Math.round(255*level);data[i+2]=Math.round(255*(level+.055));data[i+3]=255;
+ }
+ const map=new T.DataTexture(data,width,height,T.RGBAFormat);map.mapping=T.EquirectangularReflectionMapping;map.colorSpace=T.SRGBColorSpace;map.minFilter=map.magFilter=T.LinearFilter;map.needsUpdate=true;map.name='Shared restrained lobby sky reflection';return map;
+}
+export function createAssemblyMaterials(base,{lobbyGlazing='opaque-reflective'}={}){
+ const glazing=lobbyGlazingProfile(lobbyGlazing);
  const m={};const standard=(color,roughness,metalness=0)=>new T.MeshStandardMaterial({color,roughness,metalness});
  for(let i=0;i<3;i++){m['vision'+i]=base.glass.clone();Object.assign(m['vision'+i],{roughness:.27+i*.035,metalness:.16,opacity:.88+i*.025,transparent:true,depthWrite:false});m['vision'+i].color.set([0xd5e0e7,0xdde5e9,0xd2dfe6][i]);}
  m.spandrel=standard(0x485560,.47,.18);m.podiumSpandrel=standard(0x68777e,.55,.15);
  m.aluminum=standard(0x9daab0,.4,.55);m.edge=standard(0xc2cbd0,.32,.6);m.backing=standard(0x252f37,.92);
- m.lobbyGlass=new T.MeshPhysicalMaterial({color:0xc5dde3,roughness:.16,metalness:.04,opacity:.27,transparent:true,depthWrite:false,reflectivity:.35});
- m.doorGlass=m.lobbyGlass.clone();m.doorGlass.opacity=.18;
+ if(glazing.interior){m.lobbyGlass=new T.MeshPhysicalMaterial({color:0xc5dde3,roughness:.16,metalness:.04,opacity:.27,transparent:true,depthWrite:false,reflectivity:.35});m.doorGlass=m.lobbyGlass.clone();m.doorGlass.opacity=.18;}
+ else{m.lobbyGlass=standard(0x536d80,.26,.48);m.lobbyGlass.envMap=lobbyReflection();m.lobbyGlass.envMapIntensity=.65;m.doorGlass=m.lobbyGlass.clone();m.doorGlass.color.set(0x59788b);m.doorGlass.roughness=.23;}
+ m.lobbyGlass.userData.lobbyGlazing=lobbyGlazing;
+ m.lobbyGlassAlt=m.lobbyGlass.clone();m.lobbyGlassAlt.color.multiplyScalar(.96);m.lobbyGlassAlt.roughness+=.025;
  m.floor=standard(0x999b98,.72);m.ceiling=standard(0xd3d7d1,.9);m.wall=standard(0x939a96,.85);m.desk=standard(0x4b5d64,.65,.12);m.threshold=standard(0x465159,.68);
  m.light=standard(0xe8e9dd,.6);m.light.emissive.set(0xd4d9c2);m.light.emissiveIntensity=.8;
  return m;
@@ -29,7 +43,7 @@ function retainRoofs(original,spec){
 }
 
 export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
- validateSpecification(spec);const profile=lobbyProfile(spec,lobbyType),b=new ArchitectureBatch,levels=tiers(spec),audit={windows:[],corners:[],lobby:null},roof=retainRoofs(original,spec);let openTop=null;
+ validateSpecification(spec);const profile=lobbyProfile(spec,lobbyType),lobbyGlazing=materials.lobbyGlass.userData.lobbyGlazing,glazing=lobbyGlazingProfile(lobbyGlazing),b=new ArchitectureBatch,levels=tiers(spec),audit={windows:[],corners:[],lobby:null},roof=retainRoofs(original,spec);let openTop=null;
  const box=(key,x,y,z,w,h,d)=>{const bucket=b.bucket(key),start=bucket.i.length,base=bucket.p.length/3;b.box(key,x,y,z,w,h,d);if(openTop!==null&&Math.abs(y+h/2-openTop)<1e-7){let write=start;for(let i=start;i<bucket.i.length;i+=3)if(b.unit.attributes.normal.getY(bucket.i[i]-base)<.9)for(let j=0;j<3;j++)bucket.i[write++]=bucket.i[i+j];bucket.i.length=write;}};
  const uvFor=module=>{const u0=(module.atlasCol*128+1)/512,u1=(module.atlasCol*128+127)/512,v0=(512-(module.atlasRow*170+169))/512,v1=(512-(module.atlasRow*170+1))/512;return[u0,v0,u1,v0,u1,v1,u0,v1];};
  for(const tier of levels){
@@ -54,7 +68,8 @@ export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
     const entryHalf=profile.entranceBays*spec.bay/2;strip('podiumSpandrel',0,spec.lobbyHeight-.22,length,.44,-.03,.16);
     for(let col=0;col<count;col++){
      const t=-length/2+(col+.5)*spec.bay,inEntry=side===0&&Math.abs(t)<entryHalf,isDoor=inEntry&&Math.abs(t)<spec.bay,plane=inEntry?-profile.recess:-.46,bottom=isDoor?.12:.22,ceiling=spec.lobbyHeight-.55;
-     b.quad(isDoor?'doorGlass':'lobbyGlass',[point(t-spec.bay/2+.055,bottom,plane),point(t+spec.bay/2-.055,bottom,plane),point(t+spec.bay/2-.055,ceiling,plane),point(t-spec.bay/2+.055,ceiling,plane)]);b.windowBays++;
+     const glassKey=isDoor?'doorGlass':!glazing.interior&&Math.floor(col/spec.structuralBays)%3===1?'lobbyGlassAlt':'lobbyGlass';
+     b.quad(glassKey,[point(t-spec.bay/2+.055,bottom,plane),point(t+spec.bay/2-.055,bottom,plane),point(t+spec.bay/2-.055,ceiling,plane),point(t-spec.bay/2+.055,ceiling,plane)]);b.windowBays++;
      for(const dx of [-spec.bay/2+.035,spec.bay/2-.035])strip('aluminum',t+dx,(bottom+ceiling)/2,.045,ceiling-bottom,plane+.025,.075);
      strip('aluminum',t,3.03,spec.bay-.07,.055,plane+.025,.075);
      strip('aluminum',t,ceiling+.025,spec.bay-.07,.05,plane+.025,.075);
@@ -76,15 +91,22 @@ export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
  }
  openTop=null;
  const podium=levels[0],w=podium.widthBays*spec.bay,d=podium.depthBays*spec.bay,lobbyDepth=Math.min(6,d*.24),ceiling=spec.lobbyHeight-.52;
+ if(glazing.interior){
  box('floor',0,.04,0,w-.4,.08,d);box('ceiling',0,ceiling+.06,0,w-.4,.12,d-.4);
  // An opaque shallow core gives all four lobby elevations real backing.
  box('wall',0,(.08+ceiling)/2,0,w-lobbyDepth*2,ceiling-.08,d-lobbyDepth*2);
  const rear=d/2-lobbyDepth,deskZ=rear+2.0;box('desk',0,.61,deskZ,spec.bay*2,1.06,1.05);box('aluminum',0,1.17,deskZ,spec.bay*2+.14,.10,1.17);
  for(let i=-5;i<=5;i++)box('aluminum',i*spec.bay/6,2.45,rear+.07,.035,3.9,.14);
  for(const x of [-spec.bay*2,0,spec.bay*2])box('light',x,ceiling-.025,d/2-lobbyDepth/2,spec.bay*1.2,.035,.12);
- audit.lobby={type:lobbyType,floor:0,ceiling:ceiling-.0,doorPlane:d/2-profile.recess,entranceWidth:profile.entranceBays*spec.bay,doorTop:3.03,interiorRear:rear,deskTop:1.22,eyeHeight:1.6};
+ }else{
+ // Only exterior paving/soffit inside the existing entrance recess remain.
+ const z=d/2-profile.recess/2;
+ box('entryPaving',0,.04,z,profile.entranceBays*spec.bay,.08,profile.recess);
+ box('entrySoffit',0,ceiling+.06,z,profile.entranceBays*spec.bay,.12,profile.recess);
+ }
+ audit.lobby={type:lobbyType,glazing:lobbyGlazing,interior:glazing.interior,floor:0,ceiling:ceiling-.0,doorPlane:d/2-profile.recess,entranceWidth:profile.entranceBays*spec.bay,doorTop:3.03,...(glazing.interior?{interiorRear:d/2-lobbyDepth,deskTop:1.22}:{}),eyeHeight:1.6};
  for(const bucket of b.buckets.values()){const used=new Set(bucket.i);if(used.size===bucket.p.length/3)continue;const p=[],uv=[],remap=new Map;for(let i=0;i<bucket.p.length/3;i++)if(used.has(i)){remap.set(i,p.length/3);p.push(...bucket.p.slice(i*3,i*3+3));uv.push(...bucket.uv.slice(i*2,i*2+2));}bucket.p=p;bucket.uv=uv;bucket.i=bucket.i.map(i=>remap.get(i));}
- const group=b.finish(materials,'07B · Enhanced podium lobby');for(const mesh of roof.children.slice())group.add(mesh);
+ const group=b.finish({...materials,entryPaving:materials.floor,entrySoffit:materials.ceiling},'07B · Enhanced podium lobby');for(const mesh of roof.children.slice())group.add(mesh);
  group.userData={spec:structuredClone(spec),assemblyVersion:ASSEMBLY_VERSION,massing:structuredClone(original.userData.volumes),audit,approval:'unreviewed-no-publication'};return group;
 }
 

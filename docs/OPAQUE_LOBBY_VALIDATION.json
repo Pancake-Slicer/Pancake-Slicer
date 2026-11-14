@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "assemblyVersion": "2.1.0",
+  "prototype": {
+    "schemaVersion": 1,
+    "generatorVersion": "1.0.1",
+    "family": "ohneeohnee-international",
+    "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+    "seed": "1138",
+    "archetype": 6,
+    "revision": 0,
+    "name": "Broad podium tower",
+    "storeys": 35,
+    "floorHeight": 3.75,
+    "lobbyHeight": 5,
+    "bay": 2.1,
+    "widthBays": 18,
+    "depthBays": 12,
+    "structuralBays": 3,
+    "mullion": 0.055,
+    "spandrel": 1.24,
+    "visionRail": true,
+    "rhythm": "continuous",
+    "palette": "graphite",
+    "podium": {
+      "storeys": 4,
+      "widthBays": 24,
+      "depthBays": 16
+    },
+    "setback": null,
+    "roof": "screened",
+    "entrance": "recessed",
+    "columns": true
+  },
+  "models": {
+    "A": {
+      "meshes": 9,
+      "triangles": 40804,
+      "materialCount": 9,
+      "geometryBytes": 2856280,
+      "textureCount": 3,
+      "textureBytes": 1660245
+    },
+    "B": {
+      "meshes": 21,
+      "triangles": 26004,
+      "materialCount": 21,
+      "geometryBytes": 1897592,
+      "textureCount": 4,
+      "textureBytes": 1703936
+    }
+  },
+  "lastRender": {
+    "view": "full",
+    "mode": "both",
+    "counts": [
+      {
+        "label": "07A",
+        "calls": 10,
+        "triangles": 40816
+      },
+      {
+        "label": "07B",
+        "calls": 22,
+        "triangles": 26016
+      }
+    ]
+  },
+  "timing": {
+    "view": "full",
+    "viewport": [
+      285,
+      556
+    ],
+    "pixelRatio": 1.25,
+    "samples": 60,
+    "method": "alternating order, 8 warmups; performance.now around render + gl.finish; cached shadows; not city FPS",
+    "A": {
+      "medianMs": 0.2,
+      "p95Ms": 0.4
+    },
+    "B": {
+      "medianMs": 0.3,
+      "p95Ms": 0.5
+    }
+  },
+  "shadowMaps": {
+    "count": 2,
+    "resolution": 2048,
+    "approximateBytes": 67108864
+  },
+  "reviewStatus": "unreviewed",
+  "publication": false,
+  "checkpoint": "c4095c73e04b93929d1ce4ac29d149ebe8389a65",
+  "glazing": {
+    "option": "opaque-reflective",
+    "material": "MeshStandardMaterial",
+    "transparent": false,
+    "opacity": 1,
+    "depthWrite": true,
+    "interior": false,
+    "reflection": "Shared static 128 x 64 sky/horizon; filtered environment allocation not included in texture byte estimate"
+  },
+  "validation": {
+    "architectureTests": 19,
+    "gameTests": 74,
+    "build": "passed",
+    "browserWarningsAndErrors": [],
+    "protectedFiles": "Verified against pre-Phase2 hash inventory",
+    "lineup": {
+      "calls": 99,
+      "triangles": 188852
+    },
+    "rollout": false
+  },
+  "screenshots": [
+    {
+      "view": "Street",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Opaque Lobby - Street - 20261114.png",
+      "sha256": "3762ec15c173321e0e4753131edc498f2e812f6b6b0c1449a7f1e96f2d87cde2"
+    },
+    {
+      "view": "Entrance",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Opaque Lobby - Entrance - 20261114.png",
+      "sha256": "baea669571305ec1680f51fa0ce0117c1c64d3e72ac0c1c1064e6f9a7d955867"
+    },
+    {
+      "view": "Full",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Opaque Lobby - Full - 20261114.png",
+      "sha256": "a06221252ad35316ca6dae3c9a336d42ee75e2cb8476fed9ad27459e00414366"
+    }
+  ]
+}
