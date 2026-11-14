@@ -1,5 +1,7 @@
 # Enhanced ten-building family — Phase 3
 
+Phase 4 adds a separate [optimized rendering/performance lab](PROCEDURAL_ARCHITECTURE_PHASE4.md), preserving this approved generator and family. Its live view is http://127.0.0.1:4187/performance.html; no city/game publication occurs.
+
 The default lab now uses the approved 07B detailing across all ten original specifications. Automatic compatible lobbies support podium and non-podium buildings; the original family remains selectable for comparison. See [Phase 3 instructions, measured costs and validation](PROCEDURAL_ARCHITECTURE_PHASE3.md). The historical Phase 1 record below remains the baseline; no main-game publication has occurred.
 
 # Procedural Architecture Lab — Phase 1

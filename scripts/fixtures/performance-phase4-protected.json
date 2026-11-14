@@ -1,0 +1,12 @@
+{
+  "architecture/modernist/geometry.js": "7d82323ec049646fcaf286c4c11f553a382df7a81ab7b0518f62eef4123a8d1f",
+  "architecture/modernist/materials.js": "1b95eeb7e61be1a0cdfe62cc6ce8b72cde6ef061e225f2ef926d9f44f3e1f183",
+  "architecture/modernist/protected-files.json": "901219d51e07e06a7504de14a43913fa53df71a878bfdbca81ac7750e3b25063",
+  "architecture/modernist/spec.mjs": "850049475304998b8a9aba219db52c5f015ae5e32a8cc1ead4230aab91ff9e94",
+  "architecture/assemblies/enhanced.js": "6568b443789a35a0dca32aebe55eb043511ff1570c93e6b1492971de78b819c1",
+  "architecture/assemblies/systems.mjs": "116a522bdc7b1339ef07cf0c288c7bd84fe9f2bb02e8adfc226fcd423d7551f4",
+  "architecture/assemblies/roof-surfaces.js": "a3cfd33cdb580e767c11d873ace28b84cb0fe9193620def4b9db54e81f084161",
+  "architecture/assemblies/family.js": "f2d5c1c1cddd10a8dd69d472d2107cb5d2dcb8534a77ad2f9371e0885205bebd",
+  "architecture/assemblies/family-panel.js": "0dcd5799de01a4d7b45277c1ee7a876bbb083f34f06a23ec26f80fd1d04dbb8c",
+  "architecture/assemblies/comparison.js": "02888c0917b2274dfdcb78a744bf48991586ab54d2600492dc464cb5b2ed09d5"
+}
