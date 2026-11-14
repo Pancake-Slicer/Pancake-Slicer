@@ -7,7 +7,7 @@ for(const file of ['three.module.js','three.core.js'])copy(path.join(vendor,'bui
 copy(path.join(vendor,'LICENSE'),path.join(out,'vendor/LICENSE'));
 fs.writeFileSync(path.join(out,'engine.js'),"export * from './vendor/three.module.js';\n");fs.writeFileSync(path.join(out,'package.json'),'{"type":"module"}\n');
 for(const file of ['spec.mjs','geometry.js','materials.js'])copy(path.join(root,'architecture/modernist',file),path.join(out,file));
-for(const file of ['systems.mjs','enhanced.js','comparison.js'])copy(path.join(root,'architecture/assemblies',file),path.join(out,'assemblies',file));
+for(const file of ['systems.mjs','enhanced.js','comparison.js','roof-surfaces.js'])copy(path.join(root,'architecture/assemblies',file),path.join(out,'assemblies',file));
 for(const file of ['index.html','style.css','scene.js'])copy(path.join(root,'architecture/lab',file),path.join(out,file));
 copy(path.join(root,'benchmark/shared/batched-architecture.js'),path.join(out,'batched-architecture.js'));
 copy(path.join(root,'reference/third-party-notices.txt'),path.join(out,'THIRD-PARTY-NOTICES.txt'));

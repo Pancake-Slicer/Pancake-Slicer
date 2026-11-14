@@ -2,6 +2,7 @@ import * as T from '../engine.js';
 import {ArchitectureBatch} from '../batched-architecture.js';
 import {tiers,floorBase,validateSpecification} from '../spec.mjs';
 import {ASSEMBLY_VERSION,lobbyProfile,lobbyGlazingProfile,paneModule} from './systems.mjs';
+import {resolveRoofOverlaps} from './roof-surfaces.js';
 
 // Small, shared static sky/horizon reflection; no scene capture or per-pane maps.
 function lobbyReflection(){
@@ -39,7 +40,7 @@ function retainRoofs(original,spec){
  const group=new T.Group,levels=tiers(spec);
  for(const mesh of original.children){const g=mesh.geometry,p=[],uv=[],normal=[],indices=[];for(let i=0;i<g.index.count;i+=3){const source=[g.index.getX(i),g.index.getX(i+1),g.index.getX(i+2)];if(!roofTriangle(mesh,source,levels,spec))continue;for(const j of source){indices.push(p.length/3);p.push(g.attributes.position.getX(j),g.attributes.position.getY(j),g.attributes.position.getZ(j));normal.push(g.attributes.normal.getX(j),g.attributes.normal.getY(j),g.attributes.normal.getZ(j));uv.push(g.attributes.uv.getX(j),g.attributes.uv.getY(j));}}
   if(!indices.length)continue;const geometry=new T.BufferGeometry;geometry.setAttribute('position',new T.Float32BufferAttribute(p,3));geometry.setAttribute('normal',new T.Float32BufferAttribute(normal,3));geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geometry.setIndex(indices);geometry.computeBoundingBox();geometry.computeBoundingSphere();const copy=new T.Mesh(geometry,mesh.material);copy.name='retained-roof:'+mesh.name;copy.castShadow=copy.receiveShadow=true;group.add(copy);
- }return group;
+ }return resolveRoofOverlaps(group);
 }
 
 export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
@@ -65,7 +66,10 @@ export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
     const t=-length/2+col*spec.bay;strip('aluminum',t,(base+top)/2,spec.mullion,top-base,.02,.13);for(const sign of [-1,1])strip('edge',t+sign*(spec.mullion/2-.006),(base+top)/2,.009,top-base,.091,.012);
    }
    if(tier.start===0){
-    const entryHalf=profile.entranceBays*spec.bay/2;strip('podiumSpandrel',0,spec.lobbyHeight-.22,length,.44,-.03,.16);
+    // Close the head joint down to the glazing/frame, including the recessed
+    // entrance soffit: a shallow fascia alone left a through-building slot.
+    const entryHalf=profile.entranceBays*spec.bay/2,headDepth=side===0?profile.recess:.46;
+    strip('podiumSpandrel',0,spec.lobbyHeight-.275,length,.55,(.05-headDepth)/2,headDepth+.05);
     for(let col=0;col<count;col++){
      const t=-length/2+(col+.5)*spec.bay,inEntry=side===0&&Math.abs(t)<entryHalf,isDoor=inEntry&&Math.abs(t)<spec.bay,plane=inEntry?-profile.recess:-.46,bottom=isDoor?.12:.22,ceiling=spec.lobbyHeight-.55;
      const glassKey=isDoor?'doorGlass':!glazing.interior&&Math.floor(col/spec.structuralBays)%3===1?'lobbyGlassAlt':'lobbyGlass';

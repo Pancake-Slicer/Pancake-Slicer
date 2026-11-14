@@ -1,6 +1,16 @@
 # Phase 2 — Building 07 facade and podium lobby comparison
 
-## Current revision — opaque lobby glass (assembly 2.1.0)
+## Current revision — lobby head joint and roof trim (assembly 2.1.1)
+
+Closed the visible approximately 6 cm slot between the lobby's upper frame and its fascia. The reusable opaque header now reaches the existing glazing head and spans back over the recessed entrance, providing an actual solid closure rather than hiding the slot with a material or lighting adjustment. Glass panes, doors, mullions, columns and canopy keep their existing positions; massing and floor elevations are unchanged.
+
+The retained roof trim also contained coincident upward-facing surfaces at mullion/frame intersections, parapet caps and plant-screen corners. `architecture/assemblies/roof-surfaces.js` now subtracts duplicate coplanar areas once during 07B construction, retaining each surface's interpolated UVs and normals. It adds no render effect, depth bias, frame-time geometry operation, material or draw call. Roof decks themselves and non-top-facing details remain exact copies. The original 07A, original generator, other nine buildings and approved architectural assets are untouched. This repair is limited to the enhanced comparison assembly; no rollout to the baseline family has occurred.
+
+Choose **Lobby head joint**, **Roof comparison**, or **Podium terrace** in the comparison camera menu. Actual browser inspection covered close-up lobby closure, top roof at multiple zooms and angles, and the exposed podium terrace. Screenshots in Downloads: **Pancake City - Building 07 Seam Fix - Lobby Head / Roof / Terrace.png**. No browser warnings/errors were captured. All **21 architecture checks**, **74 game checks** and the build pass. Both new geometric regressions failed before the fix. Roof intersection checks allow 0.0001 square metres for Float32 rounding along long, thin cap edges; substantial source overlaps were up to approximately 0.038 square metres. The revised source-preservation test checks exact deck and vertical-detail attributes, plus source plane/UV interpolation for trimmed caps.
+
+07B remains **21 meshes/materials and 22 full-view scene draw calls**, with **26,512 model triangles** (previously 26,004). Splitting overlapping polygons adds a small number of triangles while removing duplicate surface area. Four texture maps remain in use. Matched render/GPU-finish timing at 285 × 556 CSS pixels, ratio 1.25, measured A median/p95 **0.30/0.60 ms**, B **0.40/0.70 ms** over 60 samples after eight warmups. These are isolated lab timings, not city FPS. See `docs/BUILDING07_SEAM_VALIDATION.json` for current evidence. Assembly 2.1.1 awaits visual review; version-bound prior reviews remain preserved. Safety branch `safety/pre-lobby-roof-seams-3570bd1` retains the previous revision. Nothing has been pushed.
+
+## Previous revision — opaque lobby glass (assembly 2.1.0)
 
 The user approved the overall 07B detailing and requested opaque lobby glazing. The current comparison uses blue-grey **MeshStandardMaterial** glazing with opacity 1, transparency disabled and depth writes enabled. Lobby panes and doors share one small 128 × 64 static sky/horizon reflection map, with restrained roughness/tint variation. It is an approximation of reflected surroundings, not a live scene reflection or a transparent interior.
 

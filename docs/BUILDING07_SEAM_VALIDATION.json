@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "assemblyVersion": "2.1.1",
+  "prototype": {
+    "schemaVersion": 1,
+    "generatorVersion": "1.0.1",
+    "family": "ohneeohnee-international",
+    "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+    "seed": "1138",
+    "archetype": 6,
+    "revision": 0,
+    "name": "Broad podium tower",
+    "storeys": 35,
+    "floorHeight": 3.75,
+    "lobbyHeight": 5,
+    "bay": 2.1,
+    "widthBays": 18,
+    "depthBays": 12,
+    "structuralBays": 3,
+    "mullion": 0.055,
+    "spandrel": 1.24,
+    "visionRail": true,
+    "rhythm": "continuous",
+    "palette": "graphite",
+    "podium": {
+      "storeys": 4,
+      "widthBays": 24,
+      "depthBays": 16
+    },
+    "setback": null,
+    "roof": "screened",
+    "entrance": "recessed",
+    "columns": true
+  },
+  "models": {
+    "A": {
+      "meshes": 9,
+      "triangles": 40804,
+      "materialCount": 9,
+      "geometryBytes": 2856280,
+      "textureCount": 3,
+      "textureBytes": 1660245
+    },
+    "B": {
+      "meshes": 21,
+      "triangles": 26512,
+      "materialCount": 21,
+      "geometryBytes": 1949408,
+      "textureCount": 4,
+      "textureBytes": 1703936
+    }
+  },
+  "lastRender": {
+    "view": "full",
+    "mode": "both",
+    "counts": [
+      {
+        "label": "07A",
+        "calls": 10,
+        "triangles": 40816
+      },
+      {
+        "label": "07B",
+        "calls": 22,
+        "triangles": 26524
+      }
+    ]
+  },
+  "timing": {
+    "view": "full",
+    "viewport": [
+      285,
+      556
+    ],
+    "pixelRatio": 1.25,
+    "samples": 60,
+    "method": "alternating order, 8 warmups; performance.now around render + gl.finish; cached shadows; not city FPS",
+    "A": {
+      "medianMs": 0.3,
+      "p95Ms": 0.6
+    },
+    "B": {
+      "medianMs": 0.4,
+      "p95Ms": 0.7
+    }
+  },
+  "shadowMaps": {
+    "count": 2,
+    "resolution": 2048,
+    "approximateBytes": 67108864
+  },
+  "reviewStatus": "unreviewed",
+  "publication": false,
+  "previousCommit": "3570bd115b2989343794c7d107599b487914f688",
+  "tests": {
+    "architecture": 21,
+    "game": 74,
+    "build": "passed",
+    "newRegressionsFailedBeforeFix": true
+  },
+  "preservation": {
+    "protectedFiles": 68,
+    "sha256Verified": true,
+    "original07A": true,
+    "otherNine": true,
+    "sourceGenerator": true,
+    "gameplay": true
+  },
+  "repairs": {
+    "lobby": "Solid head lintel closes slot at y4.50..4.56 and spans entry recess",
+    "roof": "One-time subtraction of coincident upward roof-trim surfaces; original deck, vertical details, UVs and materials preserved",
+    "intersectionToleranceSquareMetres": 0.0001
+  },
+  "browser": {
+    "views": [
+      "lobby head joint",
+      "top roof",
+      "zoomed roof",
+      "rotated roof",
+      "podium terrace"
+    ],
+    "warningsAndErrors": []
+  },
+  "screenshots": [
+    {
+      "view": "Lobby Head",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Seam Fix - Lobby Head.png",
+      "sha256": "45110e132f0589c5b7b4e3fee6c4bf36403acdcec6dc5b2cf8159a4172a266e4"
+    },
+    {
+      "view": "Roof",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Seam Fix - Roof.png",
+      "sha256": "61223a1b30ed2d61cdf63bdd96210ecede23ac2ead8ee6af2820fb9bbe473934"
+    },
+    {
+      "view": "Terrace",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Seam Fix - Terrace.png",
+      "sha256": "75effcaaacf8776f3fa5549af3a2b4adc02905433e4146f88b308c903d32e18b"
+    }
+  ]
+}

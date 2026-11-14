@@ -1,4 +1,4 @@
-export const ASSEMBLY_VERSION='2.1.0';
+export const ASSEMBLY_VERSION='2.1.1';
 export const LOBBY_GLAZING=Object.freeze({
  'opaque-reflective':Object.freeze({interior:false}),
  'clear-interior':Object.freeze({interior:true})

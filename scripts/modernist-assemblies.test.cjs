@@ -5,9 +5,27 @@ function signature(group){const h=crypto.createHash('sha256');group.traverse(m=>
 test('Building 07 seed, tiers, complete massing and decorated envelope are unchanged',async()=>{
  const [S,G,T,E]=await ready,s=S.createSpecification('1138',6),m=materials(T),a=G.buildModernist(s,m),before=signature(a),b=E.buildEnhanced(s,a,E.createAssemblyMaterials(m));assert.equal(s.storeys,35);assert.equal(s.floorHeight,3.75);assert.equal(s.lobbyHeight,5);assert.deepEqual(s.podium,{storeys:4,widthBays:24,depthBays:16});const ab=new T.Box3().setFromObject(a),bb=new T.Box3().setFromObject(b);assert.deepEqual(bb.min.toArray(),ab.min.toArray());assert.deepEqual(bb.max.toArray(),ab.max.toArray());assert.deepEqual(b.userData.massing,a.userData.volumes);assert.equal(signature(a),before,'07A geometry/materials must not be mutated');assert.deepEqual(b.userData.spec,s);
 });
-test('roof and terrace triangles retain exact source positions, normals, UVs and materials',async()=>{
+test('roof decks and vertical details retain exact source attributes; trimmed caps preserve source planes and UVs',async()=>{
  const [S,G,T,E]=await ready,s=S.createSpecification('1138',6),m=materials(T),a=G.buildModernist(s,m),b=E.buildEnhanced(s,a,E.createAssemblyMaterials(m)),levels=S.tiers(s);
- for(const original of a.children){const g=original.geometry,arrays={position:[],normal:[],uv:[]};for(let i=0;i<g.index.count;i+=3){const ids=[g.index.getX(i),g.index.getX(i+1),g.index.getX(i+2)];if(E.roofTriangle(original,ids,levels,s))for(const id of ids)for(const [key,target]of Object.entries(arrays)){const attr=g.attributes[key];for(let j=0;j<attr.itemSize;j++)target.push(attr.array[id*attr.itemSize+j]);}}const copy=b.children.find(m=>m.name==='retained-roof:'+original.name);if(!arrays.position.length){assert.equal(copy,undefined);continue;}assert.ok(copy);assert.equal(copy.material,original.material);for(const [key,target]of Object.entries(arrays))assert.deepEqual(Array.from(copy.geometry.attributes[key].array),target);}
+ const vertex=(g,id)=>({p:new T.Vector3().fromBufferAttribute(g.attributes.position,id),n:new T.Vector3().fromBufferAttribute(g.attributes.normal,id),uv:new T.Vector2().fromBufferAttribute(g.attributes.uv,id)});
+ const isCap=tri=>tri.every(v=>v.n.y>.99&&Math.abs(v.p.y-tri[0].p.y)<1e-6);
+ const flatten=triangles=>triangles.flatMap(t=>t.flatMap(v=>[...v.p.toArray(),...v.n.toArray(),...v.uv.toArray()]));
+ for(const original of a.children){
+  const g=original.geometry,source=[];
+  for(let i=0;i<g.index.count;i+=3){const ids=[g.index.getX(i),g.index.getX(i+1),g.index.getX(i+2)];if(E.roofTriangle(original,ids,levels,s))source.push(ids.map(j=>vertex(g,j)));}
+  const copy=b.children.find(m=>m.name==='retained-roof:'+original.name);if(!source.length){assert.equal(copy,undefined);continue;}assert.ok(copy);assert.equal(copy.material,original.material);
+  const actual=[],c=copy.geometry;for(let i=0;i<c.index.count;i+=3)actual.push([0,1,2].map(j=>vertex(c,c.index.getX(i+j))));
+  if(original.name==='roof'){assert.deepEqual(flatten(actual),flatten(source));continue;}
+  assert.deepEqual(flatten(actual.filter(t=>!isCap(t))),flatten(source.filter(t=>!isCap(t))),'Only coincident top caps may change');
+  const caps=source.filter(isCap);
+  for(const tri of actual.filter(isCap)){
+   assert.ok(caps.some(old=>tri.every(v=>{
+    if(Math.abs(v.p.y-old[0].p.y)>1e-5)return false;
+    const weights=T.Triangle.getBarycoord(v.p,...old.map(v=>v.p),new T.Vector3);if(!weights||Math.min(...weights.toArray())<-.0001)return false;
+    const uv=new T.Vector2;old.forEach((v,i)=>uv.addScaledVector(v.uv,weights.getComponent(i)));return uv.distanceTo(v.uv)<.0001;
+   })),'Trimmed cap must stay on a source triangle with unchanged UV interpolation');
+  }
+ }
 });
 test('enhanced floor, spandrel, bay and corner assemblies follow the original grid',async()=>{
  const [S,G,T,E]=await ready,s=S.createSpecification('1138',6),m=materials(T),a=G.buildModernist(s,m),b=E.buildEnhanced(s,a,E.createAssemblyMaterials(m));assert.equal(b.userData.audit.windows.length,a.userData.windows.length);for(let i=0;i<a.userData.windows.length;i++){const original=a.userData.windows[i],enhanced=b.userData.audit.windows[i];for(const key of ['floor','side','col','bottom','top'])assert.equal(enhanced[key],original[key]);}assert.equal(b.userData.audit.corners.length,S.tiers(s).length*4);
@@ -41,4 +59,19 @@ test('the assemblies also fit a synthetic different bay count and floor count wi
 });
 test('the approved Phase 1 generator and material source files are unchanged from the checkpoint',()=>{
  const baseline=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/assemblies-phase2-baseline.json')));for(const [file,expected]of Object.entries(baseline.sourceHashes))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex'),expected,file);
+});
+
+test('all lobby head joints are closed across front, rear and side bays',async()=>{
+ const [S,G,T,E]=await ready,s=S.createSpecification('1138',6),base=materials(T),a=G.buildModernist(s,base),b=E.buildEnhanced(s,a,E.createAssemblyMaterials(base));b.updateMatrixWorld(true);
+ for(const side of [0,1,2,3])for(const y of [s.lobbyHeight-.54,s.lobbyHeight-.49,s.lobbyHeight-.45,s.lobbyHeight-.01]){
+  const horizontal=side%2===0,count=horizontal?s.podium.widthBays:s.podium.depthBays,offset=(horizontal?s.podium.depthBays:s.podium.widthBays)*s.bay/2,sign=side<2?1:-1;
+  for(let col=0;col<count;col++){const t=(-count/2+col+.5)*s.bay,origin=horizontal?new T.Vector3(t,y,sign*(offset+2)):new T.Vector3(sign*(offset+2),y,t),direction=horizontal?new T.Vector3(0,0,-sign):new T.Vector3(-sign,0,0),ray=new T.Raycaster(origin,direction,0,4);assert.ok(ray.intersectObject(b,true).some(h=>h.object.material.transparent===false),'Open lobby head joint: side '+side+' bay '+col+' y '+y);}
+ }
+});
+
+test('retained roof decks, parapet caps and plant-screen rails have no overlapping coplanar top faces',async()=>{
+ const [S,G,T,E]=await ready;
+ for(const s of [S.createSpecification('1138',6),{...S.createSpecification('1138',6),id:'roof-different-dimensions',widthBays:24,depthBays:14,podium:{storeys:4,widthBays:30,depthBays:18}}]){
+  const base=materials(T),a=G.buildModernist(s,base),b=E.buildEnhanced(s,a,E.createAssemblyMaterials(base)),conflicts=require('./roof-overlap-test-helper.cjs').roofConflicts(b);assert.equal(conflicts.length,0,JSON.stringify(conflicts.slice(0,3)));
+ }
 });
