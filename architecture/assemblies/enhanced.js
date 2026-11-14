@@ -44,7 +44,7 @@ function retainRoofs(original,spec){
 }
 
 export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
- validateSpecification(spec);const profile=lobbyProfile(spec,lobbyType),lobbyGlazing=materials.lobbyGlass.userData.lobbyGlazing,glazing=lobbyGlazingProfile(lobbyGlazing),b=new ArchitectureBatch,levels=tiers(spec),audit={windows:[],corners:[],lobby:null},roof=retainRoofs(original,spec);let openTop=null;
+ validateSpecification(spec);const compatible=lobbyProfile(spec,lobbyType),profile={...compatible,canopy:spec.podium?compatible.canopy:spec.entrance==='canopy'},columnOffset=spec.columns?.2:-.035,canopyProjection=!spec.podium&&spec.entrance==='canopy'?.84:.18,lobbyGlazing=materials.lobbyGlass.userData.lobbyGlazing,glazing=lobbyGlazingProfile(lobbyGlazing),b=new ArchitectureBatch,levels=tiers(spec),audit={windows:[],corners:[],lobby:null},roof=retainRoofs(original,spec);let openTop=null;
  const box=(key,x,y,z,w,h,d)=>{const bucket=b.bucket(key),start=bucket.i.length,base=bucket.p.length/3;b.box(key,x,y,z,w,h,d);if(openTop!==null&&Math.abs(y+h/2-openTop)<1e-7){let write=start;for(let i=start;i<bucket.i.length;i+=3)if(b.unit.attributes.normal.getY(bucket.i[i]-base)<.9)for(let j=0;j<3;j++)bucket.i[write++]=bucket.i[i+j];bucket.i.length=write;}};
  const uvFor=module=>{const u0=(module.atlasCol*128+1)/512,u1=(module.atlasCol*128+127)/512,v0=(512-(module.atlasRow*170+169))/512,v1=(512-(module.atlasRow*170+1))/512;return[u0,v0,u1,v0,u1,v1,u0,v1];};
  for(const tier of levels){
@@ -63,7 +63,8 @@ export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
     }
    }
    for(let col=1;col<count;col++){
-    const t=-length/2+col*spec.bay;strip('aluminum',t,(base+top)/2,spec.mullion,top-base,.02,.13);for(const sign of [-1,1])strip('edge',t+sign*(spec.mullion/2-.006),(base+top)/2,.009,top-base,.091,.012);
+    const t=-length/2+col*spec.bay,accent=spec.rhythm==='paired'&&col%spec.structuralBays===0,profileWidth=accent?.105:spec.mullion;
+    strip('aluminum',t,(base+top)/2,profileWidth,top-base,.02,accent?.22:.13);for(const sign of [-1,1])strip('edge',t+sign*(profileWidth/2-.006),(base+top)/2,.009,top-base,accent?.136:.091,.012);
    }
    if(tier.start===0){
     // Close the head joint down to the glazing/frame, including the recessed
@@ -80,14 +81,14 @@ export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
      if(isDoor){strip('aluminum',t,1.58,.04,2.92,plane+.025,.075);for(const dx of [-.16,.16])strip('edge',t+dx,1.43,.025,.6,plane+.095,.04);}
      if(!inEntry)strip('threshold',t,.11,spec.bay,.22,-.1,.25);
     }
-    if(profile.columns)for(let col=0;col<=count;col++)if(col%spec.structuralBays===0){const t=-length/2+col*spec.bay;if(side===0&&Math.abs(t)<entryHalf)continue;strip('aluminum',t,spec.lobbyHeight/2,.19,spec.lobbyHeight,.2,.3);}
+    if(profile.columns)for(let col=0;col<=count;col++)if(col%spec.structuralBays===0){const t=-length/2+col*spec.bay;if(side===0&&Math.abs(t)<entryHalf)continue;strip('aluminum',t,spec.lobbyHeight/2,.19,spec.lobbyHeight,columnOffset,.3);}
     if(side===0){
      // Threshold keeps the original decorated envelope; canopy projects inside
      // the recessed entry instead of enlarging the approved footprint.
      strip('threshold',0,.06,spec.bay*2,.12,.12,.5);
-     if(profile.columns)for(const sign of [-1,1])strip('aluminum',sign*entryHalf,spec.lobbyHeight/2,.19,spec.lobbyHeight,.2,.3);
+     if(profile.columns)for(const sign of [-1,1])strip('aluminum',sign*entryHalf,spec.lobbyHeight/2,.19,spec.lobbyHeight,columnOffset,.3);
      for(const sign of [-1,1])strip('aluminum',sign*entryHalf,2.3,.085,4.6,-profile.recess/2,profile.recess);
-     if(profile.canopy)strip('aluminum',0,3.78,profile.entranceBays*spec.bay+.2,.13,(-profile.recess+.18)/2,profile.recess+.18);
+     if(profile.canopy)strip('aluminum',0,3.78,profile.entranceBays*spec.bay+.2,.13,(-profile.recess+canopyProjection)/2,profile.recess+canopyProjection);
     }
    }
   });

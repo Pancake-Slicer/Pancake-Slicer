@@ -1,3 +1,7 @@
+# Enhanced ten-building family — Phase 3
+
+The default lab now uses the approved 07B detailing across all ten original specifications. Automatic compatible lobbies support podium and non-podium buildings; the original family remains selectable for comparison. See [Phase 3 instructions, measured costs and validation](PROCEDURAL_ARCHITECTURE_PHASE3.md). The historical Phase 1 record below remains the baseline; no main-game publication has occurred.
+
 # Procedural Architecture Lab — Phase 1
 
 Double-click **Play Procedural Architecture Lab.cmd**, leave its window open, and open **http://127.0.0.1:4187** in Google Chrome. No internet is used while the lab runs. This is a separate local-server lab, not a double-click offline game export.

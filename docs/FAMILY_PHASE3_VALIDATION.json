@@ -1,0 +1,1100 @@
+{
+  "version": "3.0.0",
+  "seed": "1138",
+  "original": {
+    "meshes": 88,
+    "triangles": 173888,
+    "materialCount": 27,
+    "geometryBytes": 12172160,
+    "textureCount": 3,
+    "textureBytes": 1660245
+  },
+  "enhanced": {
+    "meshes": 199,
+    "triangles": 176956,
+    "materialCount": 32,
+    "geometryBytes": 12831976,
+    "textureCount": 4,
+    "textureBytes": 1703936
+  },
+  "lastRender": {
+    "variant": "enhanced",
+    "mode": "lineup",
+    "calls": 210,
+    "triangles": 191920,
+    "includes": "selected family + approved reference when visible + ground"
+  },
+  "timing": {
+    "samples": 60,
+    "warmups": 8,
+    "viewport": [
+      570,
+      556
+    ],
+    "pixelRatio": 1.25,
+    "method": "sequential original/enhanced; same lineup camera and lighting; camera update + render + gl.finish; cached shadows after warmup; includes reference and ground; not city FPS",
+    "original": {
+      "medianMs": 2.3,
+      "p95Ms": 3,
+      "calls": 99,
+      "triangles": 188852
+    },
+    "enhanced": {
+      "medianMs": 3.5,
+      "p95Ms": 4.6,
+      "calls": 210,
+      "triangles": 191920
+    }
+  },
+  "buildings": [
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-1-0",
+        "seed": "1138",
+        "archetype": 0,
+        "revision": 0,
+        "name": "Compact court",
+        "storeys": 8,
+        "floorHeight": 3.75,
+        "lobbyHeight": 5,
+        "bay": 2,
+        "widthBays": 12,
+        "depthBays": 10,
+        "structuralBays": 2,
+        "mullion": 0.06,
+        "spandrel": 1.09,
+        "visionRail": false,
+        "rhythm": "continuous",
+        "palette": "blue-grey",
+        "podium": null,
+        "setback": null,
+        "roof": "parapet",
+        "entrance": "recessed",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-1-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 8,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 24.299999237060547,
+          "height": 31.979999542236328,
+          "depth": 20.519999504089355
+        },
+        "footprint": {
+          "width": 24.299999237060547,
+          "depth": 20.519999504089355,
+          "min": [
+            -12.149999618530273,
+            -10.149999618530273
+          ],
+          "max": [
+            12.149999618530273,
+            10.369999885559082
+          ]
+        },
+        "facade": {
+          "bay": 2,
+          "widthBays": 12,
+          "depthBays": 10,
+          "structuralBays": 2,
+          "mullion": 0.06,
+          "spandrel": 1.09,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "blue-grey",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "parapet"
+        },
+        "performance": {
+          "meshes": 18,
+          "triangles": 6874,
+          "materialCount": 18,
+          "geometryBytes": 494428,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 18,
+          "windowBays": 308
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "A",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+        "seed": "1138",
+        "archetype": 1,
+        "revision": 0,
+        "name": "Broad commercial slab",
+        "storeys": 12,
+        "floorHeight": 3.6,
+        "lobbyHeight": 4.6,
+        "bay": 2.1,
+        "widthBays": 24,
+        "depthBays": 14,
+        "structuralBays": 3,
+        "mullion": 0.055,
+        "spandrel": 1.19,
+        "visionRail": true,
+        "rhythm": "continuous",
+        "palette": "silver",
+        "podium": null,
+        "setback": null,
+        "roof": "recessed",
+        "entrance": "recessed",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 12,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 50.70000076293945,
+          "height": 45.560001373291016,
+          "depth": 29.920000076293945
+        },
+        "footprint": {
+          "width": 50.70000076293945,
+          "depth": 29.920000076293945,
+          "min": [
+            -25.350000381469727,
+            -14.850000381469727
+          ],
+          "max": [
+            25.350000381469727,
+            15.069999694824219
+          ]
+        },
+        "facade": {
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.19,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "silver",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "recessed"
+        },
+        "performance": {
+          "meshes": 20,
+          "triangles": 13190,
+          "materialCount": 20,
+          "geometryBytes": 951908,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 20,
+          "windowBays": 836
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "B",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-3-0",
+        "seed": "1138",
+        "archetype": 2,
+        "revision": 0,
+        "name": "Slender urban office",
+        "storeys": 18,
+        "floorHeight": 3.6,
+        "lobbyHeight": 4.8,
+        "bay": 2.1,
+        "widthBays": 14,
+        "depthBays": 10,
+        "structuralBays": 2,
+        "mullion": 0.06,
+        "spandrel": 1.19,
+        "visionRail": true,
+        "rhythm": "continuous",
+        "palette": "warm-grey",
+        "podium": null,
+        "setback": null,
+        "roof": "screened",
+        "entrance": "canopy",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-3-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 18,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 29.700000762939453,
+          "height": 68.3499984741211,
+          "depth": 21.989999771118164
+        },
+        "footprint": {
+          "width": 29.700000762939453,
+          "depth": 21.989999771118164,
+          "min": [
+            -14.850000381469727,
+            -10.649999618530273
+          ],
+          "max": [
+            14.850000381469727,
+            11.34000015258789
+          ]
+        },
+        "facade": {
+          "bay": 2.1,
+          "widthBays": 14,
+          "depthBays": 10,
+          "structuralBays": 2,
+          "mullion": 0.06,
+          "spandrel": 1.19,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "warm-grey",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "screened"
+        },
+        "performance": {
+          "meshes": 20,
+          "triangles": 13158,
+          "materialCount": 20,
+          "geometryBytes": 987812,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 20,
+          "windowBays": 816
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "A",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-4-0",
+        "seed": "1138",
+        "archetype": 3,
+        "revision": 0,
+        "name": "Lobby and low podium",
+        "storeys": 22,
+        "floorHeight": 3.6,
+        "lobbyHeight": 5,
+        "bay": 1.9,
+        "widthBays": 16,
+        "depthBays": 14,
+        "structuralBays": 2,
+        "mullion": 0.055,
+        "spandrel": 1.12,
+        "visionRail": false,
+        "rhythm": "continuous",
+        "palette": "blue-grey",
+        "podium": {
+          "storeys": 3,
+          "widthBays": 20,
+          "depthBays": 18
+        },
+        "setback": null,
+        "roof": "parapet",
+        "entrance": "flush",
+        "columns": true
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-4-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 22,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 38.70000076293945,
+          "height": 81.33000183105469,
+          "depth": 34.920000076293945
+        },
+        "footprint": {
+          "width": 38.70000076293945,
+          "depth": 34.920000076293945,
+          "min": [
+            -19.350000381469727,
+            -17.450000762939453
+          ],
+          "max": [
+            19.350000381469727,
+            17.469999313354492
+          ]
+        },
+        "facade": {
+          "bay": 1.9,
+          "widthBays": 16,
+          "depthBays": 14,
+          "structuralBays": 2,
+          "mullion": 0.055,
+          "spandrel": 1.12,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "blue-grey",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "parapet"
+        },
+        "performance": {
+          "meshes": 19,
+          "triangles": 18116,
+          "materialCount": 19,
+          "geometryBytes": 1304344,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 19,
+          "windowBays": 1292
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "C",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-5-0",
+        "seed": "1138",
+        "archetype": 4,
+        "revision": 0,
+        "name": "Rectangular curtain tower",
+        "storeys": 26,
+        "floorHeight": 3.75,
+        "lobbyHeight": 4.8,
+        "bay": 2,
+        "widthBays": 22,
+        "depthBays": 16,
+        "structuralBays": 2,
+        "mullion": 0.05,
+        "spandrel": 1.09,
+        "visionRail": true,
+        "rhythm": "continuous",
+        "palette": "graphite",
+        "podium": null,
+        "setback": null,
+        "roof": "recessed",
+        "entrance": "flush",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-5-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 26,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 44.29999923706055,
+          "height": 99.91000366210938,
+          "depth": 32.52000045776367
+        },
+        "footprint": {
+          "width": 44.29999923706055,
+          "depth": 32.52000045776367,
+          "min": [
+            -22.149999618530273,
+            -16.149999618530273
+          ],
+          "max": [
+            22.149999618530273,
+            16.3700008392334
+          ]
+        },
+        "facade": {
+          "bay": 2,
+          "widthBays": 22,
+          "depthBays": 16,
+          "structuralBays": 2,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "graphite",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "recessed"
+        },
+        "performance": {
+          "meshes": 20,
+          "triangles": 19522,
+          "materialCount": 20,
+          "geometryBytes": 1394892,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 20,
+          "windowBays": 1900
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "B",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-6-0",
+        "seed": "1138",
+        "archetype": 5,
+        "revision": 0,
+        "name": "Mechanical penthouse",
+        "storeys": 30,
+        "floorHeight": 3.75,
+        "lobbyHeight": 4.8,
+        "bay": 2.1,
+        "widthBays": 16,
+        "depthBays": 14,
+        "structuralBays": 2,
+        "mullion": 0.055,
+        "spandrel": 1.24,
+        "visionRail": false,
+        "rhythm": "continuous",
+        "palette": "blue-grey",
+        "podium": null,
+        "setback": null,
+        "roof": "penthouse",
+        "entrance": "recessed",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-6-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 30,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 33.900001525878906,
+          "height": 117.66999816894531,
+          "depth": 29.920000076293945
+        },
+        "footprint": {
+          "width": 33.900001525878906,
+          "depth": 29.920000076293945,
+          "min": [
+            -16.950000762939453,
+            -14.850000381469727
+          ],
+          "max": [
+            16.950000762939453,
+            15.069999694824219
+          ]
+        },
+        "facade": {
+          "bay": 2.1,
+          "widthBays": 16,
+          "depthBays": 14,
+          "structuralBays": 2,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "blue-grey",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "penthouse"
+        },
+        "performance": {
+          "meshes": 20,
+          "triangles": 17414,
+          "materialCount": 20,
+          "geometryBytes": 1248356,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 20,
+          "windowBays": 1740
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "B",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+        "seed": "1138",
+        "archetype": 6,
+        "revision": 0,
+        "name": "Broad podium tower",
+        "storeys": 35,
+        "floorHeight": 3.75,
+        "lobbyHeight": 5,
+        "bay": 2.1,
+        "widthBays": 18,
+        "depthBays": 12,
+        "structuralBays": 3,
+        "mullion": 0.055,
+        "spandrel": 1.24,
+        "visionRail": true,
+        "rhythm": "continuous",
+        "palette": "graphite",
+        "podium": {
+          "storeys": 4,
+          "widthBays": 24,
+          "depthBays": 16
+        },
+        "setback": null,
+        "roof": "screened",
+        "entrance": "recessed",
+        "columns": true
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 35,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 51.099998474121094,
+          "height": 134.85000610351562,
+          "depth": 34.31999969482422
+        },
+        "footprint": {
+          "width": 51.099998474121094,
+          "depth": 34.31999969482422,
+          "min": [
+            -25.549999237060547,
+            -17.149999618530273
+          ],
+          "max": [
+            25.549999237060547,
+            17.170000076293945
+          ]
+        },
+        "facade": {
+          "bay": 2.1,
+          "widthBays": 18,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "graphite",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "screened"
+        },
+        "performance": {
+          "meshes": 21,
+          "triangles": 26512,
+          "materialCount": 21,
+          "geometryBytes": 1949408,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 21,
+          "windowBays": 2100
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "C",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+        "seed": "1138",
+        "archetype": 7,
+        "revision": 0,
+        "name": "Slender high-rise",
+        "storeys": 40,
+        "floorHeight": 3.75,
+        "lobbyHeight": 5,
+        "bay": 2,
+        "widthBays": 14,
+        "depthBays": 12,
+        "structuralBays": 3,
+        "mullion": 0.05,
+        "spandrel": 1.09,
+        "visionRail": false,
+        "rhythm": "continuous",
+        "palette": "graphite",
+        "podium": null,
+        "setback": null,
+        "roof": "penthouse",
+        "entrance": "recessed",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 40,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 28.299999237060547,
+          "height": 155.3699951171875,
+          "depth": 24.519999504089355
+        },
+        "footprint": {
+          "width": 28.299999237060547,
+          "depth": 24.519999504089355,
+          "min": [
+            -14.149999618530273,
+            -12.149999618530273
+          ],
+          "max": [
+            14.149999618530273,
+            12.369999885559082
+          ]
+        },
+        "facade": {
+          "bay": 2,
+          "widthBays": 14,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "graphite",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "penthouse"
+        },
+        "performance": {
+          "meshes": 20,
+          "triangles": 19202,
+          "materialCount": 20,
+          "geometryBytes": 1372492,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 20,
+          "windowBays": 2028
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "A",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-9-0",
+        "seed": "1138",
+        "archetype": 8,
+        "revision": 0,
+        "name": "Restrained upper setbacks",
+        "storeys": 45,
+        "floorHeight": 3.45,
+        "lobbyHeight": 5,
+        "bay": 1.9,
+        "widthBays": 16,
+        "depthBays": 12,
+        "structuralBays": 2,
+        "mullion": 0.06,
+        "spandrel": 1.14,
+        "visionRail": false,
+        "rhythm": "continuous",
+        "palette": "silver",
+        "podium": null,
+        "setback": {
+          "atStorey": 34,
+          "widthBays": 12,
+          "depthBays": 10
+        },
+        "roof": "recessed",
+        "entrance": "flush",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-9-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 45,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 30.700000762939453,
+          "height": 158.16000366210938,
+          "depth": 23.320000648498535
+        },
+        "footprint": {
+          "width": 30.700000762939453,
+          "depth": 23.320000648498535,
+          "min": [
+            -15.350000381469727,
+            -11.550000190734863
+          ],
+          "max": [
+            15.350000381469727,
+            11.770000457763672
+          ]
+        },
+        "facade": {
+          "bay": 1.9,
+          "widthBays": 16,
+          "depthBays": 12,
+          "structuralBays": 2,
+          "mullion": 0.06,
+          "spandrel": 1.14,
+          "rhythm": "continuous"
+        },
+        "material": {
+          "palette": "silver",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "recessed"
+        },
+        "performance": {
+          "meshes": 21,
+          "triangles": 23544,
+          "materialCount": 21,
+          "geometryBytes": 1692112,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 21,
+          "windowBays": 2332
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "B",
+          "glazing": "opaque-reflective"
+        }
+      }
+    },
+    {
+      "spec": {
+        "schemaVersion": 1,
+        "generatorVersion": "1.0.1",
+        "family": "ohneeohnee-international",
+        "id": "ohnee-family-168e8af0fdca2d3c-10-0",
+        "seed": "1138",
+        "archetype": 9,
+        "revision": 0,
+        "name": "Paired-bay headquarters",
+        "storeys": 25,
+        "floorHeight": 3.6,
+        "lobbyHeight": 4.8,
+        "bay": 2.1,
+        "widthBays": 24,
+        "depthBays": 14,
+        "structuralBays": 2,
+        "mullion": 0.05,
+        "spandrel": 1.19,
+        "visionRail": false,
+        "rhythm": "paired",
+        "palette": "graphite",
+        "podium": null,
+        "setback": null,
+        "roof": "screened",
+        "entrance": "recessed",
+        "columns": false
+      },
+      "metadata": {
+        "id": "ohnee-family-168e8af0fdca2d3c-10-0",
+        "family": "ohneeohnee-international",
+        "seed": "1138",
+        "storeys": 25,
+        "generatorVersion": "1.0.1",
+        "dimensions": {
+          "width": 50.70000076293945,
+          "height": 93.55000305175781,
+          "depth": 29.920000076293945
+        },
+        "footprint": {
+          "width": 50.70000076293945,
+          "depth": 29.920000076293945,
+          "min": [
+            -25.350000381469727,
+            -14.850000381469727
+          ],
+          "max": [
+            25.350000381469727,
+            15.069999694824219
+          ]
+        },
+        "facade": {
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 2,
+          "mullion": 0.05,
+          "spandrel": 1.19,
+          "rhythm": "paired"
+        },
+        "material": {
+          "palette": "graphite",
+          "source": "unchanged approved Ohneeohnee embedded atlas/stone/roof maps"
+        },
+        "roof": {
+          "type": "screened"
+        },
+        "performance": {
+          "meshes": 20,
+          "triangles": 19424,
+          "materialCount": 20,
+          "geometryBytes": 1436224,
+          "textureCount": 4,
+          "textureBytes": 1703936,
+          "materialBatches": 20,
+          "windowBays": 1824
+        },
+        "approval": "family-benchmark-awaiting-review",
+        "assemblyVersion": "3.0.0",
+        "lobby": {
+          "type": "B",
+          "glazing": "opaque-reflective"
+        }
+      }
+    }
+  ],
+  "publication": false,
+  "checkpoint": "88e774d4457cdf9707bee0a3d2afec70b8301003",
+  "tests": {
+    "architecture": 29,
+    "game": 74,
+    "build": "passed"
+  },
+  "preservation": {
+    "protectedFilesVerified": 70,
+    "approved07Signature": "c3d83ce77bb8da5c99d67c91bec986c16945511665df0a9aa3dea53667f96769",
+    "exactTenEnvelopes": true,
+    "originalMassingModulesUnchanged": true,
+    "sourceAssetsAndGameUnchanged": true
+  },
+  "browser": {
+    "fullBuildings": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "streetLobbies": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "facades": [
+      1,
+      7,
+      10
+    ],
+    "roofs": [
+      6,
+      9
+    ],
+    "referenceAndPrototypeComparison": true,
+    "originalToggle": true,
+    "seedAndCameraControls": true,
+    "reviewSaveReloadExportImport": true,
+    "finalReview": "unreviewed; temporary notes cleared",
+    "beforeRegenerationExport": "C:/Users/camsh/Downloads/Ohneeohnee-family-1138 (1).json",
+    "afterRegenerationExport": "C:/Users/camsh/Downloads/Ohneeohnee-family-1138 (2).json",
+    "verifiedChangedIndices": [
+      2
+    ],
+    "finalSeed": "1138",
+    "finalRevisions": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "warningsAndErrors": []
+  },
+  "screenshots": [
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/01 - Facade.png",
+      "sha256": "466cfca4a3d223fd3de0c40e867d5feec712ae0fe0f4f83302e20d85e37deaf3"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/01 - Full.png",
+      "sha256": "b3b9552c919ff5712571ada2267564fefa03e275d4ddde6aec9e95faec721330"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/01 - Lobby.png",
+      "sha256": "b11f13becde434db918cf68a8d839079f3c4c652037dd3303b3bfbb56d3bbfec"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/02 - Full.png",
+      "sha256": "70e64bf929a41ed7391c94feb171ae517d913e7f3585b560f1db05019ae39e1c"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/02 - Lobby.png",
+      "sha256": "a6571cf8eb4e2f10cc2d6e0d9e1e5c4acf442697223daf06a4d899572244c014"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/03 - Full.png",
+      "sha256": "d76cbeffb4d13425aee1894b84a24ec9f8a50322ff6a1033afb2810a16d6e4f3"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/03 - Lobby.png",
+      "sha256": "58d58795950c3ca6b0596a752ce5138e959526c5d74cc59468c8f86327f99dfa"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/04 - Full.png",
+      "sha256": "21f066ea85782bd85abf674b25877e8f84ca3902ddc2edb5db6dfe3d7313a684"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/04 - Lobby.png",
+      "sha256": "0072c44c213c404f24fdf6572c84ea6e1d034c8b6968c3779ca57123646667e0"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/05 - Full.png",
+      "sha256": "d318befe6133ae7674b0e53e31c03421d95e41c97537e29ab0263cbfb2288b67"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/05 - Lobby.png",
+      "sha256": "11bdcc0c7b166ec945967b61903a05a2eeffa07c2b7fafbf48496145b8aca13c"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/06 - Full.png",
+      "sha256": "55edb6a7195fb8d83f830e3f468558bb037cabed939bb0f43816f2df3fbb150d"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/06 - Lobby.png",
+      "sha256": "1889a031eab760da14fd33df038124b1cf15debb65121a3d97106033c5294553"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/06 - Roof.png",
+      "sha256": "0db942b6e555046aaee5030e9c631f7938fe054cfc58aff8728b66832e737e58"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/07 - Facade.png",
+      "sha256": "88f8c513add359c6ba0532f22c47d80df756e3e4e881f9d97fd3c48acb5b5272"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/07 - Full.png",
+      "sha256": "c00c201b569639c7e5859ad577fd3a03c650cced37d3654d03bc1a188bab190d"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/07 - Lobby.png",
+      "sha256": "33528894d0514d0d95c27050b78a6705ddc077a8907b8c0e8305f4c085f7ee1f"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/08 - Full.png",
+      "sha256": "26d11651461ca704f1b054c1bed8078314518201f2e007a546a25da26e08eec1"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/08 - Lobby.png",
+      "sha256": "f379a13c9087527c09230a2c816f26755bb49c8020f3f006cc3d965dfebbf56a"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/09 - Full.png",
+      "sha256": "983bb3df81f3154864ad49ff664d57b1000951c7ed407075f9be59cdc3b474d2"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/09 - Lobby.png",
+      "sha256": "ba6e3712dc243b67637d77b46565a9a3afe501392a5b4d0d01e2c8754fd3bf13"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/09 - Roof.png",
+      "sha256": "9b797654c78cfb488d30351fcf0a65860c7f81a24c1e9b7ce0d92d0a09183d2e"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/10 - Facade.png",
+      "sha256": "d29ec27460b56c088dfcf46aeee1cb2862276498c804b7d8aefd25e992db7bb3"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/10 - Full.png",
+      "sha256": "4866262c4f1b9d51789cc8c2d1c24d91bc4e7147a18d85e0542c95bc71fa8e2d"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/10 - Lobby.png",
+      "sha256": "fd1bb25836caa938134d8f65ec5635d20cec7635c59b05da088c773f4453018d"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/Approved 07 Comparison.png",
+      "sha256": "e8a14fb10689cd7589a63c0f3702e319284ff2fa83aeaa24e304b5b5b72dae82"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/Enhanced Lineup.png",
+      "sha256": "f08d515e1c095ed3c2014c3551fb13b9d301e684034644f2e1ee6527b47cc02c"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Enhanced Family Phase 3/Original Lineup.png",
+      "sha256": "3c03656d2ebca072d747c4108d51cee36eaffe2cc4fc1c3913ac4a2ce53b9599"
+    }
+  ]
+}

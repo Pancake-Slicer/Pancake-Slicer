@@ -1,0 +1,35 @@
+{
+  "checkpoint": "88e774d4457cdf9707bee0a3d2afec70b8301003",
+  "spec": {
+    "schemaVersion": 1,
+    "generatorVersion": "1.0.1",
+    "family": "ohneeohnee-international",
+    "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+    "seed": "1138",
+    "archetype": 6,
+    "revision": 0,
+    "name": "Broad podium tower",
+    "storeys": 35,
+    "floorHeight": 3.75,
+    "lobbyHeight": 5,
+    "bay": 2.1,
+    "widthBays": 18,
+    "depthBays": 12,
+    "structuralBays": 3,
+    "mullion": 0.055,
+    "spandrel": 1.24,
+    "visionRail": true,
+    "rhythm": "continuous",
+    "palette": "graphite",
+    "podium": {
+      "storeys": 4,
+      "widthBays": 24,
+      "depthBays": 16
+    },
+    "setback": null,
+    "roof": "screened",
+    "entrance": "recessed",
+    "columns": true
+  },
+  "signature": "c3d83ce77bb8da5c99d67c91bec986c16945511665df0a9aa3dea53667f96769"
+}
