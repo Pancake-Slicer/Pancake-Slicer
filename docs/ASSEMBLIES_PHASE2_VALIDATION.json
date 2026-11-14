@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "assemblyVersion": "2.0.0",
+  "prototype": {
+    "schemaVersion": 1,
+    "generatorVersion": "1.0.1",
+    "family": "ohneeohnee-international",
+    "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+    "seed": "1138",
+    "archetype": 6,
+    "revision": 0,
+    "name": "Broad podium tower",
+    "storeys": 35,
+    "floorHeight": 3.75,
+    "lobbyHeight": 5,
+    "bay": 2.1,
+    "widthBays": 18,
+    "depthBays": 12,
+    "structuralBays": 3,
+    "mullion": 0.055,
+    "spandrel": 1.24,
+    "visionRail": true,
+    "rhythm": "continuous",
+    "palette": "graphite",
+    "podium": {
+      "storeys": 4,
+      "widthBays": 24,
+      "depthBays": 16
+    },
+    "setback": null,
+    "roof": "screened",
+    "entrance": "recessed",
+    "columns": true
+  },
+  "models": {
+    "A": {
+      "meshes": 9,
+      "triangles": 40804,
+      "materialCount": 9,
+      "geometryBytes": 2856280,
+      "textureCount": 3,
+      "textureBytes": 1660245
+    },
+    "B": {
+      "meshes": 23,
+      "triangles": 26208,
+      "materialCount": 23,
+      "geometryBytes": 1911872,
+      "textureCount": 3,
+      "textureBytes": 1660245
+    }
+  },
+  "lastRender": {
+    "view": "full",
+    "mode": "both",
+    "counts": [
+      {
+        "label": "07A",
+        "calls": 10,
+        "triangles": 40816
+      },
+      {
+        "label": "07B",
+        "calls": 24,
+        "triangles": 26220
+      }
+    ]
+  },
+  "timing": {
+    "view": "full",
+    "viewport": [
+      490,
+      608
+    ],
+    "pixelRatio": 1.25,
+    "samples": 60,
+    "method": "alternating order, 8 warmups; performance.now around render + gl.finish; cached shadows; not city FPS",
+    "A": {
+      "medianMs": 0.3,
+      "p95Ms": 0.5
+    },
+    "B": {
+      "medianMs": 0.4,
+      "p95Ms": 0.7
+    }
+  },
+  "shadowMaps": {
+    "count": 2,
+    "resolution": 2048,
+    "approximateBytes": 67108864
+  },
+  "reviewStatus": "unreviewed",
+  "publication": false,
+  "tests": {
+    "architecture": 18,
+    "game": 74
+  },
+  "verification": {
+    "protectedFiles": 68,
+    "baselineAndMassingUnchanged": true,
+    "reviewPersistenceAndImportExport": true,
+    "finalReviewStatus": "unreviewed",
+    "mainTerrainStartup": true
+  },
+  "screenshots": [
+    {
+      "view": "Full",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Comparison - Full - 20261114.png",
+      "sha256": "0f0c14a46502aa7cb1af04482ccfe35d23436c27cd3071d5b361c95be32543c1"
+    },
+    {
+      "view": "Facade",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Comparison - Facade - 20261114.png",
+      "sha256": "62aed351a9ededa7212fc28c42303750e9e830955e3f1ebfc67294a78f1862e5"
+    },
+    {
+      "view": "Street",
+      "file": "C:/Users/camsh/Downloads/Pancake City - Building 07 Comparison - Street - 20261114.png",
+      "sha256": "35d0af43d745ac84cd7b0afe1f951e6b99bc08efa9c9001a518fb8aa44fc51e4"
+    }
+  ]
+}

@@ -4,6 +4,10 @@ Double-click **Play Procedural Architecture Lab.cmd**, leave its window open, an
 
 The initial seed is **1138**. The lineup contains ten generated buildings and an unchanged approved Ohneeohnee reference. Nothing generated here enters the game or becomes architecturally approved.
 
+## Building 07 comparison — Phase 2
+
+Use **07A / 07B comparison** in the header, or open http://127.0.0.1:4187/?comparison=07. The original and enhanced podium-lobby prototype have identical massing. Full/facade/corner/street/roof views, isolation, rendering-cost measurements and persistent review controls are available. The enhanced kit applies only to 07B; the ten-building benchmark remains unchanged. See [Phase 2 guide, performance and limitations](PROCEDURAL_ARCHITECTURE_PHASE2.md).
+
 ## Operate the lab
 
 - **New seed + ten** creates a different controlled set and displays its seed.

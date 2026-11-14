@@ -1,0 +1,39 @@
+{
+  "checkpoint": "4e858a17d0eb4280cc81ce19771aec5d75082283",
+  "specification": {
+    "schemaVersion": 1,
+    "generatorVersion": "1.0.1",
+    "family": "ohneeohnee-international",
+    "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+    "seed": "1138",
+    "archetype": 6,
+    "revision": 0,
+    "name": "Broad podium tower",
+    "storeys": 35,
+    "floorHeight": 3.75,
+    "lobbyHeight": 5,
+    "bay": 2.1,
+    "widthBays": 18,
+    "depthBays": 12,
+    "structuralBays": 3,
+    "mullion": 0.055,
+    "spandrel": 1.24,
+    "visionRail": true,
+    "rhythm": "continuous",
+    "palette": "graphite",
+    "podium": {
+      "storeys": 4,
+      "widthBays": 24,
+      "depthBays": 16
+    },
+    "setback": null,
+    "roof": "screened",
+    "entrance": "recessed",
+    "columns": true
+  },
+  "sourceHashes": {
+    "architecture/modernist/spec.mjs": "850049475304998b8a9aba219db52c5f015ae5e32a8cc1ead4230aab91ff9e94",
+    "architecture/modernist/geometry.js": "7d82323ec049646fcaf286c4c11f553a382df7a81ab7b0518f62eef4123a8d1f",
+    "architecture/modernist/materials.js": "1b95eeb7e61be1a0cdfe62cc6ce8b72cde6ef061e225f2ef926d9f44f3e1f183"
+  }
+}
