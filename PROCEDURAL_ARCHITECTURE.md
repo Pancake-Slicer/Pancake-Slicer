@@ -48,6 +48,10 @@ Each JSON record contains identity, family/version, seed, storeys, massing/tiers
 
 Initial full lineup: **99 rendered calls, 188,540 triangles including the reference and ground; 3 shared source maps**. The ten generated models themselves total **173,576 triangles**. These are scene counts, not FPS or a large-city performance certification. See the [source analysis and validation record](docs/OHNEEOHNEE_PROCEDURAL_ANALYSIS.md).
 
+## Roof correction — 1.0.1
+
+Removed the hidden portions of façade caps that coincided with roof decks, while retaining exposed trim caps. Roof textures, lighting, massing, dimensions and all other architectural parameters are unchanged. Earlier 1.0.0 specifications remain accepted and use the corrected 1.0.1 roof construction. The scene counts above record the initial 1.0.0 benchmark; the correction changes only a small amount of cap topology and preserves material batches. Refresh the running lab with Ctrl+F5 after updating.
+
 ## Limits and next iteration
 
 The original source has inferred real-world proportions, repetitive baked reflections/interior silhouettes, and an inferred rear. Generated lobbies reuse the source pane atlas; no true interiors or dynamic reflections exist. Façades currently use the same general four-sided system with controlled rhythm changes, not ten individually authored identities. Mechanical plant is organized architectural geometry, not engineering-certified equipment. Real-world floorplates, cores, egress, structure, energy and code compliance are not simulated.

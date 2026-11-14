@@ -4,10 +4,24 @@ import {validateSpecification,tiers,floorBase,VERSION,FAMILY} from './spec.mjs';
 
 export function buildModernist(spec,materials){
  validateSpecification(spec);const b=new ArchitectureBatch,windows=[],volumes=[],equipment=[];
+ let capRoof=null;
  // Maintain metre-based UV density on solid panels/roof regardless of size.
- const box=(key,x,y,z,w,h,d)=>{const bucket=b.bucket(key),start=bucket.uv.length;b.box(key,x,y,z,w,h,d);const attrs=b.unit.attributes;for(let i=0;i<attrs.position.count;i++){const nx=Math.abs(attrs.normal.getX(i)),ny=Math.abs(attrs.normal.getY(i)),scale=key==='roof'?2:1.5;bucket.uv[start+2*i]*=(nx?d:w)/scale;bucket.uv[start+2*i+1]*=(ny?d:h)/scale;}};
+ const box=(key,x,y,z,w,h,d)=>{
+  const bucket=b.bucket(key),start=bucket.uv.length,base=bucket.p.length/3,indexStart=bucket.i.length;b.box(key,x,y,z,w,h,d);const attrs=b.unit.attributes;
+  for(let i=0;i<attrs.position.count;i++){const nx=Math.abs(attrs.normal.getX(i)),ny=Math.abs(attrs.normal.getY(i)),scale=key==='roof'?2:1.5;bucket.uv[start+2*i]*=(nx?d:w)/scale;bucket.uv[start+2*i+1]*=(ny?d:h)/scale;}
+  if(capRoof&&Math.abs(y+h/2-capRoof.y)<1e-7){
+   const x0=x-w/2,x1=x+w/2,z0=z-d/2,z1=z+d/2,ix0=Math.max(x0,-capRoof.w/2),ix1=Math.min(x1,capRoof.w/2),iz0=Math.max(z0,-capRoof.d/2),iz1=Math.min(z1,capRoof.d/2);
+   if(ix1-ix0>1e-9&&iz1-iz0>1e-9){
+    // Remove only the covered +Y cap; do not offset the roof or bias materials.
+    let write=indexStart;for(let read=indexStart;read<bucket.i.length;read+=3)if(attrs.normal.getY(bucket.i[read]-base)<.9){for(let j=0;j<3;j++)bucket.i[write++]=bucket.i[read+j];}bucket.i.length=write;
+    const cap=(a,c,e,f)=>{if(e-a>1e-9&&f-c>1e-9)b.quad(key,[[a,capRoof.y,f],[e,capRoof.y,f],[e,capRoof.y,c],[a,capRoof.y,c]],[a/1.5,f/1.5,e/1.5,f/1.5,e/1.5,c/1.5,a/1.5,c/1.5]);};
+    cap(x0,z0,ix0,z1);cap(ix1,z0,x1,z1);cap(ix0,z0,ix1,iz0);cap(ix0,iz1,ix1,z1);
+   }
+  }
+ };
  function facade(tier){
   const w=tier.widthBays*spec.bay,d=tier.depthBays*spec.bay,base=floorBase(spec,tier.start),top=floorBase(spec,tier.end);
+  capRoof={w,d,y:top};
   volumes.push({base,top,width:w,depth:d});
   const faces=[{n:[0,1],u:[1,0],length:w,depth:d/2,count:tier.widthBays},{n:[1,0],u:[0,-1],length:d,depth:w/2,count:tier.depthBays},{n:[0,-1],u:[-1,0],length:w,depth:d/2,count:tier.widthBays},{n:[-1,0],u:[0,1],length:d,depth:w/2,count:tier.depthBays}];
   faces.forEach(({n,u,length,depth,count},side)=>{
@@ -45,7 +59,7 @@ export function buildModernist(spec,materials){
    }
    for(const t of [-length/2,length/2])strip('frame',t,(base+top)/2,.19,top-base,.035,.23);
   });
-  box('roof',0,top-.09,0,w,.18,d);
+  capRoof=null;box('roof',0,top-.09,0,w,.18,d);
   // A continuous parapet belongs to each exposed terrace and top roof.
   const parapet=tier.end===spec.storeys&&spec.roof==='recessed'?.95:.66;
   for(const sign of [-1,1]){box('panel',sign*(w/2-.12),top+parapet/2,0,.24,parapet,d);box('frame',sign*(w/2-.12),top+parapet+.035,0,.3,.07,d+.04);box('panel',0,top+parapet/2,sign*(d/2-.12),w-.48,parapet,.24);box('frame',0,top+parapet+.035,sign*(d/2-.12),w-.28,.07,.3);}
@@ -69,6 +83,12 @@ export function buildModernist(spec,materials){
   if(spec.roof==='screened'){
    const sw=w*.64,sd=d*.6,h=2.35;for(const sign of [-1,1]){for(let y=.15;y<h;y+=.19){box('mullion',0,top+y,sign*sd/2,sw,.055,.075);box('mullion',sign*sw/2,top+y,0,.075,.055,sd);}for(let i=0;i<=Math.ceil(sw/spec.bay);i++)box('frame',-sw/2+sw*i/Math.ceil(sw/spec.bay),top+h/2,sign*sd/2,.09,h,.09);for(let i=0;i<=Math.ceil(sd/spec.bay);i++)box('frame',sign*sw/2,top+h/2,-sd/2+sd*i/Math.ceil(sd/spec.bay),.09,h,.09);}
   }
+ }
+ // Drop vertices left unreferenced by cap trimming before calculating normals.
+ for(const bucket of b.buckets.values()){
+  const used=new Set(bucket.i);if(used.size===bucket.p.length/3)continue;const positions=[],uv=[],remap=new Map;
+  for(let i=0;i<bucket.p.length/3;i++)if(used.has(i)){remap.set(i,positions.length/3);positions.push(...bucket.p.slice(i*3,i*3+3));uv.push(...bucket.uv.slice(i*2,i*2+2));}
+  bucket.p=positions;bucket.uv=uv;bucket.i=bucket.i.map(i=>remap.get(i));
  }
  const group=b.finish(materials,spec.name),bounds=new T.Box3().setFromObject(group),size=bounds.getSize(new T.Vector3),geometryBytes=group.children.reduce((n,m)=>n+Object.values(m.geometry.attributes).reduce((a,v)=>a+v.array.byteLength,0)+m.geometry.index.array.byteLength,0),triangles=group.children.reduce((n,m)=>n+m.geometry.index.count/3,0);
  group.userData={spec,metadata:{id:spec.id,family:FAMILY,seed:spec.seed,storeys:spec.storeys,generatorVersion:VERSION,dimensions:{width:size.x,depth:size.z,height:size.y},footprint:{width:size.x,depth:size.z,min:[bounds.min.x,bounds.min.z],max:[bounds.max.x,bounds.max.z]},facade:{bay:spec.bay,widthBays:spec.widthBays,depthBays:spec.depthBays,structuralBays:spec.structuralBays,mullion:spec.mullion,spandrel:spec.spandrel,rhythm:spec.rhythm},material:{palette:spec.palette,source:'unchanged approved Ohneeohnee embedded atlas/stone/roof maps'},roof:{type:spec.roof},performance:{triangles,geometryBytes,materialBatches:group.children.length,windowBays:b.windowBays},approval:'experimental-not-approved'},windows,volumes,equipment};return group;

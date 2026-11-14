@@ -1,5 +1,5 @@
 // Architectural rules and reproducible data only; independent of Three.js.
-export const VERSION='1.0.0';
+export const VERSION='1.0.1';
 export const FAMILY='ohneeohnee-international';
 export const PRESETS=Object.freeze([
  {name:'Compact court',storeys:8,bays:[14,10],roof:'parapet'},
@@ -23,7 +23,7 @@ export function createSpecification(seed='1138',index=0,revision=0){
 }
 export function validateSpecification(s){
  const fail=m=>{throw Error('Architectural rule: '+m);};
- if(s.family!==FAMILY||s.generatorVersion!==VERSION)fail('unknown family/version');
+ if(s.family!==FAMILY||![VERSION,'1.0.0'].includes(s.generatorVersion))fail('unknown family/version');
  for(const k of ['storeys','widthBays','depthBays','structuralBays'])if(!Number.isInteger(s[k]))fail(k+' must be whole modules');
  if(s.storeys<6||s.storeys>50||s.widthBays<8||s.depthBays<8||s.widthBays>32||s.depthBays>24)fail('massing outside studied range');
  if(!(s.floorHeight>=3.3&&s.floorHeight<=3.9&&s.lobbyHeight>=4.3&&s.lobbyHeight<=5.4&&s.bay>=1.8&&s.bay<=2.2))fail('floor/bay module outside range');

@@ -1,0 +1,494 @@
+[
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-1-0",
+      "seed": "1138",
+      "archetype": 0,
+      "revision": 0,
+      "name": "Compact court",
+      "storeys": 8,
+      "floorHeight": 3.75,
+      "lobbyHeight": 5,
+      "bay": 2,
+      "widthBays": 12,
+      "depthBays": 10,
+      "structuralBays": 2,
+      "mullion": 0.06,
+      "spandrel": 1.09,
+      "visionRail": false,
+      "rhythm": "continuous",
+      "palette": "blue-grey",
+      "podium": null,
+      "setback": null,
+      "roof": "parapet",
+      "entrance": "recessed",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 24.299999237060547,
+      "depth": 20.519999504089355,
+      "height": 31.979999542236328
+    },
+    "footprint": {
+      "width": 24.299999237060547,
+      "depth": 20.519999504089355,
+      "min": [
+        -12.149999618530273,
+        -10.149999618530273
+      ],
+      "max": [
+        12.149999618530273,
+        10.369999885559082
+      ]
+    },
+    "windowBays": 352,
+    "materialBatches": 8
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+      "seed": "1138",
+      "archetype": 1,
+      "revision": 0,
+      "name": "Broad commercial slab",
+      "storeys": 12,
+      "floorHeight": 3.6,
+      "lobbyHeight": 4.6,
+      "bay": 2.1,
+      "widthBays": 24,
+      "depthBays": 14,
+      "structuralBays": 3,
+      "mullion": 0.055,
+      "spandrel": 1.19,
+      "visionRail": true,
+      "rhythm": "continuous",
+      "palette": "silver",
+      "podium": null,
+      "setback": null,
+      "roof": "recessed",
+      "entrance": "recessed",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 50.70000076293945,
+      "depth": 29.920000076293945,
+      "height": 45.560001373291016
+    },
+    "footprint": {
+      "width": 50.70000076293945,
+      "depth": 29.920000076293945,
+      "min": [
+        -25.350000381469727,
+        -14.850000381469727
+      ],
+      "max": [
+        25.350000381469727,
+        15.069999694824219
+      ]
+    },
+    "windowBays": 912,
+    "materialBatches": 9
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-3-0",
+      "seed": "1138",
+      "archetype": 2,
+      "revision": 0,
+      "name": "Slender urban office",
+      "storeys": 18,
+      "floorHeight": 3.6,
+      "lobbyHeight": 4.8,
+      "bay": 2.1,
+      "widthBays": 14,
+      "depthBays": 10,
+      "structuralBays": 2,
+      "mullion": 0.06,
+      "spandrel": 1.19,
+      "visionRail": true,
+      "rhythm": "continuous",
+      "palette": "warm-grey",
+      "podium": null,
+      "setback": null,
+      "roof": "screened",
+      "entrance": "canopy",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 29.700000762939453,
+      "depth": 21.989999771118164,
+      "height": 68.3499984741211
+    },
+    "footprint": {
+      "width": 29.700000762939453,
+      "depth": 21.989999771118164,
+      "min": [
+        -14.850000381469727,
+        -10.649999618530273
+      ],
+      "max": [
+        14.850000381469727,
+        11.34000015258789
+      ]
+    },
+    "windowBays": 864,
+    "materialBatches": 9
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-4-0",
+      "seed": "1138",
+      "archetype": 3,
+      "revision": 0,
+      "name": "Lobby and low podium",
+      "storeys": 22,
+      "floorHeight": 3.6,
+      "lobbyHeight": 5,
+      "bay": 1.9,
+      "widthBays": 16,
+      "depthBays": 14,
+      "structuralBays": 2,
+      "mullion": 0.055,
+      "spandrel": 1.12,
+      "visionRail": false,
+      "rhythm": "continuous",
+      "palette": "blue-grey",
+      "podium": {
+        "storeys": 3,
+        "widthBays": 20,
+        "depthBays": 18
+      },
+      "setback": null,
+      "roof": "parapet",
+      "entrance": "flush",
+      "columns": true
+    },
+    "dimensions": {
+      "width": 38.70000076293945,
+      "depth": 34.920000076293945,
+      "height": 81.33000183105469
+    },
+    "footprint": {
+      "width": 38.70000076293945,
+      "depth": 34.920000076293945,
+      "min": [
+        -19.350000381469727,
+        -17.450000762939453
+      ],
+      "max": [
+        19.350000381469727,
+        17.469999313354492
+      ]
+    },
+    "windowBays": 1368,
+    "materialBatches": 8
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-5-0",
+      "seed": "1138",
+      "archetype": 4,
+      "revision": 0,
+      "name": "Rectangular curtain tower",
+      "storeys": 26,
+      "floorHeight": 3.75,
+      "lobbyHeight": 4.8,
+      "bay": 2,
+      "widthBays": 22,
+      "depthBays": 16,
+      "structuralBays": 2,
+      "mullion": 0.05,
+      "spandrel": 1.09,
+      "visionRail": true,
+      "rhythm": "continuous",
+      "palette": "graphite",
+      "podium": null,
+      "setback": null,
+      "roof": "recessed",
+      "entrance": "flush",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 44.29999923706055,
+      "depth": 32.52000045776367,
+      "height": 99.91000366210938
+    },
+    "footprint": {
+      "width": 44.29999923706055,
+      "depth": 32.52000045776367,
+      "min": [
+        -22.149999618530273,
+        -16.149999618530273
+      ],
+      "max": [
+        22.149999618530273,
+        16.3700008392334
+      ]
+    },
+    "windowBays": 1976,
+    "materialBatches": 9
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-6-0",
+      "seed": "1138",
+      "archetype": 5,
+      "revision": 0,
+      "name": "Mechanical penthouse",
+      "storeys": 30,
+      "floorHeight": 3.75,
+      "lobbyHeight": 4.8,
+      "bay": 2.1,
+      "widthBays": 16,
+      "depthBays": 14,
+      "structuralBays": 2,
+      "mullion": 0.055,
+      "spandrel": 1.24,
+      "visionRail": false,
+      "rhythm": "continuous",
+      "palette": "blue-grey",
+      "podium": null,
+      "setback": null,
+      "roof": "penthouse",
+      "entrance": "recessed",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 33.900001525878906,
+      "depth": 29.920000076293945,
+      "height": 117.66999816894531
+    },
+    "footprint": {
+      "width": 33.900001525878906,
+      "depth": 29.920000076293945,
+      "min": [
+        -16.950000762939453,
+        -14.850000381469727
+      ],
+      "max": [
+        16.950000762939453,
+        15.069999694824219
+      ]
+    },
+    "windowBays": 1800,
+    "materialBatches": 9
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+      "seed": "1138",
+      "archetype": 6,
+      "revision": 0,
+      "name": "Broad podium tower",
+      "storeys": 35,
+      "floorHeight": 3.75,
+      "lobbyHeight": 5,
+      "bay": 2.1,
+      "widthBays": 18,
+      "depthBays": 12,
+      "structuralBays": 3,
+      "mullion": 0.055,
+      "spandrel": 1.24,
+      "visionRail": true,
+      "rhythm": "continuous",
+      "palette": "graphite",
+      "podium": {
+        "storeys": 4,
+        "widthBays": 24,
+        "depthBays": 16
+      },
+      "setback": null,
+      "roof": "screened",
+      "entrance": "recessed",
+      "columns": true
+    },
+    "dimensions": {
+      "width": 51.099998474121094,
+      "depth": 34.31999969482422,
+      "height": 134.85000610351562
+    },
+    "footprint": {
+      "width": 51.099998474121094,
+      "depth": 34.31999969482422,
+      "min": [
+        -25.549999237060547,
+        -17.149999618530273
+      ],
+      "max": [
+        25.549999237060547,
+        17.170000076293945
+      ]
+    },
+    "windowBays": 2180,
+    "materialBatches": 9
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+      "seed": "1138",
+      "archetype": 7,
+      "revision": 0,
+      "name": "Slender high-rise",
+      "storeys": 40,
+      "floorHeight": 3.75,
+      "lobbyHeight": 5,
+      "bay": 2,
+      "widthBays": 14,
+      "depthBays": 12,
+      "structuralBays": 3,
+      "mullion": 0.05,
+      "spandrel": 1.09,
+      "visionRail": false,
+      "rhythm": "continuous",
+      "palette": "graphite",
+      "podium": null,
+      "setback": null,
+      "roof": "penthouse",
+      "entrance": "recessed",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 28.299999237060547,
+      "depth": 24.519999504089355,
+      "height": 155.3699951171875
+    },
+    "footprint": {
+      "width": 28.299999237060547,
+      "depth": 24.519999504089355,
+      "min": [
+        -14.149999618530273,
+        -12.149999618530273
+      ],
+      "max": [
+        14.149999618530273,
+        12.369999885559082
+      ]
+    },
+    "windowBays": 2080,
+    "materialBatches": 9
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-9-0",
+      "seed": "1138",
+      "archetype": 8,
+      "revision": 0,
+      "name": "Restrained upper setbacks",
+      "storeys": 45,
+      "floorHeight": 3.45,
+      "lobbyHeight": 5,
+      "bay": 1.9,
+      "widthBays": 16,
+      "depthBays": 12,
+      "structuralBays": 2,
+      "mullion": 0.06,
+      "spandrel": 1.14,
+      "visionRail": false,
+      "rhythm": "continuous",
+      "palette": "silver",
+      "podium": null,
+      "setback": {
+        "atStorey": 34,
+        "widthBays": 12,
+        "depthBays": 10
+      },
+      "roof": "recessed",
+      "entrance": "flush",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 30.700000762939453,
+      "depth": 23.320000648498535,
+      "height": 158.16000366210938
+    },
+    "footprint": {
+      "width": 30.700000762939453,
+      "depth": 23.320000648498535,
+      "min": [
+        -15.350000381469727,
+        -11.550000190734863
+      ],
+      "max": [
+        15.350000381469727,
+        11.770000457763672
+      ]
+    },
+    "windowBays": 2388,
+    "materialBatches": 9
+  },
+  {
+    "specification": {
+      "schemaVersion": 1,
+      "generatorVersion": "1.0.0",
+      "family": "ohneeohnee-international",
+      "id": "ohnee-family-168e8af0fdca2d3c-10-0",
+      "seed": "1138",
+      "archetype": 9,
+      "revision": 0,
+      "name": "Paired-bay headquarters",
+      "storeys": 25,
+      "floorHeight": 3.6,
+      "lobbyHeight": 4.8,
+      "bay": 2.1,
+      "widthBays": 24,
+      "depthBays": 14,
+      "structuralBays": 2,
+      "mullion": 0.05,
+      "spandrel": 1.19,
+      "visionRail": false,
+      "rhythm": "paired",
+      "palette": "graphite",
+      "podium": null,
+      "setback": null,
+      "roof": "screened",
+      "entrance": "recessed",
+      "columns": false
+    },
+    "dimensions": {
+      "width": 50.70000076293945,
+      "depth": 29.920000076293945,
+      "height": 93.55000305175781
+    },
+    "footprint": {
+      "width": 50.70000076293945,
+      "depth": 29.920000076293945,
+      "min": [
+        -25.350000381469727,
+        -14.850000381469727
+      ],
+      "max": [
+        25.350000381469727,
+        15.069999694824219
+      ]
+    },
+    "windowBays": 1900,
+    "materialBatches": 9
+  }
+]
