@@ -28,7 +28,10 @@
     "assets:library:prepare": "node scripts/prepare-approved-library.cjs",
     "assets:library:test": "npm run assets:library:prepare && node scripts/approved-library-browser.cjs",
     "assets:library": "npm run assets:library:prepare && http-server .tools/approved-library -a 127.0.0.1 -p 4186 -c-1",
-    "update:buildings": "node scripts/update-approved-buildings.cjs"
+    "update:buildings": "node scripts/update-approved-buildings.cjs",
+    "architecture:modernist:prepare": "node scripts/prepare-modernist-lab.cjs",
+    "architecture:modernist:check": "npm run architecture:modernist:prepare && node --test scripts/modernist-generator.test.cjs",
+    "architecture:modernist": "npm run architecture:modernist:prepare && http-server .tools/modernist-lab -a 127.0.0.1 -p 4187 -c-1"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

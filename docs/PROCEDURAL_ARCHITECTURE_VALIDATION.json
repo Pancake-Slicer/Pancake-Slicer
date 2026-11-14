@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-13",
+  "family": "ohneeohnee-international",
+  "generatorVersion": "1.0.0",
+  "initialSeed": "1138",
+  "generatorChecks": 8,
+  "gameChecks": 74,
+  "initialScene": {
+    "generated": 10,
+    "approvedReference": 1,
+    "drawCalls": 99,
+    "trianglesIncludingReferenceAndGround": 188540,
+    "generatedTriangles": 173576,
+    "sharedTextureMaps": 3
+  },
+  "browser": {
+    "actualLineup": true,
+    "selectedDetails": true,
+    "individualRegeneration": true,
+    "seedRestore": true,
+    "jsonDownload": true,
+    "mainTerrainStartup": true,
+    "errorLogs": []
+  },
+  "protectedSourceFileCount": 64,
+  "outputs": [
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Procedural Architecture Lineup - 20261113.png",
+      "bytes": 74681,
+      "sha256": "d5aed8786b42bc170be04c0e817c7581ac5ee55935ddb9dc3b57b94709452656"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Procedural Setback Tower - 20261113.png",
+      "bytes": 61113,
+      "sha256": "284776d86f2f0bb066506f1c88bc670791dd4dd126c307905824a5d81fcaa440"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Pancake City - Procedural Facade Study - 20261113.png",
+      "bytes": 69232,
+      "sha256": "b36069ab8ddac54f9e650d70c3f809b757a0bcc508c5c93cfe6bf79824d8d5bb"
+    },
+    {
+      "file": "C:/Users/camsh/Downloads/Ohneeohnee-family-1138.json",
+      "bytes": 21110,
+      "sha256": "a8937719cd3f85d140a3853a522b6eb2098b6a8eff206e11bba06d29b4cf66a0"
+    }
+  ]
+}
