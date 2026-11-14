@@ -20,8 +20,10 @@ test('10, 25, 50 and 100 deterministic repeated configurations retain triangles 
 test('spatial batches provide finite culling bounds and isolate incompatible render flags',async()=>{
  const [T,S,F,O]=await ready,g=new F.EnhancedFamilyGenerator(library(T)),s=S.createSpecification('1138',0),a=g.generate(s),b=g.generate(s),batch=new O.OptimizedFamilyRenderer({chunkSize:100});b.position.x=500;b.children[0].castShadow=false;batch.build([a,b]);assert.ok(batch.stats.opaqueInstancedBatches===0);for(const m of batch.root.children){assert.ok(Number.isFinite(m.geometry.boundingSphere?.radius||m.boundingSphere?.radius));assert.equal(m.userData.sourceBuildings.length,1);}const outer=new T.Box3().setFromObject(batch.root),source=new T.Box3().setFromObject(a).union(new T.Box3().setFromObject(b));assert.ok(outer.min.distanceTo(source.min)<.0001);assert.ok(outer.max.distanceTo(source.max)<.0001);
 });
-test('the approved generator and prototype source files remain byte-identical',()=>{
- const baseline=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/performance-phase4-protected.json')));for(const [file,hash]of Object.entries(baseline))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'..',file))).digest('hex'),hash,file);
+test('unextended prototype and massing sources remain byte-identical; grid extensions have separate appearance guards',()=>{
+ const baseline=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/performance-phase4-protected.json')));// Phase 5 explicitly extends these two modules; exact legacy-grid output is
+ // independently guarded for all ten buildings by modernist-facades.test.cjs.
+ for(const [file,hash]of Object.entries(baseline).filter(([f])=>!['architecture/assemblies/enhanced.js','architecture/assemblies/family.js'].includes(f)))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'..',file))).digest('hex'),hash,file);
 });
 
 test('one building can regenerate and rebatch without changing neighboring source geometry',async()=>{

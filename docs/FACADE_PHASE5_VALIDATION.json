@@ -1,0 +1,1111 @@
+{
+  "phase": 5,
+  "baseCommit": "3d8c4026bb7ce995bd617cecc3d2200f67c995e9",
+  "branch": "architecture/international-facades-phase5",
+  "date": "2026-11-14",
+  "tests": {
+    "architecturePassed": 44,
+    "gamePassed": 74,
+    "build": "passed"
+  },
+  "preservation": {
+    "protectedFiles": 75,
+    "intentionalChanges": [
+      "architecture/assemblies/enhanced.js",
+      "architecture/assemblies/family.js"
+    ],
+    "unexpectedChanges": [],
+    "original52Sha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+    "optimizer": "byte-identical",
+    "grid": "all ten frozen seed1138 geometry/material signatures pass",
+    "gameAndCatalogue": "unchanged"
+  },
+  "browser": {
+    "url": "http://127.0.0.1:4187/facades.html",
+    "warnings": [],
+    "errors": [],
+    "checked": [
+      "matrix",
+      "matched rows",
+      "three facade close-ups",
+      "opaque podium lobbies",
+      "vertical/horizontal roof transitions",
+      "style switch and deterministic rebuild",
+      "seed1139 and restore1138"
+    ],
+    "finalSeed": 1138,
+    "finalView": "matrix"
+  },
+  "finalMatrix": {
+    "calls": 49,
+    "triangles": 192084,
+    "sourceMeshes": 183,
+    "optimizedObjects": 48,
+    "buildingMaterials": 24,
+    "sharedMaps": 4
+  },
+  "measurements": {
+    "version": "5.0.0",
+    "seed": "1138",
+    "cells": [
+      {
+        "cell": "A1",
+        "row": 0,
+        "col": 0,
+        "style": "vertical",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+          "seed": "1138",
+          "archetype": 1,
+          "revision": 0,
+          "name": "Broad commercial slab",
+          "storeys": 12,
+          "floorHeight": 3.6,
+          "lobbyHeight": 4.6,
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.19,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "silver",
+          "podium": null,
+          "setback": null,
+          "roof": "recessed",
+          "entrance": "recessed",
+          "columns": false,
+          "facadeStyle": "vertical"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+          "seed": "1138",
+          "archetype": 1,
+          "revision": 0,
+          "name": "Broad commercial slab",
+          "storeys": 12,
+          "floorHeight": 3.6,
+          "lobbyHeight": 4.6,
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.19,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "silver",
+          "podium": null,
+          "setback": null,
+          "roof": "recessed",
+          "entrance": "recessed",
+          "columns": false
+        },
+        "metrics": {
+          "meshes": 20,
+          "triangles": 16310,
+          "materialCount": 20,
+          "geometryBytes": 1170308,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "A2",
+        "row": 0,
+        "col": 1,
+        "style": "horizontal",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+          "seed": "1138",
+          "archetype": 1,
+          "revision": 0,
+          "name": "Broad commercial slab",
+          "storeys": 12,
+          "floorHeight": 3.6,
+          "lobbyHeight": 4.6,
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.19,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "silver",
+          "podium": null,
+          "setback": null,
+          "roof": "recessed",
+          "entrance": "recessed",
+          "columns": false,
+          "facadeStyle": "horizontal"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+          "seed": "1138",
+          "archetype": 1,
+          "revision": 0,
+          "name": "Broad commercial slab",
+          "storeys": 12,
+          "floorHeight": 3.6,
+          "lobbyHeight": 4.6,
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.19,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "silver",
+          "podium": null,
+          "setback": null,
+          "roof": "recessed",
+          "entrance": "recessed",
+          "columns": false
+        },
+        "metrics": {
+          "meshes": 20,
+          "triangles": 15686,
+          "materialCount": 20,
+          "geometryBytes": 1126628,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "A3",
+        "row": 0,
+        "col": 2,
+        "style": "grid",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+          "seed": "1138",
+          "archetype": 1,
+          "revision": 0,
+          "name": "Broad commercial slab",
+          "storeys": 12,
+          "floorHeight": 3.6,
+          "lobbyHeight": 4.6,
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.19,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "silver",
+          "podium": null,
+          "setback": null,
+          "roof": "recessed",
+          "entrance": "recessed",
+          "columns": false,
+          "facadeStyle": "grid"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-2-0",
+          "seed": "1138",
+          "archetype": 1,
+          "revision": 0,
+          "name": "Broad commercial slab",
+          "storeys": 12,
+          "floorHeight": 3.6,
+          "lobbyHeight": 4.6,
+          "bay": 2.1,
+          "widthBays": 24,
+          "depthBays": 14,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.19,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "silver",
+          "podium": null,
+          "setback": null,
+          "roof": "recessed",
+          "entrance": "recessed",
+          "columns": false
+        },
+        "metrics": {
+          "meshes": 20,
+          "triangles": 13190,
+          "materialCount": 20,
+          "geometryBytes": 951908,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "B1",
+        "row": 1,
+        "col": 0,
+        "style": "vertical",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+          "seed": "1138",
+          "archetype": 7,
+          "revision": 0,
+          "name": "Slender high-rise",
+          "storeys": 40,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2,
+          "widthBays": 14,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "visionRail": false,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": null,
+          "setback": null,
+          "roof": "penthouse",
+          "entrance": "recessed",
+          "columns": false,
+          "facadeStyle": "vertical"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+          "seed": "1138",
+          "archetype": 7,
+          "revision": 0,
+          "name": "Slender high-rise",
+          "storeys": 40,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2,
+          "widthBays": 14,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "visionRail": false,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": null,
+          "setback": null,
+          "roof": "penthouse",
+          "entrance": "recessed",
+          "columns": false
+        },
+        "metrics": {
+          "meshes": 20,
+          "triangles": 21314,
+          "materialCount": 20,
+          "geometryBytes": 1520332,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "B2",
+        "row": 1,
+        "col": 1,
+        "style": "horizontal",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+          "seed": "1138",
+          "archetype": 7,
+          "revision": 0,
+          "name": "Slender high-rise",
+          "storeys": 40,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2,
+          "widthBays": 14,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "visionRail": false,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": null,
+          "setback": null,
+          "roof": "penthouse",
+          "entrance": "recessed",
+          "columns": false,
+          "facadeStyle": "horizontal"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+          "seed": "1138",
+          "archetype": 7,
+          "revision": 0,
+          "name": "Slender high-rise",
+          "storeys": 40,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2,
+          "widthBays": 14,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "visionRail": false,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": null,
+          "setback": null,
+          "roof": "penthouse",
+          "entrance": "recessed",
+          "columns": false
+        },
+        "metrics": {
+          "meshes": 20,
+          "triangles": 21218,
+          "materialCount": 20,
+          "geometryBytes": 1513612,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "B3",
+        "row": 1,
+        "col": 2,
+        "style": "grid",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+          "seed": "1138",
+          "archetype": 7,
+          "revision": 0,
+          "name": "Slender high-rise",
+          "storeys": 40,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2,
+          "widthBays": 14,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "visionRail": false,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": null,
+          "setback": null,
+          "roof": "penthouse",
+          "entrance": "recessed",
+          "columns": false,
+          "facadeStyle": "grid"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-8-0",
+          "seed": "1138",
+          "archetype": 7,
+          "revision": 0,
+          "name": "Slender high-rise",
+          "storeys": 40,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2,
+          "widthBays": 14,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.05,
+          "spandrel": 1.09,
+          "visionRail": false,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": null,
+          "setback": null,
+          "roof": "penthouse",
+          "entrance": "recessed",
+          "columns": false
+        },
+        "metrics": {
+          "meshes": 20,
+          "triangles": 19202,
+          "materialCount": 20,
+          "geometryBytes": 1372492,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "C1",
+        "row": 2,
+        "col": 0,
+        "style": "vertical",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+          "seed": "1138",
+          "archetype": 6,
+          "revision": 0,
+          "name": "Broad podium tower",
+          "storeys": 35,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2.1,
+          "widthBays": 18,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": {
+            "storeys": 4,
+            "widthBays": 24,
+            "depthBays": 16
+          },
+          "setback": null,
+          "roof": "screened",
+          "entrance": "recessed",
+          "columns": true,
+          "facadeStyle": "vertical"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+          "seed": "1138",
+          "archetype": 6,
+          "revision": 0,
+          "name": "Broad podium tower",
+          "storeys": 35,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2.1,
+          "widthBays": 18,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": {
+            "storeys": 4,
+            "widthBays": 24,
+            "depthBays": 16
+          },
+          "setback": null,
+          "roof": "screened",
+          "entrance": "recessed",
+          "columns": true
+        },
+        "metrics": {
+          "meshes": 21,
+          "triangles": 30232,
+          "materialCount": 21,
+          "geometryBytes": 2209808,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "C2",
+        "row": 2,
+        "col": 1,
+        "style": "horizontal",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+          "seed": "1138",
+          "archetype": 6,
+          "revision": 0,
+          "name": "Broad podium tower",
+          "storeys": 35,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2.1,
+          "widthBays": 18,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": {
+            "storeys": 4,
+            "widthBays": 24,
+            "depthBays": 16
+          },
+          "setback": null,
+          "roof": "screened",
+          "entrance": "recessed",
+          "columns": true,
+          "facadeStyle": "horizontal"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+          "seed": "1138",
+          "archetype": 6,
+          "revision": 0,
+          "name": "Broad podium tower",
+          "storeys": 35,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2.1,
+          "widthBays": 18,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": {
+            "storeys": 4,
+            "widthBays": 24,
+            "depthBays": 16
+          },
+          "setback": null,
+          "roof": "screened",
+          "entrance": "recessed",
+          "columns": true
+        },
+        "metrics": {
+          "meshes": 21,
+          "triangles": 28408,
+          "materialCount": 21,
+          "geometryBytes": 2082128,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      },
+      {
+        "cell": "C3",
+        "row": 2,
+        "col": 2,
+        "style": "grid",
+        "spec": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+          "seed": "1138",
+          "archetype": 6,
+          "revision": 0,
+          "name": "Broad podium tower",
+          "storeys": 35,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2.1,
+          "widthBays": 18,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": {
+            "storeys": 4,
+            "widthBays": 24,
+            "depthBays": 16
+          },
+          "setback": null,
+          "roof": "screened",
+          "entrance": "recessed",
+          "columns": true,
+          "facadeStyle": "grid"
+        },
+        "massing": {
+          "schemaVersion": 1,
+          "generatorVersion": "1.0.1",
+          "family": "ohneeohnee-international",
+          "id": "ohnee-family-168e8af0fdca2d3c-7-0",
+          "seed": "1138",
+          "archetype": 6,
+          "revision": 0,
+          "name": "Broad podium tower",
+          "storeys": 35,
+          "floorHeight": 3.75,
+          "lobbyHeight": 5,
+          "bay": 2.1,
+          "widthBays": 18,
+          "depthBays": 12,
+          "structuralBays": 3,
+          "mullion": 0.055,
+          "spandrel": 1.24,
+          "visionRail": true,
+          "rhythm": "continuous",
+          "palette": "graphite",
+          "podium": {
+            "storeys": 4,
+            "widthBays": 24,
+            "depthBays": 16
+          },
+          "setback": null,
+          "roof": "screened",
+          "entrance": "recessed",
+          "columns": true
+        },
+        "metrics": {
+          "meshes": 21,
+          "triangles": 26512,
+          "materialCount": 21,
+          "geometryBytes": 1949408,
+          "textureCount": 4,
+          "textureBytes": 1703936
+        }
+      }
+    ],
+    "matrix": {
+      "meshes": 183,
+      "triangles": 192072,
+      "materialCount": 24,
+      "geometryBytes": 13896624,
+      "textureCount": 4,
+      "textureBytes": 1703936
+    },
+    "optimized": null,
+    "lastRender": [
+      {
+        "cell": "C1",
+        "style": "vertical",
+        "calls": 22,
+        "triangles": 30244
+      },
+      {
+        "cell": "C2",
+        "style": "horizontal",
+        "calls": 22,
+        "triangles": 28420
+      },
+      {
+        "cell": "C3",
+        "style": "grid",
+        "calls": 22,
+        "triangles": 26524
+      }
+    ],
+    "timings": [
+      {
+        "row": 0,
+        "seed": "1138",
+        "preset": "full",
+        "viewport": [
+          190,
+          556
+        ],
+        "pixelRatio": 1.25,
+        "camera": {
+          "target": [
+            0,
+            22.780000686645508,
+            0.1099996566772461
+          ],
+          "distance": 292.678592497202,
+          "yaw": 0.38,
+          "pitch": 0.18
+        },
+        "samples": 60,
+        "warmups": 8,
+        "method": "same row massing/camera/daylight; sequential styles; render + gl.finish after cached-shadow warmup; not city FPS",
+        "styles": [
+          {
+            "cell": "A1",
+            "style": "vertical",
+            "model": {
+              "meshes": 20,
+              "triangles": 16310,
+              "materialCount": 20,
+              "geometryBytes": 1170308,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 20,
+              "outputMeshes": 20,
+              "triangles": 16310,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 17,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 21,
+            "triangles": 16322,
+            "medianMs": 0.7,
+            "p95Ms": 1.6
+          },
+          {
+            "cell": "A2",
+            "style": "horizontal",
+            "model": {
+              "meshes": 20,
+              "triangles": 15686,
+              "materialCount": 20,
+              "geometryBytes": 1126628,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 20,
+              "outputMeshes": 20,
+              "triangles": 15686,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 17,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 21,
+            "triangles": 15698,
+            "medianMs": 0.5,
+            "p95Ms": 0.9
+          },
+          {
+            "cell": "A3",
+            "style": "grid",
+            "model": {
+              "meshes": 20,
+              "triangles": 13190,
+              "materialCount": 20,
+              "geometryBytes": 951908,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 20,
+              "outputMeshes": 20,
+              "triangles": 13190,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 17,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 21,
+            "triangles": 13202,
+            "medianMs": 0.6,
+            "p95Ms": 1.3
+          }
+        ]
+      },
+      {
+        "row": 1,
+        "seed": "1138",
+        "preset": "full",
+        "viewport": [
+          190,
+          556
+        ],
+        "pixelRatio": 1.25,
+        "camera": {
+          "target": [
+            0,
+            77.68499755859375,
+            0.1100001335144043
+          ],
+          "distance": 280.23735821555186,
+          "yaw": 0.38,
+          "pitch": 0.18
+        },
+        "samples": 60,
+        "warmups": 8,
+        "method": "same row massing/camera/daylight; sequential styles; render + gl.finish after cached-shadow warmup; not city FPS",
+        "styles": [
+          {
+            "cell": "B1",
+            "style": "vertical",
+            "model": {
+              "meshes": 20,
+              "triangles": 21314,
+              "materialCount": 20,
+              "geometryBytes": 1520332,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 20,
+              "outputMeshes": 20,
+              "triangles": 21314,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 17,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 21,
+            "triangles": 21326,
+            "medianMs": 0.4,
+            "p95Ms": 0.6
+          },
+          {
+            "cell": "B2",
+            "style": "horizontal",
+            "model": {
+              "meshes": 20,
+              "triangles": 21218,
+              "materialCount": 20,
+              "geometryBytes": 1513612,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 20,
+              "outputMeshes": 20,
+              "triangles": 21218,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 17,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 21,
+            "triangles": 21230,
+            "medianMs": 0.4,
+            "p95Ms": 0.8
+          },
+          {
+            "cell": "B3",
+            "style": "grid",
+            "model": {
+              "meshes": 20,
+              "triangles": 19202,
+              "materialCount": 20,
+              "geometryBytes": 1372492,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 20,
+              "outputMeshes": 20,
+              "triangles": 19202,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 17,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 21,
+            "triangles": 19214,
+            "medianMs": 0.7,
+            "p95Ms": 2.5
+          }
+        ]
+      },
+      {
+        "row": 2,
+        "seed": "1138",
+        "preset": "full",
+        "viewport": [
+          190,
+          556
+        ],
+        "pixelRatio": 1.25,
+        "camera": {
+          "target": [
+            0,
+            67.42500305175781,
+            0.010000228881835938
+          ],
+          "distance": 314.394218993944,
+          "yaw": 0.38,
+          "pitch": 0.18
+        },
+        "samples": 60,
+        "warmups": 8,
+        "method": "same row massing/camera/daylight; sequential styles; render + gl.finish after cached-shadow warmup; not city FPS",
+        "styles": [
+          {
+            "cell": "C1",
+            "style": "vertical",
+            "model": {
+              "meshes": 21,
+              "triangles": 30232,
+              "materialCount": 21,
+              "geometryBytes": 2209808,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 21,
+              "outputMeshes": 21,
+              "triangles": 30232,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 18,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 22,
+            "triangles": 30244,
+            "medianMs": 0.4,
+            "p95Ms": 0.7
+          },
+          {
+            "cell": "C2",
+            "style": "horizontal",
+            "model": {
+              "meshes": 21,
+              "triangles": 28408,
+              "materialCount": 21,
+              "geometryBytes": 2082128,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 21,
+              "outputMeshes": 21,
+              "triangles": 28408,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 18,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 22,
+            "triangles": 28420,
+            "medianMs": 0.5,
+            "p95Ms": 0.8
+          },
+          {
+            "cell": "C3",
+            "style": "grid",
+            "model": {
+              "meshes": 21,
+              "triangles": 26512,
+              "materialCount": 21,
+              "geometryBytes": 1949408,
+              "textureCount": 4,
+              "textureBytes": 1703936
+            },
+            "optimized": {
+              "inputMeshes": 21,
+              "outputMeshes": 21,
+              "triangles": 26512,
+              "opaqueMergedBatches": 0,
+              "opaqueInstancedBatches": 0,
+              "opaqueBorrowedMeshes": 18,
+              "transparentObjects": 3,
+              "ownedGeometryBytes": 0,
+              "instanceMatrixBytes": 0,
+              "chunkSize": 768
+            },
+            "calls": 22,
+            "triangles": 26524,
+            "medianMs": 0.6,
+            "p95Ms": 1.2
+          }
+        ]
+      }
+    ],
+    "gpu": {
+      "three": "180",
+      "renderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "publication": false
+  },
+  "screenshots": [
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Grid facade close-up.png",
+      "sha256": "fdc33fc5bd5318871e682c9ec7a313d5d6cddc69510d4cefc870e975028b8e9f",
+      "bytes": 72319
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Horizontal facade close-up.png",
+      "sha256": "075a195701505d97777296c2779147213848412f2ea4962f587371eb08a28e19",
+      "bytes": 69071
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Horizontal podium roof.png",
+      "sha256": "e594e331c4f5559534eafe64925758449078208be8d20067147b033c9985dc16",
+      "bytes": 64777
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Nine-building matrix.png",
+      "sha256": "f9bb14625f61e33fb94fc80470b5657eeebc42d701324a956da3c14d76a0b68c",
+      "bytes": 65496
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Podium lobbies - matched row.png",
+      "sha256": "2707a28cb24b769c9291feef3dbe0c2e7c447ab157b405f2ab7eb3b797e0d23c",
+      "bytes": 67081
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Podium tower - matched full row.png",
+      "sha256": "9e85d16a9ad07a56afe054a5f6b98dc4afad194b21dd16b62ec75aac1fa41b12",
+      "bytes": 78341
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Vertical facade close-up.png",
+      "sha256": "4f81a0df3a68d60ded509c874c88e594a94937f0475383f1901e2be4738cadc7",
+      "bytes": 71993
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Facade Subfamilies Phase 5\\Vertical podium roof.png",
+      "sha256": "38d0ba4ad23eac959f8b8cbd47366b91555b849f4cf1f179211e6e0291f6fd5a",
+      "bytes": 64290
+    }
+  ],
+  "limitations": [
+    "isolated cached-shadow timings are not city FPS",
+    "small sequential viewports and timer noise",
+    "approved upper-office transparency and source artwork retained",
+    "server-based review lab",
+    "no full-family rollout or growable publication"
+  ],
+  "push": "not authorized or performed"
+}

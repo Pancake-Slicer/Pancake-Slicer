@@ -3,6 +3,7 @@ import {ArchitectureBatch} from '../batched-architecture.js';
 import {tiers,floorBase,validateSpecification} from '../spec.mjs';
 import {ASSEMBLY_VERSION,lobbyProfile,lobbyGlazingProfile,paneModule} from './systems.mjs';
 import {resolveRoofOverlaps} from './roof-surfaces.js';
+import {facadeStyle,validateFacadeStyle} from './facade-styles.mjs';
 
 // Small, shared static sky/horizon reflection; no scene capture or per-pane maps.
 function lobbyReflection(){
@@ -44,6 +45,7 @@ function retainRoofs(original,spec){
 }
 
 export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
+ const style=facadeStyle(spec),facade=validateFacadeStyle(spec),grid=style==='grid';
  validateSpecification(spec);const compatible=lobbyProfile(spec,lobbyType),profile={...compatible,canopy:spec.podium?compatible.canopy:spec.entrance==='canopy'},columnOffset=spec.columns?.2:-.035,canopyProjection=!spec.podium&&spec.entrance==='canopy'?.84:.18,lobbyGlazing=materials.lobbyGlass.userData.lobbyGlazing,glazing=lobbyGlazingProfile(lobbyGlazing),b=new ArchitectureBatch,levels=tiers(spec),audit={windows:[],corners:[],lobby:null},roof=retainRoofs(original,spec);let openTop=null;
  const box=(key,x,y,z,w,h,d)=>{const bucket=b.bucket(key),start=bucket.i.length,base=bucket.p.length/3;b.box(key,x,y,z,w,h,d);if(openTop!==null&&Math.abs(y+h/2-openTop)<1e-7){let write=start;for(let i=start;i<bucket.i.length;i+=3)if(b.unit.attributes.normal.getY(bucket.i[i]-base)<.9)for(let j=0;j<3;j++)bucket.i[write++]=bucket.i[i+j];bucket.i.length=write;}};
  const uvFor=module=>{const u0=(module.atlasCol*128+1)/512,u1=(module.atlasCol*128+127)/512,v0=(512-(module.atlasRow*170+169))/512,v1=(512-(module.atlasRow*170+1))/512;return[u0,v0,u1,v0,u1,v1,u0,v1];};
@@ -54,17 +56,26 @@ export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
    const point=(t,y,v=0)=>[u[0]*t+n[0]*(offset+v),y,u[1]*t+n[1]*(offset+v)],strip=(key,t,y,w,h,v,d)=>box(key,...point(t,y,v),n[0]?d:w,h,n[0]?w:d);
    const curtainBase=Math.max(base,spec.lobbyHeight);if(top>curtainBase)strip('backing',0,(curtainBase+top)/2,length,top-curtainBase,-.78,.04);
    for(let floor=Math.max(1,tier.start);floor<tier.end;floor++){
-    const y=floorBase(spec,floor),spandrel=isPodium?'podiumSpandrel':'spandrel';strip(spandrel,0,y+spec.spandrel/2,length,spec.spandrel,-.07,.12);
-    for(const rail of [y+spec.spandrel+.035,y+spec.floorHeight-.035]){strip('aluminum',0,rail,length,.055,.025,.09);strip('edge',0,rail+.019,length,.012,.073,.018);}
-    if(spec.visionRail)strip('aluminum',0,y+spec.spandrel+.1+(spec.floorHeight-spec.spandrel-.2)/2,length,.026,-.025,.045);
+    const y=floorBase(spec,floor),spandrel=isPodium?'podiumSpandrel':'spandrel';strip(spandrel,0,y+spec.spandrel/2,length,spec.spandrel,facade.spandrelDepth,facade.spandrelThickness);
+    const rails=grid?[y+spec.spandrel+.035,y+spec.floorHeight-.035]:[y+spec.spandrel+facade.railHeight/2,y+spec.floorHeight-.02-facade.railHeight/2];
+    for(const rail of rails){strip('aluminum',0,rail,length,facade.railHeight,facade.railDepth,facade.railThickness);strip('edge',0,rail+(grid?.019:facade.railHeight*.32),length,facade.edgeHeight,facade.edgeDepth,facade.edgeThickness);}
+    if(spec.visionRail&&facade.visionRailWidth)strip('aluminum',0,y+spec.spandrel+.1+(spec.floorHeight-spec.spandrel-.2)/2,length,facade.visionRailWidth,facade.visionRailDepth,facade.visionRailThickness);
     for(let col=0;col<count;col++){
      const t=-length/2+(col+.5)*spec.bay,module=paneModule(spec,side,floor,col),bottom=y+spec.spandrel+.1,ceiling=y+spec.floorHeight-.1;
-     b.quad('vision'+module.variant,[point(t-spec.bay/2+.045,bottom,-.12),point(t+spec.bay/2-.045,bottom,-.12),point(t+spec.bay/2-.045,ceiling,-.12),point(t-spec.bay/2+.045,ceiling,-.12)],uvFor(module));b.windowBays++;audit.windows.push({side,floor,col,bottom,top:ceiling,tier:tier.start,module});
+     b.quad('vision'+module.variant,[point(t-spec.bay/2+.045,bottom,facade.visionDepth),point(t+spec.bay/2-.045,bottom,facade.visionDepth),point(t+spec.bay/2-.045,ceiling,facade.visionDepth),point(t-spec.bay/2+.045,ceiling,facade.visionDepth)],uvFor(module));b.windowBays++;audit.windows.push({side,floor,col,bottom,top:ceiling,tier:tier.start,module});
     }
    }
    for(let col=1;col<count;col++){
     const t=-length/2+col*spec.bay,accent=spec.rhythm==='paired'&&col%spec.structuralBays===0,profileWidth=accent?.105:spec.mullion;
-    strip('aluminum',t,(base+top)/2,profileWidth,top-base,.02,accent?.22:.13);for(const sign of [-1,1])strip('edge',t+sign*(profileWidth/2-.006),(base+top)/2,.009,top-base,accent?.136:.091,.012);
+    if(grid){strip('aluminum',t,(base+top)/2,profileWidth,top-base,.02,accent?.22:.13);for(const sign of [-1,1])strip('edge',t+sign*(profileWidth/2-.006),(base+top)/2,.009,top-base,accent?.136:.091,.012);}
+    else{
+     // Preserve the approved lobby frame. Upper facade profiles end just
+     // below the original roof flashing, with closed caps and no coplanar faces.
+     if(base===0){strip('aluminum',t,spec.lobbyHeight/2,profileWidth,spec.lobbyHeight,.02,accent?.22:.13);for(const sign of [-1,1])strip('edge',t+sign*(profileWidth/2-.006),spec.lobbyHeight/2,.009,spec.lobbyHeight,accent?.136:.091,.012);}
+     const start=Math.max(base,spec.lobbyHeight),end=top-.04,w=facade.verticalWidth;
+     strip('aluminum',t,(start+end)/2,w,end-start,facade.verticalDepth,facade.verticalThickness);
+     for(const sign of [-1,1])strip('edge',t+sign*(w/2-.006),(start+end)/2,.009,end-start,facade.verticalDepth+facade.verticalThickness/2+.006,.012);
+    }
    }
    if(tier.start===0){
     // Close the head joint down to the glazing/frame, including the recessed
@@ -92,7 +103,7 @@ export function buildEnhanced(spec,original,materials,{lobbyType='C'}={}){
     }
    }
   });
-  for(const sx of [-1,1])for(const sz of [-1,1]){const x=sx*(width/2-.025),z=sz*(depth/2-.025);box('aluminum',x,(base+top)/2,z,.25,top-base,.25);audit.corners.push({x,z,base,top});}
+  for(const sx of [-1,1])for(const sz of [-1,1]){const x=sx*(width/2-.025),z=sz*(depth/2-.025);box('aluminum',x,(base+top)/2,z,.25,top-base,.25);if(style==='vertical'){const start=Math.max(base,spec.lobbyHeight),end=top-.1;box('aluminum',x,(start+end)/2,sz*(depth/2-.18),.25,end-start,.06);box('aluminum',sx*(width/2-.18),(start+end)/2,z,.06,end-start,.25);}audit.corners.push({x,z,base,top});}
  }
  openTop=null;
  const podium=levels[0],w=podium.widthBays*spec.bay,d=podium.depthBays*spec.bay,lobbyDepth=Math.min(6,d*.24),ceiling=spec.lobbyHeight-.52;

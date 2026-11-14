@@ -4,6 +4,8 @@ This project was reconstructed **only** from the user-provided `Pancake (52).htm
 
 ## Contents
 
+Architecture Phase5 review: [International Style facade subfamilies](PROCEDURAL_ARCHITECTURE_PHASE5.md). Open [the nine-building lab](http://127.0.0.1:4187/facades.html) while `npm run architecture:modernist` is running. New styles await visual approval and are not in the live game catalogue.
+
 - `original/Pancake (52).html` — exact original playable build, unchanged. Keep this as the immutable fallback.
 - `web/index.html` — HTML shell pointing to extracted files.
 - `web/assets/game.bundle.js` — recovered bundled/minified JavaScript with the reviewed rendering fixes described below.

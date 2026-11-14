@@ -67,3 +67,7 @@ Removed the hidden portions of façade caps that coincided with roof decks, whil
 The original source has inferred real-world proportions, repetitive baked reflections/interior silhouettes, and an inferred rear. Generated lobbies reuse the source pane atlas; no true interiors or dynamic reflections exist. Façades currently use the same general four-sided system with controlled rhythm changes, not ten individually authored identities. Mechanical plant is organized architectural geometry, not engineering-certified equipment. Real-world floorplates, cores, egress, structure, energy and code compliance are not simulated.
 
 Next: review the ten compositions architecturally, improve lobby-specific artwork, add more controlled façade/upper-service-band and corner assemblies, then test repeated approved instances/LOD at city scale. Additional families should implement the same specification/validation/build/metadata contract in separate modules. Do not add Von Badel/Lind/residential families or growable publication until separately approved. Nothing in this phase changes roads, zoning, simulation, live growable selection, approved files or the original v52.
+
+## Phase 5 — facade subfamilies
+
+The approved grid remains the default. Vertical and horizontal framing configurations are available only in the separate nine-building review lab. See [Phase5 implementation, compatibility, measured performance and evidence](PROCEDURAL_ARCHITECTURE_PHASE5.md). Do not roll the new styles across the full family or publish them as growables before visual approval.
