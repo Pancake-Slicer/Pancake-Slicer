@@ -1,0 +1,386 @@
+{
+  "phase": "6B",
+  "baseCommit": "3bc8d0e130a2f7b9d35ef0a11f6dd24be43a8bb9",
+  "branch": "gameplay/ohneeohnee-phase6b",
+  "tests": {
+    "game": 81,
+    "architecture": 44,
+    "build": "passed"
+  },
+  "preservation": {
+    "protectedFileCount": 72,
+    "changedProtectedFiles": [],
+    "sourceLock": "passed",
+    "original52": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+    "unrelatedReferenceMoves": "preserved and excluded"
+  },
+  "exports": [
+    {
+      "kind": "playtest",
+      "path": "C:\\Users\\camsh\\Downloads\\Pancake City - Procedural Offices Playtest - 20261115T021444Z.html",
+      "sha256": "3b4e66a7d30c9e2bf2ea69508197af4a50028dff612b17705120371f780d1b9d",
+      "bytes": 12615835,
+      "staticEmbedding": "passed",
+      "identicalBrowserTestCopy": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\.tools\\phase6b\\playable\\playtest.html"
+    },
+    {
+      "kind": "demo",
+      "path": "C:\\Users\\camsh\\Downloads\\Pancake City - Procedural Offices Demo - 20261115T021444Z.html",
+      "sha256": "af945444690219955b9638082b24fd43cf3790674ea0aefaec55ce1362214eda",
+      "bytes": 12624669,
+      "staticEmbedding": "passed",
+      "identicalBrowserTestCopy": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\.tools\\phase6b\\playable\\demo.html"
+    }
+  ],
+  "browser": {
+    "source": "SHA-identical standalone exports served at localhost4192",
+    "fileProtocol": "blocked by browser security policy; no bypass attempted",
+    "ordinaryStartup": "flat inland terrain and regional highway ready; experimental default off",
+    "manualChecks": [
+      "all filters",
+      "enable/disable",
+      "normal demolition button",
+      "normal Undo"
+    ],
+    "selfCheckResult": "PASS",
+    "checks": [
+      "Shared package ready on host engine",
+      "Approved Lab signature: ohnee-family-vertical-midrise",
+      "Approved Lab signature: ohnee-family-vertical-slender",
+      "Approved Lab signature: ohnee-family-vertical-podium",
+      "Approved Lab signature: ohnee-family-horizontal-broad-midrise",
+      "Approved Lab signature: ohnee-family-horizontal-rectangular-tower",
+      "Approved Lab signature: ohnee-family-horizontal-podium",
+      "Approved Lab signature: ohnee-family-grid-compact",
+      "Approved Lab signature: ohnee-family-grid-tall-tower",
+      "Approved Lab signature: ohnee-family-grid-podium",
+      "Ordinary two-way road grid",
+      "68 buildings through ordinary Office zoning",
+      "Disabled uses original growable catalogue",
+      "All nine candidates naturally grown",
+      "Existing catalogue still grows alongside family",
+      "Native fit office:office-block:68.30:68.30:171.70:171.70:0:00:0",
+      "Native fit office:office-block:68.30:68.30:171.70:171.70:0:01:0",
+      "Native fit office:office-block:68.30:68.30:171.70:171.70:0:10:0",
+      "Native fit office:office-block:68.30:68.30:171.70:171.70:0:11:0",
+      "Native fit office:office-block:-51.70:68.30:51.70:171.70:1:00:0",
+      "Native fit office:office-block:-51.70:68.30:51.70:171.70:1:10:0",
+      "Native fit office:office-block:-51.70:68.30:51.70:171.70:1:11:0",
+      "Native fit office:office-block:-171.70:68.30:-68.30:171.70:2:00:0",
+      "Native fit office:office-block:-171.70:68.30:-68.30:171.70:2:01:0",
+      "Native fit office:office-block:-171.70:68.30:-68.30:171.70:2:11:0",
+      "Native fit office:office-block:68.30:-51.70:171.70:51.70:3:00:0",
+      "Native fit office:office-block:68.30:-51.70:171.70:51.70:3:11:0",
+      "Native fit office:office-block:-51.70:-51.70:51.70:51.70:4:00:0",
+      "Native fit office:office-block:-51.70:-51.70:51.70:51.70:4:01:0",
+      "Native fit office:office-block:-51.70:-51.70:51.70:51.70:4:10:0",
+      "Native fit office:office-block:-51.70:-51.70:51.70:51.70:4:11:0",
+      "Native fit office:office-block:-171.70:-51.70:-68.30:51.70:5:00:0",
+      "Native fit office:office-block:-171.70:-51.70:-68.30:51.70:5:10:0",
+      "Native fit office:office-block:-171.70:-51.70:-68.30:51.70:5:11:0",
+      "Native fit office:office-block:68.30:-171.70:171.70:-68.30:6:00:0",
+      "Native fit office:office-block:68.30:-171.70:171.70:-68.30:6:01:0",
+      "Native fit office:office-block:68.30:-171.70:171.70:-68.30:6:10:0",
+      "Native fit office:office-block:68.30:-171.70:171.70:-68.30:6:11:0",
+      "Native fit office:office-block:-51.70:-171.70:51.70:-68.30:7:00:0",
+      "Native fit office:office-block:-51.70:-171.70:51.70:-68.30:7:01:0",
+      "Native fit office:office-block:-51.70:-171.70:51.70:-68.30:7:10:0",
+      "Native fit office:office-block:-51.70:-171.70:51.70:-68.30:7:11:0",
+      "Native fit office:office-block:-171.70:-171.70:-68.30:-68.30:8:00:0",
+      "Native fit office:office-block:-171.70:-171.70:-68.30:-68.30:8:01:0",
+      "Native fit office:office-block:-171.70:-171.70:-68.30:-68.30:8:10:0",
+      "Native fit office:office-block:-171.70:-171.70:-68.30:-68.30:8:11:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:000000:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:000001:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:00001:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:00010:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:0010:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:00110:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:0100:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:0101:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:01100:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:0110100:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:0110101:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:01110:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:10000:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:10001:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:100110:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:100111:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:1010:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:10110:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:1100:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:11100:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:11101:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:11110:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:111110:0",
+      "Native fit office:office-block:-240.00:-240.00:240.00:240.00:9:1111110:0",
+      "Regeneration preserves deterministic buildings",
+      "Demolition accepted",
+      "Demolition removes building",
+      "Undo restores exact building",
+      "Redo removes building",
+      "JSON state restore preserves IDs seeds and full specifications",
+      "Disabling preserves existing grown buildings",
+      "All experimental geometry leases/caches released cycle 0",
+      "All experimental geometry leases/caches released cycle 1",
+      "All experimental geometry leases/caches released cycle 2",
+      "Renderer memory stable across three city removal cycles",
+      "Actual screen ray selects experimental tower (office:office-block:-51.70:-51.70:51.70:51.70:4:10:0 expected office:office-block:-51.70:-51.70:51.70:51.70:4:10:0)"
+    ],
+    "errors": [],
+    "knownBaselineWarnings": [
+      "MeshToonMaterial flatShading",
+      "postprocess shader derivative driver warnings"
+    ]
+  },
+  "candidateCounts": [
+    {
+      "id": "ohnee-family-vertical-midrise",
+      "count": 6
+    },
+    {
+      "id": "ohnee-family-vertical-slender",
+      "count": 7
+    },
+    {
+      "id": "ohnee-family-vertical-podium",
+      "count": 2
+    },
+    {
+      "id": "ohnee-family-horizontal-broad-midrise",
+      "count": 4
+    },
+    {
+      "id": "ohnee-family-horizontal-rectangular-tower",
+      "count": 9
+    },
+    {
+      "id": "ohnee-family-horizontal-podium",
+      "count": 8
+    },
+    {
+      "id": "ohnee-family-grid-compact",
+      "count": 5
+    },
+    {
+      "id": "ohnee-family-grid-tall-tower",
+      "count": 9
+    },
+    {
+      "id": "ohnee-family-grid-podium",
+      "count": 5
+    }
+  ],
+  "totalBuildings": 68,
+  "experimentalBuildings": 55,
+  "approvedSignatures": [
+    {
+      "id": "ohnee-family-vertical-midrise",
+      "signature": "f6bc74bb679f18bb157b8439256aa2fe3d71e0b7472c8e4ac34fd3598d890ed4"
+    },
+    {
+      "id": "ohnee-family-vertical-slender",
+      "signature": "b9d6f939efd8015998390569bfaef58f38e6ae9e4a060149f0677f856b445a1e"
+    },
+    {
+      "id": "ohnee-family-vertical-podium",
+      "signature": "fcdac13aaf31dab88d1cf54cba624b2ed29f14d168919da9fc43c4ad6668f7a7"
+    },
+    {
+      "id": "ohnee-family-horizontal-broad-midrise",
+      "signature": "4b4057c4b79ebce3ee510fea8f4df094d072a91b012656a463ce357ccc927cc3"
+    },
+    {
+      "id": "ohnee-family-horizontal-rectangular-tower",
+      "signature": "cd36dd1c0e2328459b7e869490ecbf2b817eea343459965e3b10d6eee38b1396"
+    },
+    {
+      "id": "ohnee-family-horizontal-podium",
+      "signature": "06bd43e420c8737d42649997a2cadf2c1e591120d47af30d6fb44a0a8acff63b"
+    },
+    {
+      "id": "ohnee-family-grid-compact",
+      "signature": "66b1308122e661132d675e8da536e8dc8442b05d4316cbbfda35fec39519419c"
+    },
+    {
+      "id": "ohnee-family-grid-tall-tower",
+      "signature": "aedf7d5117971f7b1b3694da8efaffbf7f581e95fdf6c63bab814aa4f00dc05e"
+    },
+    {
+      "id": "ohnee-family-grid-podium",
+      "signature": "93e9a74be567b6cb3208016dc1fe31883c3efde9c490e99e8cdbf57bcc9207e1"
+    }
+  ],
+  "performance": {
+    "disabled": {
+      "samples": 80,
+      "medianMs": 104.79999995231628,
+      "p95Ms": 114.10000014305115,
+      "method": "actual game; same 68 native lots; camera-motion rAF intervals after 8 warmups; includes browser scheduling",
+      "calls": 519,
+      "triangles": 744044,
+      "rendererMemory": {
+        "geometries": 482,
+        "textures": 88
+      },
+      "neighborhoodBuildCpuMs": 126.70000004768372,
+      "runtime": {
+        "disposed": false,
+        "activeModels": 0,
+        "activeBatches": 0,
+        "geometryCacheEntries": 0,
+        "baselineCacheEntries": 0
+      }
+    },
+    "enabled": {
+      "samples": 80,
+      "medianMs": 113.20000004768372,
+      "p95Ms": 118.29999995231628,
+      "method": "actual game; same 68 native lots; camera-motion rAF intervals after 8 warmups; includes browser scheduling",
+      "calls": 831,
+      "triangles": 1342513,
+      "rendererMemory": {
+        "geometries": 658,
+        "textures": 94
+      },
+      "neighborhoodBuildCpuMs": 806.7000000476837,
+      "runtime": {
+        "disposed": false,
+        "activeModels": 55,
+        "activeBatches": 4,
+        "geometryCacheEntries": 9,
+        "baselineCacheEntries": 0
+      }
+    }
+  },
+  "allocation": {
+    "disposed": false,
+    "activeModels": 55,
+    "activeBatches": 4,
+    "geometryCacheEntries": 9,
+    "baselineCacheEntries": 0,
+    "sourceGeometries": 179,
+    "sourceGeometryBytes": 12706784,
+    "usedMaterials": 28,
+    "usedTextures": 4,
+    "renderObjects": 500,
+    "mergedBytes": 61071164,
+    "instanceBytes": 2048
+  },
+  "cleanup": [
+    {
+      "cycle": 0,
+      "runtime": {
+        "disposed": false,
+        "activeModels": 0,
+        "activeBatches": 0,
+        "geometryCacheEntries": 0,
+        "baselineCacheEntries": 0,
+        "sourceGeometries": 0,
+        "sourceGeometryBytes": 0,
+        "usedMaterials": 0,
+        "usedTextures": 0,
+        "renderObjects": 0,
+        "mergedBytes": 0,
+        "instanceBytes": 0
+      },
+      "gpu": {
+        "geometries": 286,
+        "textures": 94
+      }
+    },
+    {
+      "cycle": 1,
+      "runtime": {
+        "disposed": false,
+        "activeModels": 0,
+        "activeBatches": 0,
+        "geometryCacheEntries": 0,
+        "baselineCacheEntries": 0,
+        "sourceGeometries": 0,
+        "sourceGeometryBytes": 0,
+        "usedMaterials": 0,
+        "usedTextures": 0,
+        "renderObjects": 0,
+        "mergedBytes": 0,
+        "instanceBytes": 0
+      },
+      "gpu": {
+        "geometries": 286,
+        "textures": 94
+      }
+    },
+    {
+      "cycle": 2,
+      "runtime": {
+        "disposed": false,
+        "activeModels": 0,
+        "activeBatches": 0,
+        "geometryCacheEntries": 0,
+        "baselineCacheEntries": 0,
+        "sourceGeometries": 0,
+        "sourceGeometryBytes": 0,
+        "usedMaterials": 0,
+        "usedTextures": 0,
+        "renderObjects": 0,
+        "mergedBytes": 0,
+        "instanceBytes": 0
+      },
+      "gpu": {
+        "geometries": 286,
+        "textures": 94
+      }
+    }
+  ],
+  "picking": {
+    "x": 640,
+    "y": 252.9253702359645,
+    "expected": "office:office-block:-51.70:-51.70:51.70:51.70:4:10:0",
+    "actual": "office:office-block:-51.70:-51.70:51.70:51.70:4:10:0"
+  },
+  "screenshots": [
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Phase6B Screenshots\\Demolished through normal tool.png",
+      "sha256": "8d2febff1789df20ae23c148a7ac0c342437d66a809f2cd8a1bc9deb7611e0b3",
+      "bytes": 115198
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Phase6B Screenshots\\Experimental facade in game.png",
+      "sha256": "192f3146602112d7ca74b1be63df717dee4f86675cf7164788c7d29cafe1c36f",
+      "bytes": 98151
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Phase6B Screenshots\\Final mixed procedural city.png",
+      "sha256": "64f289f9f1d5f02b622c7b6a0f3c2435bcf56f2011dce0a32d716bb80b393aef",
+      "bytes": 69832
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Phase6B Screenshots\\Mixed city during measurements.png",
+      "sha256": "1839d7f1d4185ffe042c9f16a1ed29167678df42bda5358f6f526f4d91ea5824",
+      "bytes": 76662
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Phase6B Screenshots\\New city development controls default off.png",
+      "sha256": "97e50452d9c1dcb6ac07b7cc5b7e82f613804afa03f710bc37fb3da553781712",
+      "bytes": 154061
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Phase6B Screenshots\\Ordinary flat terrain startup.png",
+      "sha256": "e26ec6d6f8464bef89f68cb81bb0c82ed856c0333a1415b05f130def7b87ce00",
+      "bytes": 140072
+    },
+    {
+      "file": "C:\\Users\\camsh\\Downloads\\Pancake City - Phase6B Screenshots\\Restored through normal Undo.png",
+      "sha256": "8799ba9e6ed009d34d9e913087957d03d420e5f345abc16c643739f284ed8e02",
+      "bytes": 98020
+    }
+  ],
+  "limitations": [
+    "No new disk-save UI; existing JSON capture/history extended",
+    "Dense-city timings include browser scheduling/workload; no standalone Chrome FPS guarantee",
+    "Cold bulk generation and transparent sorting cost remain",
+    "Direct file launch not automated",
+    "One pre-existing 144m synthetic grid parcel-centre error outside integration scope"
+  ],
+  "push": "pending explicit approval; no remote writes"
+}

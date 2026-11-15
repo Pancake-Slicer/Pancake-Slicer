@@ -81,5 +81,5 @@ function definitions(base=process.env.PANCAKE_GROWABLE_REGISTRY||path.join(root,
  });
 }
 
-function assetSource(){const defs=definitions(),factories=defs.filter(d=>d.factorySource).map(d=>'pcRegisterGrowableFactory('+JSON.stringify(d.key)+','+d.factorySource+');');const json=JSON.stringify(defs.map(({factorySource,...d})=>d)).replace(/</g,'\\u003c');return 'const pcGrowableDefinitions='+json+';\n'+fs.readFileSync(path.join(root,'web/features/growable-assets.js'),'utf8')+'\n'+factories.join('\n');}
+function assetSource(){const defs=definitions(),factories=defs.filter(d=>d.factorySource).map(d=>'pcRegisterGrowableFactory('+JSON.stringify(d.key)+','+d.factorySource+');');const json=JSON.stringify(defs.map(({factorySource,...d})=>d)).replace(/</g,'\\u003c');return require('./procedural-offices.cjs').proceduralOfficeSource()+'\nconst pcGrowableDefinitions='+json+'.concat(pcOhneeDefinitions);\n'+fs.readFileSync(path.join(root,'web/features/growable-assets.js'),'utf8')+'\n'+factories.join('\n');}
 module.exports={assetSource,definitions,compileGLB,validateAsset};

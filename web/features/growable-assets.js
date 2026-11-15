@@ -11,6 +11,7 @@ function pcAssetBytes(text){
 }
 function pcAssetArray(a){const bytes=pcAssetBytes(a.array);return a.type==='Uint32Array'?new Uint32Array(bytes):a.type==='Uint16Array'?new Uint16Array(bytes):new Float32Array(bytes);}
 function pcGrowableResource(asset){
+ if(asset.model.format==='ohneeohnee-family')throw Error('Use the shared family runtime for procedural offices');
  if(pcGrowableResources.has(asset.key))return pcGrowableResources.get(asset.key);
  if(asset.model.format==='procedural'){
   const factory=pcGrowableFactories.get(asset.key);if(!factory)throw Error('Missing growable factory '+asset.key);
@@ -39,7 +40,7 @@ function pcGrowableResource(asset){
  const resource={parts,materials,images};pcGrowableResources.set(asset.key,resource);return resource;
 }
 async function pcGrowablesReady(loadImage=async uri=>{const image=new Image;image.src=uri;await image.decode();return image;}){
- for(const asset of pcGrowableDefinitions){const resource=pcGrowableResource(asset);for(const {map,uri} of resource.images||[]){map.image=await loadImage(uri);map.needsUpdate=true;}}
+ for(const asset of pcGrowableDefinitions){if(asset.model.format==='ohneeohnee-family')continue;const resource=pcGrowableResource(asset);for(const {map,uri} of resource.images||[]){map.image=await loadImage(uri);map.needsUpdate=true;}}
 }
 // Follow the lot's actual axes. towardRoad points at a sampled road position,
 // which can be slightly off-centre and must not rotate a rigid building.
@@ -76,15 +77,15 @@ function pcGrowableChoose(collection,property,forPaint=false){
  // Explicit legacy catalogue selection retains the original behaviour.
  if(forPaint&&collection.pcCatalogueChoice)return null;
  const assigned=collection.pcCatalogueAssignments?.get(property.id);
- if(assigned!==undefined){const asset=pcGrowableFind(assigned);return asset&&pcGrowablePlacement(property,asset)?asset:null;}
+ if(assigned!==undefined){const asset=pcGrowableFind(assigned);return asset&&(asset.model.format!=='ohneeohnee-family'||pcOhneeRuntime&&pcOhneeValidateAssignment(collection,property,asset))&&pcGrowablePlacement(property,asset)?asset:null;}
  if(collection.pcCatalogueChoice)return null;
- const candidates=pcGrowableCurrentDefinitions.filter(d=>pcGrowablePlacement(property,d));
+ const candidates=pcGrowableCurrentDefinitions.filter(d=>(d.model.format!=='ohneeohnee-family'||pcOhneeEnabled(collection,d))&&pcGrowablePlacement(property,d));
  const total=16+candidates.reduce((n,d)=>n+d.selectionWeight,0);let ticket=pcOfficeHash(property.id+':authored-growable')/4294967296*total;
  for(const asset of candidates){ticket-=asset.selectionWeight;if(ticket<0)return asset;}return null;
 }
 function pcGrowableSpec(collection,property,spec){
  const asset=pcGrowableChoose(collection,property);if(!asset)return null;
- return {...spec,assetId:asset.id,assetVersion:asset.version,assetKey:asset.key,catalogueName:asset.name,floors:asset.dimensions.floors,floorHeight:asset.dimensions.floorHeight,sourceHeight:asset.dimensions.height,assetPlacement:pcGrowablePlacement(property,asset)};
+ return {...spec,assetId:asset.id,assetVersion:asset.version,assetKey:asset.key,catalogueName:asset.name,floors:asset.dimensions.floors,floorHeight:asset.dimensions.floorHeight,sourceHeight:asset.dimensions.height,assetPlacement:pcGrowablePlacement(property,asset),...(asset.model.format==='ohneeohnee-family'?{procedural:pcOhneeSpec(asset)}:{})};
 }
 function pcQueueGrowable(building,queue,B,stats){
  const asset=pcGrowableFind(building.office?.assetKey);if(!asset)return false;
@@ -95,11 +96,14 @@ function pcQueueGrowable(building,queue,B,stats){
  stats.windows+=asset.dimensions.windowBays||0;return true;
 }
 function pcFlushGrowables(queue,group){
+ const procedural=[];
  for(const {asset,buildings} of queue.values()){
+  if(asset.model.format==='ohneeohnee-family'){procedural.push(...buildings);continue;}
   const resource=pcGrowableResource(asset),matrix=new ke,rotation=new Ii,up=new q(0,1,0);
   for(const part of resource.parts){
    const mesh=new Kn(part.geometry,part.material,buildings.length);mesh.name=asset.name;mesh.userData.pcSharedAssetGeometry=true;mesh.userData.assetKey=asset.key;mesh.userData.buildingIds=buildings.map(b=>b.id);mesh.castShadow=mesh.receiveShadow=true;
    buildings.forEach((b,index)=>{const p=b.office.assetPlacement;rotation.setFromAxisAngle(up,p.angle);matrix.compose(new q(p.x,b.y,p.z),rotation,new q(1,1,1));mesh.setMatrixAt(index,matrix);});mesh.computeBoundingBox();mesh.computeBoundingSphere();group.add(mesh);
   }
  }
+ pcOhneeFlush(procedural,group);
 }

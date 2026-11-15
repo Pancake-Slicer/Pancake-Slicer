@@ -16,7 +16,7 @@ function pcCatalogueNeedsChange(collection,properties,zone,erase){
 function pcCatalogueAssign(collection,properties,zone,erase){
   if(zone!=='offices'||erase)return;
   if(!collection.pcCatalogueAssignments)collection.pcCatalogueAssignments=new Map;
-  for(const property of properties)collection.pcCatalogueAssignments.set(property.id,pcGrowableChoose(collection,property,true)?.key||pcCatalogueReference(collection,property).id);
+  for(const property of properties){const asset=pcGrowableChoose(collection,property,true);collection.pcCatalogueAssignments.set(property.id,asset?.key||pcCatalogueReference(collection,property).id);pcOhneeRemember(collection,property,asset);}
   if(collection.pcCatalogueChoice)for(const property of properties)collection.pcCatalogueAssignments.set(property.id,Number(collection.pcCatalogueChoice));
 }
 function pcCatalogueSpec(collection,property,spec){

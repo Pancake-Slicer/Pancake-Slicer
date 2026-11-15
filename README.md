@@ -43,6 +43,10 @@ The lab now also has a separate **07A / 07B comparison** at http://127.0.0.1:418
 
 The portable Ohneeohnee family package and nine deterministic integration candidates are documented in [Phase 6A](PROCEDURAL_ARCHITECTURE_PHASE6A.md). Run `npm run architecture:phase6a:prepare` to assemble `dist/architecture/ohneeohnee-family`, or `npm run architecture:phase6a:test` to validate independent import, determinism, Lab fidelity and resource cleanup. [Consumption and ownership contract](architecture/integration/ohneeohnee-family/README.md). Candidates are not registered or enabled in gameplay; the existing Lab and game remain unchanged.
 
+## Controlled procedural Office growables (Phase6B)
+
+**Phase6B procedural Office development build:** the nine frozen Ohneeohnee family candidates can now grow through the existing Office zoning system when explicitly enabled. Existing buildings/catalogue remain. Run `npm run export:procedural-offices` for new standalone Playtest and populated Demo files in Downloads. [Launch instructions, integration contract, tests, performance and limitations](docs/PROCEDURAL_OFFICES_PHASE6B.md). Controls are development-only and default off in a new city; the demo enables all styles for review.
+
 ## Update future approved buildings
 
 Double-click **Update Approved Buildings.cmd**, or run `npm run update:buildings`. It scans the shared Architecture-approved packages, validates and tests compatible versions, preserves last-known-good registrations, and writes new offline Playtest/Demo HTML files plus readable reports to Downloads. You never need to edit code or manifests. See [the complete command and Codex workflow](docs/APPROVED_BUILDING_WORKFLOW.md) for package ownership, skipped-asset reports and visual-review steps.
