@@ -39,6 +39,10 @@ Double-click `Play Procedural Architecture Lab.cmd`, leave the window open, and 
 
 The lab now also has a separate **07A / 07B comparison** at http://127.0.0.1:4187/?comparison=07: enhanced curtain walls and an opaque reflective-glass podium lobby on the same original Building 07 massing, with review save/import/export. No rollout to other buildings or gameplay. [Phase 2 instructions and performance](PROCEDURAL_ARCHITECTURE_PHASE2.md).
 
+## Procedural architecture — Phase 6A handoff
+
+The portable Ohneeohnee family package and nine deterministic integration candidates are documented in [Phase 6A](PROCEDURAL_ARCHITECTURE_PHASE6A.md). Run `npm run architecture:phase6a:prepare` to assemble `dist/architecture/ohneeohnee-family`, or `npm run architecture:phase6a:test` to validate independent import, determinism, Lab fidelity and resource cleanup. [Consumption and ownership contract](architecture/integration/ohneeohnee-family/README.md). Candidates are not registered or enabled in gameplay; the existing Lab and game remain unchanged.
+
 ## Update future approved buildings
 
 Double-click **Update Approved Buildings.cmd**, or run `npm run update:buildings`. It scans the shared Architecture-approved packages, validates and tests compatible versions, preserves last-known-good registrations, and writes new offline Playtest/Demo HTML files plus readable reports to Downloads. You never need to edit code or manifests. See [the complete command and Codex workflow](docs/APPROVED_BUILDING_WORKFLOW.md) for package ownership, skipped-asset reports and visual-review steps.

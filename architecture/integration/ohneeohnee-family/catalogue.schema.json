@@ -1,0 +1,10 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "title":"Ohneeohnee Phase 6A procedural integration candidates (not game registration)",
+ "type":"object","required":["schemaVersion","kind","registrationEnabled","generator","candidates"],
+ "properties":{
+  "schemaVersion":{"const":1},"kind":{"const":"procedural-family-integration-candidates"},"registrationEnabled":{"const":false},
+  "generator":{"type":"object","required":["family","version","module","factory","resource","engine","requirements"]},
+  "candidates":{"type":"array","minItems":1,"items":{"type":"object","required":["id","role","family","facadeSubfamily","generatorVersion","seed","specification","dimensions","bounds","footprint","orientation","performance","intendedZoning","renderingDependencies","geometrySignature"],"properties":{"id":{"type":"string","pattern":"^ohnee-family-"},"facadeSubfamily":{"enum":["vertical","horizontal","grid"]},"generatorVersion":{"const":"6.0.0"},"seed":{"type":"string"},"specification":{"type":"object"},"dimensions":{"type":"object","required":["width","depth","height"]},"bounds":{"type":"object","required":["min","max"]},"orientation":{"type":"object","required":["origin","up","front","entrance","door"]},"footprint":{"type":"array","minItems":4,"maxItems":4}}}
+ }
+}

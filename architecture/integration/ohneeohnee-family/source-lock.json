@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "approvedCommit": "ae30ab76ca80ae8a35ff7942eda96767abee333d",
+  "files": {
+    "architecture/modernist/spec.mjs": "850049475304998b8a9aba219db52c5f015ae5e32a8cc1ead4230aab91ff9e94",
+    "architecture/modernist/geometry.js": "7d82323ec049646fcaf286c4c11f553a382df7a81ab7b0518f62eef4123a8d1f",
+    "architecture/modernist/materials.js": "1b95eeb7e61be1a0cdfe62cc6ce8b72cde6ef061e225f2ef926d9f44f3e1f183",
+    "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+    "architecture/assemblies/systems.mjs": "116a522bdc7b1339ef07cf0c288c7bd84fe9f2bb02e8adfc226fcd423d7551f4",
+    "architecture/assemblies/enhanced.js": "be9d7e839526ef3c3ad527b133bc8b8fc934462b92d328cd9cea611f894306f8",
+    "architecture/assemblies/roof-surfaces.js": "a3cfd33cdb580e767c11d873ace28b84cb0fe9193620def4b9db54e81f084161",
+    "architecture/assemblies/family.js": "95306b3d0ec39163e32a5b5efcc5f53663b11139b67a4ae04f0a1ea7b9cc80e3",
+    "architecture/assemblies/facade-styles.mjs": "5ee1be5a8d7ed44416a733c8f13796f595921b3fa953bb893ef334a8e37dad8c",
+    "architecture/assemblies/optimized-renderer.js": "a4aea112f6491fdfacbc21c52b59517a879f565850049b6da1ce397806b53bb5"
+  }
+}
