@@ -1,0 +1,12 @@
+{
+  "originalFilename": "CN_Tower_SkyPod_2023b (1).jpg",
+  "source": "User-supplied photograph; central BMO office tower only is the architectural reference",
+  "path": "reference.jpg",
+  "sha256": "e191c75d3c49dfe85c655c3651e5137c0a60d7cf947705356e874962c18dd8e1",
+  "bytes": 11042528,
+  "displayDimensions": {
+    "width": 4160,
+    "height": 6240
+  },
+  "use": "Geometry/material reference only. No branding or photographic artwork is mapped onto the generated models."
+}

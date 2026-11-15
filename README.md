@@ -2,6 +2,10 @@
 
 This project was reconstructed **only** from the user-provided `Pancake (52).html` browser build. It is **not** the original Codex repository or its Git history.
 
+## BMO-inspired tower — awaiting visual approval
+
+Open [the five-building parametric comparison](http://127.0.0.1:4187/bmo.html) while `npm run architecture:modernist` runs. Width/depth/storeys/bays/podium/roof controls rebuild the selected template; rectangular lot tests recalculate modules without scaling. [Parameters, statistics and verification](BMO_PARAMETRIC_TOWER.md). No BMO growable registration or gameplay integration.
+
 ## Contents
 
 Architecture Phase5 review: [International Style facade subfamilies](PROCEDURAL_ARCHITECTURE_PHASE5.md). Open [the nine-building lab](http://127.0.0.1:4187/facades.html) while `npm run architecture:modernist` is running. New styles await visual approval and are not in the live game catalogue.

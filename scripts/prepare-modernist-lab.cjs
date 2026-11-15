@@ -18,3 +18,9 @@ const source=path.join(packageRoot,'ohneeohnee.glb'),expected='2938c48decce49b82
 if(crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex')!==expected)throw Error('Approved Ohneeohnee GLB changed');
 fs.writeFileSync(path.join(out,'approved-ohneeohnee.json'),JSON.stringify(compileGLB(source)));
 console.log('Prepared isolated Procedural Architecture Lab: '+out+'\nServe at http://127.0.0.1:4187');
+
+// Isolated BMO-inspired study; original generators and source UI stay unchanged.
+for(const f of ['spec.mjs','generator.js'])copy(path.join(root,'architecture/bmo',f),path.join(out,'bmo',f));
+for(const f of ['bmo.html','bmo.js'])copy(path.join(root,'architecture/lab',f),path.join(out,f));
+copy(path.join(root,'Assets/Architecture/International/BMO-inspired/reference.jpg'),path.join(out,'bmo-reference.jpg'));
+for(const f of ['index.html','facades.html','performance.html']){const p=path.join(out,f);let html=fs.readFileSync(p,'utf8');html=html.replace('<nav class="lab-navigation">','<nav class="lab-navigation"><a href="bmo.html">BMO-inspired parametric study</a>');fs.writeFileSync(p,html);}

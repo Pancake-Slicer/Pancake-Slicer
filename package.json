@@ -34,7 +34,9 @@
     "architecture:modernist": "npm run architecture:modernist:prepare && http-server .tools/modernist-lab -a 127.0.0.1 -p 4187 -c-1",
     "export:procedural-offices": "npm run build && node scripts/export-procedural-offices.cjs",
     "architecture:phase6a:prepare": "node scripts/prepare-ohneeohnee-package.cjs",
-    "architecture:phase6a:test": "npm run architecture:phase6a:prepare && npm run architecture:modernist:prepare && node scripts/ohneeohnee-package-browser.cjs"
+    "architecture:phase6a:test": "npm run architecture:phase6a:prepare && npm run architecture:modernist:prepare && node scripts/ohneeohnee-package-browser.cjs",
+    "architecture:bmo:check": "npm run architecture:modernist:prepare && node --test scripts/bmo-generator.test.cjs",
+    "architecture:bmo:test": "npm run architecture:modernist:prepare && node scripts/bmo-browser.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
