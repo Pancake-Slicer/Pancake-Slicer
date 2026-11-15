@@ -6,12 +6,13 @@ const pcOhneeDefinitions=pcOhneeCatalogue.candidates.map(c=>({
  eligibility:{zone:'offices',developmentStage:'immediate',minLotArea:c.minimumLot.width*c.minimumLot.depth,minLotWidth:c.minimumLot.width,minLotDepth:c.minimumLot.depth,capacityMinFloors:c.storeys,setback:c.minimumLot.setback},
  selectionWeight:12,facadeSubfamily:c.facadeSubfamily,seed:c.seed,specification:c.specification,geometrySignature:c.geometrySignature
 }));
-let pcOhneeRuntime=null,pcOhneeFailure=null;const pcOhneeLiveBatches=new Set;
+let pcOhneeRuntime=null,pcOhneeFailure=null,pcOhneeReadyTask=null;const pcOhneeLiveBatches=new Set;
 function pcOhneeEngine(){return {REVISION:'180',Group:Se,Mesh:ae,MeshStandardMaterial:Re,MeshPhysicalMaterial:hy,BufferGeometry:Ce,BufferAttribute:dn,Float32BufferAttribute:pe,BoxGeometry:mn,Box3:di,Vector3:q,Matrix3:Oe,Matrix4:ke,InstancedMesh:Kn,Texture:ui,CanvasTexture:vr,DataTexture:il,Color:Me,SRGBColorSpace:hn,RGBAFormat:1023,EquirectangularReflectionMapping:303,RepeatWrapping:1000,ClampToEdgeWrapping:1001,MirroredRepeatWrapping:1002,NearestFilter:1003,NearestMipmapNearestFilter:1004,NearestMipmapLinearFilter:1005,LinearFilter:1006,LinearMipmapNearestFilter:1007,LinearMipmapLinearFilter:1008};}
-async function pcOhneeReady(){
- if(pcOhneeRuntime)return pcOhneeRuntime;
- try{pcOhneeRuntime=await pcOhneePackage(pcOhneeEngine()).createOhneeohneeRuntime({payload:pcOhneePayload});return pcOhneeRuntime;}
- catch(error){pcOhneeFailure=String(error.message||error);console.error('Experimental Ohneeohnee unavailable:',pcOhneeFailure);return null;}
+function pcOhneeReady(){
+ if(!pcOhneeReadyTask)pcOhneeReadyTask=(async()=>{
+  try{pcOhneeRuntime=await pcOhneePackage(pcOhneeEngine()).createOhneeohneeRuntime({payload:pcOhneePayload});return pcOhneeRuntime;}
+  catch(error){pcOhneeFailure=String(error.message||error);console.error('Experimental Ohneeohnee unavailable:',pcOhneeFailure);return null;}
+ })();return pcOhneeReadyTask;
 }
 function pcOhneeEnabled(collection,asset){
  const control=collection.pcOhneeControl;
@@ -21,7 +22,9 @@ function pcOhneeSpec(asset){return {candidateId:asset.id,generatorVersion:asset.
 function pcOhneeHistory(collection){return {control:structuredClone(collection.pcOhneeControl||{enabled:false,style:'all'}),assignments:[...(collection.pcOhneeAssignments||new Map)]};}
 function pcOhneeRestore(collection,snapshot){
  const before=JSON.stringify(pcOhneeHistory(collection));collection.pcOhneeControl={enabled:!!snapshot?.control?.enabled,style:['all','vertical','horizontal','grid'].includes(snapshot?.control?.style)?snapshot.control.style:'all'};
- collection.pcOhneeAssignments=new Map(snapshot?.assignments||[]);collection.pcOhneeRefresh?.();return before!==JSON.stringify(pcOhneeHistory(collection));
+ collection.pcOhneeAssignments=new Map(snapshot?.assignments||[]);collection.pcOhneeRefresh?.();
+ if(!pcOhneeRuntime&&collection.pcOhneeAssignments.size)pcOhneeReady().then(runtime=>{if(runtime){collection.rebuild();collection.pcOhneeOnReady?.();}collection.pcOhneeRefresh?.();});
+ return before!==JSON.stringify(pcOhneeHistory(collection));
 }
 function pcOhneeRemember(collection,property,asset){
  if(!collection.pcOhneeAssignments)collection.pcOhneeAssignments=new Map;
@@ -62,16 +65,18 @@ function pcOhneeSetControl(collection,value){
  if(!['all','vertical','horizontal','grid'].includes(value.style))throw Error('Unknown experimental facade filter');
  collection.network.remember();collection.pcOhneeControl={enabled:!!value.enabled,style:value.style};
 }
-function pcOhneeInitControls(collection){
+function pcOhneeInitControls(collection,onReady=()=>{},graphicsInfo=()=>null){
+ collection.pcOhneeOnReady=onReady;
  if(!new URLSearchParams(location.search).has('experimental-offices')&&!document.documentElement.hasAttribute('data-experimental-offices'))return null;
  const panel=document.createElement('details');panel.id='ohneeohnee-development';panel.style.cssText='position:fixed;right:12px;bottom:44px;z-index:30;background:#202b30;color:#eff4f6;padding:10px;border:1px solid #66767e;border-radius:6px;max-width:310px;font:12px system-ui;max-height:45vh;overflow:auto';
  const summary=document.createElement('summary');summary.textContent='Development · experimental offices';panel.append(summary);
+ const graphics=document.createElement('p');graphics.textContent='Graphics: '+(graphicsInfo()?.gpuRenderer||'unavailable');panel.append(graphics);
  const label=document.createElement('label'),enabled=document.createElement('input');enabled.type='checkbox';enabled.setAttribute('aria-label','Enable experimental Ohneeohnee growables');label.append(enabled,' Enable Ohneeohnee growables');panel.append(label,document.createElement('br'));
  const style=document.createElement('select');style.setAttribute('aria-label','Experimental facade subfamily');for(const [value,text]of [['all','All three subfamilies'],['vertical','Vertical'],['horizontal','Horizontal'],['grid','Balanced grid']]){const option=document.createElement('option');option.value=value;option.textContent=text;style.append(option);}panel.append(style);
  const help=document.createElement('p');help.textContent='Future Office growth only. Existing buildings stay. Use Mix all 98, then paint unzoned Office lots. Demolish and repaint to regrow.';panel.append(help);
  const status=document.createElement('p'),list=document.createElement('ul');panel.append(status,list);document.body.append(panel);
  function refresh(){const c=collection.pcOhneeControl||{enabled:false,style:'all'};enabled.checked=c.enabled;style.value=c.style;enabled.disabled=!!pcOhneeFailure;status.textContent=pcOhneeFailure?'Unavailable: '+pcOhneeFailure:(c.enabled?'Experimental growth enabled.':'Disabled: normal catalogue growth.')+' Native fit and floor capacity still apply.';list.replaceChildren(...pcOhneeDefinitions.filter(d=>c.style==='all'||d.facadeSubfamily===c.style).map(d=>{const li=document.createElement('li');li.textContent=d.specification.name+' · '+d.dimensions.floors+' floors · '+d.dimensions.width.toFixed(1)+' × '+d.dimensions.depth.toFixed(1)+' m';return li;}));}
- const update=()=>{pcOhneeSetControl(collection,{enabled:enabled.checked,style:style.value});refresh();};enabled.onchange=style.onchange=update;
+ const update=async()=>{const value={enabled:enabled.checked,style:style.value};enabled.disabled=style.disabled=true;try{if(value.enabled&&!pcOhneeRuntime){status.textContent='Loading the approved office library…';await pcOhneeReady();}if(value.enabled&&!pcOhneeRuntime)value.enabled=false;pcOhneeSetControl(collection,value);}finally{style.disabled=false;refresh();enabled.disabled=!!pcOhneeFailure;}};enabled.onchange=style.onchange=update;
  collection.pcOhneeRefresh=refresh;
  refresh();return {refresh};
 }

@@ -20,7 +20,9 @@ Reproduce both uniquely named Downloads files with **`npm run export:procedural-
 
 ## Rendering, selection and ownership
 
-One async material pool is initialized at startup. If experimental loading fails, the experiment reports unavailable and ordinary startup/catalogue/zoning remain usable. Only buildings actually chosen by growth request model leases. Repeated candidates share geometry/materials/maps; camera movement does not generate buildings.
+**Performance follow-up:** the pool below is now initialized on demand, not at ordinary startup. Enabling the experiment awaits it; a cold experimental snapshot also requests readiness and rebuilds after loading. See [the empty-city investigation](EMPTY_CITY_PERFORMANCE.md) for background-frame suppression, the Chrome launcher, GPU diagnostics and the remaining fresh-process GPU/smooth-play verification step. The original Phase6B measurements below remain historical observations.
+
+One async material pool is initialized on demand. If experimental loading fails, the experiment reports unavailable and ordinary startup/catalogue/zoning remain usable. Only buildings actually chosen by growth request model leases. Repeated candidates share geometry/materials/maps; camera movement does not generate buildings.
 
 Each affected existing256m neighbourhood chunk delegates its experimental buildings to the unchanged package `createBatch` / Phase4 optimizer. Opaque merging/whole-mesh instancing and independently sorted transparent office surfaces are retained. Opaque reflective lobbies remain exact. The game renders batch roots, never the source Groups as well.
 

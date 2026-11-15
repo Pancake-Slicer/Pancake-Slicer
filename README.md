@@ -45,6 +45,8 @@ The portable Ohneeohnee family package and nine deterministic integration candid
 
 ## Controlled procedural Office growables (Phase6B)
 
+**Empty-city performance safeguards:** experimental materials now load on demand, hidden game tabs stop scene work, and exports include an explicit desktop-Chrome launcher and actual GPU diagnostics. The Windows high-performance preference for Chrome was applied with approval; actual NVIDIA selection and smooth play still need a fresh-launch check. [Investigation, code changes and remaining step](docs/EMPTY_CITY_PERFORMANCE.md).
+
 **Phase6B procedural Office development build:** the nine frozen Ohneeohnee family candidates can now grow through the existing Office zoning system when explicitly enabled. Existing buildings/catalogue remain. Run `npm run export:procedural-offices` for new standalone Playtest and populated Demo files in Downloads. [Launch instructions, integration contract, tests, performance and limitations](docs/PROCEDURAL_OFFICES_PHASE6B.md). Controls are development-only and default off in a new city; the demo enables all styles for review.
 
 ## Update future approved buildings

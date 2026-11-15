@@ -1,0 +1,129 @@
+{
+  "objective": "Investigate lag after ordinary terrain creation, before zoning",
+  "status": "code safeguards verified; approved Windows high-performance preference applied and read back; fresh NVIDIA context and smooth play pending",
+  "baseCommit": "274cd7ba8788b096df3b104f882b0ae92b3134a6",
+  "branch": "gameplay/ohneeohnee-phase6b",
+  "tests": {
+    "gameAndIntegrationPassed": 84,
+    "architecturePassed": 44,
+    "build": "passed",
+    "coldBootstrap": "no experimental runtime, image decode or batch",
+    "hiddenFrames": "skip work and retain resume clock",
+    "coldRestore": "loads shared package and restores nine exact specifications"
+  },
+  "hardware": {
+    "availableGPUs": [
+      "Intel Iris Xe",
+      "NVIDIA GeForce RTX 3070 Ti Laptop GPU"
+    ],
+    "observedRenderer": "Intel Iris Xe",
+    "highPerformanceHintOnly": "still Intel in desktop Chrome",
+    "observedChatGPTGpu3DPercent": 98.37,
+    "windowsPreference": "GpuPreference=2; applied with explicit approval, read back verified",
+    "preferenceBackup": ".tools/empty-performance/chrome-gpu-before.json"
+  },
+  "profiles": {
+    "preIntegration": {
+      "idle": {
+        "frameMedianMs": 167.09999990463257,
+        "frameP95Ms": 236.70000004768372,
+        "callbackCpuMedianMs": 1.1000001430511475,
+        "drawSubmitMedianMs": 0.2999999523162842,
+        "forestMedianMs": 0.2999999523162842,
+        "calls": 4,
+        "triangles": 18433,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "buildings": 0
+      },
+      "moving": {
+        "frameMedianMs": 244.5,
+        "frameP95Ms": 254.40000009536743,
+        "callbackCpuMedianMs": 3.9000000953674316,
+        "drawSubmitMedianMs": 2.8000001907348633,
+        "forestMedianMs": 0.39999985694885254,
+        "calls": 230,
+        "triangles": 939801,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "buildings": 0
+      }
+    },
+    "phase6B": {
+      "idle": {
+        "frameMedianMs": 166.79999995231628,
+        "frameP95Ms": 239.79999995231628,
+        "callbackCpuMedianMs": 1.1000001430511475,
+        "drawSubmitMedianMs": 0.20000004768371582,
+        "forestMedianMs": 0.3000001907348633,
+        "calls": 4,
+        "triangles": 18433,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "buildings": 0
+      },
+      "moving": {
+        "frameMedianMs": 240.29999995231628,
+        "frameP95Ms": 264.2000000476837,
+        "callbackCpuMedianMs": 4,
+        "drawSubmitMedianMs": 3,
+        "forestMedianMs": 0.39999985694885254,
+        "calls": 193,
+        "triangles": 829872,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "buildings": 0
+      }
+    }
+  },
+  "profileLimits": "Shared graphics workload, different browser presentation/viewport conditions; observations are not controlled FPS certification or proof of improvement",
+  "cleanup": {
+    "userApproved": true,
+    "httpTestTabsClosed": 15,
+    "fileTabs": "URL policy blocks closing; manual closure pending",
+    "preserved": "latest user Playtest, one Architecture Lab and pre-existing Chrome window",
+    "temporaryChromeDiagnosticWindow": "closed"
+  },
+  "browser": {
+    "newExport": "SHA-identical HTTP copy, test terrain fixture",
+    "checks": [
+      "flat terrain startup",
+      "default off",
+      "actual GPU label",
+      "on-demand enable succeeds"
+    ],
+    "errors": [],
+    "directFileAutomation": "blocked; no bypass",
+    "screenshot": ".tools/empty-performance/recovery-controls.png"
+  },
+  "preservation": {
+    "architecturalSources": "72 pre-integration hashes unchanged",
+    "original52": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+    "approvedGeometryAndMaterials": "unchanged",
+    "mainAndRemote": "unchanged"
+  },
+  "exports": [
+    {
+      "kind": "playtest",
+      "path": "C:\\Users\\camsh\\Downloads\\Pancake City - Procedural Offices Playtest - 20261115T025922Z.html",
+      "bytes": 12616711,
+      "sha256": "5a36dbc6535af7d261bfa46ed919eb074e1dcad3149332dc39253722bc82f7b9"
+    },
+    {
+      "kind": "demo",
+      "path": "C:\\Users\\camsh\\Downloads\\Pancake City - Procedural Offices Demo - 20261115T025922Z.html",
+      "bytes": 12625568,
+      "sha256": "86ed79945e3c5a3fa49b202bca04c95105cf61ed6120b7cc03f3cf928010e4ec"
+    },
+    {
+      "kind": "launcher",
+      "path": "C:\\Users\\camsh\\Downloads\\Play Pancake City in Chrome - 20261115T025922Z.cmd",
+      "bytes": 637,
+      "sha256": "d8dde159cf19e152bc591c41fda3fd3cd74f61aaa5a08c27dcc008ac92c1b656"
+    }
+  ],
+  "githubPush": "not approved or performed",
+  "windowsGraphicsPreference": {
+    "application": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "value": "GpuPreference=2;",
+    "approved": true,
+    "readBackVerified": true,
+    "actualNvidiaContextVerified": false
+  }
+}
