@@ -1,0 +1,13 @@
+{
+  "template": "bmo-horizontal-lightweight",
+  "version": "1.0.0",
+  "approvedCheckpoint": "a7f7704658b73b341631923ae8436509d15ac539",
+  "files": {
+    "architecture/bmo/spec.mjs": "c80bc6e079887e0139ae12a0e645c03d816a864dc3a8f2360c77c36b6773e0fb",
+    "architecture/bmo/generator.js": "3f490163779693a92133704ac099f0e78760e65043fb1957042566ba37801900",
+    "architecture/lightweight/template.mjs": "35bb413823aa5e53822fe480857b469c0149405aa7bb68c12e5dd7b87a4f458a",
+    "architecture/lightweight/bmo.mjs": "60cfd73cadfe9dd9c1f5fbc83f433d2e7948a57d3435a5ecabab3907434bf284",
+    "architecture/assemblies/optimized-renderer.js": "a4aea112f6491fdfacbc21c52b59517a879f565850049b6da1ce397806b53bb5",
+    "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0"
+  }
+}

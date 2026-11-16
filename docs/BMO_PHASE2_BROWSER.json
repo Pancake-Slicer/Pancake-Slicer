@@ -1,0 +1,429 @@
+{
+  "warning": "Intel in-app browser; 10/25 original trials have long scheduling stalls, so no speedup claim. 50-building pair completed without those stalls. Not NVIDIA certification.",
+  "discardedResizeTrial": {
+    "count": 10,
+    "originalBuildings": 8,
+    "viewport": [
+      1280,
+      720
+    ],
+    "visibility": "visible",
+    "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "nvidia": false,
+    "original": {
+      "fps": 2.3315571401509136,
+      "medianMs": 15.5,
+      "p95Ms": 1021.3000000007451,
+      "samples": 96,
+      "renderer": {
+        "rebuilds": 2,
+        "cacheHits": 0,
+        "layerBuilds": 1,
+        "layerHits": 0,
+        "lastBuildMs": 258.19999999925494,
+        "timings": {
+          "layout": 11.100000001490116,
+          "contours": 21.600000001490116,
+          "baseTilesRebuilt": 4,
+          "baseTilesTotal": 4,
+          "meshes": 33.69999999925494,
+          "paintPrep": 13.900000002235174,
+          "paintMeshes": 8.599999997764826,
+          "surfaces": 78.19999999925494,
+          "structures": 0,
+          "fixtures": 8.599999997764826,
+          "developmentForest": 158.30000000074506,
+          "drape": 2
+        },
+        "initialBuildCpuMs": 95.6000000052154,
+        "triangles": 371686,
+        "calls": 364,
+        "memory": {
+          "geometries": 363,
+          "textures": 71
+        },
+        "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "bmo": {
+        "activeBuildings": 0,
+        "batches": 0,
+        "mergedBytes": 0,
+        "sourceGeometryBytes": 0,
+        "materials": 0,
+        "textures": 0,
+        "cacheEntries": 0,
+        "leases": 0
+      },
+      "jsHeapBytes": 99616793,
+      "generationMs": 147.89999999850988
+    },
+    "mixed": {
+      "fps": 94.33962264137129,
+      "medianMs": 10.800000000745058,
+      "p95Ms": 13.300000000745058,
+      "samples": 96,
+      "renderer": {
+        "rebuilds": 2,
+        "cacheHits": 0,
+        "layerBuilds": 1,
+        "layerHits": 0,
+        "lastBuildMs": 258.19999999925494,
+        "timings": {
+          "layout": 11.100000001490116,
+          "contours": 21.600000001490116,
+          "baseTilesRebuilt": 4,
+          "baseTilesTotal": 4,
+          "meshes": 33.69999999925494,
+          "paintPrep": 13.900000002235174,
+          "paintMeshes": 8.599999997764826,
+          "surfaces": 78.19999999925494,
+          "structures": 0,
+          "fixtures": 8.599999997764826,
+          "developmentForest": 158.30000000074506,
+          "drape": 2
+        },
+        "initialBuildCpuMs": 95.6000000052154,
+        "triangles": 367425,
+        "calls": 375,
+        "memory": {
+          "geometries": 384,
+          "textures": 71
+        },
+        "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "bmo": {
+        "activeBuildings": 10,
+        "batches": 54,
+        "mergedBytes": 3413080,
+        "sourceGeometryBytes": 4054904,
+        "materials": 9,
+        "textures": 2,
+        "cacheEntries": 10,
+        "leases": 10
+      },
+      "jsHeapBytes": 98498761,
+      "generationMs": 86.39999999850988
+    },
+    "method": "Actual in-game same roads/lots/camera; 96 moving-camera rAF intervals after 16 warmups. Includes scheduling/postprocessing. Generation includes zoning and neighbourhood rebuild; shader warmup differs. Not isolated GPU time."
+  },
+  "trials": [
+    {
+      "count": 10,
+      "originalBuildings": 8,
+      "viewport": [
+        1280,
+        720
+      ],
+      "visibility": "visible",
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "nvidia": false,
+      "original": {
+        "fps": 3.637576161750989,
+        "medianMs": 10,
+        "p95Ms": 1026.5,
+        "samples": 96,
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 0,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 258.19999999925494,
+          "timings": {
+            "layout": 11.100000001490116,
+            "contours": 21.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 33.69999999925494,
+            "paintPrep": 13.900000002235174,
+            "paintMeshes": 8.599999997764826,
+            "surfaces": 78.19999999925494,
+            "structures": 0,
+            "fixtures": 8.599999997764826,
+            "developmentForest": 158.30000000074506,
+            "drape": 2
+          },
+          "initialBuildCpuMs": 95.6000000052154,
+          "triangles": 371686,
+          "calls": 364,
+          "memory": {
+            "geometries": 363,
+            "textures": 71
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 0,
+          "batches": 0,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 0,
+          "materials": 0,
+          "textures": 0,
+          "cacheEntries": 0,
+          "leases": 0
+        },
+        "jsHeapBytes": 75059892,
+        "generationMs": 112.70000000298023
+      },
+      "mixed": {
+        "fps": 108.47457627118644,
+        "medianMs": 8.899999998509884,
+        "p95Ms": 11.5,
+        "samples": 96,
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 0,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 258.19999999925494,
+          "timings": {
+            "layout": 11.100000001490116,
+            "contours": 21.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 33.69999999925494,
+            "paintPrep": 13.900000002235174,
+            "paintMeshes": 8.599999997764826,
+            "surfaces": 78.19999999925494,
+            "structures": 0,
+            "fixtures": 8.599999997764826,
+            "developmentForest": 158.30000000074506,
+            "drape": 2
+          },
+          "initialBuildCpuMs": 95.6000000052154,
+          "triangles": 367425,
+          "calls": 375,
+          "memory": {
+            "geometries": 384,
+            "textures": 71
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 10,
+          "batches": 54,
+          "mergedBytes": 3413080,
+          "sourceGeometryBytes": 4054904,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 10,
+          "leases": 10
+        },
+        "jsHeapBytes": 89320652,
+        "generationMs": 79.10000000149012
+      },
+      "method": "Actual in-game same roads/lots/camera; 96 moving-camera rAF intervals after 16 warmups. Includes scheduling/postprocessing. Generation includes zoning and neighbourhood rebuild; shader warmup differs. Not isolated GPU time."
+    },
+    {
+      "count": 25,
+      "originalBuildings": 8,
+      "viewport": [
+        1280,
+        720
+      ],
+      "visibility": "visible",
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "nvidia": false,
+      "original": {
+        "fps": 1.7241162557223828,
+        "medianMs": 970,
+        "p95Ms": 1041.800000000745,
+        "samples": 96,
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 0,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 258.19999999925494,
+          "timings": {
+            "layout": 11.100000001490116,
+            "contours": 21.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 33.69999999925494,
+            "paintPrep": 13.900000002235174,
+            "paintMeshes": 8.599999997764826,
+            "surfaces": 78.19999999925494,
+            "structures": 0,
+            "fixtures": 8.599999997764826,
+            "developmentForest": 158.30000000074506,
+            "drape": 2
+          },
+          "initialBuildCpuMs": 95.6000000052154,
+          "triangles": 505807,
+          "calls": 427,
+          "memory": {
+            "geometries": 408,
+            "textures": 71
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 0,
+          "batches": 0,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 0,
+          "materials": 0,
+          "textures": 0,
+          "cacheEntries": 0,
+          "leases": 0
+        },
+        "jsHeapBytes": 78453297,
+        "generationMs": 282.70000000298023
+      },
+      "mixed": {
+        "fps": 89.41877794355426,
+        "medianMs": 11.199999999254942,
+        "p95Ms": 14.199999999254942,
+        "samples": 96,
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 0,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 258.19999999925494,
+          "timings": {
+            "layout": 11.100000001490116,
+            "contours": 21.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 33.69999999925494,
+            "paintPrep": 13.900000002235174,
+            "paintMeshes": 8.599999997764826,
+            "surfaces": 78.19999999925494,
+            "structures": 0,
+            "fixtures": 8.599999997764826,
+            "developmentForest": 158.30000000074506,
+            "drape": 2
+          },
+          "initialBuildCpuMs": 95.6000000052154,
+          "triangles": 446994,
+          "calls": 429,
+          "memory": {
+            "geometries": 437,
+            "textures": 71
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 25,
+          "batches": 108,
+          "mergedBytes": 9223784,
+          "sourceGeometryBytes": 10490672,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 25,
+          "leases": 25
+        },
+        "jsHeapBytes": 129288320,
+        "generationMs": 179.90000000223517
+      },
+      "method": "Actual in-game same roads/lots/camera; 96 moving-camera rAF intervals after 16 warmups. Includes scheduling/postprocessing. Generation includes zoning and neighbourhood rebuild; shader warmup differs. Not isolated GPU time."
+    },
+    {
+      "count": 50,
+      "originalBuildings": 8,
+      "viewport": [
+        1280,
+        720
+      ],
+      "visibility": "visible",
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "nvidia": false,
+      "original": {
+        "fps": 93.74084562074945,
+        "medianMs": 10.600000001490116,
+        "p95Ms": 13.199999999254942,
+        "samples": 96,
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 0,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 258.19999999925494,
+          "timings": {
+            "layout": 11.100000001490116,
+            "contours": 21.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 33.69999999925494,
+            "paintPrep": 13.900000002235174,
+            "paintMeshes": 8.599999997764826,
+            "surfaces": 78.19999999925494,
+            "structures": 0,
+            "fixtures": 8.599999997764826,
+            "developmentForest": 158.30000000074506,
+            "drape": 2
+          },
+          "initialBuildCpuMs": 95.6000000052154,
+          "triangles": 650471,
+          "calls": 503,
+          "memory": {
+            "geometries": 471,
+            "textures": 86
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 0,
+          "batches": 0,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 0,
+          "materials": 0,
+          "textures": 0,
+          "cacheEntries": 0,
+          "leases": 0
+        },
+        "jsHeapBytes": 86647242,
+        "generationMs": 115
+      },
+      "mixed": {
+        "fps": 93.1405840691466,
+        "medianMs": 10.800000000745058,
+        "p95Ms": 12.300000000745058,
+        "samples": 96,
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 0,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 258.19999999925494,
+          "timings": {
+            "layout": 11.100000001490116,
+            "contours": 21.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 33.69999999925494,
+            "paintPrep": 13.900000002235174,
+            "paintMeshes": 8.599999997764826,
+            "surfaces": 78.19999999925494,
+            "structures": 0,
+            "fixtures": 8.599999997764826,
+            "developmentForest": 158.30000000074506,
+            "drape": 2
+          },
+          "initialBuildCpuMs": 95.6000000052154,
+          "triangles": 555767,
+          "calls": 453,
+          "memory": {
+            "geometries": 474,
+            "textures": 86
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 50,
+          "batches": 144,
+          "mergedBytes": 19771536,
+          "sourceGeometryBytes": 20647792,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 50,
+          "leases": 50
+        },
+        "jsHeapBytes": 134741570,
+        "generationMs": 217.19999999925494
+      },
+      "method": "Actual in-game same roads/lots/camera; 96 moving-camera rAF intervals after 16 warmups. Includes scheduling/postprocessing. Generation includes zoning and neighbourhood rebuild; shader warmup differs. Not isolated GPU time."
+    }
+  ]
+}

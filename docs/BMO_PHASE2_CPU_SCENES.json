@@ -1,0 +1,107 @@
+{
+  "method": "Actual game zoning and neighbourhood geometry renderer in Node VM; no WebGL driver, browser FPS or draw-call measurement. Cold/warm order differs; timings are diagnostic.",
+  "rows": [
+    {
+      "count": 10,
+      "totalBuildings": 18,
+      "original": {
+        "generationAndChunkMs": 550.5149999999994,
+        "meshTriangleEquivalent": 139651.66666666666,
+        "renderObjects": 98,
+        "bmo": {
+          "activeBuildings": 0,
+          "batches": 0,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 0,
+          "materials": 0,
+          "textures": 0,
+          "cacheEntries": 0,
+          "leases": 0
+        }
+      },
+      "mixed": {
+        "generationAndChunkMs": 555.8825999999972,
+        "meshTriangleEquivalent": 135390.66666666666,
+        "renderObjects": 109,
+        "bmo": {
+          "activeBuildings": 10,
+          "batches": 54,
+          "mergedBytes": 3413080,
+          "sourceGeometryBytes": 4054904,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 10,
+          "leases": 10
+        }
+      }
+    },
+    {
+      "count": 25,
+      "totalBuildings": 33,
+      "original": {
+        "generationAndChunkMs": 213.31619999999748,
+        "meshTriangleEquivalent": 273676.6666666667,
+        "renderObjects": 159,
+        "bmo": {
+          "activeBuildings": 0,
+          "batches": 0,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 0,
+          "materials": 0,
+          "textures": 0,
+          "cacheEntries": 0,
+          "leases": 0
+        }
+      },
+      "mixed": {
+        "generationAndChunkMs": 1269.4851999999992,
+        "meshTriangleEquivalent": 214959.66666666666,
+        "renderObjects": 162,
+        "bmo": {
+          "activeBuildings": 25,
+          "batches": 108,
+          "mergedBytes": 9223784,
+          "sourceGeometryBytes": 10490672,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 25,
+          "leases": 25
+        }
+      }
+    },
+    {
+      "count": 50,
+      "totalBuildings": 58,
+      "original": {
+        "generationAndChunkMs": 494.73070000000007,
+        "meshTriangleEquivalent": 426074.6666666667,
+        "renderObjects": 242,
+        "bmo": {
+          "activeBuildings": 0,
+          "batches": 0,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 0,
+          "materials": 0,
+          "textures": 0,
+          "cacheEntries": 0,
+          "leases": 0
+        }
+      },
+      "mixed": {
+        "generationAndChunkMs": 3338.372599999999,
+        "meshTriangleEquivalent": 331370.6666666667,
+        "renderObjects": 192,
+        "bmo": {
+          "activeBuildings": 50,
+          "batches": 144,
+          "mergedBytes": 19771536,
+          "sourceGeometryBytes": 20647792,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 50,
+          "leases": 50
+        }
+      }
+    }
+  ]
+}

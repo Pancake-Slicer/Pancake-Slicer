@@ -14,7 +14,7 @@
     "benchmark:test": "node scripts/art-deco-browser.cjs",
     "benchmark:serve": "npm run benchmark:build && http-server .tools/art-deco -a 127.0.0.1 -p 4180 -c-1",
     "start": "http-server web -a 127.0.0.1 -p 4173 -c-1",
-    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs scripts/growable-assets.test.cjs scripts/approved-building-import.test.cjs scripts/procedural-offices.test.cjs",
+    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs scripts/growable-assets.test.cjs scripts/approved-building-import.test.cjs scripts/procedural-offices.test.cjs scripts/lightweight-bmo.test.cjs",
     "assemble": "node scripts/assemble-runtime.cjs",
     "import:sc4": "node scripts/import-sc4-originals.cjs",
     "build": "npm run assemble && npm run check && node scripts/build.cjs",
@@ -40,7 +40,9 @@
     "architecture:lightweight:prepare": "node scripts/prepare-lightweight.cjs",
     "architecture:lightweight:check": "npm run architecture:lightweight:prepare && node --test scripts/lightweight-template.test.cjs scripts/bmo-generator.test.cjs",
     "architecture:lightweight:measure": "npm run architecture:lightweight:prepare && node scripts/lightweight-cpu.cjs",
-    "architecture:lightweight": "npm run architecture:lightweight:prepare && node scripts/lightweight-serve.cjs"
+    "architecture:lightweight": "npm run architecture:lightweight:prepare && node scripts/lightweight-serve.cjs",
+    "export:lightweight-bmo": "npm run build && node scripts/export-lightweight-bmo.cjs",
+    "review:lightweight-bmo": "node scripts/review-lightweight-bmo.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

@@ -1,0 +1,47 @@
+{
+  "phase": "Lightweight BMO in-game integration Phase 2",
+  "branch": "gameplay/lightweight-bmo-phase2",
+  "checkpoint": "a7f7704658b73b341631923ae8436509d15ac539",
+  "historyBundle": ".tools/phase2-checkpoint/history.bundle",
+  "gameAndIntegrationChecks": 90,
+  "build": "passed",
+  "browser": {
+    "cases": [
+      10,
+      25,
+      50
+    ],
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "nvidiaVerified": false,
+    "viewport": [
+      1280,
+      720
+    ],
+    "errors": [],
+    "normalStartup": "terrain created; BMO controls enabled; Office tab selected",
+    "finalExportStartup": "terrain setup and both controls loaded without errors",
+    "offPreservation": "50 BMO buildings retained after switching OFF",
+    "timingBuildSha256": "6c1687d6fbfa0791c26e4f2efa0628315881e06ded8db69450fc276bb4e1d9fd",
+    "timingLimit": "10/25 original trials have long scheduling stalls; no speedup inference. 50-building pair is one small-city Intel run.",
+    "finalDifference": "Final source adds a unit-tested OFF-demolition/repaint redevelopment guard. Final benchmark adds collapsible controls and long-interval diagnostics; no geometry/rendering change.",
+    "screenshot": ".tools/bmo-phase2/50-bmo-in-game.jpg",
+    "temporaryTabs": "closed; viewport reset"
+  },
+  "exports": {
+    "benchmark": "C:\\Users\\camsh\\Downloads\\Pancake City - Lightweight BMO Manual Benchmark - 20261116T163715Z.html",
+    "launcher": "C:\\Users\\camsh\\Downloads\\Play Lightweight BMO in Chrome - 20261116T163715Z.cmd",
+    "playtest": "C:\\Users\\camsh\\Downloads\\Pancake City - Lightweight BMO Playtest - 20261116T163715Z.html",
+    "playtestSha256": "5fe286aca2e1fbfe00e4118ebfaab29008c20f87ed80caa0d643fe47f429c3ee",
+    "benchmarkSha256": "7d2c57e9cf8cf469329ed819868c6802221e2dd3e9590c576fcac0d721841ca9"
+  },
+  "original52Sha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+  "preserved": [
+    "architecture/bmo",
+    "architecture/modernist",
+    "architecture/assemblies",
+    "architecture/integration",
+    "Assets",
+    "benchmark"
+  ],
+  "push": "not authorized; local checkpoint is not off-computer backup"
+}
