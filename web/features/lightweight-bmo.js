@@ -4,7 +4,7 @@ const pcBmoKey='template:bmo-horizontal-lightweight@1.0.0';
 const pcBmoDefinition={id:'bmo-horizontal-lightweight',version:'1.0.0',key:pcBmoKey,name:'Lightweight BMO-inspired office',model:{format:'lightweight-bmo'}};
 let pcBmoRuntime=null,pcBmoFrames=[],pcBmoPerfHook=null;const pcBmoBatches=new Set,pcBmoFits=new WeakMap;
 function pcBmoReady(){
- if(!pcBmoRuntime){const module=pcBmoPackage(pcOhneeEngine()),generator=new module.BmoGenerator,system=module.createTemplateSystem({definition:module.bmoTemplate,generator,polygon:{Te,je,sn,Bo,cS,facing:pcGrowableFacing}});pcBmoRuntime={module,generator,system};}
+ if(!pcBmoRuntime){const module=pcBmoPackage(pcOhneeEngine()),generator=new module.BmoGenerator,system=module.createTemplateSystem({definition:module.bmoTemplate,generator,polygon:{Te,je,sn,Bo,cS,facing:pcGrowableFacing}});pcBmoRuntime={module,generator,system,materials:pcBmoMaterialLibrary(generator.materials)};}
  return pcBmoRuntime;
 }
 function pcBmoControl(collection){return collection.pcBmoControl||{enabled:false,favour:false};}
@@ -48,7 +48,7 @@ function pcBmoFlush(buildings,group){
  if(!buildings.length)return;
  const runtime=pcBmoReady(),models=[],batch=new runtime.module.OptimizedFamilyRenderer({chunkSize:256});
  try{
-  for(const building of buildings){const record=structuredClone(building.office.lightweightBmo);record.placement.y=building.y;models.push(runtime.system.generate(record));}
+  for(const building of buildings){const record=structuredClone(building.office.lightweightBmo);record.placement.y=building.y;models.push(runtime.materials.apply(runtime.system.generate(record),record));}
   batch.build(models);batch.root.name='Lightweight BMO chunk';
   for(const mesh of batch.root.children){mesh.userData.pcSharedAssetGeometry=true;mesh.userData.pcBmoBuildings=mesh.userData.sourceBuildings.map(i=>buildings[i]);}
   const record={batch,models};pcBmoBatches.add(record);batch.root.userData.pcBmoCleanup=()=>{pcBmoBatches.delete(record);batch.clear();models.forEach(m=>runtime.system.release(m));};group.add(batch.root);

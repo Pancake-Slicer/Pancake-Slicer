@@ -4,6 +4,8 @@ This project was reconstructed **only** from the user-provided `Pancake (52).htm
 
 ## BMO-inspired tower — awaiting visual approval
 
+**BMO material review:** run `npm run export:bmo-harmonized` for the updated offline Playtest and the same-geometry, four-palette city comparison. [Materials, launch instructions, performance evidence and review limits](docs/BMO_MATERIAL_HARMONIZATION.md).
+
 **Phase2 playable integration:** run `npm run export:lightweight-bmo` for new self-contained development Playtest and manual Benchmark HTML files. Enable **Lightweight BMO Growables** and **Favour BMO** in the development panel, then zone new Office lots using Mix all98. OFF preserves existing buildings and returns future growth to the existing catalogue. [Launch instructions, architecture, measured results and limitations](docs/LIGHTWEIGHT_BMO_PHASE2.md). No permanent normal-game control, approved-architecture overwrite or additional family.
 
 **Lightweight Phase1:** [five-lot review](http://127.0.0.1:4195/lightweight.html), or double-click **Review Lightweight Architecture.cmd**. Native lot fitting and shared opaque BMO geometry are isolated from gameplay. [Contract, measured geometry/CPU comparison, checks and browser-verification limitation](docs/LIGHTWEIGHT_PHASE1.md). NVIDIA browser timings and visual review are pending; no growable activation.

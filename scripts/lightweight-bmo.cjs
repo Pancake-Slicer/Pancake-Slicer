@@ -18,7 +18,7 @@ function bmoSource(){
   output.push('const '+name+'=(()=>{\n'+code+'\nreturn {'+exports.join(',')+'};})();');return name;
  }
  const bmo=visit('architecture/bmo/generator.js'),contract=visit('architecture/lightweight/template.mjs'),definition=visit('architecture/lightweight/bmo.mjs'),optimizer=visit('architecture/assemblies/optimized-renderer.js');
- return 'function pcBmoPackage(engine){\n'+output.join('\n')+'\nreturn {...'+bmo+',...'+contract+',...'+definition+',...'+optimizer+'};}\n'+fs.readFileSync(path.join(root,'web/features/lightweight-bmo.js'),'utf8');
+ return 'function pcBmoPackage(engine){\n'+output.join('\n')+'\nreturn {...'+bmo+',...'+contract+',...'+definition+',...'+optimizer+'};}\n'+fs.readFileSync(path.join(root,'web/features/bmo-materials.js'),'utf8')+'\n'+fs.readFileSync(path.join(root,'web/features/lightweight-bmo.js'),'utf8');
 }
 function applyBmoIntegration(source){
  const replace=(before,after)=>{assert.equal(source.split(before).length,2,'BMO integration boundary changed: '+before.slice(0,90));source=source.replace(before,()=>after);};

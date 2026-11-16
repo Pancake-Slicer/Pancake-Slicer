@@ -1,0 +1,307 @@
+{
+  "finalScene": {
+    "kind": "BMO material harmonization",
+    "errors": [],
+    "measurements": {
+      "before": {
+        "samples": 40,
+        "fps": 1.2265762271127982,
+        "medianMs": 1005.6000000014901,
+        "p95Ms": 1043.3999999985099,
+        "maxMs": 1050.8999999985099,
+        "longIntervals": 32,
+        "viewport": [
+          1280,
+          720
+        ],
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 399,
+          "timings": {
+            "layout": 19.100000001490116,
+            "contours": 28.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 48.80000000447035,
+            "paintPrep": 18.399999998509884,
+            "paintMeshes": 13.600000001490116,
+            "surfaces": 109.80000000447035,
+            "structures": 0.09999999403953552,
+            "fixtures": 12.900000005960464,
+            "developmentForest": 254.09999999403954,
+            "drape": 3
+          },
+          "initialBuildCpuMs": 127.5,
+          "triangles": 263185,
+          "calls": 324,
+          "memory": {
+            "geometries": 293,
+            "textures": 26
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 5,
+          "batches": 36,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 302888,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 1,
+          "leases": 5
+        },
+        "jsHeapBytes": 74380512
+      },
+      "after": {
+        "samples": 40,
+        "fps": 48.79238838758894,
+        "medianMs": 20.400000005960464,
+        "p95Ms": 24.200000002980232,
+        "maxMs": 24.299999997019768,
+        "longIntervals": 0,
+        "viewport": [
+          1280,
+          720
+        ],
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 399,
+          "timings": {
+            "layout": 19.100000001490116,
+            "contours": 28.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 48.80000000447035,
+            "paintPrep": 18.399999998509884,
+            "paintMeshes": 13.600000001490116,
+            "surfaces": 109.80000000447035,
+            "structures": 0.09999999403953552,
+            "fixtures": 12.900000005960464,
+            "developmentForest": 254.09999999403954,
+            "drape": 3
+          },
+          "initialBuildCpuMs": 127.5,
+          "triangles": 263185,
+          "calls": 325,
+          "memory": {
+            "geometries": 297,
+            "textures": 26
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 5,
+          "batches": 37,
+          "mergedBytes": 163520,
+          "sourceGeometryBytes": 302888,
+          "materials": 22,
+          "textures": 2,
+          "cacheEntries": 1,
+          "leases": 5
+        },
+        "jsHeapBytes": 75437068
+      },
+      "method": "Same eight buildings, geometry, game lighting and moving camera. 40 rAF intervals after 8 warmups. Comparison retains original dark BMO as fifth sample; regular growables use only four coordinated palettes. Scheduling/driver/shader warmup are not isolated."
+    },
+    "geometryIdentical": true,
+    "palettes": [
+      {
+        "id": "light-silver",
+        "name": "Light silver / blue-grey",
+        "reference": 407,
+        "cladding": "#c3c7c9",
+        "glass": "#95a1a6"
+      },
+      {
+        "id": "medium-grey",
+        "name": "Medium grey / slate",
+        "reference": 403,
+        "cladding": "#9fa3a2",
+        "glass": "#727e82"
+      },
+      {
+        "id": "warm-grey",
+        "name": "Warm grey / neutral",
+        "reference": 414,
+        "cladding": "#c2bfb5",
+        "glass": "#97a09f"
+      },
+      {
+        "id": "dark-charcoal",
+        "name": "Dark charcoal / subdued blue-grey",
+        "reference": 403,
+        "cladding": "#565f62",
+        "glass": "#5e6a6d"
+      }
+    ],
+    "referenceIds": [
+      403,
+      407,
+      414
+    ],
+    "nativeSize": [
+      34,
+      28
+    ],
+    "storeys": 25
+  },
+  "finalSceneFirstTrial": {
+    "kind": "BMO material harmonization",
+    "errors": [],
+    "measurements": {
+      "before": {
+        "samples": 40,
+        "fps": 1.0811658211050716,
+        "medianMs": 1010.1000000014901,
+        "p95Ms": 1085.7000000029802,
+        "maxMs": 1405.6000000014901,
+        "longIntervals": 37,
+        "viewport": [
+          1280,
+          720
+        ],
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 399,
+          "timings": {
+            "layout": 19.100000001490116,
+            "contours": 28.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 48.80000000447035,
+            "paintPrep": 18.399999998509884,
+            "paintMeshes": 13.600000001490116,
+            "surfaces": 109.80000000447035,
+            "structures": 0.09999999403953552,
+            "fixtures": 12.900000005960464,
+            "developmentForest": 254.09999999403954,
+            "drape": 3
+          },
+          "initialBuildCpuMs": 127.5,
+          "triangles": 263185,
+          "calls": 324,
+          "memory": {
+            "geometries": 293,
+            "textures": 26
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 5,
+          "batches": 36,
+          "mergedBytes": 0,
+          "sourceGeometryBytes": 302888,
+          "materials": 9,
+          "textures": 2,
+          "cacheEntries": 1,
+          "leases": 5
+        },
+        "jsHeapBytes": 72626630
+      },
+      "after": {
+        "samples": 40,
+        "fps": 0.9886478510503875,
+        "medianMs": 1015.9000000059605,
+        "p95Ms": 1022.6999999955297,
+        "maxMs": 1025.2999999970198,
+        "longIntervals": 40,
+        "viewport": [
+          1280,
+          720
+        ],
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 399,
+          "timings": {
+            "layout": 19.100000001490116,
+            "contours": 28.600000001490116,
+            "baseTilesRebuilt": 4,
+            "baseTilesTotal": 4,
+            "meshes": 48.80000000447035,
+            "paintPrep": 18.399999998509884,
+            "paintMeshes": 13.600000001490116,
+            "surfaces": 109.80000000447035,
+            "structures": 0.09999999403953552,
+            "fixtures": 12.900000005960464,
+            "developmentForest": 254.09999999403954,
+            "drape": 3
+          },
+          "initialBuildCpuMs": 127.5,
+          "triangles": 263185,
+          "calls": 325,
+          "memory": {
+            "geometries": 297,
+            "textures": 26
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "bmo": {
+          "activeBuildings": 5,
+          "batches": 37,
+          "mergedBytes": 163520,
+          "sourceGeometryBytes": 302888,
+          "materials": 22,
+          "textures": 2,
+          "cacheEntries": 1,
+          "leases": 5
+        },
+        "jsHeapBytes": 73324528
+      },
+      "method": "Same eight buildings, geometry, game lighting and moving camera. 40 rAF intervals after 8 warmups. Comparison retains original dark BMO as fifth sample; regular growables use only four coordinated palettes. Scheduling/driver/shader warmup are not isolated."
+    },
+    "geometryIdentical": true,
+    "palettes": [
+      {
+        "id": "light-silver",
+        "name": "Light silver / blue-grey",
+        "reference": 407,
+        "cladding": "#c3c7c9",
+        "glass": "#95a1a6"
+      },
+      {
+        "id": "medium-grey",
+        "name": "Medium grey / slate",
+        "reference": 403,
+        "cladding": "#9fa3a2",
+        "glass": "#727e82"
+      },
+      {
+        "id": "warm-grey",
+        "name": "Warm grey / neutral",
+        "reference": 414,
+        "cladding": "#c2bfb5",
+        "glass": "#97a09f"
+      },
+      {
+        "id": "dark-charcoal",
+        "name": "Dark charcoal / subdued blue-grey",
+        "reference": 403,
+        "cladding": "#565f62",
+        "glass": "#5e6a6d"
+      }
+    ],
+    "referenceIds": [
+      403,
+      407,
+      414
+    ],
+    "nativeSize": [
+      34,
+      28
+    ],
+    "storeys": 25
+  },
+  "interpretation": "Final Intel in-app runs include 1-second scheduling stalls, so paired frame times do not establish rendering speed. Earlier clean interim scene before switching references from low offices to actual towers observed 8.9ms→8.0ms median; this is not the final palette/scene baseline and is not a speedup claim."
+}

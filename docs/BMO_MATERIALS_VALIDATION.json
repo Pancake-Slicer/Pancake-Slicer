@@ -1,0 +1,32 @@
+{
+  "checkpoint": "ca2e47aacda5e227bd50550a449ed0ec715b845e",
+  "branch": "architecture/bmo-material-harmonization",
+  "tests": {
+    "passed": 94,
+    "failed": 0
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-Slicer-main\\.tools\\lightweight-phase1\\dist\\Pancake City - BMO Harmonized Playtest - 20261116T184038Z.html",
+    "comparison": "C:\\Users\\camsh\\Desktop\\Pancake-Slicer-main\\.tools\\lightweight-phase1\\dist\\Pancake City - BMO Material Comparison - 20261116T184038Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-Slicer-main\\.tools\\lightweight-phase1\\dist\\Play Harmonized BMO in Chrome - 20261116T184038Z.cmd",
+    "playtestSha256": "a664e4b041f4293595e050d1be20c561a0239ab1b8fe7d17ab7f18ebb7798375",
+    "comparisonSha256": "d589ec47290c9873b7bf441c608be9dbf70768c96bf2949fa7ec99e2d3cb9c38"
+  },
+  "downloads": {
+    "comparison": "C:\\Users\\camsh\\Downloads\\Pancake City - BMO Material Comparison - 20261116T184038Z.html",
+    "launcher": "C:\\Users\\camsh\\Downloads\\Play Harmonized BMO in Chrome - 20261116T184038Z.cmd",
+    "playtest": "C:\\Users\\camsh\\Downloads\\Pancake City - BMO Harmonized Playtest - 20261116T184038Z.html"
+  },
+  "original52Sha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+  "verification": "Static self-contained resource checks, SHA-matched Downloads copies, actual comparison with five identical native BMO geometries plus three catalogue towers, four palette closeups, normal Playtest terrain-dialog startup, empty browser error logs. Direct file:// automation unavailable; browser executes the same export bytes through loopback. Test tabs closed and viewport reset.",
+  "screenshots": [
+    ".tools/bmo-materials/before.jpg",
+    ".tools/bmo-materials/after.jpg",
+    ".tools/bmo-materials/light.jpg",
+    ".tools/bmo-materials/medium.jpg",
+    ".tools/bmo-materials/warm.jpg",
+    ".tools/bmo-materials/charcoal.jpg",
+    ".tools/bmo-materials/startup.jpg"
+  ],
+  "limitations": "GPU was Intel Iris Xe, not NVIDIA. Final frame intervals are confounded by roughly 1-second scheduling stalls. No large-city or isolated GPU-timing claim. No GitHub push."
+}

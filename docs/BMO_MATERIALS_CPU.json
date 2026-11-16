@@ -1,0 +1,25 @@
+{
+  "method": "Actual game neighbourhood CPU geometry/material counters; no WebGL frame-time claim",
+  "before": {
+    "activeBuildings": 50,
+    "batches": 144,
+    "mergedBytes": 19771536,
+    "sourceGeometryBytes": 20647792,
+    "materials": 9,
+    "textures": 2,
+    "cacheEntries": 50,
+    "leases": 50
+  },
+  "after": {
+    "activeBuildings": 50,
+    "batches": 146,
+    "mergedBytes": 17447536,
+    "sourceGeometryBytes": 20647792,
+    "materials": 13,
+    "textures": 2,
+    "cacheEntries": 50,
+    "leases": 50
+  },
+  "geometryIdentical": true,
+  "historyIdentical": true
+}
