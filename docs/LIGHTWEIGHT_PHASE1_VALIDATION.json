@@ -1,0 +1,15 @@
+{
+  "stage": "isolated lightweight BMO Phase 1",
+  "status": "technical checks pass; browser measurements and visual verification pending",
+  "gameplayActivated": false,
+  "startCommit": "820d31d",
+  "branch": "architecture/lightweight-parametric-phase1",
+  "checks": {"game":84,"architecture":44,"bmoAndTemplate":12,"build":"passed"},
+  "browser": {"status":"blocked by browser URL verification; no further UI input", "gpu":null,"fps":null,"frameTimes":null,"sceneDrawCalls":null,"screenshots":[]},
+  "cpuReport":"LIGHTWEIGHT_PHASE1_CPU.json",
+  "reviewUrl":"http://127.0.0.1:4195/lightweight.html",
+  "gameBaselineUrl":"http://127.0.0.1:4195/game-baseline.html",
+  "original52Sha256":"c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+  "checkpoint":"C:/Users/camsh/Desktop/Pancake-Slicer-main/.tools/lightweight-phase1-checkpoint/history.bundle",
+  "push":"not authorized; local work is not an off-computer backup"
+}

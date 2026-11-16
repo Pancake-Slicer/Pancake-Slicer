@@ -4,6 +4,8 @@ This project was reconstructed **only** from the user-provided `Pancake (52).htm
 
 ## BMO-inspired tower — awaiting visual approval
 
+**Lightweight Phase1:** [five-lot review](http://127.0.0.1:4195/lightweight.html), or double-click **Review Lightweight Architecture.cmd**. Native lot fitting and shared opaque BMO geometry are isolated from gameplay. [Contract, measured geometry/CPU comparison, checks and browser-verification limitation](docs/LIGHTWEIGHT_PHASE1.md). NVIDIA browser timings and visual review are pending; no growable activation.
+
 Open [the five-building parametric comparison](http://127.0.0.1:4187/bmo.html) while `npm run architecture:modernist` runs. Width/depth/storeys/bays/podium/roof controls rebuild the selected template; rectangular lot tests recalculate modules without scaling. [Parameters, statistics and verification](BMO_PARAMETRIC_TOWER.md). No BMO growable registration or gameplay integration.
 
 ## Contents

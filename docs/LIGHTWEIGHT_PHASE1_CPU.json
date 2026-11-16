@@ -1,0 +1,573 @@
+{
+  "date": "2026-11-16T15:32:32.417Z",
+  "method": "Node CPU generation using existing Three r180 geometry; no GPU/render/FPS measurement. Detailed comparator uses neutral material stubs; no image decoding. Timings are one cold sample per shape, not statistical benchmarks.",
+  "comparison": "Same occupied floors; nearest allowed 2.2m Ohneeohnee module, max 24 depth bays; comparator has no podium. See measured dimensions. Actual browser metrics are separate.",
+  "rows": [
+    {
+      "lot": "Narrow",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "bmo-horizontal-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "phase1-fixed-1138",
+        "lotId": "lightweight-lot-0",
+        "parameters": {
+          "version": "1.0.0",
+          "family": "bmo-inspired-horizontal-office",
+          "id": "phase1-0",
+          "name": "Narrow",
+          "width": 22.2,
+          "depth": 24.2,
+          "storeys": 18,
+          "floorHeight": 3.65,
+          "lobbyHeight": 4.8,
+          "bandRatio": 0.58,
+          "cornerWidth": 1.2,
+          "targetBay": 2.4,
+          "frontBays": null,
+          "sideBays": null,
+          "capHeight": 4.6,
+          "penthouseHeight": 4.8,
+          "equipmentCount": 2,
+          "podium": null,
+          "roof": "flat-mechanical",
+          "palette": "silver-blue-grey"
+        },
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "angle": 0,
+          "scale": 1
+        },
+        "footprint": [
+          {
+            "x": -11.7,
+            "z": -12.7
+          },
+          {
+            "x": 11.7,
+            "z": -12.7
+          },
+          {
+            "x": 11.7,
+            "z": 12.7
+          },
+          {
+            "x": -11.7,
+            "z": 12.7
+          }
+        ]
+      },
+      "lightweight": {
+        "triangles": 3260,
+        "sourceGeometryBytes": 228968,
+        "materialBatches": 9,
+        "transparentBatches": 0,
+        "fitMs": 5.259299999999996,
+        "generationMs": 9.679299999999984,
+        "dimensions": {
+          "width": 22.510000228881836,
+          "depth": 24.77500057220459,
+          "height": 76.37000274658203
+        },
+        "grid": [
+          {
+            "width": 22.2,
+            "depth": 24.2,
+            "start": 0,
+            "end": 18,
+            "front": {
+              "count": 8,
+              "pitch": 2.475,
+              "clear": 19.8
+            },
+            "side": {
+              "count": 9,
+              "pitch": 2.4222222222222225,
+              "clear": 21.8
+            }
+          }
+        ]
+      },
+      "ohneeohnee": {
+        "triangles": 11936,
+        "sourceGeometryBytes": 862784,
+        "materialBatches": 20,
+        "transparentBatches": 3,
+        "generationMs": 45.17869999999999,
+        "dimensions": {
+          "width": 22.299999237060547,
+          "height": 70.87000274658203,
+          "depth": 24.72000026702881
+        }
+      }
+    },
+    {
+      "lot": "Wide podium",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "bmo-horizontal-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "phase1-fixed-1138",
+        "lotId": "lightweight-lot-1",
+        "parameters": {
+          "version": "1.0.0",
+          "family": "bmo-inspired-horizontal-office",
+          "id": "phase1-1",
+          "name": "Wide podium",
+          "width": 46,
+          "depth": 24.1,
+          "storeys": 30,
+          "floorHeight": 3.65,
+          "lobbyHeight": 4.8,
+          "bandRatio": 0.58,
+          "cornerWidth": 1.2,
+          "targetBay": 2.4,
+          "frontBays": null,
+          "sideBays": null,
+          "capHeight": 4.6,
+          "penthouseHeight": 4.8,
+          "equipmentCount": 2,
+          "podium": {
+            "storeys": 4,
+            "width": 62.2,
+            "depth": 32.2
+          },
+          "roof": "flat-mechanical",
+          "palette": "silver-blue-grey"
+        },
+        "placement": {
+          "x": 1.7763568394002505e-15,
+          "y": 0,
+          "z": 0,
+          "angle": 0,
+          "scale": 1
+        },
+        "footprint": [
+          {
+            "x": -31.700000000000003,
+            "z": -16.700000000000003
+          },
+          {
+            "x": 31.700000000000003,
+            "z": -16.700000000000003
+          },
+          {
+            "x": 31.700000000000003,
+            "z": 16.700000000000003
+          },
+          {
+            "x": -31.700000000000003,
+            "z": 16.700000000000003
+          }
+        ]
+      },
+      "lightweight": {
+        "triangles": 6152,
+        "sourceGeometryBytes": 431408,
+        "materialBatches": 9,
+        "transparentBatches": 0,
+        "fitMs": 1.11069999999998,
+        "generationMs": 2.5559000000000083,
+        "dimensions": {
+          "width": 62.4900016784668,
+          "depth": 32.76500129699707,
+          "height": 120.16999816894531
+        },
+        "grid": [
+          {
+            "width": 62.2,
+            "depth": 32.2,
+            "start": 0,
+            "end": 4,
+            "front": {
+              "count": 25,
+              "pitch": 2.3920000000000003,
+              "clear": 59.800000000000004
+            },
+            "side": {
+              "count": 12,
+              "pitch": 2.483333333333334,
+              "clear": 29.800000000000004
+            }
+          },
+          {
+            "width": 46,
+            "depth": 24.1,
+            "start": 4,
+            "end": 30,
+            "front": {
+              "count": 18,
+              "pitch": 2.4222222222222225,
+              "clear": 43.6
+            },
+            "side": {
+              "count": 9,
+              "pitch": 2.4111111111111114,
+              "clear": 21.700000000000003
+            }
+          }
+        ]
+      },
+      "ohneeohnee": {
+        "triangles": 20558,
+        "sourceGeometryBytes": 1468436,
+        "materialBatches": 20,
+        "transparentBatches": 3,
+        "generationMs": 60.746999999999986,
+        "dimensions": {
+          "width": 46.5,
+          "height": 114.66999816894531,
+          "depth": 24.72000026702881
+        }
+      }
+    },
+    {
+      "lot": "Deep",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "bmo-horizontal-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "phase1-fixed-1138",
+        "lotId": "lightweight-lot-2",
+        "parameters": {
+          "version": "1.0.0",
+          "family": "bmo-inspired-horizontal-office",
+          "id": "phase1-2",
+          "name": "Deep",
+          "width": 30.2,
+          "depth": 54,
+          "storeys": 25,
+          "floorHeight": 3.65,
+          "lobbyHeight": 4.8,
+          "bandRatio": 0.58,
+          "cornerWidth": 1.2,
+          "targetBay": 2.4,
+          "frontBays": null,
+          "sideBays": null,
+          "capHeight": 4.6,
+          "penthouseHeight": 4.8,
+          "equipmentCount": 2,
+          "podium": null,
+          "roof": "flat-mechanical",
+          "palette": "silver-blue-grey"
+        },
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "z": -1.7763568394002505e-15,
+          "angle": 0,
+          "scale": 1
+        },
+        "footprint": [
+          {
+            "x": -15.7,
+            "z": -27.6
+          },
+          {
+            "x": 15.7,
+            "z": -27.6
+          },
+          {
+            "x": 15.7,
+            "z": 27.6
+          },
+          {
+            "x": -15.7,
+            "z": 27.6
+          }
+        ]
+      },
+      "lightweight": {
+        "triangles": 4652,
+        "sourceGeometryBytes": 326408,
+        "materialBatches": 9,
+        "transparentBatches": 0,
+        "fitMs": 0.7265000000000157,
+        "generationMs": 1.7576999999999998,
+        "dimensions": {
+          "width": 30.510000228881836,
+          "depth": 54.57500076293945,
+          "height": 101.91999816894531
+        },
+        "grid": [
+          {
+            "width": 30.2,
+            "depth": 54,
+            "start": 0,
+            "end": 25,
+            "front": {
+              "count": 12,
+              "pitch": 2.316666666666667,
+              "clear": 27.8
+            },
+            "side": {
+              "count": 22,
+              "pitch": 2.3454545454545457,
+              "clear": 51.6
+            }
+          }
+        ]
+      },
+      "ohneeohnee": {
+        "triangles": 20494,
+        "sourceGeometryBytes": 1465108,
+        "materialBatches": 20,
+        "transparentBatches": 3,
+        "generationMs": 60.071800000000025,
+        "dimensions": {
+          "width": 31.100000381469727,
+          "height": 96.41999816894531,
+          "depth": 53.31999969482422
+        }
+      }
+    },
+    {
+      "lot": "Rotated",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "bmo-horizontal-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "phase1-fixed-1138",
+        "lotId": "lightweight-lot-3",
+        "parameters": {
+          "version": "1.0.0",
+          "family": "bmo-inspired-horizontal-office",
+          "id": "phase1-3",
+          "name": "Rotated",
+          "width": 40.2,
+          "depth": 30.2,
+          "storeys": 25,
+          "floorHeight": 3.65,
+          "lobbyHeight": 4.8,
+          "bandRatio": 0.58,
+          "cornerWidth": 1.2,
+          "targetBay": 2.4,
+          "frontBays": null,
+          "sideBays": null,
+          "capHeight": 4.6,
+          "penthouseHeight": 4.8,
+          "equipmentCount": 2,
+          "podium": null,
+          "roof": "flat-mechanical",
+          "palette": "silver-blue-grey"
+        },
+        "placement": {
+          "x": 1.3362492413275994e-16,
+          "y": 0,
+          "z": -4.1709267467201427e-16,
+          "angle": 0.43,
+          "scale": 1
+        },
+        "footprint": [
+          {
+            "x": -25.360462616408732,
+            "z": -5.641536659611031
+          },
+          {
+            "x": 12.270719420131513,
+            "z": -22.89998788018036
+          },
+          {
+            "x": 25.360462616408732,
+            "z": 5.641536659611031
+          },
+          {
+            "x": -12.270719420131513,
+            "z": 22.89998788018036
+          }
+        ]
+      },
+      "lightweight": {
+        "triangles": 4460,
+        "sourceGeometryBytes": 312968,
+        "materialBatches": 9,
+        "transparentBatches": 0,
+        "fitMs": 1.401200000000017,
+        "generationMs": 2.9961999999999875,
+        "dimensions": {
+          "width": 40.5099983215332,
+          "depth": 30.77500057220459,
+          "height": 101.91999816894531
+        },
+        "grid": [
+          {
+            "width": 40.2,
+            "depth": 30.2,
+            "start": 0,
+            "end": 25,
+            "front": {
+              "count": 16,
+              "pitch": 2.3625000000000003,
+              "clear": 37.800000000000004
+            },
+            "side": {
+              "count": 12,
+              "pitch": 2.316666666666667,
+              "clear": 27.8
+            }
+          }
+        ]
+      },
+      "ohneeohnee": {
+        "triangles": 18706,
+        "sourceGeometryBytes": 1338796,
+        "materialBatches": 20,
+        "transparentBatches": 3,
+        "generationMs": 43.7722,
+        "dimensions": {
+          "width": 39.900001525878906,
+          "height": 96.41999816894531,
+          "depth": 31.320000648498535
+        }
+      }
+    },
+    {
+      "lot": "Irregular",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "bmo-horizontal-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "phase1-fixed-1138",
+        "lotId": "lightweight-lot-4",
+        "parameters": {
+          "version": "1.0.0",
+          "family": "bmo-inspired-horizontal-office",
+          "id": "phase1-4",
+          "name": "Irregular",
+          "width": 43.8,
+          "depth": 33.4,
+          "storeys": 25,
+          "floorHeight": 3.65,
+          "lobbyHeight": 4.8,
+          "bandRatio": 0.58,
+          "cornerWidth": 1.2,
+          "targetBay": 2.4,
+          "frontBays": null,
+          "sideBays": null,
+          "capHeight": 4.6,
+          "penthouseHeight": 4.8,
+          "equipmentCount": 2,
+          "podium": null,
+          "roof": "flat-mechanical",
+          "palette": "silver-blue-grey"
+        },
+        "placement": {
+          "x": -0.5,
+          "y": 0,
+          "z": 0,
+          "angle": 0,
+          "scale": 1
+        },
+        "footprint": [
+          {
+            "x": -23,
+            "z": -17.3
+          },
+          {
+            "x": 22,
+            "z": -17.3
+          },
+          {
+            "x": 22,
+            "z": 17.3
+          },
+          {
+            "x": -23,
+            "z": 17.3
+          }
+        ]
+      },
+      "lightweight": {
+        "triangles": 4508,
+        "sourceGeometryBytes": 316328,
+        "materialBatches": 9,
+        "transparentBatches": 0,
+        "fitMs": 2.622599999999977,
+        "generationMs": 1.9864999999999782,
+        "dimensions": {
+          "width": 44.11000061035156,
+          "depth": 33.97500038146973,
+          "height": 101.91999816894531
+        },
+        "grid": [
+          {
+            "width": 43.8,
+            "depth": 33.4,
+            "start": 0,
+            "end": 25,
+            "front": {
+              "count": 17,
+              "pitch": 2.4352941176470586,
+              "clear": 41.4
+            },
+            "side": {
+              "count": 13,
+              "pitch": 2.3846153846153846,
+              "clear": 31
+            }
+          }
+        ]
+      },
+      "ohneeohnee": {
+        "triangles": 19852,
+        "sourceGeometryBytes": 1419592,
+        "materialBatches": 20,
+        "transparentBatches": 3,
+        "generationMs": 40.7038,
+        "dimensions": {
+          "width": 44.29999923706055,
+          "height": 96.41999816894531,
+          "depth": 33.52000045776367
+        }
+      }
+    }
+  ],
+  "batches": {
+    "lightweight": {
+      "inputMeshes": 45,
+      "outputMeshes": 9,
+      "triangles": 23032,
+      "opaqueMergedBatches": 9,
+      "opaqueInstancedBatches": 0,
+      "opaqueBorrowedMeshes": 0,
+      "transparentObjects": 0,
+      "ownedGeometryBytes": 1616080,
+      "instanceMatrixBytes": 0,
+      "chunkSize": 768
+    },
+    "ohneeohnee": {
+      "inputMeshes": 100,
+      "outputMeshes": 32,
+      "triangles": 91546,
+      "opaqueMergedBatches": 17,
+      "opaqueInstancedBatches": 0,
+      "opaqueBorrowedMeshes": 0,
+      "transparentObjects": 15,
+      "ownedGeometryBytes": 5701548,
+      "instanceMatrixBytes": 0,
+      "chunkSize": 768
+    }
+  },
+  "jsHeapUsedBytes": 85750936,
+  "sharedLightweight": {
+    "materials": 9,
+    "sourceMaps": 2,
+    "rawSourceMapBytes": 98304
+  },
+  "totals": {
+    "lightweightTriangles": 23032,
+    "ohneeohneeTriangles": 91546
+  }
+}

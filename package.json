@@ -36,7 +36,11 @@
     "architecture:phase6a:prepare": "node scripts/prepare-ohneeohnee-package.cjs",
     "architecture:phase6a:test": "npm run architecture:phase6a:prepare && npm run architecture:modernist:prepare && node scripts/ohneeohnee-package-browser.cjs",
     "architecture:bmo:check": "npm run architecture:modernist:prepare && node --test scripts/bmo-generator.test.cjs",
-    "architecture:bmo:test": "npm run architecture:modernist:prepare && node scripts/bmo-browser.cjs"
+    "architecture:bmo:test": "npm run architecture:modernist:prepare && node scripts/bmo-browser.cjs",
+    "architecture:lightweight:prepare": "node scripts/prepare-lightweight.cjs",
+    "architecture:lightweight:check": "npm run architecture:lightweight:prepare && node --test scripts/lightweight-template.test.cjs scripts/bmo-generator.test.cjs",
+    "architecture:lightweight:measure": "npm run architecture:lightweight:prepare && node scripts/lightweight-cpu.cjs",
+    "architecture:lightweight": "npm run architecture:lightweight:prepare && node scripts/lightweight-serve.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
