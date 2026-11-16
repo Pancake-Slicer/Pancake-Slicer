@@ -44,7 +44,12 @@
     "export:lightweight-bmo": "npm run build && node scripts/export-lightweight-bmo.cjs",
     "review:lightweight-bmo": "node scripts/review-lightweight-bmo.cjs",
     "export:bmo-harmonized": "npm run build && node scripts/export-bmo-harmonized.cjs",
-    "review:bmo-materials": "node scripts/review-bmo-materials.cjs"
+    "review:bmo-materials": "node scripts/review-bmo-materials.cjs",
+    "architecture:lind:prepare": "node scripts/prepare-lind-lab.cjs",
+    "architecture:lind": "npm run architecture:lind:prepare && node scripts/serve-lind-lab.cjs",
+    "architecture:lind:check": "npm run architecture:lind:prepare && node --test scripts/lind-parametric.test.cjs",
+    "architecture:lind:measure": "npm run architecture:lind:prepare && node scripts/lind-parametric-cpu.cjs",
+    "architecture:lind:export": "npm run architecture:lind:check && node scripts/export-lind-lab.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

@@ -2,6 +2,10 @@
 
 This project was reconstructed **only** from the user-provided `Pancake (52).html` browser build. It is **not** the original Codex repository or its Git history.
 
+## Parametric Lind — isolated visual review
+
+Open the timestamped **Parametric Lind Architecture Lab** HTML in Downloads with Chrome. It contains five native lot fits, BMO comparison, approved-Lind comparison and performance tools without a server. Rebuild with `npm run architecture:lind:export`. [Review instructions, measured costs and limitations](docs/LIND_PARAMETRIC_PHASE1.md). Not enabled in gameplay.
+
 ## BMO-inspired tower — awaiting visual approval
 
 **BMO material review:** run `npm run export:bmo-harmonized` for the updated offline Playtest and the same-geometry, four-palette city comparison. [Materials, launch instructions, performance evidence and review limits](docs/BMO_MATERIAL_HARMONIZATION.md).

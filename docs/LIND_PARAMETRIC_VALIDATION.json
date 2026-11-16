@@ -1,0 +1,29 @@
+{
+  "baseCommit": "47152fb5e5e6ebcec7c8f2f8c0cd973bb0dcac55",
+  "branch": "codex/lightweight-lind-phase1",
+  "checkpoint": ".tools/lind-parametric-checkpoint/history.bundle",
+  "export": {
+    "file": "C:\\Users\\camsh\\Desktop\\Pancake-Slicer-main\\.tools\\lightweight-phase1\\dist\\Pancake City - Parametric Lind Architecture Lab - 20261116T210400Z.html",
+    "sha256": "0c0859b365e5870f53d61edf165d8c30f8faf45582373b41c75340d06702d25b",
+    "bytes": 10857818,
+    "embeddedModules": 14,
+    "scope": "Isolated review; no gameplay integration",
+    "download": "C:\\Users\\camsh\\Downloads\\Pancake City - Parametric Lind Architecture Lab - 20261116T210400Z.html"
+  },
+  "checks": {
+    "existingGamePassed": 94,
+    "isolatedLindPassed": 7
+  },
+  "original52Sha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+  "unchanged": "git diff against47152fb confirms all original/, Assets/, benchmark/, web/, existing BMO/Ohneeohnee/optimizer/template sources unchanged.",
+  "browser": "Final standalone HTML executed through loopback with data-URL modules and embedded images; five variants, BMO comparator, original Lind pair, irregular view and roof closeup inspected. Error logs empty. Test tab closed and viewport reset. Direct file:// automation unavailable. Final raised-crown fascia closure ray-tested and visually verified; final five-lot lineup recaptured.",
+  "measurements": "Final sealed-crown generator, materials, caption UI, camera and self-contained export measured and visually checked. Frame intervals contain roughly1-second scheduling stalls; render+gl.finish samples include CPU, driver and GPU synchronization, not GPU timer queries.",
+  "screenshots": [
+    ".tools/lind-review/five-lots.jpg",
+    ".tools/lind-review/reference-comparison.jpg",
+    ".tools/lind-review/bmo-comparison.jpg",
+    ".tools/lind-review/irregular.jpg",
+    ".tools/lind-review/crown.jpg"
+  ],
+  "status": "Local milestone only; no push; not registered for gameplay"
+}

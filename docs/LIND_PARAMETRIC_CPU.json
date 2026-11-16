@@ -1,0 +1,1769 @@
+{
+  "date": "2026-11-16T21:04:00.982Z",
+  "method": "Node cold geometry generation, no WebGL/GPU/FPS claim. Lind uses untextured materials; original Lind uses neutral stand-ins. BMO original nine slots (browser comparison applies existing harmonization). Same body/podium dimensions and floor levels, different architectural expression/crown.",
+  "rows": [
+    {
+      "lot": "Narrow · no podium",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "lind-stepped-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "lind-review-0",
+        "lotId": "lind-lot-0",
+        "lot": {
+          "width": 28,
+          "depth": 28,
+          "footprint": [
+            {
+              "x": -14,
+              "z": -14
+            },
+            {
+              "x": 14,
+              "z": -14
+            },
+            {
+              "x": 14,
+              "z": 14
+            },
+            {
+              "x": -14,
+              "z": 14
+            }
+          ]
+        },
+        "parameters": {
+          "family": "lind-stepped-art-deco",
+          "version": "1.0.0",
+          "id": "lind-lot-0",
+          "name": "Narrow · no podium",
+          "seed": "lind-review-0",
+          "variant": 1,
+          "width": 25.6,
+          "depth": 25.6,
+          "storeys": 24,
+          "floorHeight": 3.7,
+          "targetBay": 3.7,
+          "podium": null,
+          "roof": "lind-hipped-crown",
+          "palette": "catalogue-limestone"
+        },
+        "grid": {
+          "volumes": [
+            {
+              "name": "central shaft",
+              "x": 0,
+              "z": -1.6,
+              "width": 12.8,
+              "depth": 16,
+              "start": 0,
+              "end": 17,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 4.1,
+                "clear": 12.299999999999999,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 4,
+                "clear": 16,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left main wing",
+              "x": -9.600000000000001,
+              "z": 0,
+              "width": 6.4,
+              "depth": 22.400000000000002,
+              "start": 0,
+              "end": 11,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.733333333333334,
+                "clear": 22.400000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left shoulder",
+              "x": -9.06752,
+              "z": -0.8,
+              "width": 5.33504,
+              "depth": 19.200000000000003,
+              "start": 11,
+              "end": 13,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.8400000000000007,
+                "clear": 19.200000000000003,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left termination",
+              "x": -8.533760000000001,
+              "z": -1.6,
+              "width": 4.26752,
+              "depth": 16,
+              "start": 13,
+              "end": 14,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 4,
+                "clear": 16,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right main wing",
+              "x": 9.600000000000001,
+              "z": 0,
+              "width": 6.4,
+              "depth": 22.400000000000002,
+              "start": 0,
+              "end": 11,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.733333333333334,
+                "clear": 22.400000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right shoulder",
+              "x": 9.06752,
+              "z": -0.8,
+              "width": 5.33504,
+              "depth": 19.200000000000003,
+              "start": 11,
+              "end": 13,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.8400000000000007,
+                "clear": 19.200000000000003,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right termination",
+              "x": 8.533760000000001,
+              "z": -1.6,
+              "width": 4.26752,
+              "depth": 16,
+              "start": 13,
+              "end": 14,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 4,
+                "clear": 16,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper setback",
+              "x": 0,
+              "z": -1.6,
+              "width": 10.6624,
+              "depth": 14.4,
+              "start": 17,
+              "end": 19,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 3.554133333333333,
+                "clear": 10.6624,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 3.6,
+                "clear": 14.4,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper lantern",
+              "x": 0,
+              "z": -1.6,
+              "width": 8.6624,
+              "depth": 12.8,
+              "start": 19,
+              "end": 20,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 3,
+                "pitch": 4.1,
+                "clear": 12.299999999999999,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "crown drum",
+              "x": 0,
+              "z": -1.6,
+              "width": 7.4624,
+              "depth": 7.4624,
+              "start": 20,
+              "end": 24,
+              "kind": "louvred",
+              "front": {
+                "count": 2,
+                "pitch": 3.7312,
+                "clear": 7.4624,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 2,
+                "pitch": 3.7312,
+                "clear": 7.4624,
+                "windowWidth": 1.93
+              }
+            }
+          ],
+          "crown": {
+            "width": 7.4624,
+            "depth": 7.4624,
+            "z": -1.6,
+            "base": 89.70000000000002,
+            "peak": 92.90000000000002
+          }
+        },
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "angle": 0,
+          "scale": 1,
+          "front": [
+            0,
+            1
+          ]
+        },
+        "footprint": [
+          {
+            "x": -13.700000000000001,
+            "z": -13.700000000000001
+          },
+          {
+            "x": 13.700000000000001,
+            "z": -13.700000000000001
+          },
+          {
+            "x": 13.700000000000001,
+            "z": 13.700000000000001
+          },
+          {
+            "x": -13.700000000000001,
+            "z": 13.700000000000001
+          }
+        ]
+      },
+      "lind": {
+        "triangles": 4398,
+        "geometryBytes": 307988,
+        "batches": 7,
+        "dimensions": {
+          "width": 26.420000076293945,
+          "depth": 23.6200008392334,
+          "height": 92.92813110351562
+        },
+        "generationMs": 10.545000000000002
+      },
+      "bmo": {
+        "triangles": 4076,
+        "geometryBytes": 286088,
+        "batches": 9,
+        "dimensions": {
+          "width": 25.90999984741211,
+          "depth": 26.175000190734863,
+          "height": 99.41999816894531
+        },
+        "generationMs": 4.331699999999998
+      }
+    },
+    {
+      "lot": "Wide · street podium",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "lind-stepped-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "lind-review-1",
+        "lotId": "lind-lot-1",
+        "lot": {
+          "width": 66,
+          "depth": 38,
+          "footprint": [
+            {
+              "x": -33,
+              "z": -19
+            },
+            {
+              "x": 33,
+              "z": -19
+            },
+            {
+              "x": 33,
+              "z": 19
+            },
+            {
+              "x": -33,
+              "z": 19
+            }
+          ]
+        },
+        "parameters": {
+          "family": "lind-stepped-art-deco",
+          "version": "1.0.0",
+          "id": "lind-lot-1",
+          "name": "Wide · street podium",
+          "seed": "lind-review-1",
+          "variant": 0,
+          "width": 57.6,
+          "depth": 31.6,
+          "storeys": 40,
+          "floorHeight": 3.7,
+          "targetBay": 3.7,
+          "podium": {
+            "width": 63.6,
+            "depth": 35.6,
+            "storeys": 5
+          },
+          "roof": "lind-hipped-crown",
+          "palette": "catalogue-limestone"
+        },
+        "grid": {
+          "volumes": [
+            {
+              "name": "street podium",
+              "x": 0,
+              "z": 0,
+              "width": 63.6,
+              "depth": 35.6,
+              "start": 0,
+              "end": 5,
+              "kind": "occupied",
+              "front": {
+                "count": 17,
+                "pitch": 3.7411764705882353,
+                "clear": 63.6,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 10,
+                "pitch": 3.56,
+                "clear": 35.6,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "central shaft",
+              "x": 0,
+              "z": -1.975,
+              "width": 28.8,
+              "depth": 19.75,
+              "start": 5,
+              "end": 28,
+              "kind": "occupied",
+              "front": {
+                "count": 8,
+                "pitch": 3.6,
+                "clear": 28.8,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.95,
+                "clear": 19.75,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left main wing",
+              "x": -21.6,
+              "z": 0,
+              "width": 14.4,
+              "depth": 27.650000000000002,
+              "start": 5,
+              "end": 17,
+              "kind": "occupied",
+              "front": {
+                "count": 4,
+                "pitch": 3.6,
+                "clear": 14.4,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 7,
+                "pitch": 3.95,
+                "clear": 27.650000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left shoulder",
+              "x": -20.40192,
+              "z": -0.9875,
+              "width": 12.00384,
+              "depth": 23.700000000000003,
+              "start": 17,
+              "end": 20,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 4.00128,
+                "clear": 12.00384,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.9500000000000006,
+                "clear": 23.700000000000003,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left termination",
+              "x": -19.200960000000002,
+              "z": -1.975,
+              "width": 9.60192,
+              "depth": 19.75,
+              "start": 20,
+              "end": 21,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.95,
+                "clear": 19.75,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right main wing",
+              "x": 21.6,
+              "z": 0,
+              "width": 14.4,
+              "depth": 27.650000000000002,
+              "start": 5,
+              "end": 17,
+              "kind": "occupied",
+              "front": {
+                "count": 4,
+                "pitch": 3.6,
+                "clear": 14.4,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 7,
+                "pitch": 3.95,
+                "clear": 27.650000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right shoulder",
+              "x": 20.40192,
+              "z": -0.9875,
+              "width": 12.00384,
+              "depth": 23.700000000000003,
+              "start": 17,
+              "end": 20,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 4.00128,
+                "clear": 12.00384,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.9500000000000006,
+                "clear": 23.700000000000003,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right termination",
+              "x": 19.200960000000002,
+              "z": -1.975,
+              "width": 9.60192,
+              "depth": 19.75,
+              "start": 20,
+              "end": 21,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.95,
+                "clear": 19.75,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper setback",
+              "x": 0,
+              "z": -1.975,
+              "width": 23.9904,
+              "depth": 17.775000000000002,
+              "start": 28,
+              "end": 32,
+              "kind": "occupied",
+              "front": {
+                "count": 6,
+                "pitch": 3.9984,
+                "clear": 23.9904,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.5550000000000006,
+                "clear": 17.775000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper lantern",
+              "x": 0,
+              "z": -1.975,
+              "width": 19.209600000000002,
+              "depth": 15.8,
+              "start": 32,
+              "end": 35,
+              "kind": "occupied",
+              "front": {
+                "count": 5,
+                "pitch": 3.8419200000000004,
+                "clear": 19.209600000000002,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 3.95,
+                "clear": 15.8,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "crown drum",
+              "x": 0,
+              "z": -1.975,
+              "width": 13.825,
+              "depth": 13.825,
+              "start": 35,
+              "end": 40,
+              "kind": "louvred",
+              "front": {
+                "count": 4,
+                "pitch": 3.45625,
+                "clear": 13.825,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 3.45625,
+                "clear": 13.825,
+                "windowWidth": 1.93
+              }
+            }
+          ],
+          "crown": {
+            "width": 13.825,
+            "depth": 13.825,
+            "z": -1.975,
+            "base": 148.9,
+            "peak": 154.3
+          }
+        },
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "angle": 0,
+          "scale": 1,
+          "front": [
+            0,
+            1
+          ]
+        },
+        "footprint": [
+          {
+            "x": -32.7,
+            "z": -18.7
+          },
+          {
+            "x": 32.7,
+            "z": -18.7
+          },
+          {
+            "x": 32.7,
+            "z": 18.7
+          },
+          {
+            "x": -32.7,
+            "z": 18.7
+          }
+        ]
+      },
+      "lind": {
+        "triangles": 6770,
+        "geometryBytes": 474028,
+        "batches": 7,
+        "dimensions": {
+          "width": 64.81999969482422,
+          "depth": 36.959999084472656,
+          "height": 154.32861328125
+        },
+        "generationMs": 4.795100000000005
+      },
+      "bmo": {
+        "triangles": 7616,
+        "geometryBytes": 533888,
+        "batches": 9,
+        "dimensions": {
+          "width": 63.88999938964844,
+          "depth": 36.16499900817871,
+          "height": 158.6199951171875
+        },
+        "generationMs": 4.49069999999999
+      }
+    },
+    {
+      "lot": "Deep · no podium",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "lind-stepped-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "lind-review-2",
+        "lotId": "lind-lot-2",
+        "lot": {
+          "width": 34,
+          "depth": 56,
+          "footprint": [
+            {
+              "x": -17,
+              "z": -28
+            },
+            {
+              "x": 17,
+              "z": -28
+            },
+            {
+              "x": 17,
+              "z": 28
+            },
+            {
+              "x": -17,
+              "z": 28
+            }
+          ]
+        },
+        "parameters": {
+          "family": "lind-stepped-art-deco",
+          "version": "1.0.0",
+          "id": "lind-lot-2",
+          "name": "Deep · no podium",
+          "seed": "lind-review-2",
+          "variant": 0,
+          "width": 31.6,
+          "depth": 53.6,
+          "storeys": 34,
+          "floorHeight": 3.7,
+          "targetBay": 3.7,
+          "podium": null,
+          "roof": "lind-hipped-crown",
+          "palette": "catalogue-limestone"
+        },
+        "grid": {
+          "volumes": [
+            {
+              "name": "central shaft",
+              "x": 0,
+              "z": -3.35,
+              "width": 15.8,
+              "depth": 33.5,
+              "start": 0,
+              "end": 23,
+              "kind": "occupied",
+              "front": {
+                "count": 4,
+                "pitch": 3.95,
+                "clear": 15.8,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 9,
+                "pitch": 3.7222222222222223,
+                "clear": 33.5,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left main wing",
+              "x": -11.850000000000001,
+              "z": 0,
+              "width": 7.9,
+              "depth": 46.9,
+              "start": 0,
+              "end": 15,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 3.95,
+                "clear": 7.9,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 13,
+                "pitch": 3.6076923076923078,
+                "clear": 46.9,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left shoulder",
+              "x": -11.192720000000001,
+              "z": -1.675,
+              "width": 6.58544,
+              "depth": 40.2,
+              "start": 15,
+              "end": 17,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 11,
+                "pitch": 3.6545454545454548,
+                "clear": 40.2,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left termination",
+              "x": -10.53386,
+              "z": -3.35,
+              "width": 5.26772,
+              "depth": 33.5,
+              "start": 17,
+              "end": 18,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 9,
+                "pitch": 3.7222222222222223,
+                "clear": 33.5,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right main wing",
+              "x": 11.850000000000001,
+              "z": 0,
+              "width": 7.9,
+              "depth": 46.9,
+              "start": 0,
+              "end": 15,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 3.95,
+                "clear": 7.9,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 13,
+                "pitch": 3.6076923076923078,
+                "clear": 46.9,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right shoulder",
+              "x": 11.192720000000001,
+              "z": -1.675,
+              "width": 6.58544,
+              "depth": 40.2,
+              "start": 15,
+              "end": 17,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 11,
+                "pitch": 3.6545454545454548,
+                "clear": 40.2,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right termination",
+              "x": 10.53386,
+              "z": -3.35,
+              "width": 5.26772,
+              "depth": 33.5,
+              "start": 17,
+              "end": 18,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 9,
+                "pitch": 3.7222222222222223,
+                "clear": 33.5,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper setback",
+              "x": 0,
+              "z": -3.35,
+              "width": 13.1614,
+              "depth": 30.150000000000002,
+              "start": 23,
+              "end": 27,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 4.1,
+                "clear": 12.299999999999999,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 8,
+                "pitch": 3.7687500000000003,
+                "clear": 30.150000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper lantern",
+              "x": 0,
+              "z": -3.35,
+              "width": 10.5386,
+              "depth": 26.8,
+              "start": 27,
+              "end": 29,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 3.512866666666667,
+                "clear": 10.5386,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 7,
+                "pitch": 3.8285714285714287,
+                "clear": 26.8,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "crown drum",
+              "x": 0,
+              "z": -3.35,
+              "width": 9.2114,
+              "depth": 9.2114,
+              "start": 29,
+              "end": 34,
+              "kind": "louvred",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              }
+            }
+          ],
+          "crown": {
+            "width": 9.2114,
+            "depth": 9.2114,
+            "z": -3.35,
+            "base": 126.70000000000002,
+            "peak": 130.53194240000002
+          }
+        },
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "z": -1.7763568394002505e-15,
+          "angle": 0,
+          "scale": 1,
+          "front": [
+            0,
+            1
+          ]
+        },
+        "footprint": [
+          {
+            "x": -16.7,
+            "z": -27.700000000000003
+          },
+          {
+            "x": 16.7,
+            "z": -27.700000000000003
+          },
+          {
+            "x": 16.7,
+            "z": 27.699999999999996
+          },
+          {
+            "x": -16.7,
+            "z": 27.699999999999996
+          }
+        ]
+      },
+      "lind": {
+        "triangles": 6250,
+        "geometryBytes": 437628,
+        "batches": 7,
+        "dimensions": {
+          "width": 32.81999969482422,
+          "depth": 48.119998931884766,
+          "height": 130.5602264404297
+        },
+        "generationMs": 3.9218999999999937
+      },
+      "bmo": {
+        "triangles": 5708,
+        "geometryBytes": 400328,
+        "batches": 9,
+        "dimensions": {
+          "width": 31.90999984741211,
+          "depth": 54.17499923706055,
+          "height": 136.4199981689453
+        },
+        "generationMs": 5.354599999999991
+      }
+    },
+    {
+      "lot": "Rotated · street podium",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "lind-stepped-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "lind-review-3",
+        "lotId": "lind-lot-3",
+        "lot": {
+          "width": 48.00000000000001,
+          "depth": 40,
+          "footprint": [
+            {
+              "x": -29.706360642095902,
+              "z": -9.67120144561862
+            },
+            {
+              "x": 14.869541865576593,
+              "z": -27.475383977441787
+            },
+            {
+              "x": 29.706360642095902,
+              "z": 9.67120144561862
+            },
+            {
+              "x": -14.869541865576593,
+              "z": 27.475383977441787
+            }
+          ]
+        },
+        "parameters": {
+          "family": "lind-stepped-art-deco",
+          "version": "1.0.0",
+          "id": "lind-lot-3",
+          "name": "Rotated · street podium",
+          "seed": "lind-review-3",
+          "variant": 2,
+          "width": 37.2,
+          "depth": 31.6,
+          "storeys": 42,
+          "floorHeight": 3.7,
+          "targetBay": 3.7,
+          "podium": {
+            "width": 43.2,
+            "depth": 35.6,
+            "storeys": 4
+          },
+          "roof": "lind-hipped-crown",
+          "palette": "catalogue-limestone"
+        },
+        "grid": {
+          "volumes": [
+            {
+              "name": "street podium",
+              "x": 0,
+              "z": 0,
+              "width": 43.2,
+              "depth": 35.6,
+              "start": 0,
+              "end": 4,
+              "kind": "occupied",
+              "front": {
+                "count": 12,
+                "pitch": 3.6,
+                "clear": 43.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 10,
+                "pitch": 3.56,
+                "clear": 35.6,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "central shaft",
+              "x": 0,
+              "z": -1.975,
+              "width": 18.6,
+              "depth": 19.75,
+              "start": 4,
+              "end": 29,
+              "kind": "occupied",
+              "front": {
+                "count": 5,
+                "pitch": 3.72,
+                "clear": 18.6,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.95,
+                "clear": 19.75,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left main wing",
+              "x": -13.950000000000001,
+              "z": 0,
+              "width": 9.3,
+              "depth": 27.650000000000002,
+              "start": 4,
+              "end": 19,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 7,
+                "pitch": 3.95,
+                "clear": 27.650000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left shoulder",
+              "x": -13.17624,
+              "z": -0.9875,
+              "width": 7.75248,
+              "depth": 23.700000000000003,
+              "start": 19,
+              "end": 22,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 3.87624,
+                "clear": 7.75248,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.9500000000000006,
+                "clear": 23.700000000000003,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left termination",
+              "x": -12.40062,
+              "z": -1.975,
+              "width": 6.20124,
+              "depth": 19.75,
+              "start": 22,
+              "end": 23,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.95,
+                "clear": 19.75,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right main wing",
+              "x": 13.950000000000001,
+              "z": 0,
+              "width": 9.3,
+              "depth": 27.650000000000002,
+              "start": 4,
+              "end": 19,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 7,
+                "pitch": 3.95,
+                "clear": 27.650000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right shoulder",
+              "x": 13.17624,
+              "z": -0.9875,
+              "width": 7.75248,
+              "depth": 23.700000000000003,
+              "start": 19,
+              "end": 22,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 3.87624,
+                "clear": 7.75248,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.9500000000000006,
+                "clear": 23.700000000000003,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right termination",
+              "x": 12.40062,
+              "z": -1.975,
+              "width": 6.20124,
+              "depth": 19.75,
+              "start": 22,
+              "end": 23,
+              "kind": "occupied",
+              "front": {
+                "count": 1,
+                "pitch": 4.1,
+                "clear": 4.1,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.95,
+                "clear": 19.75,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper setback",
+              "x": 0,
+              "z": -1.975,
+              "width": 15.4938,
+              "depth": 17.775000000000002,
+              "start": 29,
+              "end": 33,
+              "kind": "occupied",
+              "front": {
+                "count": 4,
+                "pitch": 3.87345,
+                "clear": 15.4938,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.5550000000000006,
+                "clear": 17.775000000000002,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper lantern",
+              "x": 0,
+              "z": -1.975,
+              "width": 12.406200000000002,
+              "depth": 15.8,
+              "start": 33,
+              "end": 37,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 4.1,
+                "clear": 12.299999999999999,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 3.95,
+                "clear": 15.8,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "crown drum",
+              "x": 0,
+              "z": -1.975,
+              "width": 10.8438,
+              "depth": 10.8438,
+              "start": 37,
+              "end": 42,
+              "kind": "louvred",
+              "front": {
+                "count": 3,
+                "pitch": 3.6146,
+                "clear": 10.8438,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 3,
+                "pitch": 3.6146,
+                "clear": 10.8438,
+                "windowWidth": 1.93
+              }
+            }
+          ],
+          "crown": {
+            "width": 10.8438,
+            "depth": 10.8438,
+            "z": -1.975,
+            "base": 156.3,
+            "peak": 160.81102080000002
+          }
+        },
+        "placement": {
+          "x": 1.3177742254306064e-15,
+          "y": 0,
+          "z": -2.5343412496955066e-16,
+          "angle": 0.38,
+          "scale": 1,
+          "front": [
+            0.3709204694129827,
+            0.9286646355765102
+          ]
+        },
+        "footprint": [
+          {
+            "x": -27.831167078494254,
+            "z": -9.020318123488632
+          },
+          {
+            "x": 13.958741522448703,
+            "z": -25.711739247072853
+          },
+          {
+            "x": 27.831167078494254,
+            "z": 9.020318123488632
+          },
+          {
+            "x": -13.958741522448703,
+            "z": 25.711739247072853
+          }
+        ]
+      },
+      "lind": {
+        "triangles": 6042,
+        "geometryBytes": 423068,
+        "batches": 7,
+        "dimensions": {
+          "width": 44.41999816894531,
+          "depth": 36.959999084472656,
+          "height": 160.83926391601562
+        },
+        "generationMs": 3.482299999999995
+      },
+      "bmo": {
+        "triangles": 7376,
+        "geometryBytes": 517088,
+        "batches": 9,
+        "dimensions": {
+          "width": 43.4900016784668,
+          "depth": 36.16499900817871,
+          "height": 166.02000427246094
+        },
+        "generationMs": 4.069700000000012
+      }
+    },
+    {
+      "lot": "Irregular · no podium",
+      "record": {
+        "schemaVersion": 1,
+        "template": {
+          "id": "lind-stepped-lightweight",
+          "version": "1.0.0"
+        },
+        "seed": "lind-review-4",
+        "lotId": "lind-lot-4",
+        "lot": {
+          "width": 57,
+          "depth": 44,
+          "footprint": [
+            {
+              "x": -29,
+              "z": -22
+            },
+            {
+              "x": 28,
+              "z": -22
+            },
+            {
+              "x": 22,
+              "z": 22
+            },
+            {
+              "x": -24,
+              "z": 22
+            }
+          ]
+        },
+        "parameters": {
+          "family": "lind-stepped-art-deco",
+          "version": "1.0.0",
+          "id": "lind-lot-4",
+          "name": "Irregular · no podium",
+          "seed": "lind-review-4",
+          "variant": 0,
+          "width": 43.2,
+          "depth": 32.8,
+          "storeys": 36,
+          "floorHeight": 3.7,
+          "targetBay": 3.7,
+          "podium": null,
+          "roof": "lind-hipped-crown",
+          "palette": "catalogue-limestone"
+        },
+        "grid": {
+          "volumes": [
+            {
+              "name": "central shaft",
+              "x": 0,
+              "z": -2.05,
+              "width": 21.6,
+              "depth": 20.5,
+              "start": 0,
+              "end": 25,
+              "kind": "occupied",
+              "front": {
+                "count": 6,
+                "pitch": 3.6,
+                "clear": 21.6,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.4166666666666665,
+                "clear": 20.5,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left main wing",
+              "x": -16.200000000000003,
+              "z": 0,
+              "width": 10.8,
+              "depth": 28.699999999999996,
+              "start": 0,
+              "end": 15,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 3.6,
+                "clear": 10.8,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 8,
+                "pitch": 3.5874999999999995,
+                "clear": 28.699999999999996,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left shoulder",
+              "x": -15.301440000000001,
+              "z": -1.025,
+              "width": 9.002880000000001,
+              "depth": 24.599999999999998,
+              "start": 15,
+              "end": 17,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 7,
+                "pitch": 3.514285714285714,
+                "clear": 24.599999999999998,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "left termination",
+              "x": -14.40072,
+              "z": -2.05,
+              "width": 7.20144,
+              "depth": 20.5,
+              "start": 17,
+              "end": 18,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 3.60072,
+                "clear": 7.20144,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.4166666666666665,
+                "clear": 20.5,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right main wing",
+              "x": 16.200000000000003,
+              "z": 0,
+              "width": 10.8,
+              "depth": 28.699999999999996,
+              "start": 0,
+              "end": 15,
+              "kind": "occupied",
+              "front": {
+                "count": 3,
+                "pitch": 3.6,
+                "clear": 10.8,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 8,
+                "pitch": 3.5874999999999995,
+                "clear": 28.699999999999996,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right shoulder",
+              "x": 15.301440000000001,
+              "z": -1.025,
+              "width": 9.002880000000001,
+              "depth": 24.599999999999998,
+              "start": 15,
+              "end": 17,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 4.1,
+                "clear": 8.2,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 7,
+                "pitch": 3.514285714285714,
+                "clear": 24.599999999999998,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "right termination",
+              "x": 14.40072,
+              "z": -2.05,
+              "width": 7.20144,
+              "depth": 20.5,
+              "start": 17,
+              "end": 18,
+              "kind": "occupied",
+              "front": {
+                "count": 2,
+                "pitch": 3.60072,
+                "clear": 7.20144,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 6,
+                "pitch": 3.4166666666666665,
+                "clear": 20.5,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper setback",
+              "x": 0,
+              "z": -2.05,
+              "width": 17.9928,
+              "depth": 18.45,
+              "start": 25,
+              "end": 28,
+              "kind": "occupied",
+              "front": {
+                "count": 5,
+                "pitch": 3.59856,
+                "clear": 17.9928,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 5,
+                "pitch": 3.69,
+                "clear": 18.45,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "upper lantern",
+              "x": 0,
+              "z": -2.05,
+              "width": 14.407200000000001,
+              "depth": 16.400000000000002,
+              "start": 28,
+              "end": 31,
+              "kind": "occupied",
+              "front": {
+                "count": 4,
+                "pitch": 3.6018000000000003,
+                "clear": 14.407200000000001,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 4,
+                "pitch": 4.1,
+                "clear": 16.4,
+                "windowWidth": 1.93
+              }
+            },
+            {
+              "name": "crown drum",
+              "x": 0,
+              "z": -2.05,
+              "width": 12.5928,
+              "depth": 12.5928,
+              "start": 31,
+              "end": 36,
+              "kind": "louvred",
+              "front": {
+                "count": 3,
+                "pitch": 4.1,
+                "clear": 12.299999999999999,
+                "windowWidth": 1.93
+              },
+              "side": {
+                "count": 3,
+                "pitch": 4.1,
+                "clear": 12.299999999999999,
+                "windowWidth": 1.93
+              }
+            }
+          ],
+          "crown": {
+            "width": 12.5928,
+            "depth": 12.5928,
+            "z": -2.05,
+            "base": 134.10000000000002,
+            "peak": 139.3386048
+          }
+        },
+        "placement": {
+          "x": -0.5,
+          "y": 0,
+          "z": 0,
+          "angle": 0,
+          "scale": 1,
+          "front": [
+            0,
+            1
+          ]
+        },
+        "footprint": [
+          {
+            "x": -23,
+            "z": -17.299999999999997
+          },
+          {
+            "x": 22,
+            "z": -17.299999999999997
+          },
+          {
+            "x": 22,
+            "z": 17.299999999999997
+          },
+          {
+            "x": -23,
+            "z": 17.299999999999997
+          }
+        ]
+      },
+      "lind": {
+        "triangles": 5682,
+        "geometryBytes": 397868,
+        "batches": 7,
+        "dimensions": {
+          "width": 44.41999816894531,
+          "depth": 29.920000076293945,
+          "height": 139.3668212890625
+        },
+        "generationMs": 3.9170000000000016
+      },
+      "bmo": {
+        "triangles": 5828,
+        "geometryBytes": 408728,
+        "batches": 9,
+        "dimensions": {
+          "width": 43.5099983215332,
+          "depth": 33.375,
+          "height": 143.82000732421875
+        },
+        "generationMs": 2.406899999999993
+      }
+    }
+  ],
+  "batches": {
+    "lind": {
+      "inputMeshes": 35,
+      "outputMeshes": 7,
+      "triangles": 29142,
+      "opaqueMergedBatches": 7,
+      "opaqueInstancedBatches": 0,
+      "opaqueBorrowedMeshes": 0,
+      "transparentObjects": 0,
+      "ownedGeometryBytes": 2040580,
+      "instanceMatrixBytes": 0,
+      "chunkSize": 768
+    },
+    "bmo": {
+      "inputMeshes": 45,
+      "outputMeshes": 9,
+      "triangles": 30604,
+      "opaqueMergedBatches": 9,
+      "opaqueInstancedBatches": 0,
+      "opaqueBorrowedMeshes": 0,
+      "transparentObjects": 0,
+      "ownedGeometryBytes": 2146120,
+      "instanceMatrixBytes": 0,
+      "chunkSize": 768
+    }
+  },
+  "totals": {
+    "lindTriangles": 29142,
+    "bmoTriangles": 30604
+  },
+  "approvedLind": {
+    "triangles": 26040,
+    "geometryBytes": 1822928,
+    "batches": 7
+  },
+  "canonicalLind": {
+    "triangles": 6210,
+    "geometryBytes": 434828,
+    "batches": 7,
+    "dimensions": {
+      "width": 45.619998931884766,
+      "depth": 30.960000038146973,
+      "height": 183.91232299804688
+    }
+  },
+  "lindPool": {
+    "materials": 7,
+    "browserMaps": 2,
+    "rawMapBytes": 655360
+  },
+  "jsHeapUsedBytes": 25685592
+}
