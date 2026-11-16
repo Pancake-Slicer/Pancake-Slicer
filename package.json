@@ -14,7 +14,7 @@
     "benchmark:test": "node scripts/art-deco-browser.cjs",
     "benchmark:serve": "npm run benchmark:build && http-server .tools/art-deco -a 127.0.0.1 -p 4180 -c-1",
     "start": "http-server web -a 127.0.0.1 -p 4173 -c-1",
-    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs scripts/growable-assets.test.cjs scripts/approved-building-import.test.cjs scripts/procedural-offices.test.cjs scripts/lightweight-bmo.test.cjs scripts/bmo-materials.test.cjs",
+    "check": "node --check web/assets/game.bundle.js && node scripts/verify-recovery.cjs && node --test scripts/rendering-fixes.test.cjs scripts/office-zoning.test.cjs scripts/landmark-performance.test.cjs scripts/sc4-catalogue.test.cjs scripts/sc4-originals.test.cjs scripts/sc4-rebuilds.test.cjs scripts/office-blocks.test.cjs scripts/cel-style.test.cjs scripts/growable-assets.test.cjs scripts/approved-building-import.test.cjs scripts/procedural-offices.test.cjs scripts/lightweight-bmo.test.cjs scripts/bmo-materials.test.cjs scripts/lightweight-lind.test.cjs",
     "assemble": "node scripts/assemble-runtime.cjs",
     "import:sc4": "node scripts/import-sc4-originals.cjs",
     "build": "npm run assemble && npm run check && node scripts/build.cjs",
@@ -49,7 +49,9 @@
     "architecture:lind": "npm run architecture:lind:prepare && node scripts/serve-lind-lab.cjs",
     "architecture:lind:check": "npm run architecture:lind:prepare && node --test scripts/lind-parametric.test.cjs",
     "architecture:lind:measure": "npm run architecture:lind:prepare && node scripts/lind-parametric-cpu.cjs",
-    "architecture:lind:export": "npm run architecture:lind:check && node scripts/export-lind-lab.cjs"
+    "architecture:lind:export": "npm run architecture:lind:check && node scripts/export-lind-lab.cjs",
+    "export:lind-growables": "npm run build && node scripts/export-lind-growables.cjs",
+    "review:lind-growables": "node scripts/review-lind-growables.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

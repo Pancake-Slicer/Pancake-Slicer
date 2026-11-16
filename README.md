@@ -2,6 +2,10 @@
 
 This project was reconstructed **only** from the user-provided `Pancake (52).html` browser build. It is **not** the original Codex repository or its Git history.
 
+## Lind + BMO — playable growable integration
+
+Run `npm run export:lind-growables` for fresh standalone Playtest and prebuilt Test City files. The supplied Playtest enables natural mixed Lind/BMO growth alongside the existing catalogue. Use Office / Mix all98; the existing development panel includes Favour Lind. [Launch instructions, architecture, tests and measured limits](docs/LIND_GROWABLE_INTEGRATION.md).
+
 ## Parametric Lind — isolated visual review
 
 Open the timestamped **Parametric Lind Architecture Lab** HTML in Downloads with Chrome. It contains five native lot fits, BMO comparison, approved-Lind comparison and performance tools without a server. Rebuild with `npm run architecture:lind:export`. [Review instructions, measured costs and limitations](docs/LIND_PARAMETRIC_PHASE1.md). Not enabled in gameplay.

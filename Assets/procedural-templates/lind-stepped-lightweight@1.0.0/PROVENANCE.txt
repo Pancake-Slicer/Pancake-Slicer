@@ -1,0 +1,8 @@
+Derived from the existing approved Lind facade source. Original source is preserved.
+Source: Assets/Architecture/Art Deco/Art Deco Limestone Window Facade.png
+Source SHA-256: 790172b58a08351bf48461c00e2015967952e62e15c1b2a34d534dd373cec8b9
+Bay: crop134,92,173,310; resize256x480; pad16px top/bottom to256x512.
+Stone: crop343,20,59,193; resize128x256.
+Storage: base64 RGBA8, bottom row first, opaque alpha.
+Pixels are shared family-wide. Regenerate through scripts/lind-textures.cjs only after a reviewed source/version update.
+Existing project and approved-building notices continue to apply; no new external artwork introduced.

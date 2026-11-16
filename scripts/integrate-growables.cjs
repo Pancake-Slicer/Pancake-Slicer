@@ -26,6 +26,6 @@ function applyGrowableAssets(source){
  replace(';const _e=new zb;pw(', ';await pcGrowablesReady();const _e=new zb;pw(');
  replace('Ui();new URLSearchParams(location.search).has("test")', 'pcOhneeInitControls(Vh,()=>{Gt.drawZoning();Ui()},()=>Gt.performanceInfo());Ui();new URLSearchParams(location.search).has("test")');
  replace('window.__sandbox={network:_e,', 'window.__sandbox={proceduralOffices:{definitions:pcOhneeDefinitions,get runtime(){return pcOhneeRuntime},info:pcOhneeInfo,setControl:pcOhneeSetControl,engine:pcOhneeEngine,package:pcOhneePackage},growables:{definitions:pcGrowableDefinitions,resource:pcGrowableResource,placement:pcGrowablePlacement,three:{Group:Se,BoxGeometry:mn,BufferGeometry:Ce,Float32BufferAttribute:pe,Mesh:ae,MeshStandardMaterial:Re,CanvasTexture:vr,SRGBColorSpace:hn}},network:_e,');
- return require('./lightweight-bmo.cjs').applyBmoIntegration(source);
+ return require('./lightweight-lind.cjs').applyLindIntegration(require('./lightweight-bmo.cjs').applyBmoIntegration(source));
 }
 module.exports={applyGrowableAssets};

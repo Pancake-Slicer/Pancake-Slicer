@@ -1,0 +1,33 @@
+{
+  "baseCommit": "f856c4cd02a9f1bdc159bfbe5c71602bd4462cdf",
+  "branch": "codex/lightweight-lind-integration",
+  "checkpoint": ".tools/lind-integration-checkpoint/history.bundle",
+  "checks": {
+    "gamePassed": 102,
+    "unchangedLindLabPassed": 7,
+    "failed": 0
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-Slicer-main\\.tools\\lightweight-phase1\\dist\\Pancake City - Lind and BMO Growables Playtest - 20261116T214357Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-Slicer-main\\.tools\\lightweight-phase1\\dist\\Pancake City - Lind Growables Test City - 20261116T214357Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-Slicer-main\\.tools\\lightweight-phase1\\dist\\Play Lind and BMO in Chrome - 20261116T214357Z.cmd",
+    "playtestSha256": "11c153409e85736a133301217509ea4a5fb1fb8fe57c369411a689f61bcce0d1",
+    "reviewSha256": "4b3c2f43306a34ea8e626a2c2e247c3f68221d6ec18e00339e9b0cb0ade67139"
+  },
+  "downloads": {
+    "launcher": "C:\\Users\\camsh\\Downloads\\Play Lind and BMO in Chrome - 20261116T214357Z.cmd",
+    "review": "C:\\Users\\camsh\\Downloads\\Pancake City - Lind Growables Test City - 20261116T214357Z.html",
+    "playtest": "C:\\Users\\camsh\\Downloads\\Pancake City - Lind and BMO Growables Playtest - 20261116T214357Z.html"
+  },
+  "original52Sha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+  "preserved": "Original Lind/GLBs/images, BMO generator/materials/host source/assembler, all other approved architectures, shared polygon template, batcher and existing CSS are byte-unchanged. Existing game mechanics retain their prior implementation; generated host helpers gain typed-family arguments, history, selection and controls.",
+  "browser": "Exact final review HTML visibly grew9 Lind+11 BMO+48 original offices, preserving eight originally zoned buildings. Demolition, Undo under fixed legacy403, Redo and exact regeneration passed. Final fifty-building comparison passed with empty error logs. Normal Playtest created flat seed1138 terrain through ordinary UI, retained both defaults ON and lazy Lind resources, and selected Office. That normal-startup smoke preceded the final assignment-read guard; startup/geometry/material/rendering code is unchanged, and final release fixture verified the guard.",
+  "offline": "Embedded JS/CSS/geometry/maps/notices and no external HTML resources checked; Download copies byte-identical. Browser executes exact exported bytes over loopback; direct file:// automation unavailable.",
+  "screenshots": [
+    ".tools/lind-integration/mixed-city.jpg",
+    ".tools/lind-integration/lind-closeup.jpg",
+    ".tools/lind-integration/playtest-flat-startup.jpg"
+  ],
+  "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "push": "Not authorized; local commit/bundle are not off-computer backups."
+}
