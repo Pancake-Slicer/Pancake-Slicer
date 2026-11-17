@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-17",
+  "checks": {
+    "build": true,
+    "tests": 129,
+    "failures": 0,
+    "original52HashVerified": true
+  },
+  "scope": {
+    "catalogueStyles": 98,
+    "nativeResidential": true,
+    "lightweightFamilies": [
+      "BMO",
+      "Lind",
+      "Von Badel"
+    ],
+    "optionalEnhancedFamilyRegression": true
+  },
+  "browser": {
+    "method": "Exact exported HTML bytes served by the existing localhost4202 review server; disposable actual-game fixtures, not Architecture Lab. Screenshots inspected in browser; direct file launch not automated.",
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "viewport": [
+      1280,
+      720
+    ],
+    "flat": {
+      "von": 12,
+      "bmo": 10,
+      "lind": 5,
+      "catalogue": 41,
+      "pavedOfficeLots": 27,
+      "exposedOfficeArea": 11439.950322027047,
+      "sidewalkAndConcreteColour": 11449266,
+      "sidewalkSurfaceOffset": 0.24,
+      "concreteMaps": 0
+    },
+    "slope": {
+      "equation": "30 + x*.025 + z*.018",
+      "maxFamilyTerrainSpread": 2.3273999999999972,
+      "pavedOfficeLots": 27,
+      "catalogue": 41,
+      "cameraSnapshot": {
+        "calls": 259,
+        "triangles": 578928,
+        "geometries": 345,
+        "textures": 38
+      }
+    },
+    "residential": {
+      "flatAndSloped": true,
+      "houses": 28,
+      "remainingCatalogue": 37,
+      "pavedOfficeLots": 27,
+      "landscapeRetained": true
+    },
+    "actions": {
+      "demolition": true,
+      "undo": true,
+      "redo": true,
+      "regeneration": true
+    },
+    "consoleErrors": [],
+    "warnings": "Existing MeshToonMaterial flatShading and Intel FXAA compiler warnings. No runtime errors.",
+    "normalPlaytestStartup": true,
+    "performanceLimits": "Material sharing and idle/chunk cleanup regression tests passed. Camera-dependent scene counts only; scheduling was throttled in this browser. No FPS, NVIDIA, large-city or speedup claim."
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - All Growable Foundations and Office Paving Playtest - 20261117T162243Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - All Growable Foundations and Office Paving Test City - 20261117T162243Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play All Growable Foundations and Office Paving in Chrome - 20261117T162243Z.cmd",
+    "playtestSha256": "77088b17071154c95ef4fb2e923abe6066ac90c20dd35928badf1273883321c6",
+    "reviewSha256": "28ca5de755c0d7779ad29aa88ef87d626e77b535d86eb86df15cb88a38fcb847"
+  }
+}

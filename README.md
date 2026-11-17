@@ -1,5 +1,9 @@
 # Pancake City — v52 recovery
 
+## All growable foundations and office paving — latest
+
+Facade-matched terrain foundations now cover catalogue offices and native homes as well as BMO/Lind/Von. Office setbacks and courtyards use sidewalk-matching concrete; homes retain landscaping. Run `npm run export:auto-foundations` for updated offline Playtest/Test City builds. [Scope, checks and limitations](docs/ALL_GROWABLE_FOUNDATIONS.md).
+
 This project was reconstructed **only** from the user-provided `Pancake (52).html` browser build. It is **not** the original Codex repository or its Git history.
 
 ## Facade-integrated lightweight foundations

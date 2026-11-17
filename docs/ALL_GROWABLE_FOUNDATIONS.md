@@ -1,0 +1,15 @@
+# All growable foundations and office paving
+
+The facade foundation adapter now also covers all 98 catalogue office styles, native residential growables, the detailed office fallback and the opt-in enhanced family. It reuses existing extrusion, terrain fitting, native chunk batching, facade materials and cleanup. Source models, saved lot shapes, textures, zoning, roads, sidewalks and terrain generation remain intact.
+
+Exposed Office lot ground is paved at the existing sidewalk datum (ur = terrain + 0.24m) with one shared material using sidewalk colour Wl, without adding textures. Courtyards/setbacks are polygon differences around actual ground-floor footprints, draped with the existing terrain helper. Residential landscaping stays unchanged. The previous lightweight milestone's terrain+0.06 sidewalk assumption is superseded by the actual recovered constant; doorway datums and narrow plinth coping follow that correction. Supports borrow existing wall materials, including native brick. No retired original assets are enabled or loaded.
+
+Derived render objects keep residential plot/save records unchanged. Contact geometry signatures depend on sampled local heights, while terrain revision/function changes invalidate the sampling cache. Remote landmark grading therefore does not invalidate unchanged buildings.
+
+Run `npm run export:auto-foundations` for new timestamped offline Playtest, Test City and Chrome launcher files in dist/. The normal Playtest starts empty; the disposable Test City includes flat/sloped modes, catalogue and home closeups. Office paving appears automatically on existing and newly zoned offices.
+
+Validation: all 129 checks and npm run build pass. Five new regressions cover all catalogue foundations, exact office paving coverage/materials, sloped terrain normals/heights, residential material sharing/cache isolation and demolition/Undo/Redo/cold restore. The existing open-cap rendering test now expects foundations to share the facade batch and permits only low plinth/entry caps plus the exterior roof. Original52 SHA-256 and reviewed assembly checks pass.
+
+Actual exported Test City: 12 Von, 10 BMO, 5 Lind, 41 catalogue; 27 exposed Office lots paved. Flat and sloped Lind/corner/catalogue/native homes inspected; 28 homes retain grass. Demolition/Undo/Redo/regeneration pass, runtime error logs empty. Existing material/compiler warnings remain. Intel camera-dependent counts and export hashes are in [validation evidence](ALL_GROWABLE_FOUNDATIONS_VALIDATION.json). Single shared paving material/no new maps, unchanged idle frames and cleanup are regression-tested. Browser scheduling was throttled: no FPS or large-city performance claim. Exact-byte HTTP execution was verified; direct offline launch remains user-side.
+
+Recovery: safety/pre-office-paving-d9aa1a6 and verified .tools/checkpoints/all-growable-foundations/history.bundle retain the pre-change state, plus copies of unrelated dirty work. Changes are local on codex/all-growable-foundations. No push without approval; local commits/checkpoints are not off-computer backups.

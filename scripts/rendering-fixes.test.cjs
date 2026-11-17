@@ -89,9 +89,9 @@ test('the actual neighborhood renderer uses the open internal caps and retains f
   assert.equal(renderer.info().buildings,1);
   assert.ok(renderer.info().windows>0);
   const shells=[];scene.traverse(object=>{if(object.userData.buildingRanges)shells.push(object.geometry);});
-  assert.equal(shells.length,3,'Foundation, wall and roof materials remain separate');
+  assert.equal(shells.length,2,'Facade-integrated foundations share the wall material; roof stays separate');
   for(const geometry of shells)for(const face of faces(geometry))if(Math.abs(face.normal)>.5){
-    assert.ok(face.points.every(p=>Math.abs(p[1]+.18)<1e-5||Math.abs(p[1]-11.16)<1e-5),'Only the exterior bottom and top caps should be rendered');
+    assert.ok(face.points.every(p=>p[1]<=.721||Math.abs(p[1]-10.46)<1e-5),'Only the low plinth/entry transitions and exterior roof cap should be rendered');
   }
 });
 function generate(api,points,{renderCache=false}={}){
