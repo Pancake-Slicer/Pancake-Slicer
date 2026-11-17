@@ -68,11 +68,12 @@ function validateAsset(file,{verifySources=true}={}){
   assert.equal(d.model.format,'procedural');const code=fs.readFileSync(model,'utf8');assert.ok(!/\b(?:import|export)\b/.test(code),'Procedural factory must be a standalone function expression');
   return {...d,key:'asset:'+d.id+'@'+d.version,factorySource:code};
 }
+const retiredIds=new Set(require('../reference/retired-growables.json').ids);
 function definitions(base=process.env.PANCAKE_GROWABLE_REGISTRY||path.join(root,fs.existsSync(path.join(root,'Assets/growable-registry'))?'Assets/growable-registry':'Assets/buildings'),options){
  if(!fs.existsSync(base))return [];
  const portable=path.resolve(base)!==path.join(root,'Assets/buildings'),seen=new Set;
- return fs.readdirSync(base).sort().map(name=>path.join(base,name,'asset.json')).filter(file=>fs.existsSync(file)).map(file=>{
-  const d=validateAsset(file,options||{verifySources:!portable});assert.ok(!seen.has(d.id+'@'+d.version),'Duplicate asset version');seen.add(d.id+'@'+d.version);
+ return fs.readdirSync(base).sort().map(name=>path.join(base,name,'asset.json')).filter(file=>fs.existsSync(file)).filter(file=>!options?.activeOnly||!retiredIds.has(JSON.parse(fs.readFileSync(file,'utf8')).id)).map(file=>{
+  const d=validateAsset(file,{verifySources:!portable,...options});assert.ok(!seen.has(d.id+'@'+d.version),'Duplicate asset version');seen.add(d.id+'@'+d.version);
   if(portable){const folder=path.dirname(file),receipt=JSON.parse(fs.readFileSync(path.join(folder,'accepted.json')));assert.equal(receipt.manifestSha256,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),'Accepted manifest changed');assert.equal(receipt.modelSha256,d.payload.sha256,'Accepted model changed');
    const notices=receipt.notices||[];for(const n of notices){const p=path.resolve(folder,n.path);assert.ok(p.startsWith(folder+path.sep),'Notice escapes package');assert.equal(crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),n.sha256,'Accepted notice changed');}
    const bytes=[fs.readFileSync(file),fs.readFileSync(path.resolve(folder,d.model.path)),fs.readFileSync(path.join(folder,'architecture.json')),...(notices.length?[Buffer.from(JSON.stringify(notices))]:[])];assert.equal(crypto.createHash('sha256').update(Buffer.concat(bytes)).digest('hex'),receipt.fingerprint,'Accepted package metadata changed');
@@ -81,5 +82,6 @@ function definitions(base=process.env.PANCAKE_GROWABLE_REGISTRY||path.join(root,
  });
 }
 
-function assetSource(){const defs=definitions(),factories=defs.filter(d=>d.factorySource).map(d=>'pcRegisterGrowableFactory('+JSON.stringify(d.key)+','+d.factorySource+');');const json=JSON.stringify(defs.map(({factorySource,...d})=>d)).replace(/</g,'\\u003c');return require('./procedural-offices.cjs').proceduralOfficeSource()+'\nconst pcGrowableDefinitions='+json+'.concat(pcOhneeDefinitions);\n'+fs.readFileSync(path.join(root,'web/features/growable-assets.js'),'utf8')+'\n'+factories.join('\n');}
-module.exports={assetSource,definitions,compileGLB,validateAsset};
+function activeDefinitions(base){return definitions(base,{activeOnly:true});}
+function assetSource(){const defs=activeDefinitions(),factories=defs.filter(d=>d.factorySource).map(d=>'pcRegisterGrowableFactory('+JSON.stringify(d.key)+','+d.factorySource+');');const json=JSON.stringify(defs.map(({factorySource,...d})=>d)).replace(/</g,'\\u003c');return 'const pcRetiredGrowableIds=new Set('+JSON.stringify([...retiredIds])+');\n'+require('./procedural-offices.cjs').proceduralOfficeSource()+'\nconst pcGrowableDefinitions='+json+'.concat(pcOhneeDefinitions);\n'+fs.readFileSync(path.join(root,'web/features/growable-assets.js'),'utf8')+'\n'+factories.join('\n');}
+module.exports={assetSource,definitions,activeDefinitions,compileGLB,validateAsset};

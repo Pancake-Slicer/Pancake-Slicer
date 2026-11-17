@@ -25,11 +25,11 @@ test('conflicting duplicate versions and duplicate models under different identi
 test('a placement/render smoke failure skips that package; accepted registry survives missing source packages',()=>{
  const f=fixture();copy(f.source);assert.equal(syncLibrary({...f,probe:()=>{throw Error('Unsupported rendering');}}).entries[0].status,'skipped');syncLibrary(f);fs.renameSync(path.join(f.source,'tower'),path.join(path.dirname(f.source),'removed-from-inbox'));assert.equal(syncLibrary(f).retained.length,1);assert.equal(definitions(f.registry).length,1);
 });
-test('all currently accepted models pass generic native-fit and instanced-render smoke checks',()=>{
- const results=smoke(path.join(root,'web/assets/game.bundle.js'));assert.ok(results.length>=3);assert.ok(results.every(r=>r.status==='passed'&&r.placements===3&&r.sharedRenderBatches>0));
+test('active accepted models pass generic smoke checks; archived models remain excluded',()=>{
+ const results=smoke(path.join(root,'web/assets/game.bundle.js'));assert.equal(results.length,require('./growable-assets.cjs').activeDefinitions().length);assert.ok(results.every(r=>r.status==='passed'&&r.placements===3&&r.sharedRenderBatches>0));
 });
 test('newest versions grow while old versioned assignments still resolve',()=>{
- const d=definitions().find(d=>d.id==='ohneeohnee-modernist'&&d.version==='1.0.0'),newer={...d,version:'1.1.0',key:'asset:'+d.id+'@1.1.0'};
+ const original=definitions().find(d=>d.id==='ohneeohnee-modernist'&&d.version==='1.0.0'),d={...original,id:'fixture-active-tower',key:'asset:fixture-active-tower@1.0.0'},newer={...d,version:'1.1.0',key:'asset:'+d.id+'@1.1.0'};
  const runtime=fs.readFileSync(path.join(root,'web/assets/game.bundle.js'),'utf8').replace(/const pcGrowableDefinitions=.*?;\n/,()=> 'const pcGrowableDefinitions='+JSON.stringify([d,newer])+';\n'),context=vm.createContext({console,performance,structuredClone,document:{createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}});vm.runInContext(runtime.slice(0,runtime.indexOf('const LP='))+';globalThis.api={pcGrowableChoose,pcGrowableCurrentDefinitions};',context);const a=context.api;assert.equal(a.pcGrowableCurrentDefinitions.length,1);assert.equal(a.pcGrowableCurrentDefinitions[0].version,'1.1.0');let grew=0;
  for(let i=0;i<30;i++){const p={id:'version-'+i,zone:'offices',area:3600,officeProfile:{maxFloors:80},x:0,z:0,y:8,rotation:0,towardRoad:{x:0,z:1},entrance:{x:0,z:30},footprint:[{x:-30,z:-30},{x:30,z:-30},{x:30,z:30},{x:-30,z:30}]},selected=a.pcGrowableChoose({},p);if(selected){assert.equal(selected.version,'1.1.0');grew++;}assert.equal(a.pcGrowableChoose({pcCatalogueAssignments:new Map([[p.id,d.key]])},p).version,d.version);}assert.ok(grew>0);
 });

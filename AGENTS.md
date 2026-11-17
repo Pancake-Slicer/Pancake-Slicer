@@ -36,7 +36,7 @@
 | .tools/; dist/ | Ignored local dependencies, staged viewers/diagnostics and generated exports; do not edit as source. |
 
 - The game uses one recovered **Three.js r180 / WebGL** engine: 3D meshes, procedural geometry and approved GLBs, not sprite buildings.
-- Scripts assemble the runtime from original HTML plus reviewed recipes: assemble-runtime.cjs → rendering/Office/landmark patches → integrate-growables.cjs → lightweight-bmo.cjs → lightweight-lind.cjs (all under scripts/).
+- Scripts assemble the runtime from original HTML plus reviewed recipes: assemble-runtime.cjs → rendering/Office/landmark patches → integrate-growables.cjs → lightweight-bmo.cjs → lightweight-lind.cjs → lightweight-von.cjs (all under scripts/).
 - Change editable feature modules/recipes, then assemble; do not hand-patch the generated bundle or replace the renderer. Preserve existing camera/shadow/frame caches and hidden-tab safeguards.
 - Architecture Lab tools reuse optional local .tools/node_modules/three@0.180.0. Follow preparation-script guidance if missing; never add a second engine to the game.
 
@@ -45,7 +45,7 @@
 - **BMO lightweight:** integrated parametric Office growable. Horizontal bands, silver/grey cladding, opaque blue-grey/slate glazing, restrained charcoal and flat mechanical roof. Four coordinated palettes in web/features/bmo-materials.js.
 - **Lind lightweight:** integrated parametric Office growable. Stepped Art Deco massing, vertical limestone piers, recessed windows and green-grey hipped crown. Three restrained warm/neutral/weathered tones in web/features/lightweight-lind.js.
 - BMO/Lind start ON in export:lind-growables builds via data-lightweight-growables; other modes retain their own defaults. Existing development controls include per-family ON/OFF and Favour; do not assume every export enables them.
-- **Static approved GLBs:** lind-art-deco@1.0.0, von-badel-art-deco@2.1.0 and ohneeohnee-modernist@1.0.0 are accepted catalogue growables, independently of procedural templates.
+- **Original static GLBs — reference-only:** all versions of lind-art-deco, von-badel-art-deco and ohneeohnee-modernist are retired from gameplay by reference/retired-growables.json. Preserve sources/packages/Lab access. activeDefinitions() excludes them before compilation; saved keys remain and display the existing catalogue fallback. See docs/RETIRED_CUSTOM_GROWABLES.md. Lightweight Lind/Von/BMO remain active.
 - **Ohneeohnee enhanced generator:** nine frozen opt-in candidates, disabled by default; vertical/horizontal/grid facade subfamilies. Preserve its optimized implementation and approved maps, but do not substitute its expensive detailing into lightweight city growth.
 - **Von Badel:** current approved v2.1.0 is charcoal International Style, recessed blue-grey glass, symmetric wings and flat roof. Historical art-deco names/notes are not instructions to restore the superseded design.
 - Lab/benchmark presence alone does not register an asset for growth. Preserve original comparisons and archived versions; consult docs/LIND_GROWABLE_INTEGRATION.md, docs/LIGHTWEIGHT_BMO_PHASE2.md and docs/PROCEDURAL_OFFICES_PHASE6B.md for host contracts/status.

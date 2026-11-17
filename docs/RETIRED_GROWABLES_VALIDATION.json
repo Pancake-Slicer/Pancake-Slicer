@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-16 America/Toronto",
+  "checkpoint": "safety/pre-retire-originals-ba1262d",
+  "branch": "codex/retire-original-growables",
+  "tests": {
+    "fullBuild": "npm run build",
+    "passed": 117,
+    "retirementRegressions": 6,
+    "targetedBatchPassed": 33,
+    "proceduralAndLindVonBatchPassed": 27
+  },
+  "browser": {
+    "url": "http://127.0.0.1:4202/review.html",
+    "retiredIds": [
+      "lind-art-deco",
+      "von-badel-art-deco",
+      "ohneeohnee-modernist"
+    ],
+    "activeStaticKeys": [],
+    "staticResourceKeys": [],
+    "enhancedRuntimeLoaded": false,
+    "mixed": {
+      "von": 12,
+      "bmo": 10,
+      "lind": 5,
+      "existing": 41
+    },
+    "preservedExisting": 8,
+    "demolition": true,
+    "undo": true,
+    "redo": true,
+    "regrowth": true,
+    "consoleErrors": [],
+    "method": "Actual exported Test City served over localhost; direct file launch not automated. Visually inspected mixed city. No FPS/performance claim."
+  },
+  "runtimeBytes": {
+    "before": 13526020,
+    "after": 3897655,
+    "reduction": 9628365
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Lightweight Offices Only Playtest - 20261117T020054Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Lightweight Offices Only Test City - 20261117T020054Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Lightweight Offices Only in Chrome - 20261117T020054Z.cmd",
+    "playtestSha256": "721fc4ff6e2e06acf7867f1bfeb4ee9787aaac07f920f9818624574fe0cc9048",
+    "reviewSha256": "790659fe19c0adb54f3d631663f0e927095c2f89c26efef7ee0b6b9dae4126b2"
+  },
+  "legacyPolicy": "Preserve original saved assignment keys verbatim; render those lots using the deterministic existing catalogue fallback. Undo/Redo and cold JSON tested; user save files are never edited."
+}

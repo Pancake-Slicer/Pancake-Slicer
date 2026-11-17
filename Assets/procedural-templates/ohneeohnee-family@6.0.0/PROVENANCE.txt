@@ -1,0 +1,6 @@
+Shared materials for the preserved opt-in enhanced Ohneeohnee generator (6.0.0).
+Derived without changing materials, sampler settings or embedded images from the archived approved Ohneeohnee GLB.
+Source SHA-256: 2938c48decce49b82fcead7dd831f138597f24828f0155a32f2e8b0894f8f133
+Materials payload SHA-256: df62d64d94dd352de1575ef9fc9e60fcccf2bc5f438eec62e2c68acb789157d6
+Contains named material bindings only; no original vertex, normal, UV, index or transform data.
+The original model, authoring sources, notices and assets remain intact.

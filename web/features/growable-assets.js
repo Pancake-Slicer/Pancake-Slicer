@@ -1,7 +1,7 @@
 // Shared static building-asset interface. Placement never scales the model.
-const pcGrowableByKey=new Map(pcGrowableDefinitions.map(d=>[d.key,d]));
+const pcGrowableByKey=new Map(pcGrowableDefinitions.filter(d=>!pcRetiredGrowableIds.has(d.id)).map(d=>[d.key,d]));
 // Keep archived versions for save/history keys, but grow only the newest version.
-const pcGrowableCurrentDefinitions=[...pcGrowableDefinitions.reduce((map,d)=>{const old=map.get(d.id),a=d.version.split('.').map(Number),b=old?.version.split('.').map(Number);if(!old||a[0]>b[0]||a[0]===b[0]&&(a[1]>b[1]||a[1]===b[1]&&a[2]>b[2]))map.set(d.id,d);return map;},new Map).values()];
+const pcGrowableCurrentDefinitions=[...pcGrowableDefinitions.filter(d=>!pcRetiredGrowableIds.has(d.id)).reduce((map,d)=>{const old=map.get(d.id),a=d.version.split('.').map(Number),b=old?.version.split('.').map(Number);if(!old||a[0]>b[0]||a[0]===b[0]&&(a[1]>b[1]||a[1]===b[1]&&a[2]>b[2]))map.set(d.id,d);return map;},new Map).values()];
 const pcGrowableResources=new Map,pcGrowableFactories=new Map,pcGrowablePlacements=new WeakMap;
 function pcRegisterGrowableFactory(key,factory){if(!pcGrowableByKey.has(key)||typeof factory!=='function')throw Error('Invalid growable factory');pcGrowableFactories.set(key,factory);}
 function pcGrowableFind(key){return pcGrowableByKey.get(key)||pcGrowableCurrentDefinitions.find(d=>d.id===key)||null;}
@@ -11,6 +11,7 @@ function pcAssetBytes(text){
 }
 function pcAssetArray(a){const bytes=pcAssetBytes(a.array);return a.type==='Uint32Array'?new Uint32Array(bytes):a.type==='Uint16Array'?new Uint16Array(bytes):new Float32Array(bytes);}
 function pcGrowableResource(asset){
+ if(pcRetiredGrowableIds.has(asset.id))throw Error('Retired reference-only growable: '+asset.id);
  if(asset.model.format==='ohneeohnee-family')throw Error('Use the shared family runtime for procedural offices');
  if(pcGrowableResources.has(asset.key))return pcGrowableResources.get(asset.key);
  if(asset.model.format==='procedural'){
@@ -40,7 +41,7 @@ function pcGrowableResource(asset){
  const resource={parts,materials,images};pcGrowableResources.set(asset.key,resource);return resource;
 }
 async function pcGrowablesReady(loadImage=async uri=>{const image=new Image;image.src=uri;await image.decode();return image;}){
- for(const asset of pcGrowableDefinitions){if(asset.model.format==='ohneeohnee-family')continue;const resource=pcGrowableResource(asset);for(const {map,uri} of resource.images||[]){map.image=await loadImage(uri);map.needsUpdate=true;}}
+ for(const asset of pcGrowableDefinitions){if(pcRetiredGrowableIds.has(asset.id)||asset.model.format==='ohneeohnee-family')continue;const resource=pcGrowableResource(asset);for(const {map,uri} of resource.images||[]){map.image=await loadImage(uri);map.needsUpdate=true;}}
 }
 // Follow the lot's actual axes. towardRoad points at a sampled road position,
 // which can be slightly off-centre and must not rotate a rigid building.

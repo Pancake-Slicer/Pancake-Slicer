@@ -2,6 +2,10 @@
 
 This project was reconstructed **only** from the user-provided `Pancake (52).html` browser build. It is **not** the original Codex repository or its Git history.
 
+## Current gameplay — lightweight custom offices only
+
+Run npm run export:lightweight-only for a new offline Playtest and populated Test City in dist/. Lightweight Lind, Von Badel and BMO grow beside the existing catalogue. Original bespoke Lind/Von Badel/Ohneeohnee models are preserved for reference and excluded from gameplay loading/spawning. Legacy saved keys are retained and shown through the existing catalogue fallback. [Retirement details and validation](docs/RETIRED_CUSTOM_GROWABLES.md).
+
 ## Lind + BMO — playable growable integration
 
 Run `npm run export:lind-growables` for fresh standalone Playtest and prebuilt Test City files. The supplied Playtest enables natural mixed Lind/BMO growth alongside the existing catalogue. Use Office / Mix all98; the existing development panel includes Favour Lind. [Launch instructions, architecture, tests and measured limits](docs/LIND_GROWABLE_INTEGRATION.md).

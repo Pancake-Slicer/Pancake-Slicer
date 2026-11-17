@@ -54,7 +54,7 @@ function validatePackage(file){
 function syncLibrary({source,registry,probe=()=>{}}){
  fs.mkdirSync(registry,{recursive:true});const existing=definitions(registry),keys=new Map(existing.map(d=>[d.id+'@'+d.version,d])),report={source,entries:[],added:[],retained:existing.map(d=>d.key)};
  const candidates=new Map;
- for(const file of scan(source,(e,dir)=>report.entries.push({file:dir,status:'skipped',reason:'Cannot scan directory: '+e.message}))){try{const p=validatePackage(file),key=p.d.id+'@'+p.d.version;probe(p.d);if(!candidates.has(key))candidates.set(key,[]);candidates.get(key).push(p);}catch(e){report.entries.push({file,status:'skipped',reason:e.message});}}
+ for(const file of scan(source,(e,dir)=>report.entries.push({file:dir,status:'skipped',reason:'Cannot scan directory: '+e.message}))){try{const manifest=JSON.parse(fs.readFileSync(file,'utf8'));if(require('../reference/retired-growables.json').ids.includes(manifest.id)){report.entries.push({file,status:'reference-only',reason:'Retired from gameplay; source package retained'});continue;}const p=validatePackage(file),key=p.d.id+'@'+p.d.version;probe(p.d);if(!candidates.has(key))candidates.set(key,[]);candidates.get(key).push(p);}catch(e){report.entries.push({file,status:'skipped',reason:e.message});}}
  for(const [key,packages]of candidates){
   if(new Set(packages.map(p=>p.fingerprint)).size>1){report.entries.push({key,status:'skipped',reason:'Conflicting packages use the same ID/version; publish a new version'});continue;}
   const p=packages[0],current=keys.get(key),dest=path.join(registry,key);

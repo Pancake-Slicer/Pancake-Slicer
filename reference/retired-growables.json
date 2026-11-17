@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "ids": [
+    "lind-art-deco",
+    "von-badel-art-deco",
+    "ohneeohnee-modernist"
+  ],
+  "reason": "Original bespoke models are reference-only. Keep source packages and legacy assignment keys; display legacy lots through the existing catalogue fallback."
+}
