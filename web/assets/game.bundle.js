@@ -6247,7 +6247,7 @@ function pcFacadePlace(b,property,terrain){
  const p=b.office.assetPlacement,s=r.parameters,bmo=!!b.office?.lightweightBmo,cos=Math.cos(p.angle),sin=Math.sin(p.angle);
  const point=(x,z)=>({x:p.x+x*cos+z*sin,z:p.z-x*sin+z*cos});
  const ground=(x,z)=>{const w=point(x,z),v=terrain?.heightAt(w.x,w.z);return Number.isFinite(v)?v:b.ground;};
- const front=b.office.lightweightLind?(s.podium?.depth/2||s.depth*.25):(s.podium?.depth||s.depth)/2;
+ const front=b.office.lightweightBrick?r.grid.entrance.z:b.office.lightweightLind?(s.podium?.depth/2||s.depth*.25):(s.podium?.depth||s.depth)/2;
  // The existing sidewalk surface uses ur (terrain+.24). Put the doorway just above it;
  // BMO already has its native .16m entrance threshold.
  const sill=bmo?.16:0,base=Math.max(ground(-2.2,front),ground(0,front),ground(2.2,front))+(bmo?ur-.04:ur+.06);
@@ -6415,14 +6415,21 @@ const brickModule0=(()=>{
 
 const VERSION='1.0.0';
 function normalizeSpecification(input={}){
- const s={family:'brick-commercial-office',version:VERSION,id:input.id||'brick-office',name:input.name||'Brick Commercial Office',seed:String(input.seed??'1138'),width:input.width??34,depth:input.depth??28,storeys:input.storeys??26,floorHeight:input.floorHeight??3.65,targetBay:input.targetBay??3.2,podium:null};
+ const s={family:'brick-commercial-office',version:VERSION,architectureRevision:2,id:input.id||'brick-office',name:input.name||'Brick Commercial Office',seed:String(input.seed??'1138'),width:input.width??34,depth:input.depth??28,storeys:input.storeys??26,floorHeight:input.floorHeight??3.65,targetBay:input.targetBay??3.2,podium:null};
  if(input.family&&input.family!==s.family||input.version&&input.version!==VERSION)throw Error('Unknown brick office family/version');
  for(const [k,min,max]of [['width',18,60],['depth',16,54],['storeys',12,42],['floorHeight',3.6,3.8],['targetBay',3.1,3.5]])if(!Number.isFinite(s[k])||s[k]<min||s[k]>max)throw Error('Unsupported brick office '+k);
  if(!Number.isInteger(s.storeys)||s.storeys*s.floorHeight/Math.min(s.width,s.depth)>7.5)throw Error('Unsupported brick tower proportions');return s;
 }
-function bayGrid(length,target){const clear=length-1.5,count=Math.max(4,Math.round(clear/target));return {count,pitch:clear/count,clear,windowWidth:1.65};}
-function massing(input){const s=normalizeSpecification(input),cut=s.storeys-3,volume=(name,width,depth,start,end)=>({name,x:0,z:0,width,depth,start,end,front:bayGrid(width,s.targetBay),side:bayGrid(depth,s.targetBay)});return {volumes:[volume('brick shaft',s.width,s.depth,0,cut),volume('recessed crown',s.width-1.6,s.depth-1.6,cut,s.storeys)],roof:{level:s.storeys*s.floorHeight,height:3.4}};}
-function fitToLot(input,{width,depth,setback=.3}){const round=n=>Math.floor((n+1e-8)*10)/10;return normalizeSpecification({...input,width:round(width-2*setback-2),depth:round(depth-2*setback-2)});}
+
+function bayGrid(length,target){const clear=length-1.1,count=Math.max(1,Math.round(clear/target));if(clear/count<2.5)throw Error('H-plan face too narrow for masonry bays');return {count,pitch:clear/count,clear,windowWidth:1.65};}
+function massing(input){
+ const s=normalizeSpecification(input),w=s.width,d=s.depth,wingWidth=Math.round(w*.28*10)/10,gap=w-2*wingWidth,coreDepth=Math.round(d*.46*10)/10,cut=s.storeys-Math.max(3,Math.min(9,Math.round(s.storeys*.22))),baseFloors=Math.max(2,Math.min(5,Math.round(s.storeys*.12))),volumes=[];
+ const add=(name,x,width,depth,start,end)=>volumes.push({name,x,z:0,width,depth,start,end,front:bayGrid(width,s.targetBay),side:bayGrid(depth,s.targetBay)});
+ for(const [name,x,width,depth,end]of [['left wing',-(w-wingWidth)/2,wingWidth,d,s.storeys],['recessed connector',0,gap,coreDepth,s.storeys-1],['right wing',(w-wingWidth)/2,wingWidth,d,s.storeys]]){add(name,x,width,depth,0,cut);add(name+' limestone crown',x,width,depth,cut,end);}
+ const outline=[[-w/2,-d/2],[-gap/2,-d/2],[-gap/2,-coreDepth/2],[gap/2,-coreDepth/2],[gap/2,-d/2],[w/2,-d/2],[w/2,d/2],[gap/2,d/2],[gap/2,coreDepth/2],[-gap/2,coreDepth/2],[-gap/2,d/2],[-w/2,d/2]].map(([x,z])=>({x,z}));
+ return {volumes,outline,wingWidth,gap,coreDepth,recess:(d-coreDepth)/2,baseFloors,crownStart:cut,roof:{level:s.storeys*s.floorHeight,height:2.2},entrance:{x:0,z:coreDepth/2}};
+}
+function fitToLot(input,{width,depth,setback=.3}){const round=n=>Math.floor((n+1e-8)*10)/10,s=normalizeSpecification({...input,width:round(width-2*setback-2),depth:round(depth-2*setback-2)});if(s.width<28||s.depth<24||s.width/s.depth>1.9||s.depth/s.width>1.6)throw Error('Lot cannot preserve both H-plan wings and recessed connector');massing(s);return s;}
 const brickTemplate=Object.freeze({id:'brick-commercial-lightweight',version:VERSION,family:'office',maximumLot:{width:62.6,depth:56.6},envelopeMargin:2,normalize:normalizeSpecification,fit:fitToLot,layout:massing});
 
 return {VERSION,normalizeSpecification,bayGrid,massing,fitToLot,brickTemplate};})();
@@ -6497,32 +6504,49 @@ function createBrickMaterials(){
  const mat=(name,color,roughness,extra={})=>{const m=new T.MeshStandardMaterial({color,roughness,...extra});m.name=name;return m;};
  return {brick:mat('brick',0xe1d2bc,.96,{map:brick}),stone:mat('stone',0xb8ad93,.94),trim:mat('trim',0xc8bfa8,.88),bay:mat('bay',0xe4e0d4,.42,{map:bay,metalness:.04}),glass:mat('glass',0x53666a,.3,{metalness:.15}),roof:mat('roof',0x686963,.98),metal:mat('metal',0x535b59,.7,{metalness:.22})};
 }
+
 function buildBrick(input,materials){
- const s=normalizeSpecification(input),plan=massing(s),b=new ArchitectureBatch,fh=s.floorHeight;
- function ring(key,w,d,y,h,projection){for(const sign of [-1,1]){b.box(key,0,y,sign*(d/2+projection/2),w+2*projection,h,projection);b.box(key,sign*(w/2+projection/2),y,0,projection,h,d);}}
- for(const v of plan.volumes){const w=v.width,d=v.depth,y0=v.start*fh,top=v.end*fh,base=v.start===0,shaftStart=base?2*fh:y0;
-  for(const {n,u,length,offset,g}of [{n:[0,1],u:[1,0],length:w,offset:d/2,g:v.front},{n:[1,0],u:[0,-1],length:d,offset:w/2,g:v.side},{n:[0,-1],u:[-1,0],length:w,offset:d/2,g:v.front},{n:[-1,0],u:[0,1],length:d,offset:w/2,g:v.side}]){
-   const p=(t,y,o=0)=>[u[0]*t+n[0]*(offset+o),y,u[1]*t+n[1]*(offset+o)],strip=(key,t,y,ww,h,o,depth)=>b.box(key,...p(t,y,o),n[0]?depth:ww,h,n[0]?ww:depth);
-   b.quad('brick',[p(-length/2,y0,-.06),p(length/2,y0,-.06),p(length/2,top,-.06),p(-length/2,top,-.06)],[0,0,length/2,0,length/2,(top-y0)/2,0,(top-y0)/2]);
-   if(base)b.quad('stone',[p(-length/2,0),p(length/2,0),p(length/2,2*fh),p(-length/2,2*fh)]);
-   for(let i=0;i<g.count;i++){const t=-g.clear/2+(i+.5)*g.pitch,ww=g.windowWidth;
-    b.quad('bay',[p(t-ww/2,shaftStart,.015),p(t+ww/2,shaftStart,.015),p(t+ww/2,top,.015),p(t-ww/2,top,.015)],[0,0,1,0,1,(top-shaftStart)/fh,0,(top-shaftStart)/fh]);b.windowBays+=(v.end-(base?2:v.start));
-    if(base){b.quad('bay',[p(t-.98,.7,.025),p(t+.98,.7,.025),p(t+.98,2*fh-.2,.025),p(t-.98,2*fh-.2,.025)],[0,0,1,0,1,2,0,2]);b.windowBays+=2;}
-   }
-   for(let i=0;i<=g.count;i++){const t=-g.clear/2+i*g.pitch;strip('brick',t,(shaftStart+top)/2,.76,top-shaftStart,.16,.44);if(base)strip('trim',t,fh,.82,2*fh,.16,.42);strip('trim',t,top-.34,.93,.42,.2,.5);}
-   // Stone sill courses read across bays without per-window meshes.
-   for(let floor=(base?3:v.start+1);floor<v.end;floor++)if(floor%4===0)strip('stone',0,floor*fh+.1,length,.17,.03,.15);
+ const s=normalizeSpecification(input),plan=massing(s),b=new ArchitectureBatch,fh=s.floorHeight,base=plan.baseFloors*fh,crown=plan.crownStart*fh,roof=s.storeys*fh;
+ // Trace only the twelve exposed H-plan faces. No walls or slabs fill its courts.
+ const faces=plan.outline.map((a,i)=>{const q=plan.outline[(i+1)%plan.outline.length],dx=q.x-a.x,dz=q.z-a.z,length=Math.hypot(dx,dz),n=[dz/length,-dx/length],u=[-dx/length,-dz/length],mid=[(a.x+q.x)/2,(a.z+q.z)/2],connector=Math.abs(mid[0])<plan.gap/2-.01&&Math.abs(dz)<.001;return {length,n,u,mid,connector,top:(s.storeys-(connector?1:0))*fh};});
+ function faceTools(f){const p=(t,y,o=0)=>[f.mid[0]+f.u[0]*t+f.n[0]*o,y,f.mid[1]+f.u[1]*t+f.n[1]*o],box=(key,t,y,w,h,o,depth)=>b.box(key,...p(t,y,o),f.n[0]?depth:w,h,f.n[0]?w:depth);const pier=(key,t,y,w,h,o,d)=>{const lo=y-h/2,hi=y+h/2,l=t-w/2,r=t+w/2,back=o-d/2,front=o+d/2;b.quad(key,[p(l,lo,front),p(r,lo,front),p(r,hi,front),p(l,hi,front)]);b.quad(key,[p(l,lo,back),p(l,lo,front),p(l,hi,front),p(l,hi,back)]);b.quad(key,[p(r,lo,front),p(r,lo,back),p(r,hi,back),p(r,hi,front)]);};return {p,box,pier};}
+ function course(f,key,y,height,projection){const {box}=faceTools(f);box(key,0,y,f.length+projection*2,height,projection/2-.05,projection+.1);}
+ const marker=b.begin('H-plan limestone base, brick shaft and limestone crown');
+ for(const f of faces){const {p,box,pier}=faceTools(f),gridCount=Math.max(1,Math.round((f.length-1.1)/s.targetBay)),clear=f.length-1.1,pitch=clear/gridCount;
+  for(const [key,lo,hi]of [['stone',0,base],['brick',base,crown],['stone',crown,f.top]])b.quad(key,[p(-f.length/2,lo,-.07),p(f.length/2,lo,-.07),p(f.length/2,hi,-.07),p(-f.length/2,hi,-.07)]);
+  for(let i=0;i<gridCount;i++){const t=-clear/2+(i+.5)*pitch,ww=1.65;
+   b.quad('bay',[p(t-ww/2,.65,.015),p(t+ww/2,.65,.015),p(t+ww/2,base-.25,.015),p(t-ww/2,base-.25,.015)],[0,0,1,0,1,plan.baseFloors,0,plan.baseFloors]);
+   b.quad('bay',[p(t-ww/2,base+.24,.015),p(t+ww/2,base+.24,.015),p(t+ww/2,crown-.16,.015),p(t-ww/2,crown-.16,.015)],[0,0,1,0,1,plan.crownStart-plan.baseFloors,0,plan.crownStart-plan.baseFloors]);
+   b.quad('bay',[p(t-ww/2,crown+.34,.015),p(t+ww/2,crown+.34,.015),p(t+ww/2,f.top-.38,.015),p(t-ww/2,f.top-.38,.015)],[0,0,1,0,1,(f.top-crown)/fh,0,(f.top-crown)/fh]);b.windowBays+=Math.round(f.top/fh);
   }
-  if(base){ring('trim',w,d,2*fh,.42,.36);ring('stone',w,d,2*fh-.38,.18,.20);ring('trim',w,d,6*fh,.24,.2);}
-  ring('stone',w,d,top-.36,.22,.23);ring('trim',w,d,top,.36,.58);ring('trim',w,d,top+.27,.17,.72);
-  if(base){const cw=s.width-1.6,cd=s.depth-1.6;for(const sign of [-1,1]){b.box('roof',0,top+.02,sign*(cd/2+.4),w,.08,.8);b.box('roof',sign*(cw/2+.4),top+.02,0,.8,.08,cd);}}
+  // Major masonry piers organize pairs/triples of recessed windows.
+  for(let i=0;i<=gridCount;i++){const t=-clear/2+i*pitch,major=i%3===0||i===gridCount;
+   pier('trim',t,base/2,major?1.02:.76,base,.19,.5);
+   pier('brick',t,(base+crown)/2,major?.88:.50,crown-base,major?.22:.12,major?.6:.4);
+   pier('trim',t,(crown+f.top)/2,major?.86:.54,f.top-crown,.21,.52);
+   if(major){box('stone',t,base+.45,.98,.5,.27,.66);box('trim',t,crown-.4,.94,.55,.29,.7);box('trim',t,f.top+.86,.7,1.0,.12,.42);box('trim',t,f.top+1.43,.91,.2,.17,.64);}
+  }
+  for(const y of [base-.36,base+.08])course(f,'trim',y,.24,.35);course(f,'trim',base+.36,.28,.65);
+  // Sparse continuous belt courses; the shaft remains predominantly vertical brick.
+  for(const level of [Math.round((plan.baseFloors+plan.crownStart)*.5)])course(f,'stone',level*fh,.20,.18);
+  course(f,'stone',crown-.25,.32,.25);course(f,'trim',crown+.12,.24,.62);
+  course(f,'stone',f.top-.42,.46,.38);course(f,'trim',f.top,.50,.76);course(f,'trim',f.top+.35,.20,.94);
+  // Solid parapet panels and raised pier caps articulate the top silhouette.
+  course(f,'stone',f.top+.84,1.0,.08);course(f,'trim',f.top+1.36,.18,.31);
  }
- const roof=s.storeys*fh,w=s.width-1.6,d=s.depth-1.6;b.box('roof',0,roof-.05,0,w,.1,d);
- ring('brick',w-.5,d-.5,roof+.65,1.3,.25);ring('trim',w,d,roof+1.34,.2,.5);
- b.box('stone',0,roof+1.12,-d*.13,w*.29,2.24,d*.31);b.box('trim',0,roof+2.3,-d*.13,w*.29+.35,.18,d*.31+.35);
- for(const sign of [-1,1]){b.box('metal',sign*w*.29,roof+.65,d*.2,2.3,1.3,2.4);for(let j=0;j<4;j++)b.box('roof',sign*w*.29,roof+.3+j*.23,d*.2+1.22,2,.07,.05);b.box('metal',sign*w*.18,roof+1.1,-d*.3,.7,2.2,.7);}
- const z=s.depth/2;b.box('glass',0,2.4,z+.05,4.2,4.8,.12);for(const x of [-2.25,0,2.25])b.box('metal',x,2.45,z+.16,.12,4.9,.13);b.box('trim',0,5.02,z+.19,5.1,.35,.45);b.box('trim',0,5.31,z+.28,5.6,.2,.8);
- const model=b.finish(materials,s.name);for(const mesh of model.children)if(mesh.name==='brick'){const p=mesh.geometry.attributes.position,n=mesh.geometry.attributes.normal,uv=mesh.geometry.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/2,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/2);}const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3);model.userData={...model.userData,specification:s,metadata:{dimensions:{width:size.x,depth:size.z,height:size.y},bounds:{min:bounds.min.toArray(),max:bounds.max.toArray()},grids:plan.volumes,performance:{triangles:model.children.reduce((n,m)=>n+m.geometry.index.count/3,0),materialBatches:model.children.length}}};return model;
+ b.end(marker);
+ const roofPart=b.begin('stepped H-plan roofs and mechanical penthouse');
+ for(const v of plan.volumes.filter(v=>v.start===plan.crownStart))b.box('roof',v.x,v.end*fh-.055,0,v.width,.11,v.depth);
+ // One-storey lower connector exposes the inner wing walls above its roof.
+ for(const sign of [-1,1])b.box('stone',sign*(plan.gap/2+.08),(s.storeys-.5)*fh,0,.16,fh,plan.coreDepth);
+ const connectorRoof=(s.storeys-1)*fh,pw=Math.min(plan.gap-2,plan.gap*.62),pd=plan.coreDepth*.58;
+ b.box('metal',0,connectorRoof+1.4,-plan.coreDepth*.08,pw,2.8,pd);b.box('trim',0,connectorRoof+2.88,-plan.coreDepth*.08,pw+.4,.16,pd+.4);
+ for(const sign of [-1,1]){const x=sign*(s.width-plan.wingWidth)/2;b.box('metal',x,roof+.64,-s.depth*.18,2.4,1.28,3);for(let j=0;j<4;j++)b.box('roof',x,roof+.3+j*.22,-s.depth*.18+1.52,2.1,.06,.06);b.box('metal',x,roof+1,s.depth*.22,.7,2,.7);b.box('trim',x,roof+2.05,s.depth*.22,1,.16,1);}
+ b.end(roofPart);
+ const z=plan.entrance.z;b.box('glass',0,2.4,z+.06,4.2,4.8,.12);for(const x of [-2.25,0,2.25])b.box('metal',x,2.45,z+.17,.12,4.9,.13);b.box('trim',0,5.02,z+.21,5.1,.35,.5);b.box('trim',0,5.33,z+.3,5.6,.22,.9);
+ const model=b.finish(materials,s.name);
+ for(const mesh of model.children)if(mesh.name==='brick'){const p=mesh.geometry.attributes.position,n=mesh.geometry.attributes.normal,uv=mesh.geometry.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/2,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/2);}
+ const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3);model.userData={...model.userData,specification:s,metadata:{dimensions:{width:size.x,depth:size.z,height:size.y},bounds:{min:bounds.min.toArray(),max:bounds.max.toArray()},grids:plan.volumes,architecture:{revision:2,plan:'H',wingWidth:plan.wingWidth,recess:plan.recess,baseFloors:plan.baseFloors,crownFloors:s.storeys-plan.crownStart},performance:{triangles:model.children.reduce((n,m)=>n+m.geometry.index.count/3,0),materialBatches:model.children.length}}};return model;
 }
 class BrickGenerator{
  constructor(materials=createBrickMaterials()){this.materials=materials;this.cache=new Map;this.leases=new Map;this.disposed=false;}
@@ -6554,17 +6578,18 @@ function pcBrickFit(property){
  else{const minimum=Math.min(capacity,Math.max(12,property.officeProfile?.minFloors||12)),storeys=minimum+((h>>>2)%Math.max(1,capacity-minimum+1)),parameters={id:'brick:'+property.id,name:'Brick Commercial office',seed:String(h),storeys,floorHeight:[3.6,3.65,3.7][h%3],targetBay:[3.1,3.3,3.5][(h>>>4)%3]},runtime=pcBrickReady();fit=runtime.system.fit(property,{parameters,seed:String(h),capacity});}
  pcBrickFits.set(property,fit);return fit;
 }
+function pcBrickResolve(record){const s=record.parameters;if(s.width<28||s.depth<24||s.width/s.depth>1.9||s.depth/s.width>1.6)return null;return {...record,parameters:pcBrickReady().module.normalizeSpecification(s),grid:pcBrickReady().module.massing(s)};}
 function pcBrickAsset(record){const s=record.parameters,windowBays=record.grid.volumes.reduce((n,v)=>n+2*(v.front.count+v.side.count)*(v.end-v.start),0);return {...pcBrickDefinition,record,dimensions:{floors:s.storeys,floorHeight:s.floorHeight,height:s.storeys*s.floorHeight+3.4,windowBays}};}
 function pcBrickChoose(collection,property,forPaint=false){
  if(forPaint&&collection.pcCatalogueChoice)return null;const assigned=collection.pcCatalogueAssignments?.get(property.id),control=pcBrickControl(collection);
- if(assigned===pcBrickKey){if(forPaint&&!control.enabled)return null;const r=collection.pcBrickAssignments?.get(property.id);if(!r)return null;pcBrickValidate(r);return sn(je(Te(r.footprint),Te(property.footprint)))<.0001?pcBrickAsset(r):null;}
+ if(assigned===pcBrickKey){if(forPaint&&!control.enabled)return null;const r=collection.pcBrickAssignments?.get(property.id);if(!r)return null;pcBrickValidate(r);const resolved=pcBrickResolve(r);return resolved&&sn(je(Te(r.footprint),Te(property.footprint)))<.0001?pcBrickAsset(resolved):null;}
  if(assigned!==undefined||collection.pcCatalogueChoice||!control.enabled)return null;
  const favoured=[pcBmoControl(collection),pcLindControl(collection),pcVonControl(collection)].filter(c=>c.enabled&&c.favour).length;
  if(!control.favour&&favoured)return null;
  if(control.favour&&favoured&&(pcOfficeHash(property.id+':brick-favoured')>>>12)%(favoured+1)!==0)return null;
  if(!control.favour&&(pcOfficeHash(property.id+':brick-selection')>>>12)%5!==3)return null;const fit=pcBrickFit(property);return fit.ok?pcBrickAsset(fit.record):null;
 }
-function pcBrickPlacement(property,asset){const r=asset.record,p=r.placement,s=r.parameters,z=s.podium?s.podium.depth/2:s.depth/2;return {...p,footprint:r.footprint,entrance:{x:p.x+Math.sin(p.angle)*z,y:property.y,z:p.z+Math.cos(p.angle)*z}};}
+function pcBrickPlacement(property,asset){const r=asset.record,p=r.placement,s=r.parameters,z=r.grid.entrance.z;return {...p,footprint:r.footprint,entrance:{x:p.x+Math.sin(p.angle)*z,y:property.y,z:p.z+Math.cos(p.angle)*z}};}
 function pcBrickRemember(collection,property,asset){if(!collection.pcBrickAssignments)collection.pcBrickAssignments=new Map;if(asset?.model.format==='lightweight-brick')collection.pcBrickAssignments.set(property.id,structuredClone(asset.record));else collection.pcBrickAssignments.delete(property.id);}
 const pcBrickAdapter={ready:pcBrickReady,batches:pcBrickBatches,name:'Lightweight Brick chunk',record:building=>{if(!building.office.lightweightBrick)throw Error('Missing fitted Brick record');return building.office.lightweightBrick;}};
 function pcBrickInfo(){return pcBmoInfo(pcBrickBatches,pcBrickRuntime);}

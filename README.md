@@ -1,8 +1,8 @@
 # Pancake City — v52 recovery
 
-## Brick Commercial Office family — latest
+## Corrected H-shaped Brick Office family — latest
 
-New parametric brick offices grow alongside BMO, Lind, Von Badel and the catalogue. Run `npm run export:brick-growables` for the updated offline Playtest and in-game Test City. [Architecture, checks and measured limits](docs/BRICK_COMMERCIAL_OFFICES.md).
+The existing brick family now has projecting wings, recessed courts, limestone base/crown and stepped roofs. Run `npm run export:brick-growables` for the updated Playtest and direct in-game isometric reference comparison. [Correction, checks and measured limits](docs/BRICK_OFFICE_H_CORRECTION.md).
 
 ## All growable foundations and office paving — latest
 

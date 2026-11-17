@@ -1,7 +1,7 @@
 {
   "files": {
-    "architecture/brick-office/spec.mjs": "fbefb3e6e994bb3697b8c8e5d645932e2911fff681af2c5b49909dfb2b752287",
-    "architecture/brick-office/generator.js": "eba0f489a4ad69cfbbef0e19f1e416f415170085e793047b920211217f575ae7",
+    "architecture/brick-office/spec.mjs": "3a7df26dbf45bbefa3a5b6e943ab90d667fa6cfb6d87f7de3aeb34679da73df9",
+    "architecture/brick-office/generator.js": "0f5b9cd21a3bf5d09b8d12422621d116030469386953c97f7b39a3f343030426",
     "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0"
   }
 }

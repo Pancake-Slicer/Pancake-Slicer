@@ -18,17 +18,18 @@ function pcBrickFit(property){
  else{const minimum=Math.min(capacity,Math.max(12,property.officeProfile?.minFloors||12)),storeys=minimum+((h>>>2)%Math.max(1,capacity-minimum+1)),parameters={id:'brick:'+property.id,name:'Brick Commercial office',seed:String(h),storeys,floorHeight:[3.6,3.65,3.7][h%3],targetBay:[3.1,3.3,3.5][(h>>>4)%3]},runtime=pcBrickReady();fit=runtime.system.fit(property,{parameters,seed:String(h),capacity});}
  pcBrickFits.set(property,fit);return fit;
 }
+function pcBrickResolve(record){const s=record.parameters;if(s.width<28||s.depth<24||s.width/s.depth>1.9||s.depth/s.width>1.6)return null;return {...record,parameters:pcBrickReady().module.normalizeSpecification(s),grid:pcBrickReady().module.massing(s)};}
 function pcBrickAsset(record){const s=record.parameters,windowBays=record.grid.volumes.reduce((n,v)=>n+2*(v.front.count+v.side.count)*(v.end-v.start),0);return {...pcBrickDefinition,record,dimensions:{floors:s.storeys,floorHeight:s.floorHeight,height:s.storeys*s.floorHeight+3.4,windowBays}};}
 function pcBrickChoose(collection,property,forPaint=false){
  if(forPaint&&collection.pcCatalogueChoice)return null;const assigned=collection.pcCatalogueAssignments?.get(property.id),control=pcBrickControl(collection);
- if(assigned===pcBrickKey){if(forPaint&&!control.enabled)return null;const r=collection.pcBrickAssignments?.get(property.id);if(!r)return null;pcBrickValidate(r);return sn(je(Te(r.footprint),Te(property.footprint)))<.0001?pcBrickAsset(r):null;}
+ if(assigned===pcBrickKey){if(forPaint&&!control.enabled)return null;const r=collection.pcBrickAssignments?.get(property.id);if(!r)return null;pcBrickValidate(r);const resolved=pcBrickResolve(r);return resolved&&sn(je(Te(r.footprint),Te(property.footprint)))<.0001?pcBrickAsset(resolved):null;}
  if(assigned!==undefined||collection.pcCatalogueChoice||!control.enabled)return null;
  const favoured=[pcBmoControl(collection),pcLindControl(collection),pcVonControl(collection)].filter(c=>c.enabled&&c.favour).length;
  if(!control.favour&&favoured)return null;
  if(control.favour&&favoured&&(pcOfficeHash(property.id+':brick-favoured')>>>12)%(favoured+1)!==0)return null;
  if(!control.favour&&(pcOfficeHash(property.id+':brick-selection')>>>12)%5!==3)return null;const fit=pcBrickFit(property);return fit.ok?pcBrickAsset(fit.record):null;
 }
-function pcBrickPlacement(property,asset){const r=asset.record,p=r.placement,s=r.parameters,z=s.podium?s.podium.depth/2:s.depth/2;return {...p,footprint:r.footprint,entrance:{x:p.x+Math.sin(p.angle)*z,y:property.y,z:p.z+Math.cos(p.angle)*z}};}
+function pcBrickPlacement(property,asset){const r=asset.record,p=r.placement,s=r.parameters,z=r.grid.entrance.z;return {...p,footprint:r.footprint,entrance:{x:p.x+Math.sin(p.angle)*z,y:property.y,z:p.z+Math.cos(p.angle)*z}};}
 function pcBrickRemember(collection,property,asset){if(!collection.pcBrickAssignments)collection.pcBrickAssignments=new Map;if(asset?.model.format==='lightweight-brick')collection.pcBrickAssignments.set(property.id,structuredClone(asset.record));else collection.pcBrickAssignments.delete(property.id);}
 const pcBrickAdapter={ready:pcBrickReady,batches:pcBrickBatches,name:'Lightweight Brick chunk',record:building=>{if(!building.office.lightweightBrick)throw Error('Missing fitted Brick record');return building.office.lightweightBrick;}};
 function pcBrickInfo(){return pcBmoInfo(pcBrickBatches,pcBrickRuntime);}

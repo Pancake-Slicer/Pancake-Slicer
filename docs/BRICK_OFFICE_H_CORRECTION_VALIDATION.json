@@ -1,0 +1,174 @@
+{
+  "date": "2026-11-17",
+  "checks": {
+    "build": true,
+    "tests": 141,
+    "failures": 0,
+    "brickSuites": 12,
+    "original52HashVerified": true
+  },
+  "identity": {
+    "sameFamily": "brick-commercial-lightweight",
+    "sameVersion": "1.0.0",
+    "architectureRevision": 2,
+    "legacy": "Compatible old assignments resolve a derived H-plan, without rewriting their saved records. Incompatible narrow/shallow old assignments retain their keys and use the existing catalogue fallback."
+  },
+  "architecture": {
+    "plan": "Two projecting full-depth wings joined by a recessed connector; front and rear courts remain open.",
+    "wingWidthFraction": 0.28,
+    "connectorDepthFraction": 0.46,
+    "compatibleMinimum": [
+      28,
+      24
+    ],
+    "baseStoreys": "2–5, approximately12%",
+    "limestoneCrownStoreys": "3–9, approximately22%",
+    "connectorRoof": "One storey below the wings",
+    "materials": 7,
+    "textures": 2,
+    "triangleLimit": 6500
+  },
+  "browser": {
+    "method": "Exact exported HTML bytes run over localhost4202; direct offline launch not automated. Reference image displayed beside actual-game model.",
+    "viewport": [
+      1280,
+      720
+    ],
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "referenceAngle": {
+      "azimuth": 45,
+      "elevation": 35.264,
+      "building": [
+        50.8,
+        47.4,
+        41
+      ]
+    },
+    "verified": [
+      "H-plan wing/connector depth and open courts",
+      "Limestone base and upper storeys",
+      "Vertical masonry/window groupings",
+      "Projecting cornices and articulated parapet",
+      "Stepped wing/core roofs and mechanical arrangement",
+      "Flat/sloped recessed entrance, facade foundations and concrete",
+      "Demolition/Undo/Redo/regeneration",
+      "Natural mixed growth and normal Playtest startup"
+    ],
+    "mixed": {
+      "brick": 9,
+      "bmo": 10,
+      "lind": 4,
+      "von": 9,
+      "catalogue": 36,
+      "preservedExisting": 8
+    },
+    "slope": {
+      "brickBuildings": 9,
+      "foundationTriangles": 13075,
+      "maxTerrainSpread": 2.3187999999999995,
+      "maxSteps": 1
+    },
+    "stress": {
+      "brick": 50,
+      "catalogue": 8,
+      "brickBatches": 112,
+      "materials": 7,
+      "textures": 2,
+      "mergedBytes": 27229836,
+      "sourceGeometryBytes": 26986608,
+      "generationAndDrawZoningMs": 490,
+      "sceneTriangles": 1009155,
+      "sceneCalls": 557,
+      "sceneGeometries": 413,
+      "sceneTextures": 68,
+      "note": "Warm runtime after reference/mixed checks; whole-scene, camera-dependent counts. Not a cold-time comparison."
+    },
+    "errors": [],
+    "limits": "Existing material/compiler warnings remain. The in-app browser throttles scheduling; no FPS/NVIDIA/large-city parity claim. Geometry and shared batching are comparable with BMO/Lind; cold generation/batching is slower (see comparative results)."
+  },
+  "performance": {
+    "method": "Same common eligible actual-game lots, 50 or fewer buildings per family. Native family specifications and heights differ. Cold source generation plus material batching; no foundations/scene/postprocessing or GPU time.",
+    "count": 50,
+    "families": {
+      "Bmo": {
+        "triangles": 296080,
+        "perBuilding": 5921.6,
+        "generateMs": 704.5892,
+        "batchMs": 549.9817,
+        "stats": {
+          "inputMeshes": 450,
+          "outputMeshes": 89,
+          "triangles": 296080,
+          "opaqueMergedBatches": 71,
+          "opaqueInstancedBatches": 0,
+          "opaqueBorrowedMeshes": 18,
+          "transparentObjects": 0,
+          "ownedGeometryBytes": 19314016,
+          "instanceMatrixBytes": 0,
+          "chunkSize": 256
+        }
+      },
+      "Lind": {
+        "triangles": 330912,
+        "perBuilding": 6618.24,
+        "generateMs": 740.0678000000003,
+        "batchMs": 857.6489999999999,
+        "stats": {
+          "inputMeshes": 350,
+          "outputMeshes": 83,
+          "triangles": 330912,
+          "opaqueMergedBatches": 63,
+          "opaqueInstancedBatches": 0,
+          "opaqueBorrowedMeshes": 20,
+          "transparentObjects": 0,
+          "ownedGeometryBytes": 21325960,
+          "instanceMatrixBytes": 0,
+          "chunkSize": 256
+        }
+      },
+      "Von": {
+        "triangles": 68480,
+        "perBuilding": 1369.6,
+        "generateMs": 397.3298,
+        "batchMs": 320.54359999999997,
+        "stats": {
+          "inputMeshes": 350,
+          "outputMeshes": 63,
+          "triangles": 68480,
+          "opaqueMergedBatches": 49,
+          "opaqueInstancedBatches": 0,
+          "opaqueBorrowedMeshes": 14,
+          "transparentObjects": 0,
+          "ownedGeometryBytes": 4590320,
+          "instanceMatrixBytes": 0,
+          "chunkSize": 256
+        }
+      },
+      "Brick": {
+        "triangles": 289608,
+        "perBuilding": 5792.16,
+        "generateMs": 1671.5929999999998,
+        "batchMs": 1479.9670999999998,
+        "stats": {
+          "inputMeshes": 350,
+          "outputMeshes": 63,
+          "triangles": 289608,
+          "opaqueMergedBatches": 49,
+          "opaqueInstancedBatches": 0,
+          "opaqueBorrowedMeshes": 14,
+          "transparentObjects": 0,
+          "ownedGeometryBytes": 19740816,
+          "instanceMatrixBytes": 0,
+          "chunkSize": 256
+        }
+      }
+    }
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Corrected H-Plan Brick Offices Playtest - 20261117T172709Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Corrected H-Plan Brick Offices Test City - 20261117T172709Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Corrected H-Plan Brick Offices in Chrome - 20261117T172709Z.cmd",
+    "playtestSha256": "b7765a2fccb91fcfe362226ebf6556e2fc5d7fac96a6ba59bb036d97e7966f50",
+    "reviewSha256": "87b043380434d36902d39824470ad7f0799ed5ad3eacc722d70693deb3256a74"
+  }
+}

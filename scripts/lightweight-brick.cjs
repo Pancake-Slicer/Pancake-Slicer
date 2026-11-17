@@ -24,6 +24,7 @@ function applyBrickIntegration(source){
  replace('window.__sandbox={lightweightVon:', 'window.__sandbox={lightweightBrick:{setControl:pcBrickSetControl,info:pcBrickInfo,fit:pcBrickFit,history:pcBrickHistory,get runtime(){return pcBrickRuntime;}},lightweightVon:');
  replace('function pcFacadeRecord(b){return ','function pcFacadeRecord(b){return b.office?.lightweightBrick||');
  replace('if(b.office.lightweightLind)return r.grid.volumes.filter(v=>v.start===0);','if(b.office.lightweightBrick||b.office.lightweightLind)return r.grid.volumes.filter(v=>v.start===0);');
+ replace('const front=b.office.lightweightLind?', 'const front=b.office.lightweightBrick?r.grid.entrance.z:b.office.lightweightLind?');
  replace('if(b.office.lightweightVon)return runtime.generator.materials;','if(b.office.lightweightBrick||b.office.lightweightVon)return runtime.generator.materials;');
  return source;
 }

@@ -1,5 +1,7 @@
 # Lightweight Brick Commercial Office family
 
+The initial architecture below is superseded by the user-requested [H-plan correction](BRICK_OFFICE_H_CORRECTION.md). It remains as milestone history.
+
 Version brick-commercial-lightweight@1.0.0 is integrated directly into Office growth. The supplied SC4 image inspired warm reddish-brown brick, vertical masonry piers, narrow recessed windows, a contrasting two-storey stone base, projecting cornices, horizontal sill courses and a three-storey recessed crown. The flat roof has a brick parapet, stone coping, enclosure, vents and mechanical equipment. Original code-generated brick/window tiles are used; no reference pixels or third-party model content are redistributed.
 
 Architecture lives in architecture/brick-office/{spec.mjs,generator.js}. Its source lock pins this new version and the unchanged shared ArchitectureBatch. The adapter reuses BMO's template polygon fitter, engine binding, opaque material/chunk renderer, geometry cache/lease lifecycle, picking and versioned zoning history. No new engine, dependency, road/lot system, source-asset replacement or detailed generator activation.
