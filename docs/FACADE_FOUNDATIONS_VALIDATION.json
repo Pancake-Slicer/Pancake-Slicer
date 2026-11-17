@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-17 America/Toronto",
+  "branch": "codex/facade-integrated-foundations",
+  "checkpoint": "safety/pre-facade-foundations-a83cfb2",
+  "reference": "User supplied Curbs.png",
+  "tests": {
+    "fullBuild": "npm run build",
+    "passed": 124,
+    "foundationRegressions": 7,
+    "latestTargetedFoundationChecks": 7,
+    "originalHash": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c"
+  },
+  "browser": {
+    "method": "Actual exported Test City served over localhost4202. Flat and sloped entrance/corner views inspected. Final sloped artifact checked after coping seam refinement.",
+    "flatAndSlopedFamilies": [
+      "Lind",
+      "BMO",
+      "Von Badel"
+    ],
+    "mixed": {
+      "lind": 5,
+      "bmo": 10,
+      "von": 12,
+      "existingCatalogue": 41
+    },
+    "sloped": {
+      "heightAt": "30 + 0.025*x + 0.018*z (test fixture only)",
+      "maxTerrainSpreadMetres": {
+        "bmo": 2.2951,
+        "lind": 2.1152375,
+        "von": 2.3274
+      },
+      "foundationTriangles": {
+        "bmo": 6600,
+        "lind": 6291,
+        "von": 10380
+      },
+      "maxEntranceSteps": 1
+    },
+    "sharedMaterialsInFixture": {
+      "bmo": 13,
+      "lind": 9,
+      "von": 7
+    },
+    "sharedMapsPerFamily": 2,
+    "chunkBatchObjects": {
+      "bmo": 60,
+      "von": 63
+    },
+    "demolition": true,
+    "undo": true,
+    "redo": true,
+    "regrowth": true,
+    "retiredResourcesLoaded": 0,
+    "consoleErrors": [],
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "frameTiming": {
+      "usable": false,
+      "reason": "In-app browser rAF was throttled around1000ms. No FPS or dense-city performance certification; material batch count equality is independently tested."
+    },
+    "offlineLaunch": "Embedding verified; exact exported bytes tested over HTTP. Direct double-click remains user-side."
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Facade Foundations Playtest - 20261117T154832Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Facade Foundations Test City - 20261117T154832Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Facade Foundations in Chrome - 20261117T154832Z.cmd",
+    "playtestSha256": "27f7d56e8f337857c7229125f7112a7b2646101b2d3092a400364fa8e4ab4345",
+    "reviewSha256": "8211cb56234d9df9587e19d0f3911e1d697fe92b599354e9f55f87b1e08c96d8"
+  }
+}

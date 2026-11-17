@@ -2,6 +2,10 @@
 
 This project was reconstructed **only** from the user-provided `Pancake (52).html` browser build. It is **not** the original Codex repository or its Git history.
 
+## Facade-integrated lightweight foundations
+
+Run npm run export:facade-foundations for the latest Playtest and an in-game flat/sloped Test City. Lind, BMO and Von Badel use their facade materials down to terrain with accessible door transitions, replacing the broad generic platforms. Roads, sidewalks and lot fitting are preserved. [Details, validation and limits](docs/FACADE_INTEGRATED_FOUNDATIONS.md).
+
 ## Current gameplay — lightweight custom offices only
 
 Run npm run export:lightweight-only for a new offline Playtest and populated Test City in dist/. Lightweight Lind, Von Badel and BMO grow beside the existing catalogue. Original bespoke Lind/Von Badel/Ohneeohnee models are preserved for reference and excluded from gameplay loading/spawning. Legacy saved keys are retained and shown through the existing catalogue fallback. [Retirement details and validation](docs/RETIRED_CUSTOM_GROWABLES.md).
