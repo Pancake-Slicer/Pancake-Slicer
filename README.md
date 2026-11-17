@@ -132,3 +132,7 @@ Double-click `Play Art Deco Benchmark.cmd`, then open `http://127.0.0.1:4180` to
 ## Recovery limitation
 
 The bundle is minified and includes third-party rendering code. Its exact original modular source, build configuration, and commit history cannot be reliably recovered from this HTML alone. The extracted bundle is still functional JavaScript source, but should be refactored carefully with regression tests.
+
+## Von Badel lightweight office growables — 2026-11-16
+
+Run npm run export:von-growables for the latest offline Playtest and populated Test City in dist/. Von Badel grows naturally beside BMO, Lind and the existing catalogue; Development → Lightweight offices includes ON/OFF and Favour controls. Uses native per-lot generation and shared batching, with approved source assets preserved. [Implementation, checks and measured limitations](docs/VON_BADEL_DIRECT_INTEGRATION.md).

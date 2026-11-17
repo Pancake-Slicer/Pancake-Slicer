@@ -1,0 +1,193 @@
+{
+  "kind": "Von in-game integration",
+  "errors": [],
+  "actions": [
+    {
+      "demolition": true,
+      "undo": true,
+      "redo": true,
+      "regeneration": true,
+      "geometryAndTonePreserved": true,
+      "fixedLegacyChoicePreservesVon": true,
+      "id": "office:office-block:-171.70:68.30:-68.30:171.70:2:00:0"
+    }
+  ],
+  "runs": [
+    {
+      "count": 50,
+      "existing": 8,
+      "phases": {
+        "bmo": {
+          "samples": 32,
+          "medianMs": 16.700000002980232,
+          "p95Ms": 33.899999998509884,
+          "maxMs": 89.60000000149012,
+          "longIntervals": 0,
+          "fps": 50.87440381558029,
+          "viewport": [
+            714,
+            667
+          ],
+          "renderer": {
+            "rebuilds": 2,
+            "cacheHits": 1,
+            "layerBuilds": 1,
+            "layerHits": 0,
+            "lastBuildMs": 248.40000000596046,
+            "timings": {
+              "layout": 8.700000002980232,
+              "contours": 14.899999998509884,
+              "baseTilesRebuilt": 4,
+              "baseTilesTotal": 4,
+              "meshes": 27.100000001490116,
+              "paintPrep": 12,
+              "paintMeshes": 8.199999995529652,
+              "surfaces": 62.5,
+              "structures": 0,
+              "fixtures": 8.799999997019768,
+              "developmentForest": 166.30000000447035,
+              "drape": 2.100000001490116
+            },
+            "initialBuildCpuMs": 76.5,
+            "triangles": 548764,
+            "calls": 448,
+            "memory": {
+              "geometries": 473,
+              "textures": 90
+            },
+            "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+          },
+          "von": {
+            "activeBuildings": 0,
+            "batches": 0,
+            "mergedBytes": 0,
+            "sourceGeometryBytes": 0,
+            "materials": 0,
+            "textures": 0,
+            "cacheEntries": 0,
+            "leases": 0
+          },
+          "bmo": {
+            "activeBuildings": 50,
+            "batches": 146,
+            "mergedBytes": 17447536,
+            "sourceGeometryBytes": 20647792,
+            "materials": 13,
+            "textures": 2,
+            "cacheEntries": 50,
+            "leases": 50
+          },
+          "jsHeapBytes": 165416155,
+          "generationMs": 179.09999999403954,
+          "counts": {
+            "von": 0,
+            "bmo": 50,
+            "lind": 0,
+            "existing": 8
+          }
+        },
+        "von": {
+          "samples": 32,
+          "medianMs": 17.100000001490116,
+          "p95Ms": 18.30000000447035,
+          "maxMs": 18.5,
+          "longIntervals": 0,
+          "fps": 59.67922417058334,
+          "viewport": [
+            714,
+            667
+          ],
+          "renderer": {
+            "rebuilds": 2,
+            "cacheHits": 1,
+            "layerBuilds": 1,
+            "layerHits": 0,
+            "lastBuildMs": 248.40000000596046,
+            "timings": {
+              "layout": 8.700000002980232,
+              "contours": 14.899999998509884,
+              "baseTilesRebuilt": 4,
+              "baseTilesTotal": 4,
+              "meshes": 27.100000001490116,
+              "paintPrep": 12,
+              "paintMeshes": 8.199999995529652,
+              "surfaces": 62.5,
+              "structures": 0,
+              "fixtures": 8.799999997019768,
+              "developmentForest": 166.30000000447035,
+              "drape": 2.100000001490116
+            },
+            "initialBuildCpuMs": 76.5,
+            "triangles": 323120,
+            "calls": 414,
+            "memory": {
+              "geometries": 439,
+              "textures": 90
+            },
+            "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+          },
+          "von": {
+            "activeBuildings": 50,
+            "batches": 112,
+            "mergedBytes": 4602080,
+            "sourceGeometryBytes": 4698400,
+            "materials": 7,
+            "textures": 2,
+            "cacheEntries": 49,
+            "leases": 50
+          },
+          "bmo": {
+            "activeBuildings": 0,
+            "batches": 0,
+            "mergedBytes": 0,
+            "sourceGeometryBytes": 0,
+            "materials": 0,
+            "textures": 0,
+            "cacheEntries": 0,
+            "leases": 0
+          },
+          "jsHeapBytes": 178060477,
+          "generationMs": 65,
+          "counts": {
+            "von": 50,
+            "bmo": 0,
+            "lind": 0,
+            "existing": 8
+          }
+        }
+      },
+      "method": "Actual game, same road/lot polygons, family count, camera, viewport and eight existing catalogue sites. Independently fitted family heights/massing differ.32 rAF intervals after8 warmups; scheduling/postprocessing included, not GPU timer queries."
+    }
+  ],
+  "mixed": {
+    "von": {
+      "activeBuildings": 12,
+      "batches": 63,
+      "mergedBytes": 613760,
+      "sourceGeometryBytes": 1227520,
+      "materials": 7,
+      "textures": 2,
+      "cacheEntries": 12,
+      "leases": 12
+    },
+    "bmo": {
+      "activeBuildings": 10,
+      "batches": 60,
+      "mergedBytes": 1726928,
+      "sourceGeometryBytes": 4968896,
+      "materials": 13,
+      "textures": 2,
+      "cacheEntries": 10,
+      "leases": 10
+    },
+    "lind": 5,
+    "existing": 41,
+    "preservedExisting": 8,
+    "counts": {
+      "von": 12,
+      "bmo": 10,
+      "lind": 5,
+      "existing": 41
+    }
+  }
+}

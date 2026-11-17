@@ -1,7 +1,7 @@
 // Build-time crop of the approved source; no runtime image decoding or fetch.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{spawnSync}=require('node:child_process');
 module.exports=function lindTextures(){
- const root=path.resolve(__dirname,'..'),source=path.join(root,'Assets/Architecture/Art Deco/Art Deco Limestone Window Facade.png'),sha=crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),cache=path.join(root,'.tools/lind-textures/rgba.json');
+ const root=path.resolve(__dirname,'..'),source=path.join(root,'Assets/Architecture/Art Deco',fs.existsSync(path.join(root,'Assets/Architecture/Art Deco/Art Deco Limestone Window Facade.png'))?'':'Kind','Art Deco Limestone Window Facade.png'),sha=crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),cache=path.join(root,'.tools/lind-textures/rgba.json');
  const packaged=path.join(root,'Assets/procedural-templates/lind-stepped-lightweight@1.0.0/textures.rgba.json');if(fs.existsSync(packaged)){const data=JSON.parse(fs.readFileSync(packaged));if(data.sourceSha256!==sha||data.version!==1)throw Error('Packaged Lind crop does not match its approved source');return data;}
  if(fs.existsSync(cache)){const data=JSON.parse(fs.readFileSync(cache));if(data.sourceSha256===sha&&data.version===1)return data;}
  const quote=s=>"'"+s.replace(/'/g,"''")+"'",command=`Add-Type -AssemblyName System.Drawing
