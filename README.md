@@ -1,5 +1,9 @@
 # Pancake City — v52 recovery
 
+## Brick Commercial Office family — latest
+
+New parametric brick offices grow alongside BMO, Lind, Von Badel and the catalogue. Run `npm run export:brick-growables` for the updated offline Playtest and in-game Test City. [Architecture, checks and measured limits](docs/BRICK_COMMERCIAL_OFFICES.md).
+
 ## All growable foundations and office paving — latest
 
 Facade-matched terrain foundations now cover catalogue offices and native homes as well as BMO/Lind/Von. Office setbacks and courtyards use sidewalk-matching concrete; homes retain landscaping. Run `npm run export:auto-foundations` for updated offline Playtest/Test City builds. [Scope, checks and limitations](docs/ALL_GROWABLE_FOUNDATIONS.md).

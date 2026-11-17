@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-17",
+  "checks": {
+    "build": true,
+    "tests": 139,
+    "failures": 0,
+    "newBrickTests": 10,
+    "original52Hash": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c"
+  },
+  "architecture": {
+    "template": "brick-commercial-lightweight@1.0.0",
+    "storeys": [
+      12,
+      42
+    ],
+    "width": [
+      18,
+      60
+    ],
+    "depth": [
+      16,
+      54
+    ],
+    "windowWidth": 1.65,
+    "materials": 7,
+    "maps": 2,
+    "pixels": "Original procedural repeating brick and window textures; no SC4 image extraction.",
+    "originalFamiliesChanged": false
+  },
+  "browser": {
+    "method": "Actual game; exact exported bytes served at localhost4202. Flat/sloped reference city and normal Playtest startup; direct offline file launch remains user-side.",
+    "viewport": [
+      1280,
+      720
+    ],
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "mixed": {
+      "brick": 10,
+      "bmo": 10,
+      "lind": 4,
+      "von": 9,
+      "catalogue": 35,
+      "existingBuildingsPreserved": 8
+    },
+    "actions": {
+      "demolition": true,
+      "undo": true,
+      "redo": true,
+      "deterministicRegeneration": true,
+      "fixedLegacyChoicePreservesBrick": true
+    },
+    "slope": {
+      "equation": "30+x*.025+z*.018",
+      "brickBuildings": 10,
+      "maxTerrainSpread": 2.3187999999999995,
+      "maxEntranceSteps": 1,
+      "foundationTriangles": 8898,
+      "brickMaterials": 7,
+      "brickTextures": 2
+    },
+    "stress": {
+      "brick": 50,
+      "catalogue": 8,
+      "brickBatches": 112,
+      "brickMergedBytes": 21892412,
+      "brickSourceBytes": 21941376,
+      "brickMaterials": 7,
+      "brickTextures": 2,
+      "brickCacheEntries": 50,
+      "brickLeases": 50,
+      "generationAndDrawZoningMs": 1552.1000000089407,
+      "sceneTriangles": 871243,
+      "sceneCalls": 561,
+      "sceneGeometries": 415,
+      "sceneTextures": 71,
+      "note": "Camera-dependent whole-scene counters after previous mixed review retained other family material pools. CPU interval includes zoning, supports, paving and batching; not GPU time."
+    },
+    "visual": [
+      "Warm brick texture and recessed bays",
+      "Stone base and grade-integrated entrance",
+      "Projecting cornices and three-storey recessed crown",
+      "Parapet, roof enclosure, vents and mechanical units",
+      "Flat/sloped terrain contact and sidewalk concrete"
+    ],
+    "runtimeErrors": [],
+    "limitations": "Existing material/compiler warnings remain. Browser scheduling is throttled; no FPS, NVIDIA, large-city or speedup claim. Source envelope regression caps each tested building below 6500 triangles. No Architecture Lab used."
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Brick Commercial Offices Playtest - 20261117T165751Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Brick Commercial Offices Test City - 20261117T165751Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Brick Commercial Offices in Chrome - 20261117T165751Z.cmd",
+    "playtestSha256": "a399612482977a5ce37e71c316c710fbe7d9ff4c837b46ba6109da79bfd2b07d",
+    "reviewSha256": "71241ec6f49ced1653425281943b9a3cd399394d72444fb484cbe51fc0b627ac"
+  }
+}
