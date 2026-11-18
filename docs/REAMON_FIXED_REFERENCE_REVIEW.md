@@ -1,0 +1,17 @@
+# Reamon — one fixed reconstruction for visual approval
+
+This is an authored review candidate inside the existing brick-office architecture. It does not replace or register a growable. Live brick/BMO/Lind/Von generators, source locks, lot fitting, terrain, foundations, gameplay and runtime remain unchanged. The supplied Reamon.jpg is the primary authority; Bad.png is the rejected earlier result. No additional variations or parameter controls.
+
+The single body is32.4×28.8m,26 storeys at3.6m, with three base,18 shaft and five crown storeys. Each front wing is13.2m wide with four bays; the connector is6m wide and16.8m deep, offset2.4m rearward. Front/rear recesses are8.4/3.6m. These are inferred proportions, not asserted measurements of an original SC4 mesh.
+
+Reconstruction features: continuous brick piers and recessed paired windows; separate repeating window profiles for limestone base, brick shaft and stone crown; heavier lower piers and tier-specific cornices; actual upper parapet/coping/modillions; arched front entrance and sloped glazed court canopy. Roof has paving, offset left penthouse, right barrel skylight, enclosed rear mechanical units/fans/ducts, access hatch and planters. Fine masonry/window detail uses procedural pixels rather than extracted reference artwork.
+
+Uses the existing Three r180 tool engine, ArchitectureBatch, OptimizedFamilyRenderer, current catalogue lighting/shader and opaque shared materials. Hidden sealed faces and narrow stone profiles are reduced. One model:11470 triangles,10 architecture batches/materials,6 repeating maps totaling589824 raw bytes. Measured isolated scene15 calls/11520 triangles on Intel Iris Xe. This fixed review is more detailed than the rejected generic tower; no city-scale/FPS/parametric performance approval is claimed.
+
+Review delivery: the self-contained timestamped Reamon Fixed Reconstruction Review HTML in dist/. The supplied reference is embedded beside the model. Reference isometric uses22.5° azimuth/35.264° elevation; H-plan/roof changes only the camera to73.8° elevation on the same model. Save both review views exports comparison PNGs. Exact HTML was executed via localhost4203; direct offline launch remains user-side.
+
+Commands: `npm run review:reamon:export`, `npm run review:reamon` and `npm run review:reamon:check`. Existing local .tools/node_modules/three@0.180.0 is reused without dependency changes. The original reference is copied unchanged from Downloads/Reamon.jpg (or PANCAKE_REAMON_REFERENCE) into ignored staging; source art is not committed. Exported HTML embeds required modules/reference/notices.
+
+Validation: four targeted tests pass (one fixed/no-fit API, H courts/connectivity, tier material separation/finite geometry/budget and characteristic entrance/roof details). All141 existing game checks and npm run build pass, original52 hash verified, live runtime/fitting diffs empty. Both actual rendered comparison images inspected; review error logs empty. [Raw evidence, counts and hashes](REAMON_FIXED_REFERENCE_VALIDATION.json).
+
+Recovery: safety/pre-reamon-fixed-d1dd7ae and verified .tools/checkpoints/reamon-fixed-d1dd7ae/history.bundle, plus copies of unrelated dirty work. Existing user asset moves/export-script edit remain excluded. Local branch codex/reamon-fixed-reference-review; push pending approval, not an off-computer backup. Stop here for user visual approval before any parameterization or further game integration.

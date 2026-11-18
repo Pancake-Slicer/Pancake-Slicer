@@ -57,7 +57,10 @@
     "export:lightweight-only": "npm run build && node scripts/export-lightweight-only.cjs",
     "export:facade-foundations": "npm run build && node scripts/export-facade-foundations.cjs",
     "export:auto-foundations": "npm run build && node scripts/export-auto-foundations.cjs",
-    "export:brick-growables": "npm run build && node scripts/export-brick-growables.cjs"
+    "export:brick-growables": "npm run build && node scripts/export-brick-growables.cjs",
+    "review:reamon:export": "node scripts/export-reamon-review.cjs",
+    "review:reamon": "node scripts/serve-reamon-review.cjs",
+    "review:reamon:check": "node scripts/prepare-reamon-review.cjs && node --test scripts/reamon-reference.test.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

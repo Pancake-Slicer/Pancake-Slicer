@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-18",
+  "status": "Awaiting visual approval; no parameterization or gameplay integration",
+  "checks": {
+    "fixedReconstructionTests": 4,
+    "fixedFailures": 0,
+    "existingGameTests": 141,
+    "gameFailures": 0,
+    "build": true,
+    "original52Hash": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+    "liveRuntimeUnchanged": true,
+    "lotFittingUnchanged": true
+  },
+  "browser": {
+    "kind": "One fixed reference reconstruction",
+    "dimensions": {
+      "name": "Reamon brick office — fixed reconstruction",
+      "width": 32.4,
+      "depth": 28.8,
+      "wingWidth": 13.2,
+      "connectorWidth": 6,
+      "connectorDepth": 16.8,
+      "connectorCentreZ": -2.4,
+      "frontRecess": 8.4,
+      "rearRecess": 3.6,
+      "storeys": 26,
+      "floorHeight": 3.6,
+      "baseStoreys": 3,
+      "shaftStoreys": 18,
+      "crownStoreys": 5,
+      "frontBaysPerWing": 4,
+      "sideBays": 8
+    },
+    "reviewOnly": true,
+    "models": 1,
+    "sourceTriangles": 11470,
+    "architectureBatches": 10,
+    "materials": 10,
+    "textures": 6,
+    "textureBytes": 589824,
+    "sceneCalls": 15,
+    "sceneTriangles": 11520,
+    "view": "isometric",
+    "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "viewport": [
+      640,
+      565
+    ],
+    "errors": []
+  },
+  "visual": {
+    "reference": "User supplied Downloads/Reamon.jpg; primary architectural authority. Bad.png identifies the rejected prior result.",
+    "scope": "Exactly one fixed 3D model, shown in two camera views beside the original image.",
+    "proportions": "32.4m width,28.8m depth,26 storeys at3.6m; inferred reference dimensions, not measurements of an original SC4 mesh.",
+    "isometric": {
+      "azimuth": 22.5,
+      "elevation": 35.264
+    },
+    "plan": {
+      "azimuth": 22.5,
+      "elevation": 73.8
+    },
+    "captures": {
+      "isometric": {
+        "path": ".tools/reamon-fixed-review/reports/isometric.png",
+        "sha256": "900b042ee4305f17f75f494cd9a4bb148c6ec49bd561b351b0deb6eaf74bf729"
+      },
+      "plan": {
+        "path": ".tools/reamon-fixed-review/reports/plan.png",
+        "sha256": "8ea2a9dd27b2b1e60f029c4f6e7525b0467a9d0fb2469f6fe591a87860f53928"
+      }
+    },
+    "consoleErrorsDuringReview": [],
+    "limitations": "Reference details are interpreted in lightweight geometry/textures. Fidelity remains subject to user visual approval. Exact exported HTML ran via loopback; direct file launch remains user-side. No FPS/large-city/gameplay parity claim."
+  },
+  "source": {
+    "model": "architecture/brick-office/reference-reconstruction.js",
+    "sha256": "366f0adb173f107d9228d53ca1b01735d8851d484769040a3531fed6ea0ab150",
+    "referenceSha256": "65e2fc873c89b23f1fa8248589ae3bcec90810209fb4e9052ee704394a1b772a"
+  },
+  "export": {
+    "file": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Reamon Fixed Reconstruction Review - 20261117T184323Z.html",
+    "sha256": "a5c4a330673955d91ccbec17017598d78f5e277c88757819c3ba0d8295bb5ff9",
+    "bytes": 2875100,
+    "models": 1,
+    "scope": "Fixed reconstruction for visual approval only; no parametric fitting, variations or gameplay integration."
+  }
+}

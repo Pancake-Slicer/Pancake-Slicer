@@ -1,5 +1,9 @@
 # Pancake City — v52 recovery
 
+## Reamon — fixed reconstruction awaiting visual approval
+
+One reference-sized building, beside the original at a comparable isometric angle, plus an H-plan/roof view. No lot-fitting or gameplay changes. Run `npm run review:reamon:export`. [Review scope, commands and evidence](docs/REAMON_FIXED_REFERENCE_REVIEW.md).
+
 ## Corrected H-shaped Brick Office family — latest
 
 The existing brick family now has projecting wings, recessed courts, limestone base/crown and stepped roofs. Run `npm run export:brick-growables` for the updated Playtest and direct in-game isometric reference comparison. [Correction, checks and measured limits](docs/BRICK_OFFICE_H_CORRECTION.md).
