@@ -1,0 +1,16 @@
+{
+  "family": "alderwick-commercial",
+  "version": "1.0.0",
+  "reference": "architecture/heritage-tower/fixed-model.js",
+  "files": {
+    "architecture/alderwick/spec.mjs": "0d659cd7344f5d1b7c6d11e71b1b3c3404201996db77b73cde438744a1c5a7cb",
+    "architecture/alderwick/generator.js": "bc4ea306bda4f9b3ef2713cc904a1d0ab13f90b24d973d361327d054df45b899",
+    "architecture/alderwick/materials.js": "afdd95df1b43e5bbf9aee8b6de3b3898629cfdb5732fd1310f7c47267325a36d"
+  },
+  "references": {
+    "architecture/heritage-tower/fixed-model.js": "87488117032f01c75f792cd13913bf528f463632e307633cd31937de01f9172f",
+    "architecture/heritage-tower/review/index.html": "bb044b6bc6b3023b8efb3aa374c19a125b1a71f2b1d6f3f23f47523bb22c62bb",
+    "architecture/heritage-tower/review/review.js": "84454bf823cfd03825f6a0d0da91417c651846ba73d3670190ed0b7340553024",
+    "architecture/brick-office/reference-reconstruction.js": "366f0adb173f107d9228d53ca1b01735d8851d484769040a3531fed6ea0ab150"
+  }
+}

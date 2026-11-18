@@ -1,0 +1,648 @@
+{
+  "date": "2026-11-18",
+  "branch": "codex/alderwick-growable-integration",
+  "checkpoint": "safety/pre-alderwick-integration-ee4d8cc",
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Alderwick Growables Playtest - 20261118T201152Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Alderwick Growables Test City - 20261118T201152Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Alderwick Growables in Chrome - 20261118T201152Z.cmd",
+    "playtestSha256": "defabd3376caf3c6a6fc73512029fe52de7f443c82368f667e102bc9aaa6a91a",
+    "reviewSha256": "df6616eb2b126ad62e6605558c40de4f2818bedcbe22ae588d720835f9762855"
+  },
+  "architecture": [
+    {
+      "name": "Canonical · 26 storeys",
+      "parameters": {
+        "family": "alderwick-commercial",
+        "version": "1.0.0",
+        "preset": "canonical",
+        "id": "alderwick",
+        "name": "Canonical · 26 storeys",
+        "seed": "1138",
+        "frontBays": 12,
+        "depthBays": 9,
+        "width": 42,
+        "depth": 30,
+        "storeys": 26,
+        "shaftStoreys": 15,
+        "tierStoreys": [
+          3,
+          3,
+          1
+        ],
+        "setbackProfile": "canonical",
+        "brickTone": 0,
+        "accentTone": 0,
+        "glazingTone": 0,
+        "roofArrangement": 0,
+        "detailing": 0,
+        "podium": null,
+        "floorHeight": 3.6,
+        "baseTop": 16,
+        "shaftTop": 70,
+        "bodyHeight": 95.2,
+        "crown": [
+          {
+            "width": 34.8,
+            "depth": 25.2,
+            "z": -0.6,
+            "bottom": 70,
+            "top": 80.8,
+            "storeys": 3
+          },
+          {
+            "width": 27.6,
+            "depth": 19.2,
+            "z": -1.5,
+            "bottom": 80.8,
+            "top": 91.6,
+            "storeys": 3
+          },
+          {
+            "width": 21,
+            "depth": 14.4,
+            "z": -1.5,
+            "bottom": 91.6,
+            "top": 95.2,
+            "storeys": 1
+          }
+        ],
+        "entrance": {
+          "x": 0,
+          "z": 15,
+          "width": 10.8,
+          "height": 8.4,
+          "doorWidth": 7.2
+        }
+      },
+      "sourceTriangles": 14970,
+      "batches": 11,
+      "textures": 8,
+      "textureBytes": 737280,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "view": "side"
+    },
+    {
+      "name": "A · compact 22",
+      "parameters": {
+        "family": "alderwick-commercial",
+        "version": "1.0.0",
+        "preset": "fitted",
+        "id": "alderwick",
+        "name": "A · compact 22",
+        "seed": "1138",
+        "frontBays": 10,
+        "depthBays": 8,
+        "width": 35.4,
+        "depth": 26.7,
+        "storeys": 22,
+        "shaftStoreys": 14,
+        "tierStoreys": [
+          3,
+          1
+        ],
+        "setbackProfile": "compact",
+        "brickTone": 1,
+        "accentTone": 1,
+        "glazingTone": 1,
+        "roofArrangement": 0,
+        "detailing": 0,
+        "podium": null,
+        "floorHeight": 3.6,
+        "baseTop": 16,
+        "shaftTop": 66.4,
+        "bodyHeight": 80.8,
+        "crown": [
+          {
+            "width": 30.6,
+            "depth": 23.7,
+            "z": -0.3,
+            "bottom": 66.4,
+            "top": 77.2,
+            "storeys": 3
+          },
+          {
+            "width": 25.2,
+            "depth": 18.9,
+            "z": -0.3,
+            "bottom": 77.2,
+            "top": 80.8,
+            "storeys": 1
+          }
+        ],
+        "entrance": {
+          "x": 0,
+          "z": 13.35,
+          "width": 10.8,
+          "height": 8.4,
+          "doorWidth": 7.2
+        }
+      },
+      "sourceTriangles": 12916,
+      "batches": 11,
+      "textures": 8,
+      "textureBytes": 737280,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "view": "isometric"
+    },
+    {
+      "name": "B · broad 24",
+      "parameters": {
+        "family": "alderwick-commercial",
+        "version": "1.0.0",
+        "preset": "fitted",
+        "id": "alderwick",
+        "name": "B · broad 24",
+        "seed": "1138",
+        "frontBays": 14,
+        "depthBays": 9,
+        "width": 48.6,
+        "depth": 30,
+        "storeys": 24,
+        "shaftStoreys": 14,
+        "tierStoreys": [
+          2,
+          3,
+          1
+        ],
+        "setbackProfile": "compact",
+        "brickTone": 2,
+        "accentTone": 0,
+        "glazingTone": 2,
+        "roofArrangement": 1,
+        "detailing": 0,
+        "podium": null,
+        "floorHeight": 3.6,
+        "baseTop": 16,
+        "shaftTop": 66.4,
+        "bodyHeight": 88,
+        "crown": [
+          {
+            "width": 43.8,
+            "depth": 27,
+            "z": -0.3,
+            "bottom": 66.4,
+            "top": 73.6,
+            "storeys": 2
+          },
+          {
+            "width": 37.8,
+            "depth": 23.4,
+            "z": -0.9,
+            "bottom": 73.6,
+            "top": 84.4,
+            "storeys": 3
+          },
+          {
+            "width": 32.4,
+            "depth": 19.8,
+            "z": -1.5,
+            "bottom": 84.4,
+            "top": 88,
+            "storeys": 1
+          }
+        ],
+        "entrance": {
+          "x": 0,
+          "z": 15,
+          "width": 10.8,
+          "height": 8.4,
+          "doorWidth": 7.2
+        }
+      },
+      "sourceTriangles": 17216,
+      "batches": 11,
+      "textures": 8,
+      "textureBytes": 737280,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "view": "isometric"
+    },
+    {
+      "name": "C · deep 28",
+      "parameters": {
+        "family": "alderwick-commercial",
+        "version": "1.0.0",
+        "preset": "fitted",
+        "id": "alderwick",
+        "name": "C · deep 28",
+        "seed": "1138",
+        "frontBays": 12,
+        "depthBays": 12,
+        "width": 42,
+        "depth": 39.9,
+        "storeys": 28,
+        "shaftStoreys": 17,
+        "tierStoreys": [
+          3,
+          3,
+          1
+        ],
+        "setbackProfile": "canonical",
+        "brickTone": 0,
+        "accentTone": 2,
+        "glazingTone": 1,
+        "roofArrangement": 0,
+        "detailing": 1,
+        "podium": null,
+        "floorHeight": 3.6,
+        "baseTop": 16,
+        "shaftTop": 77.2,
+        "bodyHeight": 102.4,
+        "crown": [
+          {
+            "width": 34.8,
+            "depth": 35.1,
+            "z": -0.6,
+            "bottom": 77.2,
+            "top": 88,
+            "storeys": 3
+          },
+          {
+            "width": 27.6,
+            "depth": 29.1,
+            "z": -1.5,
+            "bottom": 88,
+            "top": 98.8,
+            "storeys": 3
+          },
+          {
+            "width": 21,
+            "depth": 24.3,
+            "z": -1.5,
+            "bottom": 98.8,
+            "top": 102.4,
+            "storeys": 1
+          }
+        ],
+        "entrance": {
+          "x": 0,
+          "z": 19.95,
+          "width": 10.8,
+          "height": 8.4,
+          "doorWidth": 7.2
+        }
+      },
+      "sourceTriangles": 16914,
+      "batches": 11,
+      "textures": 8,
+      "textureBytes": 737280,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "view": "isometric"
+    },
+    {
+      "name": "D · broad two-tier 30",
+      "parameters": {
+        "family": "alderwick-commercial",
+        "version": "1.0.0",
+        "preset": "fitted",
+        "id": "alderwick",
+        "name": "D · broad two-tier 30",
+        "seed": "1138",
+        "frontBays": 16,
+        "depthBays": 10,
+        "width": 55.2,
+        "depth": 33.3,
+        "storeys": 30,
+        "shaftStoreys": 21,
+        "tierStoreys": [
+          4,
+          1
+        ],
+        "setbackProfile": "canonical",
+        "brickTone": 1,
+        "accentTone": 1,
+        "glazingTone": 0,
+        "roofArrangement": 1,
+        "detailing": 0,
+        "podium": null,
+        "floorHeight": 3.6,
+        "baseTop": 16,
+        "shaftTop": 91.60000000000001,
+        "bodyHeight": 109.6,
+        "crown": [
+          {
+            "width": 48,
+            "depth": 28.5,
+            "z": -0.6,
+            "bottom": 91.60000000000001,
+            "top": 106,
+            "storeys": 4
+          },
+          {
+            "width": 41.4,
+            "depth": 23.7,
+            "z": -0.6,
+            "bottom": 106,
+            "top": 109.6,
+            "storeys": 1
+          }
+        ],
+        "entrance": {
+          "x": 0,
+          "z": 16.65,
+          "width": 10.8,
+          "height": 8.4,
+          "doorWidth": 7.2
+        }
+      },
+      "sourceTriangles": 18568,
+      "batches": 11,
+      "textures": 8,
+      "textureBytes": 737280,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "view": "isometric"
+    },
+    {
+      "name": "E · narrow 24",
+      "parameters": {
+        "family": "alderwick-commercial",
+        "version": "1.0.0",
+        "preset": "fitted",
+        "id": "alderwick",
+        "name": "E · narrow 24",
+        "seed": "1138",
+        "frontBays": 10,
+        "depthBays": 10,
+        "width": 35.4,
+        "depth": 33.3,
+        "storeys": 24,
+        "shaftStoreys": 14,
+        "tierStoreys": [
+          2,
+          3,
+          1
+        ],
+        "setbackProfile": "compact",
+        "brickTone": 2,
+        "accentTone": 2,
+        "glazingTone": 2,
+        "roofArrangement": 0,
+        "detailing": 1,
+        "podium": null,
+        "floorHeight": 3.6,
+        "baseTop": 16,
+        "shaftTop": 66.4,
+        "bodyHeight": 88,
+        "crown": [
+          {
+            "width": 30.6,
+            "depth": 30.3,
+            "z": -0.3,
+            "bottom": 66.4,
+            "top": 73.6,
+            "storeys": 2
+          },
+          {
+            "width": 24.6,
+            "depth": 26.7,
+            "z": -0.9,
+            "bottom": 73.6,
+            "top": 84.4,
+            "storeys": 3
+          },
+          {
+            "width": 19.2,
+            "depth": 23.1,
+            "z": -1.5,
+            "bottom": 84.4,
+            "top": 88,
+            "storeys": 1
+          }
+        ],
+        "entrance": {
+          "x": 0,
+          "z": 16.65,
+          "width": 10.8,
+          "height": 8.4,
+          "doorWidth": 7.2
+        }
+      },
+      "sourceTriangles": 14948,
+      "batches": 11,
+      "textures": 8,
+      "textureBytes": 737280,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "view": "isometric"
+    },
+    {
+      "name": "F · landmark 32",
+      "parameters": {
+        "family": "alderwick-commercial",
+        "version": "1.0.0",
+        "preset": "fitted",
+        "id": "alderwick",
+        "name": "F · landmark 32",
+        "seed": "1138",
+        "frontBays": 16,
+        "depthBays": 12,
+        "width": 55.2,
+        "depth": 39.9,
+        "storeys": 32,
+        "shaftStoreys": 20,
+        "tierStoreys": [
+          4,
+          3,
+          1
+        ],
+        "setbackProfile": "canonical",
+        "brickTone": 0,
+        "accentTone": 0,
+        "glazingTone": 1,
+        "roofArrangement": 1,
+        "detailing": 0,
+        "podium": null,
+        "floorHeight": 3.6,
+        "baseTop": 16,
+        "shaftTop": 88,
+        "bodyHeight": 116.8,
+        "crown": [
+          {
+            "width": 48,
+            "depth": 35.1,
+            "z": -0.6,
+            "bottom": 88,
+            "top": 102.4,
+            "storeys": 4
+          },
+          {
+            "width": 40.8,
+            "depth": 29.1,
+            "z": -1.5,
+            "bottom": 102.4,
+            "top": 113.2,
+            "storeys": 3
+          },
+          {
+            "width": 34.2,
+            "depth": 24.3,
+            "z": -1.5,
+            "bottom": 113.2,
+            "top": 116.8,
+            "storeys": 1
+          }
+        ],
+        "entrance": {
+          "x": 0,
+          "z": 19.95,
+          "width": 10.8,
+          "height": 8.4,
+          "doorWidth": 7.2
+        }
+      },
+      "sourceTriangles": 20452,
+      "batches": 11,
+      "textures": 8,
+      "textureBytes": 737280,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "view": "isometric"
+    }
+  ],
+  "flat": {
+    "mode": "flat",
+    "counts": {
+      "von": 8,
+      "brick": 8,
+      "alderwick": 8,
+      "bmo": 8,
+      "lind": 3,
+      "existing": 33
+    },
+    "preservedExisting": 8,
+    "retirement": {
+      "retiredIds": [
+        "lind-art-deco",
+        "von-badel-art-deco",
+        "ohneeohnee-modernist"
+      ],
+      "activeStaticKeys": [],
+      "staticResourceKeys": [],
+      "enhancedRuntimeLoaded": false
+    },
+    "actions": [
+      {
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "regeneration": true,
+        "geometryAndTonePreserved": true,
+        "fixedLegacyChoicePreservesAlderwick": true,
+        "id": "office:office-block:-51.70:-51.70:51.70:51.70:4:10:0"
+      }
+    ],
+    "errors": [],
+    "alderwick": {
+      "buildings": 8,
+      "triangles": 6264,
+      "maxSteps": 1,
+      "maxTerrainSpread": 0,
+      "minBase": 8.3,
+      "maxBase": 8.3
+    }
+  },
+  "sloped": {
+    "mode": "sloped",
+    "counts": {
+      "von": 8,
+      "brick": 8,
+      "alderwick": 8,
+      "bmo": 8,
+      "lind": 3,
+      "existing": 33
+    },
+    "preservedExisting": 8,
+    "retirement": {
+      "retiredIds": [
+        "lind-art-deco",
+        "von-badel-art-deco",
+        "ohneeohnee-modernist"
+      ],
+      "activeStaticKeys": [],
+      "staticResourceKeys": [],
+      "enhancedRuntimeLoaded": false
+    },
+    "actions": [
+      {
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "regeneration": true,
+        "geometryAndTonePreserved": true,
+        "fixedLegacyChoicePreservesAlderwick": true,
+        "id": "office:office-block:-51.70:-51.70:51.70:51.70:4:10:0"
+      }
+    ],
+    "errors": [],
+    "alderwick": {
+      "buildings": 8,
+      "triangles": 6334,
+      "maxSteps": 2,
+      "maxTerrainSpread": 2.0982000000000056,
+      "minBase": 26.2769,
+      "maxBase": 36.8758
+    }
+  },
+  "performance": [
+    {
+      "count": 10,
+      "existing": 8,
+      "method": "Actual game, same road/lot polygons, family count, camera, viewport and eight existing catalogue sites. Independently fitted family heights/massing differ.32 rAF intervals after8 warmups; scheduling/postprocessing included, not GPU timer queries.",
+      "phases": {
+        "bmo": {
+          "generationMs": 125.2999999821186,
+          "medianMs": 12.199999988079071,
+          "p95Ms": 23.900000005960464,
+          "samples": 32,
+          "viewport": [
+            1280,
+            720
+          ],
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "sceneCalls": 354,
+          "sceneTriangles": 321115,
+          "architecture": {
+            "activeBuildings": 10,
+            "batches": 53,
+            "mergedBytes": 3869912,
+            "sourceGeometryBytes": 4797560,
+            "materials": 13,
+            "textures": 2,
+            "cacheEntries": 10,
+            "leases": 10
+          }
+        },
+        "alderwick": {
+          "generationMs": 207.69999998807907,
+          "medianMs": 9.699999988079071,
+          "p95Ms": 12.099999994039536,
+          "samples": 32,
+          "viewport": [
+            1280,
+            720
+          ],
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "sceneCalls": 392,
+          "sceneTriangles": 450191,
+          "architecture": {
+            "activeBuildings": 10,
+            "batches": 91,
+            "mergedBytes": 6080944,
+            "sourceGeometryBytes": 12524760,
+            "materials": 27,
+            "textures": 8,
+            "cacheEntries": 9,
+            "leases": 10
+          }
+        }
+      }
+    }
+  ],
+  "checks": {
+    "existing": 141,
+    "integration": 4,
+    "architecture": 2,
+    "build": true,
+    "original52Hash": true,
+    "exactHttpBytes": true,
+    "directFileLaunch": false
+  }
+}

@@ -160,3 +160,8 @@ The bundle is minified and includes third-party rendering code. Its exact origin
 ## Von Badel lightweight office growables — 2026-11-16
 
 Run npm run export:von-growables for the latest offline Playtest and populated Test City in dist/. Von Badel grows naturally beside BMO, Lind and the existing catalogue; Development → Lightweight offices includes ON/OFF and Favour controls. Uses native per-lot generation and shared batching, with approved source assets preserved. [Implementation, checks and measured limitations](docs/VON_BADEL_DIRECT_INTEGRATION.md).
+
+
+## Alderwick growables — 2026-11-18
+
+Run `npm run export:alderwick-growables` for the playable Alderwick build and populated Test City. Natural Office growth mixes Alderwick with the existing families; development controls can favour Alderwick or its canonical26-storey preset on compatible new lots. Approved original fixed model preserved. [Architecture, validation and limits](docs/ALDERWICK_GROWABLE_INTEGRATION.md).
