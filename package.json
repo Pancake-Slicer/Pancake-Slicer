@@ -60,7 +60,10 @@
     "export:brick-growables": "npm run build && node scripts/export-brick-growables.cjs",
     "review:reamon:export": "node scripts/export-reamon-review.cjs",
     "review:reamon": "node scripts/serve-reamon-review.cjs",
-    "review:reamon:check": "node scripts/prepare-reamon-review.cjs && node --test scripts/reamon-reference.test.cjs"
+    "review:reamon:check": "node scripts/prepare-reamon-review.cjs && node --test scripts/reamon-reference.test.cjs",
+    "review:heritage:export": "node scripts/export-heritage-review.cjs",
+    "review:heritage": "node scripts/serve-heritage-review.cjs",
+    "review:heritage:check": "node scripts/prepare-heritage-review.cjs && node --test scripts/heritage-tower.test.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

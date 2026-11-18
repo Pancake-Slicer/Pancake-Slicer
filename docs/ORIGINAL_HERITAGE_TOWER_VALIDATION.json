@@ -1,0 +1,148 @@
+{
+  "date": "2026-11-18",
+  "status": "One original fixed design; awaiting architectural review",
+  "model": "architecture/heritage-tower/fixed-model.js",
+  "modelSha256": "87488117032f01c75f792cd13913bf528f463632e307633cd31937de01f9172f",
+  "scope": {
+    "models": 1,
+    "parametric": false,
+    "gameplayIntegration": false,
+    "lotFittingChanged": false,
+    "existingAssetsChanged": false
+  },
+  "validation": {
+    "designTests": 4,
+    "designFailures": 0,
+    "existingGameTests": 141,
+    "gameFailures": 0,
+    "build": true,
+    "original52Sha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+    "preservedReamonHashes": {
+      "architecture/brick-office/reference-reconstruction.js": "366f0adb173f107d9228d53ca1b01735d8851d484769040a3531fed6ea0ab150",
+      "architecture/brick-office/review/index.html": "fcdfaaee871f8dfd2d8ef4401141d8dfd084a951347b478d7ddfa232067063b9",
+      "architecture/brick-office/review/review.js": "3557aef6809c4d6782790022993fd7cbb11c1f0c5b510b837cfe054887b6aa5c",
+      "scripts/prepare-reamon-review.cjs": "131e508d5015846a7ce3536fdfa24a4b8b33a243feee88f0efb46906c4cda545",
+      "scripts/export-reamon-review.cjs": "a85be972d2ee223f443007518f1fb1ce6bbb18097c87c147e8f6f756ed0db3ca",
+      "scripts/serve-reamon-review.cjs": "a5d68dc94fbe5e71d5fbe7c0eab35c26d293fd245df43b36b01010e44fbd2d50"
+    }
+  },
+  "browser": {
+    "name": "Alderwick Commercial Tower",
+    "design": {
+      "name": "Alderwick Commercial Tower",
+      "period": "Late 1920s",
+      "storeys": 26,
+      "width": 42,
+      "depth": 30,
+      "baseStoreys": 4,
+      "baseFloorHeight": 4,
+      "officeFloorHeight": 3.6,
+      "baseTop": 16,
+      "shaftTop": 70,
+      "bodyHeight": 95.2,
+      "frontStructuralPitch": 3.3,
+      "frontBays": 12,
+      "pavilionBays": 2,
+      "pavilionProjection": 0.6,
+      "entrance": "Chamfered southeast corner, rectangular double-height portal",
+      "crown": [
+        {
+          "floors": "20–22",
+          "width": 34.8,
+          "depth": 25.2,
+          "z": -0.6,
+          "bottom": 70,
+          "top": 80.8
+        },
+        {
+          "floors": "23–25",
+          "width": 27.6,
+          "depth": 19.2,
+          "z": -1.5,
+          "bottom": 80.8,
+          "top": 91.6
+        },
+        {
+          "floors": "26",
+          "width": 21,
+          "depth": 14.4,
+          "z": -1.5,
+          "bottom": 91.6,
+          "top": 95.2
+        }
+      ]
+    },
+    "models": 1,
+    "reviewOnly": true,
+    "sourceTriangles": 14780,
+    "architectureBatches": 11,
+    "materials": 11,
+    "textures": 8,
+    "textureBytes": 737280,
+    "sceneCalls": 15,
+    "sceneTriangles": 14818,
+    "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "view": "isometric",
+    "viewport": [
+      1280,
+      560
+    ],
+    "provenance": {
+      "geometry": "Independently authored for this fixed design",
+      "textures": "Original code-generated pixels; no extracted or existing building maps",
+      "reused": [
+        "Three.js r180",
+        "ArchitectureBatch",
+        "OptimizedFamilyRenderer",
+        "Catalogue physical-lighting adapter"
+      ]
+    }
+  },
+  "camera": {
+    "isometricAzimuth": 22.5,
+    "isometricElevation": 35.264,
+    "orthographicHalfHeight": 58,
+    "frontAzimuth": 0,
+    "sideAzimuth": 90,
+    "elevationForElevations": 0,
+    "toneMapping": "ACESFilmic",
+    "exposure": 0.9,
+    "lighting": "Same hemisphere, directional sunlight, shadow quality and catalogue finish as the approved reference review."
+  },
+  "captures": {
+    "isometric": {
+      "path": ".tools/heritage-tower-review/reports/isometric.png",
+      "sha256": "0e82da2a2549ef39cf93a8772be04ea2136239c20d46fdbdae272f4a2bfa0b64"
+    },
+    "front": {
+      "path": ".tools/heritage-tower-review/reports/front.png",
+      "sha256": "c8e18b2e670da67f2d6ca69eed693c3b78bc02041f86ba9c8a0b6c3f5a074e72"
+    },
+    "side": {
+      "path": ".tools/heritage-tower-review/reports/side.png",
+      "sha256": "b4d316318540ac522b4e0441626ff55e77a503c9b90ba9f0671fd8c7a4323c9d"
+    }
+  },
+  "originality": {
+    "architectureMeshesReused": [],
+    "bitmapOrTextureAssetsReused": [],
+    "newTextures": "Eight code-generated repeating maps; no extracted image pixels.",
+    "genericInfrastructureReused": [
+      "Three.js r180 unit primitives/renderer",
+      "ArchitectureBatch",
+      "OptimizedFamilyRenderer",
+      "Catalogue physical-lighting/shader adapter",
+      "Generic review camera/capture/export scaffolding"
+    ],
+    "composition": "Broad rectangular shaft, shallow side pavilions, chamfered commercial corner portal and three brick setback stages. No H-shaped courts, central arch/canopy, paired pale upper wings or barrel skylight."
+  },
+  "errorsDuringBrowserReview": [],
+  "limits": "Fixed-design review only; no eventual city-scale/FPS/growable performance claim. Exact exported HTML tested over loopback; direct offline file launch remains user-side.",
+  "export": {
+    "file": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Alderwick Original Heritage Tower Review - 20261118T193233Z.html",
+    "sha256": "ee8759728d8269bc07228db5de31592ffca52c73b159facdd5ba3ed56f347d71",
+    "bytes": 2732996,
+    "models": 1,
+    "scope": "Original fixed 26-storey design for visual review only; no variation, fitting or gameplay integration."
+  }
+}

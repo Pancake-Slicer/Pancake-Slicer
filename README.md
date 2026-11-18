@@ -1,5 +1,9 @@
 # Pancake City — v52 recovery
 
+## Original Alderwick heritage tower — fixed review
+
+One independently designed 26-storey commercial tower with isometric/front/side previews. Approved Reamon remains unchanged and reference-only. No fitting or gameplay integration. Run `npm run review:heritage:export`. [Composition, provenance and validation](docs/ORIGINAL_HERITAGE_TOWER.md).
+
 ## Reamon — fixed reconstruction awaiting visual approval
 
 One reference-sized building, beside the original at a comparable isometric angle, plus an H-plan/roof view. No lot-fitting or gameplay changes. Run `npm run review:reamon:export`. [Review scope, commands and evidence](docs/REAMON_FIXED_REFERENCE_REVIEW.md).
