@@ -1,0 +1,25 @@
+# Art Deco tower corrections — 2026-11-19
+
+This milestone revises new experimental Aster, Calder and Marlowe growth only. Original Lind and other architectural generators/assets remain unchanged.
+
+- Aster: three-storey H podium targets 90% of the usable street-aligned lot dimensions. Two 30%-width wings surround a 40%-width connector recessed 20% at both ends. A centred tower targets 70% of podium width and 75% of depth. Whole 3.6m bays reflow within these targets; windows/piers never scale. Upper setbacks culminate in a compact copper pyramid. Forty-eight 3.7m floors plus the 6.3m crown assembly reach **183.9m**, the approved original Lind height in benchmark/art-deco/model.js. The tower bridges onto both podium wings through a shallow masonry transfer soffit.
+- Calder: existing massing/entrance retained, with a broader pyramidal copper termination above its central setback tower. Both crowns reuse one pooled Lind-palette patinated-copper material and four roof planes with lightweight standing seams and a sealed masonry drum.
+- Marlowe: entrance moved to x=0 on its primary +Z facade; symmetric adjoining bays, foundation openings and terrain transitions follow that same axis.
+- Deco-specific ground-pier and portal supports now match their projecting masonry plinth widths, closing the small slope gaps found during review. They use the existing skirt/rectangle helper and remain in the same material batches.
+- Existing facade skirts and Office concrete remain authoritative. No projecting generic foundation platform, terrain, sidewalk, road or zoning changes.
+
+## Fitting and saved cities
+
+The existing shared fitter now accepts optional family envelope/search-bound callbacks. Aster supplies its complete H-shaped decorated envelope, including the upper tower's bridge over each courtyard; actual native polygon booleans check containment and street orientation. A bounded largest-first search rejects incompatible narrow, oversized, height-restricted or irregular lots instead of shrinking to a tiny centre building. Other definitions retain their original rectangular envelope, search ratios and maximum dimensions. Shared-fitter source-lock hashes were deliberately updated; approved generators and textures retain their pinned hashes.
+
+New records carry architecture revision 2 under the existing experimental template identity. Original serialized revision-1 records retain their original dimensions, entrance and roof geometry; unknown revisions reject safely. No saved city or assignment is deleted or silently restyled. **Use newly zoned Office lots to review these corrections.** Experimental controls/defaults and normal catalogue fallbacks remain unchanged.
+
+## Validation and delivery
+
+- Full npm run build passes **155 checks** (147 prior + 8 Deco). Targeted Deco tests cover fixed bays, multiple sizes/rotations, 30/30/40 H proportions, dual recesses, podium/tower ratios, exact Lind height, upward crown normals, concave containment of decorated geometry, unsupported-site rejection, centred entrance, flat/sloped facade foundations, shared materials/maps, natural mixed spawning, picking, stable frames, demolition/Undo/Redo, deterministic regrowth, cold restoration and cleanup.
+- Tested rectangular lots: 50x50, 60x54, 76x64 and 96x80m at two street angles, plus a concave H-compatible polygon. Architectural bay rounding can leave up to one 3.6m bay short of a dimensional target. Exact identification of the user's screenshot lot requires its city save; the screenshot-like 50x50m case is covered.
+- Actual final game review: 3 Aster, 9 Calder and 11 Marlowe coexist with every prior family; eight existing offices preserved and retired static cache empty. All three demolition/Undo/Redo/regrowth actions pass. Aster was inspected on native 60x51.7m and 50x50m sites; both copper crowns and all three sloped entrances were inspected. Ordinary Playtest creates terrain normally and enables all Office families. Exact HTML hashes match loopback responses; direct file launch remains user-side.
+- A/B use seven opaque material buckets; C retains six. All share three repeating maps (262144 raw texture bytes), with no additional texture allocation for copper. Source geometry and actual browser evidence are recorded separately in DECO_TOWER_CORRECTIONS_VALIDATION.json. No universal FPS/GPU-time or large-city performance claim.
+- Run npm run export:original-deco for uniquely named **Art Deco Tower Corrections** Playtest, Test City and Chrome launcher in dist/. Test City offers direct actual-game family, lot-size, terrain, entrance/roof and history checks; ordinary Playtest contains no disposable review controls. Serve via npm run review:original-deco (127.0.0.1:4208).
+
+Checkpoint: checkpoint/deco-before-corrections-20261119-114031 at c1990aa, plus .tools/checkpoints/deco-corrections-20261119-114031/history.bundle, unrelated-work patch and copied assets/exporter. Branch codex/deco-tower-corrections. Unrelated user asset moves and exporter edits are excluded. Local commit only; push requires specific approval and is not an off-computer backup.

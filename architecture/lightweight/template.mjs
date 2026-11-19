@@ -17,13 +17,14 @@ export function createTemplateSystem({definition,generator,polygon}){
    const safe=Bo(Te(lot.footprint),-(input.setback??.3));if(!safe.length)return {ok:false,reason:'No buildable polygon after clearance'};
    // A bounded deterministic search. Reject rather than deform rectangular
    // architecture. Each trial reflows the bay grid through the family solver.
+   const maximumLot=definition.maximumLotFor?.(input.parameters||{})||definition.maximumLot;
    const centres=[[(minX+maxX)/2,(minZ+maxZ)/2],[0,0]];
    for(const fraction of [.25,.75])for(const f of [.25,.75])centres.push([minX+(maxX-minX)*fraction,minZ+(maxZ-minZ)*f]);
-   for(const ratio of [1,.95,.9,.85,.8,.7,.6,.5])for(const [cx,cz]of centres){
-    let spec;try{spec=definition.fit(input.parameters||{}, {width:Math.min(maxX-minX,definition.maximumLot.width)*ratio,depth:Math.min(maxZ-minZ,definition.maximumLot.depth)*ratio,setback:input.setback??.3});}catch{continue;}
+   for(const ratio of (definition.ratios?.(input.parameters||{})||[1,.95,.9,.85,.8,.7,.6,.5]))for(const [cx,cz]of centres){
+    let spec;try{spec=definition.fit(input.parameters||{}, {width:Math.min(maxX-minX,maximumLot.width)*ratio,depth:Math.min(maxZ-minZ,maximumLot.depth)*ratio,setback:input.setback??.3});}catch{continue;}
     if(input.capacity!==undefined&&spec.storeys>input.capacity)continue;
     const w=(spec.podium?.width||spec.width)+definition.envelopeMargin,d=(spec.podium?.depth||spec.depth)+definition.envelopeMargin;
-    const centre=point({x:cx,z:cz},origin.x,origin.z,angle),ring=[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([x,z])=>point({x,z},centre.x,centre.z,angle));
+    const centre=point({x:cx,z:cz},origin.x,origin.z,angle),ring=(definition.envelope?.(spec)||[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]]).map(([x,z])=>point({x,z},centre.x,centre.z,angle));
     if(sn(je(Te(ring),safe))>.0001)continue;
     const normalized=definition.normalize(spec),seed=String(input.seed??lot.id);
     const record={schemaVersion:CONTRACT_VERSION,template:{id:definition.id,version:definition.version},seed,lotId:lot.id,lot:{width:maxX-minX,depth:maxZ-minZ,footprint:structuredClone(lot.footprint)},parameters:normalized,grid:definition.layout?.(normalized)||null,placement:{x:centre.x,y:lot.y||0,z:centre.z,angle,scale:1,front:[Math.sin(angle),Math.cos(angle)]},footprint:ring};

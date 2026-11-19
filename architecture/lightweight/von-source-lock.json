@@ -2,7 +2,7 @@
   "files": {
     "architecture/von-badel/spec.mjs": "925eba655b601e95bcfe717db6b6fd6b8a6877b20892c0e2c9ac419bf49f94ee",
     "architecture/von-badel/generator.js": "877284c94681af278530fc1de1c4df9aaf57a0e31ac01bf7c6a04147ecfc5a97",
-    "architecture/lightweight/template.mjs": "35bb413823aa5e53822fe480857b469c0149405aa7bb68c12e5dd7b87a4f458a",
+    "architecture/lightweight/template.mjs": "9473a9e4cb701524a798ca8bcd8bfec399b3d6d6e9ef69b9a30edd63555af496",
     "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0"
   }
 }

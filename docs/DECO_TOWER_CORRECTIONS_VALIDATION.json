@@ -1,0 +1,417 @@
+{
+  "date": "2026-11-19",
+  "branch": "codex/deco-tower-corrections",
+  "checkpoint": {
+    "branch": "checkpoint/deco-before-corrections-20261119-114031",
+    "commit": "c1990aa",
+    "bundle": ".tools/checkpoints/deco-corrections-20261119-114031/history.bundle",
+    "verified": true
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Art Deco Tower Corrections Playtest - 20261119T171431Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Art Deco Tower Corrections Test City - 20261119T171431Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Art Deco Tower Corrections in Chrome - 20261119T171431Z.cmd",
+    "playtestSha256": "bb086875be7d7b8c25d93e210cead82641e81ba81547ae03cc8100089d7c602c",
+    "reviewSha256": "c8c048807823efd25a2f1df0dae848ce30f9441903b8c1685165e58d78162777"
+  },
+  "httpHashes": {
+    "playtest": {
+      "sha256": "bb086875be7d7b8c25d93e210cead82641e81ba81547ae03cc8100089d7c602c",
+      "bytes": 4077656
+    },
+    "review": {
+      "sha256": "c8c048807823efd25a2f1df0dae848ce30f9441903b8c1685165e58d78162777",
+      "bytes": 4087593
+    }
+  },
+  "tests": {
+    "prior": 147,
+    "targeted": 8,
+    "total": 155,
+    "build": true
+  },
+  "cpu": {
+    "date": "2026-11-19T17:16:46.517Z",
+    "note": "Single cold CPU transaction after module/material initialization; native lots and normal batch/foundation work. Shape heights differ. Not FPS or GPU timing. Deco candidate fits were precomputed while choosing eligible lots; Lind fitting is included. Different heights and warmup mean these are illustrative timings, not an apples-to-apples benchmark.",
+    "cases": {
+      "A": {
+        "milliseconds": 334.84110000000004,
+        "lots": 10,
+        "buildings": 10,
+        "resources": {
+          "activeBuildings": 10,
+          "batches": 56,
+          "mergedBytes": 5808148,
+          "sourceGeometryBytes": 2689644,
+          "materials": 7,
+          "textures": 3,
+          "cacheEntries": 3,
+          "leases": 10
+        },
+        "sourceShapes": [
+          {
+            "width": 42,
+            "depth": 42,
+            "storeys": 48,
+            "triangles": 6550
+          },
+          {
+            "width": 45.6,
+            "depth": 45.6,
+            "storeys": 48,
+            "triangles": 6918
+          },
+          {
+            "width": 45.6,
+            "depth": 42,
+            "storeys": 48,
+            "triangles": 6550
+          }
+        ]
+      },
+      "B": {
+        "milliseconds": 411.17859999999996,
+        "lots": 10,
+        "buildings": 10,
+        "resources": {
+          "activeBuildings": 10,
+          "batches": 42,
+          "mergedBytes": 6607528,
+          "sourceGeometryBytes": 4988572,
+          "materials": 7,
+          "textures": 3,
+          "cacheEntries": 7,
+          "leases": 10
+        },
+        "sourceShapes": [
+          {
+            "width": 49.2,
+            "depth": 42,
+            "storeys": 34,
+            "triangles": 8662
+          },
+          {
+            "width": 49.2,
+            "depth": 42,
+            "storeys": 26,
+            "triangles": 8662
+          },
+          {
+            "width": 49.2,
+            "depth": 42,
+            "storeys": 31,
+            "triangles": 8662
+          },
+          {
+            "width": 45.6,
+            "depth": 42,
+            "storeys": 34,
+            "triangles": 8438
+          },
+          {
+            "width": 49.2,
+            "depth": 42,
+            "storeys": 25,
+            "triangles": 8662
+          },
+          {
+            "width": 45.6,
+            "depth": 42,
+            "storeys": 22,
+            "triangles": 8438
+          },
+          {
+            "width": 49.2,
+            "depth": 42,
+            "storeys": 27,
+            "triangles": 8662
+          }
+        ]
+      },
+      "C": {
+        "milliseconds": 318.4831999999999,
+        "lots": 10,
+        "buildings": 10,
+        "resources": {
+          "activeBuildings": 10,
+          "batches": 36,
+          "mergedBytes": 6089832,
+          "sourceGeometryBytes": 3030224,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 4,
+          "leases": 10
+        },
+        "sourceShapes": [
+          {
+            "width": 49.2,
+            "depth": 38.4,
+            "storeys": 15,
+            "triangles": 8354
+          },
+          {
+            "width": 45.6,
+            "depth": 38.4,
+            "storeys": 16,
+            "triangles": 8026
+          },
+          {
+            "width": 49.2,
+            "depth": 38.4,
+            "storeys": 16,
+            "triangles": 8354
+          },
+          {
+            "width": 45.6,
+            "depth": 38.4,
+            "storeys": 14,
+            "triangles": 8026
+          }
+        ]
+      },
+      "Lind": {
+        "milliseconds": 515.4110000000001,
+        "lots": 10,
+        "buildings": 10,
+        "resources": null,
+        "sourceShapes": []
+      }
+    }
+  },
+  "browser": {
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "viewport": [
+      1280,
+      720
+    ],
+    "mixed": {
+      "counts": {
+        "A": 3,
+        "B": 9,
+        "C": 11,
+        "bmo": 13,
+        "lind": 15,
+        "von": 25,
+        "brick": 14,
+        "alderwick": 20,
+        "catalogue": 42
+      },
+      "preservedExisting": 8,
+      "staticResources": [],
+      "errors": []
+    },
+    "families": {
+      "A": {
+        "type": "A",
+        "width": 52.8,
+        "depth": 45.6,
+        "storeys": 48,
+        "height": 183.90000000000003,
+        "lot": {
+          "id": "office-block:-360.00:-360.00:360.00:360.00:25:0010:0",
+          "width": 60,
+          "depth": 51.699999999999996
+        },
+        "entrance": {
+          "x": 0,
+          "z": 13.68,
+          "width": 7.8,
+          "doorWidth": 4.4,
+          "height": 8.6
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 7,
+          "mergedBytes": 633072,
+          "sourceGeometryBytes": 672868,
+          "materials": 7,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "draw": {
+          "calls": 96,
+          "triangles": 92303
+        },
+        "errors": [],
+        "actions": {
+          "type": "A",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "regeneration": true
+        },
+        "capture": ".tools/deco-corrections/flat-large/A-isometric.png"
+      },
+      "B": {
+        "type": "B",
+        "width": 56.4,
+        "depth": 42,
+        "storeys": 34,
+        "height": 130.356,
+        "lot": {
+          "id": "office-block:-360.00:-360.00:360.00:360.00:25:0010:0",
+          "width": 60,
+          "depth": 51.699999999999996
+        },
+        "entrance": {
+          "x": 0,
+          "z": 21,
+          "width": 11.6,
+          "doorWidth": 8.4,
+          "height": 6.9
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 7,
+          "mergedBytes": 656984,
+          "sourceGeometryBytes": 719156,
+          "materials": 7,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "draw": {
+          "calls": 75,
+          "triangles": 91973
+        },
+        "errors": [],
+        "actions": {
+          "type": "B",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "regeneration": true
+        },
+        "capture": ".tools/deco-corrections/flat-large/B-isometric.png"
+      },
+      "C": {
+        "type": "C",
+        "width": 56.4,
+        "depth": 38.4,
+        "storeys": 16,
+        "height": 60.2,
+        "lot": {
+          "id": "office-block:-360.00:-360.00:360.00:360.00:25:0010:0",
+          "width": 60,
+          "depth": 51.699999999999996
+        },
+        "entrance": {
+          "x": 0,
+          "z": 19.2,
+          "width": 7.2,
+          "doorWidth": 4.4,
+          "height": 6.6
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 580464,
+          "sourceGeometryBytes": 711956,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "draw": {
+          "calls": 68,
+          "triangles": 91477
+        },
+        "errors": [],
+        "actions": {
+          "type": "C",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "regeneration": true
+        },
+        "capture": ".tools/deco-corrections/flat-large/C-isometric.png"
+      }
+    },
+    "smallAster": {
+      "type": "A",
+      "width": 42,
+      "depth": 42,
+      "storeys": 48,
+      "height": 183.90000000000003,
+      "lot": {
+        "id": "office-block:188.30:188.30:291.70:291.70:0:11:0",
+        "width": 50,
+        "depth": 50
+      },
+      "entrance": {
+        "x": 0,
+        "z": 12.6,
+        "width": 7.8,
+        "doorWidth": 4.4,
+        "height": 8.6
+      },
+      "resources": {
+        "activeBuildings": 1,
+        "batches": 7,
+        "mergedBytes": 534882,
+        "sourceGeometryBytes": 570916,
+        "materials": 7,
+        "textures": 3,
+        "cacheEntries": 1,
+        "leases": 1
+      },
+      "draw": {
+        "calls": 268,
+        "triangles": 112904
+      },
+      "errors": []
+    },
+    "slopedEntrances": {
+      "A": {
+        "errors": [],
+        "entrance": {
+          "x": 0,
+          "z": 13.68,
+          "width": 7.8,
+          "doorWidth": 4.4,
+          "height": 8.6
+        },
+        "capture": ".tools/deco-corrections/sloped/A-entrance.png"
+      },
+      "B": {
+        "errors": [],
+        "entrance": {
+          "x": 0,
+          "z": 21,
+          "width": 11.6,
+          "doorWidth": 8.4,
+          "height": 6.9
+        },
+        "capture": ".tools/deco-corrections/sloped/B-entrance.png"
+      },
+      "C": {
+        "errors": [],
+        "entrance": {
+          "x": 0,
+          "z": 19.2,
+          "width": 7.2,
+          "doorWidth": 4.4,
+          "height": 6.6
+        },
+        "capture": ".tools/deco-corrections/sloped/C-entrance.png"
+      }
+    },
+    "ordinaryPlaytest": {
+      "terrainCreation": true,
+      "experimentalEnabled": true,
+      "priorFamiliesEnabled": true,
+      "reviewControlsAbsent": true
+    },
+    "crownCaptures": [
+      ".tools/deco-corrections/flat-large/A-roof.png",
+      ".tools/deco-corrections/flat-large/B-roof.png"
+    ]
+  },
+  "limits": [
+    "Exact screenshot city/lot not available; tested native 50x50m representative plus other rectangular/concave/rotated sites.",
+    "Revision-1 saved assignments keep their previous geometry; new lots use revision 2.",
+    "Exact exported HTML bytes verified over HTTP; direct local-file launch remains user-side.",
+    "CPU observations and draw/resource counters only; no FPS, GPU time or large-city parity claim."
+  ]
+}

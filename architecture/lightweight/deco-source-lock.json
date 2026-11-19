@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "status": "experimental",
   "files": {
-    "architecture/original-deco/spec.mjs": "f1e71283ca63a2b00f6c3b3263bfa180ac884c766bc536c48c0755af70b3d6ca",
-    "architecture/original-deco/generator.js": "c205f5fa28b821a4795e4de181269033aea0b2a75e3ab73693024b058e71a1fb",
-    "architecture/original-deco/materials.js": "7cf01e0795475ed14b1a82794733fff1313531c8775e3a1d9218008055e2622b",
-    "architecture/original-deco/components.js": "fa9b0781b892018fd65bbaa5673c83d6f513786ae3bf3239fc718a6f438f9ae3"
+    "architecture/original-deco/spec.mjs": "fdd209d495f19ae18e3e25a6dc4e7047361ed04413f5e1364fc1ffe23ca68400",
+    "architecture/original-deco/generator.js": "d0a7f6cb641cb16fab4c3e54cf48def4bc6cf44c0393f3e4271ca60f7542e6ac",
+    "architecture/original-deco/materials.js": "83d5e756478bc66eb2b59e8a17c5e085a21313bd238d98864a2c3bbb10132163",
+    "architecture/original-deco/components.js": "bd2a24dc2a6376aa9335e3a5e65aac502a9b45dbdc476cad18095090e288a3ef"
   },
   "dependencies": {
     "architecture/lind/spec.mjs": "d5a8ab0f54dc6e74d90503e8aabac4b6aff10e14d076008d1615f90b10cdf938",
@@ -18,7 +18,7 @@
     "architecture/lind/spec.mjs": "d5a8ab0f54dc6e74d90503e8aabac4b6aff10e14d076008d1615f90b10cdf938",
     "architecture/lind/generator.js": "5e929a82485f191b8eafde208d05d290e819f12b9fdd94221a5d41688e6d7e0f",
     "architecture/lind/materials.js": "7b2d2e2501a4763a320c13323185c3625bdc94a9121e6880efe3c041be60c152",
-    "architecture/lightweight/template.mjs": "35bb413823aa5e53822fe480857b469c0149405aa7bb68c12e5dd7b87a4f458a",
+    "architecture/lightweight/template.mjs": "9473a9e4cb701524a798ca8bcd8bfec399b3d6d6e9ef69b9a30edd63555af496",
     "architecture/assemblies/optimized-renderer.js": "a4aea112f6491fdfacbc21c52b59517a879f565850049b6da1ce397806b53bb5",
     "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
     "Assets/Architecture/Art Deco/Art Deco Limestone Window Facade.png": "790172b58a08351bf48461c00e2015967952e62e15c1b2a34d534dd373cec8b9",

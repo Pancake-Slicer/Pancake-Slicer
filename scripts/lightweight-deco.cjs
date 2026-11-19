@@ -27,6 +27,12 @@ function applyDecoIntegration(source){const replace=(a,b)=>{assert.equal(source.
  replace('base=Math.max(ground(-doorHalf,front),ground(0,front),ground(doorHalf,front))','base=Math.max(ground(doorX-doorHalf,front),ground(doorX,front),ground(doorX+doorHalf,front))');
  replace('parts,rings,point,ground,front,sill,base,terrainMin:','...(b.office.lightweightDeco?{doorX:r.grid.entrance.x,doorHalfWidth:r.grid.entrance.width/2,stepHalfWidth:r.grid.entrance.doorWidth/2}:{}),parts,rings,point,ground,front,sill,base,terrainMin:');
  replace('if(b.office.lightweightAlderwick){const m=runtime.materials.forRecord(r);','if(b.office.lightweightDeco)return runtime.generator.materials;if(b.office.lightweightAlderwick){const m=runtime.materials.forRecord(r);');
+ // Match these towers' projecting masonry feet; other family supports are unchanged.
+ replace("w=bmo?.34:b.office.lightweightLind?", "w=b.office?.lightweightDeco&&r.parameters.revision===2?1.58:bmo?.34:b.office.lightweightLind?");
+ replace("d=bmo?.27:b.office.lightweightLind?", "d=b.office?.lightweightDeco&&r.parameters.revision===2?1.0:bmo?.27:b.office.lightweightLind?");
+ replace("o=bmo?.01:b.office.lightweightLind?", "o=b.office?.lightweightDeco&&r.parameters.revision===2?.18:bmo?.01:b.office.lightweightLind?");
+ replace("   rectangle(pier,v.x+u[0]*t+n[0]*(off+o)", "   if(b.office?.lightweightDeco&&r.parameters.revision===2&&n[1]===1&&Math.abs(v.z+off-site.front)<.11&&Math.abs(v.x+t-doorX)<doorHalf)continue;rectangle(pier,v.x+u[0]*t+n[0]*(off+o)");
+ replace(" // A narrow door transition stays inside", " if(b.office?.lightweightDeco&&r.parameters.revision===2){const broad=r.parameters.archetype==='B';for(const x of broad?[-5.1,0,5.1]:[-3.1,3.1])rectangle(pier,doorX+x,site.front+(broad?.15:.14),broad?1.04:.9,broad?.78:.85);}\n // A narrow door transition stays inside");
  return source;
 }
 module.exports={decoSource,applyDecoIntegration};
