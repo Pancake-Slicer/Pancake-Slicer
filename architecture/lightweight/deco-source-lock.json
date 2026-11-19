@@ -1,0 +1,37 @@
+{
+  "family": "original-deco-experimental",
+  "version": "1.0.0",
+  "status": "experimental",
+  "files": {
+    "architecture/original-deco/spec.mjs": "f1e71283ca63a2b00f6c3b3263bfa180ac884c766bc536c48c0755af70b3d6ca",
+    "architecture/original-deco/generator.js": "c205f5fa28b821a4795e4de181269033aea0b2a75e3ab73693024b058e71a1fb",
+    "architecture/original-deco/materials.js": "7cf01e0795475ed14b1a82794733fff1313531c8775e3a1d9218008055e2622b",
+    "architecture/original-deco/components.js": "fa9b0781b892018fd65bbaa5673c83d6f513786ae3bf3239fc718a6f438f9ae3"
+  },
+  "dependencies": {
+    "architecture/lind/spec.mjs": "d5a8ab0f54dc6e74d90503e8aabac4b6aff10e14d076008d1615f90b10cdf938",
+    "architecture/lind/generator.js": "5e929a82485f191b8eafde208d05d290e819f12b9fdd94221a5d41688e6d7e0f",
+    "architecture/lind/materials.js": "7b2d2e2501a4763a320c13323185c3625bdc94a9121e6880efe3c041be60c152",
+    "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0"
+  },
+  "preserved": {
+    "architecture/lind/spec.mjs": "d5a8ab0f54dc6e74d90503e8aabac4b6aff10e14d076008d1615f90b10cdf938",
+    "architecture/lind/generator.js": "5e929a82485f191b8eafde208d05d290e819f12b9fdd94221a5d41688e6d7e0f",
+    "architecture/lind/materials.js": "7b2d2e2501a4763a320c13323185c3625bdc94a9121e6880efe3c041be60c152",
+    "architecture/lightweight/template.mjs": "35bb413823aa5e53822fe480857b469c0149405aa7bb68c12e5dd7b87a4f458a",
+    "architecture/assemblies/optimized-renderer.js": "a4aea112f6491fdfacbc21c52b59517a879f565850049b6da1ce397806b53bb5",
+    "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+    "Assets/Architecture/Art Deco/Art Deco Limestone Window Facade.png": "790172b58a08351bf48461c00e2015967952e62e15c1b2a34d534dd373cec8b9",
+    "Assets/procedural-templates/lind-stepped-lightweight@1.0.0/textures.rgba.json": "b075cddefc4c3a6298d51a810e0b37479fd5f51280cbc9ddf500b41e949911a7",
+    "architecture/bmo/spec.mjs": "c80bc6e079887e0139ae12a0e645c03d816a864dc3a8f2360c77c36b6773e0fb",
+    "architecture/bmo/generator.js": "3f490163779693a92133704ac099f0e78760e65043fb1957042566ba37801900",
+    "architecture/lightweight/bmo.mjs": "60cfd73cadfe9dd9c1f5fbc83f433d2e7948a57d3435a5ecabab3907434bf284",
+    "architecture/von-badel/spec.mjs": "925eba655b601e95bcfe717db6b6fd6b8a6877b20892c0e2c9ac419bf49f94ee",
+    "architecture/von-badel/generator.js": "877284c94681af278530fc1de1c4df9aaf57a0e31ac01bf7c6a04147ecfc5a97",
+    "architecture/brick-office/spec.mjs": "3a7df26dbf45bbefa3a5b6e943ab90d667fa6cfb6d87f7de3aeb34679da73df9",
+    "architecture/brick-office/generator.js": "0f5b9cd21a3bf5d09b8d12422621d116030469386953c97f7b39a3f343030426",
+    "architecture/alderwick/spec.mjs": "0d659cd7344f5d1b7c6d11e71b1b3c3404201996db77b73cde438744a1c5a7cb",
+    "architecture/alderwick/generator.js": "bc4ea306bda4f9b3ef2713cc904a1d0ab13f90b24d973d361327d054df45b899",
+    "architecture/alderwick/materials.js": "afdd95df1b43e5bbf9aee8b6de3b3898629cfdb5732fd1310f7c47267325a36d"
+  }
+}

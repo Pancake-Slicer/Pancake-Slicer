@@ -1,0 +1,16 @@
+// Reuse Lind's generic exposed-roof rectangle subtraction, not its composition.
+import {exposedRoof} from '../lind/generator.js';
+export function roofPatches(volume,volumes){const rect=v=>[v.x-v.width/2,v.z-v.depth/2,v.x+v.width/2,v.z+v.depth/2];return exposedRoof(rect(volume),volumes.filter(v=>v.start===volume.end).map(rect));}
+export function faceTools(batch,v,normal,axis,offset){const p=(t,y,o=0)=>[v.x+axis[0]*t+normal[0]*(offset+o),y,v.z+axis[1]*t+normal[1]*(offset+o)],box=(key,t,y,w,h,o,d)=>batch.box(key,...p(t,y,o),normal[0]?d:w,h,normal[0]?w:d);
+ const strip=(key,t,y,w,h,o,d,cap=false)=>{const a=t-w/2,c=t+w/2,lo=y-h/2,hi=y+h/2,rear=o-d/2,front=o+d/2;batch.quad(key,[p(a,lo,front),p(c,lo,front),p(c,hi,front),p(a,hi,front)]);batch.quad(key,[p(a,lo,rear),p(a,lo,front),p(a,hi,front),p(a,hi,rear)]);batch.quad(key,[p(c,lo,front),p(c,lo,rear),p(c,hi,rear),p(c,hi,front)]);if(cap)batch.quad(key,[p(a,hi,front),p(c,hi,front),p(c,hi,rear),p(a,hi,rear)]);};return {p,box,strip};}
+export function portal(b,s,e){const front={x:e.x,z:e.z,width:e.width,depth:0},t=faceTools(b,front,[0,1],[1,0],0),{p,box}=t,h=e.height;
+ // Fixed-size bronze doors remain behind the masonry order at every bay count.
+ const door=(x,w)=>{b.box('bronze',e.x+x,2.55,e.z-.13,w,5.1,.12);b.box('glass',e.x+x,2.56,e.z-.05,w-.2,4.9,.06);for(const sign of [-1,1])b.box('bronze',e.x+x+sign*.12,1.65,e.z+.01,.035,.58,.06);b.box('bronze',e.x+x,2.55,e.z,.07,5.0,.07);};
+ if(s.archetype==='B'){for(const sign of [-1,1])door(sign*2.1,3.6);for(const x of [-5.1,0,5.1])box('trim',x,h/2,1.04,h,.15,.78);box('trim',0,h+.18,11.6,.6,.25,1.0);box('bronze',0,5.65,10.4,.22,.52,1.2);box('dark',0,5.81,10.2,.10,.52,1.15);}
+ else{door(0,4.4);for(const sign of [-1,1]){box('trim',sign*3.1,h/2,.9,h,.14,.85);for(const x of [-.24,0,.24])box('stone',sign*3.1+x,h/2,.06,h-.8,.60,.07);}for(let i=0;i<3;i++)box('trim',0,h+.12+i*.23,7.1-i*.40,.24,.28+i*.04,.95+i*.08);if(s.archetype==='A'){box('bronze',0,6.8,4.8,1.55,-.02,.08);for(const x of [-1.5,-.75,0,.75,1.5])box('trim',x,6.8,.10,1.34,.07,.15);}else{for(const sign of [-1,1])box('bronze',sign*2.2,4.0,.11,2.2,.26,.15);}}
+}
+
+// One mitered ring, with no coplanar overlapping box caps at the corners.
+export function corniceRing(b,v,y,height,projection){const outer=[[-v.width/2-projection,-v.depth/2-projection],[v.width/2+projection,-v.depth/2-projection],[v.width/2+projection,v.depth/2+projection],[-v.width/2-projection,v.depth/2+projection]],inner=[[-v.width/2+.26,-v.depth/2+.26],[v.width/2-.26,-v.depth/2+.26],[v.width/2-.26,v.depth/2-.26],[-v.width/2+.26,v.depth/2-.26]],p=(a,h)=>[v.x+a[0],h,v.z+a[1]],lo=y-height/2,hi=y+height/2;for(let i=0;i<4;i++){const j=(i+1)%4;b.quad('trim',[p(outer[j],lo),p(outer[i],lo),p(outer[i],hi),p(outer[j],hi)]);b.quad('trim',[p(outer[i],hi),p(inner[i],hi),p(inner[j],hi),p(outer[j],hi)]);b.quad('trim',[p(outer[j],lo),p(inner[j],lo),p(inner[i],lo),p(outer[i],lo)]);}}
+
+export function crownPylon(b,x,y,z,height){b.box('stone',x,y+height/2,z,.94,height,1.2);for(const sign of [-1,1])for(const dx of [-.26,0,.26])b.box('trim',x+dx,y+height/2,z+sign*.64,.065,height-.35,.08);b.box('bronze',x,y+height-.22,z,1.02,.10,1.28);b.box('trim',x,y+height,z,1.24,.20,1.46);b.box('stone',x,y+height+.12,z,.95,.12,1.16);}

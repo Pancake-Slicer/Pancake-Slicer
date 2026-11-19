@@ -1,0 +1,293 @@
+{
+  "date": "2026-11-19",
+  "branch": "codex/original-art-deco-family",
+  "checkpoint": "safety/pre-original-deco-0f658cd",
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Art Deco Experiments Playtest - 20261119T160056Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Art Deco Experiments Test City - 20261119T160056Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Original Art Deco Experiments in Chrome - 20261119T160056Z.cmd",
+    "playtestSha256": "c4d324685276c55bf0f23c6096723b1d156c85c3ebcfe8a62f986bf8485331b8",
+    "reviewSha256": "0421e2d615a2cae29e31c3c85d858043d228d76a93ffb3359a5b599cb02b4d9e"
+  },
+  "tests": {
+    "existing": 147,
+    "newExperimentalFamily": 5,
+    "build": true
+  },
+  "designs": [
+    {
+      "type": "A",
+      "specification": {
+        "family": "original-deco-experimental",
+        "version": "1.0.0",
+        "id": "deco-A",
+        "name": "Aster Tower",
+        "seed": "1138",
+        "archetype": "A",
+        "width": 27.6,
+        "depth": 24,
+        "storeys": 30,
+        "floorHeight": 3.6,
+        "podium": null
+      },
+      "sourceTriangles": 4622,
+      "materialBatches": 6,
+      "bounds": {
+        "min": [
+          -14.520000457763672,
+          0,
+          -12.720000267028809
+        ],
+        "max": [
+          14.520000457763672,
+          112.08000183105469,
+          12.914999961853027
+        ]
+      }
+    },
+    {
+      "type": "B",
+      "specification": {
+        "family": "original-deco-experimental",
+        "version": "1.0.0",
+        "id": "deco-B",
+        "name": "Calder Exchange",
+        "seed": "1138",
+        "archetype": "B",
+        "width": 49.2,
+        "depth": 34.8,
+        "storeys": 28,
+        "floorHeight": 3.6,
+        "podium": null
+      },
+      "sourceTriangles": 7690,
+      "materialBatches": 6,
+      "bounds": {
+        "min": [
+          -25.31999969482422,
+          0,
+          -18.1200008392334
+        ],
+        "max": [
+          25.31999969482422,
+          103.94000244140625,
+          18.520000457763672
+        ]
+      }
+    },
+    {
+      "type": "C",
+      "specification": {
+        "family": "original-deco-experimental",
+        "version": "1.0.0",
+        "id": "deco-C",
+        "name": "Marlowe House",
+        "seed": "1138",
+        "archetype": "C",
+        "width": 42,
+        "depth": 27.6,
+        "storeys": 13,
+        "floorHeight": 3.6,
+        "podium": null
+      },
+      "sourceTriangles": 6798,
+      "materialBatches": 6,
+      "bounds": {
+        "min": [
+          -21.719999313354492,
+          0,
+          -14.520000457763672
+        ],
+        "max": [
+          21.719999313354492,
+          49.150001525878906,
+          14.71500015258789
+        ]
+      }
+    }
+  ],
+  "cpu": {
+    "method": "Same ten eligible native properties. Modules/materials preinitialized; one cold shape/layout/support/batch transaction per family. VM/CPU only; different fitted storeys/massing, no GPU/frame-time claim.",
+    "results": [
+      {
+        "family": "A",
+        "count": 10,
+        "fitLayoutGenerationAndBatchMs": 279.36080000000004,
+        "activeBuildings": 10,
+        "batches": 36,
+        "mergedBytes": 4131040,
+        "sourceGeometryBytes": 3110580,
+        "materials": 6,
+        "textures": 3,
+        "cacheEntries": 7,
+        "leases": 10
+      },
+      {
+        "family": "B",
+        "count": 10,
+        "fitLayoutGenerationAndBatchMs": 374.0852,
+        "activeBuildings": 10,
+        "batches": 36,
+        "mergedBytes": 6672088,
+        "sourceGeometryBytes": 5034980,
+        "materials": 6,
+        "textures": 3,
+        "cacheEntries": 7,
+        "leases": 10
+      },
+      {
+        "family": "C",
+        "count": 10,
+        "fitLayoutGenerationAndBatchMs": 295.27,
+        "activeBuildings": 10,
+        "batches": 36,
+        "mergedBytes": 6091872,
+        "sourceGeometryBytes": 3032144,
+        "materials": 6,
+        "textures": 3,
+        "cacheEntries": 4,
+        "leases": 10
+      },
+      {
+        "family": "Lind",
+        "count": 10,
+        "fitLayoutGenerationAndBatchMs": 619.1199999999999,
+        "activeBuildings": 10,
+        "batches": 50,
+        "mergedBytes": 5684420,
+        "sourceGeometryBytes": 5824168,
+        "materials": 11,
+        "textures": 2,
+        "cacheEntries": 10,
+        "leases": 10
+      }
+    ]
+  },
+  "browser": {
+    "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "viewport": [
+      1280,
+      720
+    ],
+    "mixed": {
+      "A": 5,
+      "B": 3,
+      "C": 3,
+      "bmo": 7,
+      "lind": 1,
+      "von": 8,
+      "brick": 7,
+      "alderwick": 5,
+      "catalogue": 29
+    },
+    "preservedExisting": 8,
+    "staticResourceKeys": [],
+    "actions": [
+      {
+        "type": "A",
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "regeneration": true
+      },
+      {
+        "type": "B",
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "regeneration": true
+      },
+      {
+        "type": "C",
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "regeneration": true
+      }
+    ],
+    "slopedC": "sloped",
+    "smallC": {
+      "width": 31.2,
+      "depth": 38.4,
+      "storeys": 16
+    },
+    "models": {
+      "A": {
+        "specification": {
+          "family": "original-deco-experimental",
+          "version": "1.0.0",
+          "id": "deco-A:office-block:-240.00:-240.00:240.00:240.00:9:10000:0",
+          "name": "Aster Tower · A",
+          "seed": "2090147440",
+          "archetype": "A",
+          "width": 31.2,
+          "depth": 27.6,
+          "storeys": 34,
+          "floorHeight": 3.6,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 393724,
+          "sourceGeometryBytes": 422892,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        }
+      },
+      "B": {
+        "specification": {
+          "family": "original-deco-experimental",
+          "version": "1.0.0",
+          "id": "deco-B:office-block:-240.00:-240.00:240.00:240.00:9:10000:0",
+          "name": "Calder Exchange · B",
+          "seed": "2140480297",
+          "archetype": "B",
+          "width": 56.4,
+          "depth": 42,
+          "storeys": 30,
+          "floorHeight": 3.6,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 663680,
+          "sourceGeometryBytes": 725116,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        }
+      },
+      "C": {
+        "specification": {
+          "family": "original-deco-experimental",
+          "version": "1.0.0",
+          "id": "deco-C:office-block:-240.00:-240.00:240.00:240.00:9:10000:0",
+          "name": "Marlowe House · C",
+          "seed": "2123702678",
+          "archetype": "C",
+          "width": 56.4,
+          "depth": 38.4,
+          "storeys": 16,
+          "floorHeight": 3.6,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 580668,
+          "sourceGeometryBytes": 712148,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        }
+      }
+    }
+  },
+  "limits": "Experimental opt-in. Intel browser fixture; no GPU-time/FPS/large-city parity claim. Exact standalone bytes tested over HTTP; direct file launch remains user-side."
+}

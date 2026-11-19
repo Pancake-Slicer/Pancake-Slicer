@@ -170,3 +170,8 @@ Run `npm run export:alderwick-growables` for the playable Alderwick build and po
 ## Clean roof, facade and concrete shadows — 2026-11-19
 
 Run `npm run export:surface-shading` for the latest corrected playable build. Shared shadow bias now follows view resolution to remove diagonal self-shadow banding across building families. [Scope and validation](docs/SURFACE_SHADING_FIX.md).
+
+
+## Original Art Deco experimental growables — 2026-11-19
+
+Run `npm run export:original-deco` for three original towers: Aster (slender), Calder Exchange (winged) and Marlowe House (mid-rise). The Test City offers direct in-game views and controls; Lind and previous buildings are preserved. [Scope, controls and validation](docs/ORIGINAL_DECO_EXPERIMENTS.md).
