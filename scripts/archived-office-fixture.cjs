@@ -1,0 +1,2 @@
+const fs=require('node:fs'),path=require('node:path');let cached;
+module.exports=function archivedOfficeFixture(){if(cached)return cached;const html=fs.readFileSync(path.join(__dirname,'../original/Pancake (52).html'),'utf8'),script=html.match(/<script\b[^>]*type=["']module["'][^>]*>([\s\S]*?)<\/script>/i)[1];return cached=require('./integrate-growables.cjs').applyGrowableAssets(require('./landmark-performance.cjs').applyLandmarkPerformance(require('./office-zoning.cjs').applyOfficeZoning(require('./rendering-fixes.cjs').applyRenderingFixes(script))));};

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "catalogueIds": [
+    423,
+    420
+  ],
+  "templateIds": [
+    "lind-stepped-lightweight",
+    "brick-commercial-lightweight"
+  ],
+  "reason": "Lind and Reamon reference-derived buildings are archival; preserve source/shared helpers and legacy assignment data, render legacy lots using the active catalogue fallback."
+}

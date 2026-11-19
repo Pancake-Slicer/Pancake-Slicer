@@ -11,8 +11,8 @@ function rayHit(geometries,origin,direction){
  for(const {geometry} of geometries){const p=geometry.attributes.position.array;for(let i=0;i<p.length;i+=9){const a=[p[i],p[i+1],p[i+2]],ab=[p[i+3]-a[0],p[i+4]-a[1],p[i+5]-a[2]],ac=[p[i+6]-a[0],p[i+7]-a[1],p[i+8]-a[2]],n=[ab[1]*ac[2]-ab[2]*ac[1],ab[2]*ac[0]-ab[0]*ac[2],ab[0]*ac[1]-ab[1]*ac[0]],dot=(x,y)=>x.reduce((s,v,j)=>s+v*y[j],0),den=dot(n,direction);if(den>=-1e-8)continue;const t=dot(n,a.map((v,k)=>v-origin[k]))/den;if(t<0)continue;const v=origin.map((x,k)=>x+direction[k]*t-a[k]),aa=dot(ab,ab),bb=dot(ac,ac),cc=dot(ab,ac),det=aa*bb-cc*cc;if(det<1e-12)continue;const u=(dot(v,ab)*bb-dot(v,ac)*cc)/det,w=(dot(v,ac)*aa-dot(v,ab)*cc)/det;if(u>=-1e-5&&w>=-1e-5&&u+w<=1.00001)return true;}}
  return false;
 }
-test('all 98 recipes contain authored solid plans and no imported raster/triangle/UV payload',()=>{
- assert.equal(entries.length,98);assert.equal(new Set(entries.map(e=>e.id)).size,98);
+test('all 96 active recipes contain authored solid plans and no imported raster/triangle/UV payload',()=>{
+ assert.equal(entries.length,96);assert.equal(new Set(entries.map(e=>e.id)).size,96);
  const text=fs.readFileSync(path.join(__dirname,'../reference/sc4-rebuilt-designs.json'),'utf8');assert.ok(!/"(?:png|positions|uv|variants)"/.test(text));
  for(const d of entries){assert.ok(d.height>0&&d.floors>=1&&d.floors<=80);assert.ok(Math.abs(d.bodyHeight+d.roofHeight-d.height)<.02);assert.equal(d.bands[0].y,0);assert.ok(Math.abs(d.bands.at(-1).top-d.bodyHeight)<.02);for(let i=0;i<d.bands.length;i++){const b=d.bands[i];assert.ok(b.top>b.y);if(i)assert.equal(b.y,d.bands[i-1].top);for(const ring of b.parts)assert.ok(api.sn(api.Te(ring.map(([x,z])=>({x,z}))))>1);}}
 });

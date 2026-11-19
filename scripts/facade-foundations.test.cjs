@@ -1,5 +1,6 @@
+// Archived architecture regression fixture; production retirement is checked separately.
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
-const source=fs.readFileSync(require('node:path').join(__dirname,'../web/assets/game.bundle.js'),'utf8'),plain=x=>JSON.parse(JSON.stringify(x));
+const source=require('./archived-office-fixture.cjs')(),plain=x=>JSON.parse(JSON.stringify(x));
 function api(){const ctx=vm.createContext({console,performance,structuredClone,atob,URL,location:{href:'http://localhost/'},document:{createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}});vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.a={zb,qb,pS,Se,pcBmoFit,pcLindFit,pcVonFit,pcBmoReady,pcLindReady,pcVonReady,pcFacadePlace,pcFacadeAttach,pcFacadeRelease,pcFacadeSites,pcOfficeParcels,pcBmoBatches,pcBmoSetControl,pcLindSetControl,pcVonSetControl,pcBmoInfo,pcLindInfo,pcVonInfo,pcGrowableFacing,Te,je,sn};',ctx);return ctx.a;}
 const families=[['Bmo','lightweightBmo','template:bmo-horizontal-lightweight@1.0.0'],['Lind','lightweightLind','template:lind-stepped-lightweight@1.0.0'],['Von','lightweightVon','template:von-badel-lightweight@1.0.0']];
 function specimen(a,family,heightAt=()=>20,angle=0,index=0){

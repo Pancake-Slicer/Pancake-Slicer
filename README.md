@@ -177,3 +177,5 @@ Run `npm run export:surface-shading` for the latest corrected playable build. Sh
 Run `npm run export:original-deco` for three original towers: Aster (slender), Calder Exchange (winged) and Marlowe House (mid-rise). The Test City offers direct in-game views and controls; Lind and previous buildings are preserved. [Scope, controls and validation](docs/ORIGINAL_DECO_EXPERIMENTS.md).
 
 Art Deco correction review: `npm run export:original-deco` now produces **Art Deco Tower Corrections** builds with Aster's H podium/Lind-matched height, Aster/Calder copper pyramids and Marlowe's centred entrance. Review newly zoned Office lots; saved revision-1 buildings are preserved. [Details](docs/DECO_TOWER_CORRECTIONS.md).
+
+Latest playable: npm run export:original-offices. Original Lind/Reamon growables are reference-only; Alderwick, Aster, Calder, Marlowe, BMO and Von remain available. [Retirement and legacy-save behaviour](docs/RETIRED_LIND_REAMON.md).

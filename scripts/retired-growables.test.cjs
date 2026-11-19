@@ -12,7 +12,7 @@ test('active packaging never reads retired GLBs, while archive definitions remai
 });
 test('ordinary readiness and mixed lightweight growth allocate zero retired resources or image decodes',async()=>{
  const host=api(),{a}=host;await a.pcGrowablesReady();assert.equal(host.images(),0);assert.equal(a.pcGrowableResources.size,0);assert.equal(a.enhanced,null);
- const {z}=city(a);z.applyProperties(z.properties,'offices');for(const field of ['lightweightLind','lightweightVon','lightweightBmo'])assert.ok(z.buildings.some(b=>b.office[field]),field);assert.ok(z.buildings.some(b=>!b.office.assetKey));
+ const {z}=city(a);z.applyProperties(z.properties,'offices');for(const field of ['lightweightVon','lightweightBmo'])assert.ok(z.buildings.some(b=>b.office[field]),field);assert.ok(z.buildings.some(b=>!b.office.assetKey));
  for(const d of a.pcGrowableDefinitions)assert.ok(!retired.includes(d.id));for(const b of z.buildings)assert.ok(!retired.includes(b.office.assetId));
  const scene=new a.Se,renderer=a.pS(scene);renderer.render(z);assert.equal(renderer.render(z),false);assert.equal(a.pcGrowableResources.size,0);assert.equal(host.images(),0);assert.equal(a.enhanced,null);
  for(const b of [...z.buildings])z.demolish(b.id);renderer.render(z);assert.equal(scene.children.flatMap(c=>c.children||[]).filter(m=>retired.some(id=>m.userData.assetKey?.includes(id))).length,0);

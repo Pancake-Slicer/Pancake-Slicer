@@ -43,9 +43,9 @@
 ## Family status and visual standards
 
 - **BMO lightweight:** integrated parametric Office growable. Horizontal bands, silver/grey cladding, opaque blue-grey/slate glazing, restrained charcoal and flat mechanical roof. Four coordinated palettes in web/features/bmo-materials.js.
-- **Lind lightweight:** integrated parametric Office growable. Stepped Art Deco massing, vertical limestone piers, recessed windows and green-grey hipped crown. Three restrained warm/neutral/weathered tones in web/features/lightweight-lind.js.
-- BMO/Lind start ON in export:lind-growables builds via data-lightweight-growables; other modes retain their own defaults. Existing development controls include per-family ON/OFF and Favour; do not assume every export enables them.
-- **Original static GLBs — reference-only:** all versions of lind-art-deco, von-badel-art-deco and ohneeohnee-modernist are retired from gameplay by reference/retired-growables.json. Preserve sources/packages/Lab access. activeDefinitions() excludes them before compilation; saved keys remain and display the existing catalogue fallback. See docs/RETIRED_CUSTOM_GROWABLES.md. Lightweight Lind/Von/BMO remain active.
+- **Lind and Reamon reference families:** archived from gameplay by scripts/retire-reference-offices.cjs and reference/retired-reference-offices.json. This excludes catalogue423/420 and the lightweight Lind/brick-Reamon templates, including legacy regeneration. Preserve architecture/lind/, architecture/brick-office/, reference models and shared materials/roof helpers. Alderwick, Aster, Calder, Marlowe, BMO and Von remain active. See docs/RETIRED_LIND_REAMON.md.
+- BMO starts ON in historical export:lind-growables builds via data-lightweight-growables; retired Lind remains blocked. Other modes retain their own defaults. Active families have ON/OFF and Favour controls; do not assume every export enables them.
+- **Original static GLBs — reference-only:** all versions of lind-art-deco, von-badel-art-deco and ohneeohnee-modernist are retired from gameplay by reference/retired-growables.json. Preserve sources/packages/Lab access. activeDefinitions() excludes them before compilation; saved keys remain and display the existing catalogue fallback. See docs/RETIRED_CUSTOM_GROWABLES.md. Lightweight Von/BMO remain active; the later Lind/Reamon retirement is described above.
 - **Ohneeohnee enhanced generator:** nine frozen opt-in candidates, disabled by default; vertical/horizontal/grid facade subfamilies. Preserve its optimized implementation and approved maps, but do not substitute its expensive detailing into lightweight city growth.
 - **Von Badel:** current approved v2.1.0 is charcoal International Style, recessed blue-grey glass, symmetric wings and flat roof. Historical art-deco names/notes are not instructions to restore the superseded design.
 - Lab/benchmark presence alone does not register an asset for growth. Preserve original comparisons and archived versions; consult docs/LIND_GROWABLE_INTEGRATION.md, docs/LIGHTWEIGHT_BMO_PHASE2.md and docs/PROCEDURAL_OFFICES_PHASE6B.md for host contracts/status.
@@ -79,8 +79,8 @@ Run from the correct checkout root; on PowerShell use npm.cmd if npm.ps1 is bloc
 | Shared fitting/BMO geometry | npm run architecture:lightweight:check |
 | Lind geometry / isolated Lab | npm run architecture:lind:check; npm run architecture:lind |
 | Ohneeohnee architecture / package | npm run architecture:modernist:check; npm run architecture:phase6a:test |
-| Current mixed offline Playtest + Test City | npm run export:lind-growables |
-| Serve those generated files | npm run review:lind-growables (127.0.0.1:4200) |
+| Current mixed offline Playtest + Test City | npm run export:original-offices |
+| Serve those generated files | npm run review:original-deco (127.0.0.1:4208) |
 | Generic offline export | npm run export:html |
 | Approved GLB package update | npm run update:buildings |
 

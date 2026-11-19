@@ -12,15 +12,15 @@ function city(){
   network.addBatch(points.map((p,i)=>[p,points[(i+1)%4]]));
   const zoning=new api.qb(network,{items:[]});zoning.setPropertyZone('offices');return {network,zoning};
 }
-test('all 98 public catalogue IDs remain independently selectable, including repeated names',()=>{
+test('all 96 active catalogue IDs remain independently selectable, including repeated names',()=>{
   const entries=api.pcSC4Catalogue.entries;
-  assert.equal(entries.length,98);assert.equal(new Set(entries.map(e=>e.id)).size,98);
-  assert.equal(entries.filter(e=>e.type==='office').length,64);assert.equal(entries.filter(e=>e.type==='services').length,34);
-  const local=JSON.parse(fs.readFileSync(path.join(__dirname,'../reference/sc4-commercial-wealth3.json'),'utf8'));
-  assert.deepEqual(plain(api.pcSC4Catalogue),local);
+  assert.equal(entries.length,96);assert.equal(new Set(entries.map(e=>e.id)).size,96);
+  assert.equal(entries.filter(e=>e.type==='office').length,62);assert.equal(entries.filter(e=>e.type==='services').length,34);
+  const full=JSON.parse(fs.readFileSync(path.join(__dirname,'../reference/sc4-commercial-wealth3.json'),'utf8'));
+  assert.equal(full.entries.length,98);const local={...full,count:96,entries:full.entries.filter(e=>![420,423].includes(e.id))};assert.deepEqual(plain(api.pcSC4Catalogue),local);
   const select={addEventListener(type,handler){this[type]=handler;}},help={};
   const {zoning}=city();api.pcCatalogueInitMenu({querySelector:s=>s==='#commercial-catalogue'?select:help},zoning,()=>{});
-  assert.equal((select.innerHTML.match(/<option /g)||[]).length,99);
+  assert.equal((select.innerHTML.match(/<option /g)||[]).length,97);assert.ok(select.innerHTML.includes('Offices (62)'));assert.ok(!select.innerHTML.includes('Lind Entertainment')&&!select.innerHTML.includes('Reamon Plaza'));
   for(const entry of entries){select.value=String(entry.id);select.change();assert.equal(zoning.pcCatalogueChoice,entry.id);assert.ok(help.textContent.includes(entry.name));assert.ok(help.textContent.includes('SC4-inspired rebuild'));}
   select.value='';select.change();assert.equal(zoning.pcCatalogueChoice,null);
 });
@@ -39,7 +39,7 @@ test('every catalogue building actually renders finite geometry with picking IDs
     });
     assert.ok(triangles>30&&picking>0,entry.name);assert.equal(renderer.render(zoning),false);
   }
-  assert.equal(signatures.size,98);
+  assert.equal(signatures.size,96);
 });
 test('catalogue choice only changes painted sites, and undo/redo restores design identity',()=>{
   const {network,zoning}=city(),[a,b]=zoning.properties;

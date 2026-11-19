@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-19",
+  "branch": "codex/retire-lind-reamon",
+  "checkpoint": "checkpoint/pre-retire-lind-reamon-32f924e",
+  "checkpointBundleVerified": true,
+  "tests": {
+    "existing": 155,
+    "retirement": 4,
+    "total": 159,
+    "build": true
+  },
+  "retired": {
+    "schemaVersion": 1,
+    "catalogueIds": [
+      423,
+      420
+    ],
+    "templateIds": [
+      "lind-stepped-lightweight",
+      "brick-commercial-lightweight"
+    ],
+    "reason": "Lind and Reamon reference-derived buildings are archival; preserve source/shared helpers and legacy assignment data, render legacy lots using the active catalogue fallback."
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Offices Playtest - 20261119T181716Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Offices Test City - 20261119T181716Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Original Offices in Chrome - 20261119T181716Z.cmd",
+    "playtestSha256": "dc74b66e9ed5b00c2c036d01d38498d92fd2f76fcca15577a515fa937b52fafd",
+    "reviewSha256": "39b4e865c781939cad5cd5f6976cbc883c88298a864b2659907c715e0bd9736f"
+  },
+  "httpChecks": {
+    "playtest": {
+      "bytes": 3201970,
+      "sha256": "dc74b66e9ed5b00c2c036d01d38498d92fd2f76fcca15577a515fa937b52fafd"
+    },
+    "review": {
+      "bytes": 3212171,
+      "sha256": "39b4e865c781939cad5cd5f6976cbc883c88298a864b2659907c715e0bd9736f"
+    }
+  },
+  "browser": {
+    "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "viewport": [
+      1280,
+      720
+    ],
+    "errors": [],
+    "retired": {
+      "catalogueIds": [
+        420,
+        423
+      ],
+      "lindRuntime": null,
+      "reamonRuntime": null,
+      "activeCatalogue": 96
+    },
+    "counts": {
+      "A": 3,
+      "B": 9,
+      "C": 11,
+      "bmo": 17,
+      "lind": 0,
+      "von": 31,
+      "brick": 0,
+      "alderwick": 20,
+      "catalogue": 61
+    },
+    "preservedExisting": 8,
+    "staticResources": [],
+    "menu": {
+      "active": 96,
+      "optionsIncludingMix": 97,
+      "officeGroup": "Offices (62)",
+      "retiredNamesPresent": false
+    },
+    "retainedBuildingActions": [
+      {
+        "type": "C",
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "regeneration": true
+      }
+    ],
+    "capture": ".tools/reference-retirement/mixed-isometric.png"
+  },
+  "scope": "Architecture/shared component/material source files unchanged. Retired sources and user city data preserved. Exact packaged bytes tested over HTTP; direct local-file launch remains user-side."
+}
