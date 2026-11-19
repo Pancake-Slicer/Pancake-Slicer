@@ -17,6 +17,10 @@ function applyRenderingFixes(source) {
   replace('t.add(new fy(14937329,6912142,.65))','t.add(new fy(0xf0efdc,0x8b9c83,.80))');
   replace('const s=new gy(16773336,2.15)','const s=new gy(0xfff2da,1.90)');
   replace('s.position.set(-260,480,240),s.castShadow=!0,s.shadow.mapSize.set(i,i)', 's.position.set(-260,480,240),s.castShadow=!0,s.shadow.intensity=.65,s.shadow.radius=1.8,s.shadow.mapSize.set(i,i)');
+  const shadowSurfaces=fs.readFileSync(path.join(__dirname,'../web/features/shadow-surfaces.js'),'utf8');
+  replace('function kS(n,t,e=()=>{},',shadowSurfaces+'\nfunction kS(n,t,e=()=>{},');
+  replace('s.shadow.normalBias=.2,s.shadow.bias=-8e-5,','Object.assign(s.shadow,pcShadowSurfaceBias(940/i,20,1300)),');
+  replace('s.shadow.normalBias=Math.max(.025,Math.min(.25,M.texel*.5)),s.shadow.bias=-.015/(M.far-M.near),','Object.assign(s.shadow,pcShadowSurfaceBias(M.texel,M.near,M.far)),');
   replace('cel-physical-sun-horizon-v1','cel-physical-sun-horizon-illustrated-v3');
   // Real architectural creases, batched once per neighborhood chunk. Texture
   // grain, triangle diagonals and shadows do not become black contours.

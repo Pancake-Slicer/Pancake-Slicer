@@ -66,7 +66,9 @@
     "review:heritage:check": "node scripts/prepare-heritage-review.cjs && node --test scripts/heritage-tower.test.cjs",
     "architecture:alderwick:check": "node scripts/prepare-alderwick-review.cjs && node --test scripts/alderwick-architecture.test.cjs",
     "review:alderwick": "node scripts/serve-alderwick-review.cjs",
-    "export:alderwick-growables": "npm run build && node scripts/export-alderwick-growables.cjs"
+    "export:alderwick-growables": "npm run build && node scripts/export-alderwick-growables.cjs",
+    "export:surface-shading": "npm run build && node scripts/export-surface-shading.cjs",
+    "review:surface-shading": "node scripts/review-surface-shading.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

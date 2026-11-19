@@ -11,7 +11,7 @@ function load(source) {
   const context = vm.createContext({ console, performance, structuredClone, document: { createElement: () => ({ relList: { supports: () => true }, getContext: () => ({fillRect(){}}) }) } });
   const end = source.indexOf('const LP=');
   assert.ok(end > 0, 'Locate the end of runtime definitions before starting the UI');
-  vm.runInContext(source.slice(0, end) + ';globalThis.geometry={Ql,dh,Ep,Te,xn,sn,pS,Se,zb,Wb,Od,Hb,Dd,cn};', context);
+  vm.runInContext(source.slice(0, end) + ';globalThis.geometry={kS,$i,q,Aa,nh,ds,Ql,dh,Ep,Te,xn,sn,pS,Se,zb,Wb,Od,Hb,Dd,cn};', context);
   return context.geometry;
 }
 const live = load(current), old = load(baseline);
@@ -145,4 +145,25 @@ test('camera motion bounds expensive shadow-view updates and refreshes after set
   assert.ok(calls>=9&&calls<=10,`Expected at most ten shadow recalculations, got ${calls}`);
   context._=false;context.H=1200;vm.runInContext(code,context);
   assert.equal(context.pcShadowViewAt,1200,'The settled camera must immediately receive a fresh shadow view');
+});
+
+// Exercise the actual shared sun controller, rather than a duplicate bias formula.
+function surfaceLighting(api,size=2048){const renderer={setClearColor(){},shadowMap:{}},scene=new api.Se,controller=api.kS(renderer,scene,()=>{},{shadowSize:size});return {renderer,scene,controller};}
+test('surface shadow bias follows view resolution, keeps real shadows and preserves settled-camera caching',()=>{
+ for(const size of [1024,2048]){const {renderer,scene,controller}=surfaceLighting(live,size),camera=new live.$i(50,1.6,.1,5000),target=new live.q;
+ assert.equal(renderer.shadowMap.enabled,true);assert.equal(renderer.shadowMap.autoUpdate,false);assert.equal(controller.sun.castShadow,true);assert.equal(controller.sun.shadow.intensity,.65);assert.equal(controller.sun.shadow.radius,1.8);assert.equal(controller.sun.shadow.mapSize.x,size);assert.equal(scene.children.length,3);
+ let previousOffset=0;for(const distance of [40,180,400]){camera.position.set(0,distance*.7,distance);camera.lookAt(target);assert.equal(controller.updateView(camera,target,[]),true);const info=controller.info(),offset=-controller.sun.shadow.bias*(info.far-info.near);assert.ok(offset>=info.texel*.99&&offset<=info.texel*1.01);assert.ok(offset>previousOffset);previousOffset=offset;const updates=info.updates;assert.equal(controller.updateView(camera,target,[]),false);assert.equal(controller.info().updates,updates);assert.equal(renderer.shadowMap.autoUpdate,false);}
+ // Clipping depth can change with camera height; world-space bias must not.
+ const last=controller.info(),world=-controller.sun.shadow.bias*(last.far-last.near);camera.position.set(0,980,1400);camera.lookAt(target);controller.updateView(camera,target,[]);const next=controller.info();assert.equal(next.texel,last.texel);assert.ok(Math.abs(-controller.sun.shadow.bias*(next.far-next.near)-world)<1e-12);
+ }
+});
+test('coarse filtered roof and facade plane samples no longer self-shadow into diagonal bands',()=>{
+ const systems=[live,old].map(api=>{const {controller}=surfaceLighting(api),camera=new api.$i(50,1.6,.1,5000),target=new api.q;camera.position.set(0,280,400);camera.lookAt(target);controller.updateView(camera,target,[]);return controller;});
+ // Compare a lit plane to its own sampled depth at neighboring filter taps.
+ // Both bias components come from the controller; the legacy controller is
+ // required to reproduce a false shadow on the same unoccluded plane.
+ for(const [normal,footprint]of [[new live.q(0,1,0),1.8],[new live.q(-1,0,0),.7],[new live.q(0,0,1),.7]]){
+ const visibility=controller=>{const i=controller.info(),depth=-controller.sun.shadow.bias*(i.far-i.near),normalOffset=controller.sun.shadow.normalBias,light=normal.dot(live.ds);return Math.min(...[-1,1].flatMap(x=>[-1,1].map(y=>(normalOffset+(normal.dot(live.Aa)*x+normal.dot(live.nh)*y)*i.texel*footprint)/light+depth)));};
+ assert.ok(visibility(systems[1])<0,'Legacy bias must reproduce diagonal self-shadowing');assert.ok(visibility(systems[0])>0,'Unoccluded plane must stay lit across filter taps');
+ }
 });

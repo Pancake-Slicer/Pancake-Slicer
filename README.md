@@ -165,3 +165,8 @@ Run npm run export:von-growables for the latest offline Playtest and populated T
 ## Alderwick growables — 2026-11-18
 
 Run `npm run export:alderwick-growables` for the playable Alderwick build and populated Test City. Natural Office growth mixes Alderwick with the existing families; development controls can favour Alderwick or its canonical26-storey preset on compatible new lots. Approved original fixed model preserved. [Architecture, validation and limits](docs/ALDERWICK_GROWABLE_INTEGRATION.md).
+
+
+## Clean roof, facade and concrete shadows — 2026-11-19
+
+Run `npm run export:surface-shading` for the latest corrected playable build. Shared shadow bias now follows view resolution to remove diagonal self-shadow banding across building families. [Scope and validation](docs/SURFACE_SHADING_FIX.md).

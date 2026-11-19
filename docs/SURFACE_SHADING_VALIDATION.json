@@ -1,0 +1,403 @@
+{
+  "date": "2026-11-19",
+  "branch": "codex/surface-shading-fix",
+  "checkpoint": "safety/pre-surface-shading-ea1029f",
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Clean Surface Shading Playtest - 20261119T135603Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Clean Surface Shading Test City - 20261119T135603Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Clean Surface Shading in Chrome - 20261119T135603Z.cmd",
+    "playtestSha256": "b03c64c46091d0c61b466b2a1e4835291e62edb809823e33238f85353f427885",
+    "reviewSha256": "d6baf4cb9c5f40ca99ae56b9188b2b0a7840ca4ce5e9272ab1f04b9b8414260b"
+  },
+  "tests": {
+    "existingIncludingTwoNewShadowRegressions": 143,
+    "alderwickIntegration": 4,
+    "build": true
+  },
+  "browser": {
+    "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "viewport": [
+      1280,
+      720
+    ],
+    "matchedComparisons": [
+      {
+        "view": "roof",
+        "calls": 31,
+        "triangles": 230463,
+        "legacyDepth": -0.00004178272980501393,
+        "correctedDepth": -0.00026114206128133706,
+        "texel": 0.09375
+      },
+      {
+        "view": "lobby",
+        "calls": 30,
+        "triangles": 230238,
+        "legacyDepth": -0.00004702194357366771,
+        "correctedDepth": -0.0002938871473354232,
+        "texel": 0.09375
+      }
+    ],
+    "captures": [
+      {
+        "family": "alderwick",
+        "view": "roof",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 3,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 360,
+          "position": [
+            141.4967555870965,
+            199.5405343241465,
+            97.12708426424118
+          ],
+          "target": [
+            218.92118151584063,
+            56.60313260954193,
+            25.658383406938896
+          ]
+        },
+        "depthBias": -0.00026114206128133706,
+        "sceneCalls": 31,
+        "sceneTriangles": 230463,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "alderwick",
+        "view": "lobby",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 2,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 320,
+          "position": [
+            148.24535476312343,
+            161.92204495087776,
+            81.58389291705059
+          ],
+          "target": [
+            217.04080327265348,
+            34.915063087129965,
+            18.080401985176685
+          ]
+        },
+        "depthBias": -0.0002938871473354232,
+        "sceneCalls": 30,
+        "sceneTriangles": 230238,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "bmo",
+        "view": "roof",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 5,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 368,
+          "position": [
+            137.68685312138763,
+            190.7762344690231,
+            86.73713710221283
+          ],
+          "target": [
+            216.5364057742179,
+            45.2078295714903,
+            13.952934653446416
+          ]
+        },
+        "depthBias": -0.00025544959128065393,
+        "sceneCalls": 28,
+        "sceneTriangles": 222862,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "bmo",
+        "view": "lobby",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 4,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 408,
+          "position": [
+            134.18902830257557,
+            233.7293848367906,
+            103.87267868072206
+          ],
+          "target": [
+            222.42460096648833,
+            70.83294299572084,
+            22.424457760187202
+          ]
+        },
+        "depthBias": -0.00023034398034398035,
+        "sceneCalls": 27,
+        "sceneTriangles": 222775,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "lind",
+        "view": "roof",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 8,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 312,
+          "position": [
+            145.52986054955974,
+            154.61058717175797,
+            79.62502307726278
+          ],
+          "target": [
+            212.5040461321823,
+            30.965936865377834,
+            17.80269792407272
+          ]
+        },
+        "depthBias": -0.0003014469453376206,
+        "sceneCalls": 28,
+        "sceneTriangles": 223526,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "lind",
+        "view": "lobby",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 7,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 352,
+          "position": [
+            141.91299680887852,
+            197.50810965240862,
+            96.74286159798086
+          ],
+          "target": [
+            218.23232683951278,
+            56.61088498046843,
+            26.294249262010766
+          ]
+        },
+        "depthBias": -0.0002670940170940171,
+        "sceneCalls": 29,
+        "sceneTriangles": 223403,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "von",
+        "view": "roof",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 11,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 320,
+          "position": [
+            144.7942447171448,
+            158.02261359629046,
+            80.30405307641502
+          ],
+          "target": [
+            212.85701817363744,
+            32.36826259968868,
+            17.47687757811412
+          ]
+        },
+        "depthBias": -0.0002938871473354232,
+        "sceneCalls": 27,
+        "sceneTriangles": 217208,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "von",
+        "view": "lobby",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 10,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 360,
+          "position": [
+            141.1773809764636,
+            200.92013607694108,
+            97.42189159713308
+          ],
+          "target": [
+            218.62617444403872,
+            57.937748136802384,
+            25.930697627063743
+          ]
+        },
+        "depthBias": -0.00026114206128133706,
+        "sceneCalls": 28,
+        "sceneTriangles": 217129,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "brick",
+        "view": "roof",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 14,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 304,
+          "position": [
+            151.6817392713126,
+            153.4701401051206,
+            80.07045249243654
+          ],
+          "target": [
+            217.49136580394597,
+            31.975444967951347,
+            19.323104923851915
+          ]
+        },
+        "depthBias": -0.0003094059405940594,
+        "sceneCalls": 27,
+        "sceneTriangles": 222103,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "brick",
+        "view": "lobby",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 13,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 352,
+          "position": [
+            142.62825809210392,
+            193.9756634397469,
+            96.08262041346511
+          ],
+          "target": [
+            217.82390463581976,
+            55.15293135904074,
+            26.671254373112017
+          ]
+        },
+        "depthBias": -0.0002670940170940171,
+        "sceneCalls": 28,
+        "sceneTriangles": 222220,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "catalogue",
+        "view": "roof",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 17,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 304,
+          "position": [
+            145.88899404831272,
+            150.4760420184502,
+            78.78317467419406
+          ],
+          "target": [
+            211.564018078775,
+            29.22984380836595,
+            18.16007556915193
+          ]
+        },
+        "depthBias": -0.0003094059405940594,
+        "sceneCalls": 27,
+        "sceneTriangles": 215880,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "family": "catalogue",
+        "view": "lobby",
+        "shadow": {
+          "type": "filtered-pcf",
+          "mapSize": 2048,
+          "span": 192,
+          "texel": 0.09375,
+          "updates": 16,
+          "receivers": 1,
+          "normalBias": 0.046875,
+          "near": 1,
+          "far": 352,
+          "position": [
+            142.7482859951079,
+            193.5960760475682,
+            95.97182542607682
+          ],
+          "target": [
+            217.80933003665268,
+            55.02184089394703,
+            26.684707849266232
+          ]
+        },
+        "depthBias": -0.0002670940170940171,
+        "sceneCalls": 27,
+        "sceneTriangles": 215753,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    ],
+    "mixedCity": {
+      "alderwick": 8,
+      "bmo": 8,
+      "lind": 3,
+      "von": 8,
+      "brick": 8,
+      "catalogue": 33
+    },
+    "demolitionUndoRedoRegeneration": true,
+    "flatAndSlopedInspection": true,
+    "limits": "Intel fixture; no NVIDIA-specific, GPU timing, FPS or large-city parity claim. Direct file launch remains user-side."
+  }
+}
