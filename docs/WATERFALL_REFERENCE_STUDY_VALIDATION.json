@@ -1,0 +1,212 @@
+{
+  "date": "2026-11-20",
+  "branch": "codex/waterfall-reference-reconstruction",
+  "status": "fixed unapproved architectural study; stop for visual approval",
+  "baseCommit": "d225c84",
+  "checkpoint": "checkpoint/pre-waterfall-d225c84",
+  "rejectedPrototypeArchive": ".tools/checkpoints/waterfall-reconstruction",
+  "tests": {
+    "existing": 159,
+    "study": 4,
+    "total": 163,
+    "build": true
+  },
+  "geometry": {
+    "width": 56,
+    "depth": 41.6,
+    "bodyHeight": 176.8,
+    "height": 184.4,
+    "storeys": 52,
+    "floorHeight": 3.4,
+    "connectedBlocks": 15,
+    "slopedShoulderRoofs": 14,
+    "frontRearRoofDrop": 8.5,
+    "lateralRoofDrop": 1.6,
+    "recessWidth": 11.2,
+    "recessDepth": 7.8,
+    "triangles": 9758,
+    "materialBuckets": 6,
+    "sharedMaps": 3
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Waterfall Reference Reconstruction Playtest - 20261119T205319Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Waterfall Reference Reconstruction Test City - 20261119T205319Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Waterfall Reference Reconstruction in Chrome - 20261119T205319Z.cmd",
+    "playtestSha256": "bebad65d7a986c1d99bc0b383536102f4ed0bf306d77b589f60b0d2354824a5a",
+    "reviewSha256": "abfe28928d50153d73e29b1f0e7fbbeba13a75c7352fb5b0f00742e84338ba3d"
+  },
+  "httpChecks": {
+    "playtest": {
+      "bytes": 3239114,
+      "sha256": "bebad65d7a986c1d99bc0b383536102f4ed0bf306d77b589f60b0d2354824a5a"
+    },
+    "review": {
+      "bytes": 3337166,
+      "sha256": "abfe28928d50153d73e29b1f0e7fbbeba13a75c7352fb5b0f00742e84338ba3d"
+    }
+  },
+  "reference": {
+    "sha256": "bf41a44df075e71821a2957c4d0762d70764f788ca10ad68c647f817af8a4e8c",
+    "includedIn": "review HTML only; no facade pixel sampling"
+  },
+  "browser": {
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "viewport": [
+      1280,
+      720
+    ],
+    "errors": [],
+    "views": {
+      "isometric": {
+        "capture": ".tools/waterfall-study-final/P-isometric.png",
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false,
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.1.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:-360.00:-360.00:360.00:360.00:25:0010:0",
+          "name": "Waterfall reference study",
+          "seed": "reference-study",
+          "width": 56,
+          "depth": 41.6,
+          "storeys": 52,
+          "floorHeight": 3.4,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 448250,
+          "sourceGeometryBytes": 801620,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "camera": {
+          "azimuth": 25.15,
+          "elevation": 35.26,
+          "fov": 18
+        },
+        "actions": [
+          {
+            "demolition": true,
+            "undo": true,
+            "redo": true,
+            "restoredIdentically": true
+          }
+        ]
+      },
+      "roof": {
+        "capture": ".tools/waterfall-study-final/P-roof.png",
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false,
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.1.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:-360.00:-360.00:360.00:360.00:25:0010:0",
+          "name": "Waterfall reference study",
+          "seed": "reference-study",
+          "width": 56,
+          "depth": 41.6,
+          "storeys": 52,
+          "floorHeight": 3.4,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 448250,
+          "sourceGeometryBytes": 801620,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "camera": {
+          "view": "roof",
+          "fov": 45
+        },
+        "actions": []
+      },
+      "plan": {
+        "capture": ".tools/waterfall-study-final/P-plan.png",
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false,
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.1.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:-360.00:-360.00:360.00:360.00:25:0010:0",
+          "name": "Waterfall reference study",
+          "seed": "reference-study",
+          "width": 56,
+          "depth": 41.6,
+          "storeys": 52,
+          "floorHeight": 3.4,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 448250,
+          "sourceGeometryBytes": 801620,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "camera": {
+          "view": "plan",
+          "fov": 45
+        },
+        "actions": []
+      },
+      "entrance": {
+        "capture": ".tools/waterfall-study-final/P-entrance.png",
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false,
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.1.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:-360.00:-360.00:360.00:360.00:25:0010:0",
+          "name": "Waterfall reference study",
+          "seed": "reference-study",
+          "width": 56,
+          "depth": 41.6,
+          "storeys": 52,
+          "floorHeight": 3.4,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 448250,
+          "sourceGeometryBytes": 801620,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "camera": {
+          "view": "entrance",
+          "fov": 45
+        },
+        "actions": []
+      }
+    }
+  },
+  "limitations": [
+    "Interpretation of a small cropped reference; visual approval pending.",
+    "No parametric variants, height presets or natural spawning.",
+    "Exact HTML tested over loopback; direct local-file launch remains user-side.",
+    "No FPS or large-city performance claim."
+  ]
+}

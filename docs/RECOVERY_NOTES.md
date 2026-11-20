@@ -475,3 +475,8 @@ Suggested smoke tests: load the world, camera movement, freeform road placement,
 
 - Excluded catalogue423/420 and the Lind/brick-Reamon procedural templates from runtime selection, developer controls, fitting and resource construction. Existing static Lind retirement remains enforced. Retired Lind map payload omitted; sources/assets and newer buildings/shared architectural helpers preserved.
 - Legacy assignments remain in history/cold saves and render active catalogue fallbacks; no user city files deleted. Archived architecture tests remain available separately from shipped-policy checks. Updated playable export: npm run export:original-offices. Scope/checkpoint/validation: docs/RETIRED_LIND_REAMON.md. Local codex/retire-lind-reamon milestone; push pending approval, not a remote backup.
+
+## Fixed waterfall reference reconstruction — 2026-11-20
+
+- Superseded the rejected uncommitted three-configuration prototype with one fixed reference study:56 x41.6m,15 connected sections,14 sloping cascade roofs, deep11.2 x7.8m corner cuts, dark articulated crown and cool blue/lavender-grey materials. Approximate height184.4m. No additional variants or natural spawning until visual approval.
+- Reused native fit/batches/history/picking/facade foundations. Approved architecture, gameplay and Lind/Reamon retirement preserved. Build163 checks passes; details, direct in-game comparison and checkpoint paths: docs/WATERFALL_REFERENCE_STUDY.md. Playable review via export:waterfall; launcher opens one fixed prototype. Local study only, push pending approval, not an off-computer backup.

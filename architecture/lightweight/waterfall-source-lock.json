@@ -1,0 +1,17 @@
+{
+  "family": "waterfall-reference-study",
+  "version": "0.1.0",
+  "status": "fixed-unapproved-study",
+  "files": {
+    "architecture/waterfall/spec.mjs": "b29834ed331178528545c261b09b2051d6f982b2daa071724c47034cc2af7306",
+    "architecture/waterfall/generator.js": "f6297b2fdb66d95d453dc6e84f6d3fa80ad0d5fc6289bb28120ec5dcfc48cce6",
+    "architecture/waterfall/materials.js": "8705523be2b60db7d665074355230d3cb397831991520086b91cbd7c6768fde3"
+  },
+  "dependencies": {
+    "architecture/original-deco/components.js": "bd2a24dc2a6376aa9335e3a5e65aac502a9b45dbdc476cad18095090e288a3ef",
+    "architecture/lind/generator.js": "5e929a82485f191b8eafde208d05d290e819f12b9fdd94221a5d41688e6d7e0f",
+    "architecture/lind/spec.mjs": "d5a8ab0f54dc6e74d90503e8aabac4b6aff10e14d076008d1615f90b10cdf938",
+    "architecture/lind/materials.js": "7b2d2e2501a4763a320c13323185c3625bdc94a9121e6880efe3c041be60c152",
+    "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0"
+  }
+}
