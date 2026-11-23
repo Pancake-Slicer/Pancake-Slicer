@@ -52,7 +52,7 @@
 - Use actual catalogue shader/material definitions for harmony. Keep warm limestone distinct from silver-grey offices; avoid arbitrary saturation, cream/mint lift or generic cartoon restyling. RT.jpg is the established visual reference, not permission to alter approved assets.
 - Use opaque glass, existing roughness/metalness conventions, SRGB colour maps, repeating metric UVs and restrained shared texture sizes. Respect each asset's sampler/orientation; do not repaint or stretch approved maps.
 
-- **Waterfall reference study:** one fixed unapproved reconstruction under architecture/waterfall/. No variations, parametric expansion or natural spawning before explicit visual approval. Review with export:waterfall; the launcher opens the single study. Preserve the archived rejected prototype and approved families. Current benchmark is version0.5.0: equal-width outer landings with aligned wall corners and a fourth angled crown step replacing the penthouse. All angled roofs start below their flat neighbours. Detail study0.3 is checkpointed/archive-only. See docs/WATERFALL_EQUAL_STEPS.md.
+- **Waterfall reference study:** one fixed unapproved reconstruction under architecture/waterfall/. No variations, parametric expansion or natural spawning before explicit visual approval. Review with export:waterfall; the launcher opens the single study. Preserve the archived rejected prototype and approved families. Current benchmark is version0.6.0: two rear-projecting crown rows, equal-height glass/cladding bands and user-directed red granite; equal-width landings and four angled roofs remain. Detail study0.3 is checkpointed/archive-only. See docs/WATERFALL_RED_GRANITE.md.
 
 ## Parametric building and integration workflow
 

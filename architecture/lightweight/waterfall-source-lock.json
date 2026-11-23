@@ -1,11 +1,11 @@
 {
   "family": "waterfall-reference-study",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "status": "fixed-unapproved-study",
   "files": {
-    "architecture/waterfall/spec.mjs": "5f2937710b913723e3a00a47b6aa8b45b28b9aa3c30dfe5389dcbf08972f4b2a",
-    "architecture/waterfall/generator.js": "617681edb5d76e518a8e5e7f2ce5f0e653780b8d33151da0a35689db4c878a0a",
-    "architecture/waterfall/materials.js": "9342cd925840ff6ed8a53bfcb9731f390671b0bfd3e80f779f8eb262d0b29f15"
+    "architecture/waterfall/spec.mjs": "a91a48683094ca415c53c8f02ed39352ed4b6a034cc9863b48b1e825b73d3db9",
+    "architecture/waterfall/generator.js": "dafeb11d4f4860f3bab06faa6dff532cc70eafa8ce5cb193d31ce96d29a72954",
+    "architecture/waterfall/materials.js": "c133401458ee8dcbabe6d5a491280b80e974faf728ad2705e650aad438f242d7"
   },
   "dependencies": {
     "architecture/original-deco/components.js": "bd2a24dc2a6376aa9335e3a5e65aac502a9b45dbdc476cad18095090e288a3ef",

@@ -1,0 +1,171 @@
+{
+  "date": "2026-11-22",
+  "baseCommit": "2ea0a47",
+  "checkpoint": "checkpoint/pre-red-granite-2ea0a47",
+  "branch": "codex/waterfall-red-granite-rear-crowns",
+  "version": "0.6.0",
+  "status": "One fixed internal benchmark; no variants/natural spawning",
+  "geometry": {
+    "rearCrownProjections": [
+      3.12,
+      6.24
+    ],
+    "crownWidth": 7.8,
+    "glassBand": 1.6,
+    "graniteBand": 1.6,
+    "storey": 3.2,
+    "depth": 42.64,
+    "height": 150.82,
+    "volumes": 18,
+    "perimeterVertices": 32,
+    "groundArea": 1472.328,
+    "triangles": 22380,
+    "batches": 6,
+    "maps": 3,
+    "graniteTextureMetres": 1.5
+  },
+  "tests": {
+    "build": true,
+    "suites": [
+      143,
+      4,
+      8,
+      4,
+      7
+    ],
+    "total": 166
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Waterfall Red Granite and Rear Crowns Playtest - 20261123T043359Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Waterfall Red Granite and Rear Crowns Test City - 20261123T043359Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Waterfall Red Granite and Rear Crowns in Chrome - 20261123T043359Z.cmd",
+    "playtestSha256": "7df0e35619a1890da657b91cef77d9922fef8a910ec5b2621ef2b01b2a8fbbcf",
+    "reviewSha256": "c62106543fea2534189100b7bfddc66a467efd7acbc41956b9fb2caf90db8746"
+  },
+  "http": {
+    "review": {
+      "bytes": 3556487,
+      "sha256": "c62106543fea2534189100b7bfddc66a467efd7acbc41956b9fb2caf90db8746"
+    },
+    "playtest": {
+      "bytes": 3241135,
+      "sha256": "7df0e35619a1890da657b91cef77d9922fef8a910ec5b2621ef2b01b2a8fbbcf"
+    }
+  },
+  "originalSha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+  "browser": {
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "viewport": [
+      1280,
+      720
+    ],
+    "consoleErrors": [],
+    "views": {
+      "isometric": {
+        "capture": ".tools/waterfall-granite-final/P-isometric.png",
+        "camera": {
+          "azimuth": 22.5,
+          "elevation": 35.26,
+          "fov": 18
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1593916,
+          "sourceGeometryBytes": 1709448,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "actions": [],
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false
+      },
+      "rear": {
+        "capture": ".tools/waterfall-granite-final/P-rear.png",
+        "camera": {
+          "view": "rear",
+          "fov": 45
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1593916,
+          "sourceGeometryBytes": 1709448,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "actions": [],
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false
+      },
+      "plan": {
+        "capture": ".tools/waterfall-granite-final/P-plan.png",
+        "camera": {
+          "view": "plan",
+          "fov": 45
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1593916,
+          "sourceGeometryBytes": 1709448,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "actions": [
+          {
+            "demolition": true,
+            "undo": true,
+            "redo": true,
+            "restoredIdentically": true
+          }
+        ],
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false
+      },
+      "entrance": {
+        "capture": ".tools/waterfall-granite-final/P-entrance.png",
+        "camera": {
+          "view": "entrance",
+          "fov": 45
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1593916,
+          "sourceGeometryBytes": 1709448,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "actions": [
+          {
+            "demolition": true,
+            "undo": true,
+            "redo": true,
+            "restoredIdentically": true
+          }
+        ],
+        "errors": [],
+        "prototypeCount": 1,
+        "naturalSpawning": false
+      }
+    }
+  },
+  "limitations": [
+    "Direct file launch unverified; exact exported bytes tested over localhost",
+    "No FPS/GPU-time or city-scale performance claim",
+    "Entrance retains its existing double-height portal; ordinary facade bands are1:1",
+    "Visual approval remains pending"
+  ]
+}
