@@ -1,0 +1,130 @@
+{
+  "date": "2026-11-23",
+  "version": "0.1.1",
+  "checkpoint": "checkpoint/pre-curved-banding-268063f",
+  "branch": "codex/curved-skyscraper-reference",
+  "scope": "Vision glass and spandrel texture colours only; fixed study remains outside gameplay",
+  "palette": {
+    "curved": {
+      "vision": "#5c7768",
+      "spandrel": "#919d99"
+    },
+    "side": {
+      "vision": "#5c7083",
+      "spandrel": "#828f99"
+    },
+    "note": "Base atlas RGB before restrained deterministic panel variation, shared material tint and lighting; spandrels occupy approximately lower third of each storey."
+  },
+  "checks": {
+    "targeted": 6,
+    "geometryNormalsUvsAndIndices": "all buffers SHA-256-identical to268063f",
+    "browserViews": [
+      "isometric",
+      "ground"
+    ],
+    "browserConsoleErrors": [],
+    "httpMatchesExport": true,
+    "originalSha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+    "directFileLaunch": "not exercised; exact export tested over local HTTP",
+    "build": {
+      "command": "npm run build",
+      "passed": true,
+      "tests": 166
+    }
+  },
+  "export": {
+    "file": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Curved Skyscraper Fixed Review - 20261123T155240Z.html",
+    "sha256": "36bf382a8c8b535a01660158aeb9e409ea56f5462e33acce85dd81b5baebf9ab",
+    "bytes": 3818409,
+    "models": 1,
+    "scope": "Fixed interactive architectural study only; no variants, fitting or growable registration"
+  },
+  "views": {
+    "isometric": {
+      "kind": "Fixed curved skyscraper reference study",
+      "models": 1,
+      "reviewOnly": true,
+      "normalSpawning": false,
+      "reference": {
+        "id": "curved-skyscraper-fixed-study",
+        "version": "0.1.1",
+        "storeys": 72,
+        "floorHeight": 3.25,
+        "podiumHeight": 8.1,
+        "radiusX": 29.7,
+        "radiusZ": 21.6,
+        "facadeBays": 96,
+        "curveSegments": 384,
+        "sideFloors": 66,
+        "sideWidth": 10.8,
+        "sideDepth": 29.7,
+        "roofHeight": 242.1,
+        "antennaHeight": 22,
+        "reviewOnly": true
+      },
+      "sourceTriangles": 63574,
+      "architectureBatches": 11,
+      "materials": 11,
+      "maps": 4,
+      "textureBytes": 1638400,
+      "generationMs": 98.10000002384186,
+      "sceneCalls": 12,
+      "sceneTriangles": 63576,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "viewport": [
+        632,
+        575
+      ],
+      "view": "isometric",
+      "camera": {
+        "azimuth": 22.5,
+        "elevation": 35.264,
+        "orthographic": true
+      },
+      "timing": null,
+      "errors": []
+    },
+    "ground": {
+      "kind": "Fixed curved skyscraper reference study",
+      "models": 1,
+      "reviewOnly": true,
+      "normalSpawning": false,
+      "reference": {
+        "id": "curved-skyscraper-fixed-study",
+        "version": "0.1.1",
+        "storeys": 72,
+        "floorHeight": 3.25,
+        "podiumHeight": 8.1,
+        "radiusX": 29.7,
+        "radiusZ": 21.6,
+        "facadeBays": 96,
+        "curveSegments": 384,
+        "sideFloors": 66,
+        "sideWidth": 10.8,
+        "sideDepth": 29.7,
+        "roofHeight": 242.1,
+        "antennaHeight": 22,
+        "reviewOnly": true
+      },
+      "sourceTriangles": 63574,
+      "architectureBatches": 11,
+      "materials": 11,
+      "maps": 4,
+      "textureBytes": 1638400,
+      "generationMs": 98.10000002384186,
+      "sceneCalls": 11,
+      "sceneTriangles": 62904,
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "viewport": [
+        632,
+        575
+      ],
+      "view": "ground",
+      "camera": {
+        "view": "ground"
+      },
+      "timing": null,
+      "errors": []
+    }
+  }
+}

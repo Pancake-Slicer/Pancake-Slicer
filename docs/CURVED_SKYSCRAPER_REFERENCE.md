@@ -29,3 +29,11 @@ Browser inspection covered final isometric, roof and ground views, preset switch
 The single image does not reveal exact dimensions or concealed rear geometry. Equipment internals, reflections and fine weathering are approximated. The result is a review candidate, not a claim of exact reproduction or commercial approval. Stop for user visual approval before any original redesign, parameterization or growable integration.
 
 Checkpoint: checkpoint/pre-curved-reference-66cf214. Local branch: codex/curved-skyscraper-reference. Unrelated user asset moves and exporter edits excluded. No push/off-computer backup; push requires approval of the completed local commit.
+
+## Vision / spandrel banding revision0.1.1 — 2026-11-23
+
+The user-requested banding now separates darker muted-green vision glass (base atlas #5c7768) from paler grey-green spandrels (#919d99). The adjoining section retains its blue-grey identity with corresponding vision/spandrel tones (#5c7083 / #828f99). Spandrels occupy roughly the lower third of each storey. Both tones stay within the existing repeating maps; framing remains continuous. Geometry, normals, UVs and indices are byte-identical to268063f;63574 triangles,11 batches,4 maps and texture memory are unchanged.
+
+Six targeted checks pass, including floor-by-floor tonal separation and uninterrupted vertical framing. Isometric/ground comparisons inspected and captured in .tools/curved-reference-banding/; browser errors empty. Current export: Pancake City - Curved Skyscraper Fixed Review - 20261123T155240Z.html, SHA-256 36bf382a8c8b535a01660158aeb9e409ea56f5462e33acce85dd81b5baebf9ab; exact local HTTP bytes verified. Direct file launch remains unverified. No new performance/FPS claim. Evidence: CURVED_SKYSCRAPER_BANDING_VALIDATION.json. Checkpoint/pre-curved-banding-268063f preserves the prior appearance. No growable integration, variants or original redesign; visual approval remains pending.
+
+The revision also passes the full166-check npm run build. Original52 and recovered runtime remain unchanged; no additional dependencies.
