@@ -43,3 +43,18 @@ The comparison prototypes use20548 /20462 /18285 triangles (A/B/C), versus63574 
 Checkpoint: checkpoint/pre-original-curved-79346b5. Branch: codex/original-curved-modernist. Unrelated user asset moves/exporter edit remain excluded. Local milestone only, no off-computer backup until an approved push. Stop for visual approval before enabling normal spawning.
 
 Latest architecture revision2: Arcus glazed roof fins; Crescent rounded corners, doubled supported attic inset and central roof plant. Legacy records remain revision1 and C geometry is unchanged. [Revision details and playable hashes](CURVED_ROOF_REVISIONS.md).
+
+## Revision 3 — Arcus taper and Splice Tower
+
+Arcus carries its existing upper facade slope through the three-storey glazed fins. The crest uses the same elliptical taper as the glazing below the roof. Mullions follow the slope, and the fins retain the existing side openings, pooled materials and continuous curtain-wall grid.
+
+Splice Tower replaces Crescent Plaza in the B slot for new experimental assignments. The new office has two rounded wings linked by a recessed glazed center, a street-facing three-storey podium and six floors of taper at the top. The roof has one compact central service enclosure. The design uses the existing lot fitter, facade foundations, opaque materials and batching.
+
+Saved Crescent and Arcus retain their original revision, name and geometry. The revision 1 and 2 geometry buffers for all three designs, plus the current Facet Point buffers, match commit 02fb229. Normal spawning remains off.
+
+Run npm run export:curved-modernist to reproduce the Playtest and Test City. In the Test City choose A · Arcus and Roof, or B · Splice Tower and Footprint.
+
+- Test City: Pancake City - Original Curved Modernist Experiments Test City - 20261123T203639Z.html (SHA-256 a71dc0073960496e4b489ffcad57e502f4d627b1b97f06f6482c74572427def6).
+- Playtest: Pancake City - Original Curved Modernist Experiments Playtest - 20261123T203639Z.html (SHA-256 e1a2609325f0a9035c3b629601ff83fa4c47918519a23de6274771059605a712).
+- Full build passed 177 checks, including 11 family checks. Both exported hashes verified. Chrome opened the Test City directly from disk and passed in-game demolition, Undo and Redo for both towers with zero browser errors.
+- Local review captures: .tools/curved-modernist/splice-review/. Default A/B/C models have 22,012 / 16,576 / 18,151 triangles respectively, with seven material batches each. No performance benchmark was run.

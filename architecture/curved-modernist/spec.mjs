@@ -3,9 +3,10 @@ import * as T from '../engine.js';
 export const VERSION='0.1.0';
 export const ARCHETYPES=Object.freeze(['A','B','C']);
 export function normalizeSpecification(a={}){
- if(a.revision!==undefined&&![1,2].includes(a.revision))throw Error('Unknown curved architecture revision');
+ if(a.revision!==undefined&&![1,2,3].includes(a.revision))throw Error('Unknown curved architecture revision');
  const archetype=a.archetype||'A';if(!ARCHETYPES.includes(archetype))throw Error('Unknown curved design');
- const s={family:'original-curved-modernist',version:VERSION,revision:a.revision??(a.family?1:2),id:a.id||'curved-'+archetype,name:a.name||({A:'Arcus Corporate Tower',B:'Crescent Plaza',C:'Facet Point'}[archetype]),seed:String(a.seed??1138),archetype,width:a.width??({A:48,B:67.2,C:55.2}[archetype]),depth:a.depth??({A:40.8,B:43.2,C:43.2}[archetype]),storeys:a.storeys??({A:48,B:34,C:62}[archetype]),floorHeight:3.4,palette:a.palette??({A:0,B:2,C:1}[archetype]),podium:null};
+ const revision=a.revision??(a.family?1:3);
+ const s={family:'original-curved-modernist',version:VERSION,revision,id:a.id||'curved-'+archetype,name:a.name||({A:'Arcus Corporate Tower',B:revision>=3?'Splice Tower':'Crescent Plaza',C:'Facet Point'}[archetype]),seed:String(a.seed??1138),archetype,width:a.width??({A:48,B:67.2,C:55.2}[archetype]),depth:a.depth??({A:40.8,B:43.2,C:43.2}[archetype]),storeys:a.storeys??({A:48,B:34,C:62}[archetype]),floorHeight:3.4,palette:a.palette??({A:0,B:2,C:1}[archetype]),podium:null};
  if(a.family&&a.family!==s.family||a.version&&a.version!==VERSION)throw Error('Unknown curved template version');
  if(!Number.isInteger(s.storeys)||s.storeys<20||s.storeys>70)throw Error('20–70 whole storeys required');
  if(!Number.isInteger(s.palette)||s.palette<0||s.palette>3)throw Error('Unknown coordinated palette');
@@ -18,19 +19,24 @@ function roundCrescent(raw,radius){const ring=[...raw.slice(48),...raw.slice(0,4
 function insetCrescent(ring,w,d,amount){if(!T.insetCurvedPolygon)throw Error('The native polygon inset adapter is required');return T.insetCurvedPolygon(ring,w,d,amount);}
 export function footprint(s,scale=1,offset=[0,0]){const w=s.width*scale,d=s.depth*scale;let ring;
  if(s.archetype==='A')ring=Array.from({length:192},(_,i)=>{const t=-i/192*Math.PI*2;return [w*.5*Math.sin(t),d*.5*Math.cos(t)];});
- if(s.archetype==='B'){ring=[];for(let i=0;i<=96;i++){const t=-Math.PI/2+i/96*Math.PI;ring.push([w*.5*Math.sin(t),d*(.22-.72*Math.cos(t))]);}for(let i=0;i<=96;i++){const t=Math.PI/2-i/96*Math.PI,x=w*.4*Math.sin(t);ring.push([x,Math.abs(x)<4?d*.06:d*(.5-.44*Math.cos(t))]);}if(s.revision>=2)ring=roundCrescent(ring,Math.min(w*.055,d*.09));}
+ if(s.archetype==='B'&&s.revision>=3)ring=rounded([
+  [-w*.50,-d*.50],[-w*.18,-d*.50],[-w*.13,-d*.33],[w*.13,-d*.33],[w*.18,-d*.50],[w*.50,-d*.50],
+  [w*.50,d*.50],[w*.18,d*.50],[w*.13,d*.33],[-w*.13,d*.33],[-w*.18,d*.50],[-w*.50,d*.50]
+ ],.22);
+ if(s.archetype==='B'&&s.revision<3){ring=[];for(let i=0;i<=96;i++){const t=-Math.PI/2+i/96*Math.PI;ring.push([w*.5*Math.sin(t),d*(.22-.72*Math.cos(t))]);}for(let i=0;i<=96;i++){const t=Math.PI/2-i/96*Math.PI,x=w*.4*Math.sin(t);ring.push([x,Math.abs(x)<4?d*.06:d*(.5-.44*Math.cos(t))]);}if(s.revision>=2)ring=roundCrescent(ring,Math.min(w*.055,d*.09));}
  if(s.archetype==='C')ring=rounded([[-w*.48,-d*.35],[-w*.05,-d*.5],[w*.48,-d*.18],[w*.44,d*.36],[w*.16,d*.5],[-w*.32,d*.5],[-w*.5,d*.15]],.18);
  return ring.map(([x,z])=>[x+offset[0],z+offset[1]]);
 }
 export function massing(input){const s=normalizeSpecification(input),w=s.width,d=s.depth,h=s.storeys,podium=s.archetype==='B'?3:2,sections=[],add=(name,start,end,scale,topScale=scale,offset=[0,0])=>sections.push({name,start,end,ring:footprint(s,scale,offset),topRing:footprint(s,topScale,offset)});
- // The crescent keeps its concave court through the podium and tower, never a filled oval.
- const groundRing=s.archetype==='A'?rounded([[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]],.22):footprint(s);
+ // Splice starts from a full street-facing podium below the recessed shaft.
+ const groundRing=s.archetype==='A'||s.archetype==='B'&&s.revision>=3?rounded([[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]],.22):footprint(s);
  sections.push({name:'integrated commercial podium',start:0,end:podium,ring:groundRing,topRing:groundRing,podium:true});
  if(s.archetype==='A'){add('elliptical corporate shaft',podium,h-10,.85);add('continuous tapered upper section',h-10,h,.85,.70);}
- if(s.archetype==='B'){add('broad crescent shaft',podium,h-4,.87);if(s.revision===1)add('recessed crescent attic',h-4,h,.82);else{const ring=insetCrescent(footprint(s,.87),w,d,.05);sections.push({name:'recessed crescent attic',start:h-4,end:h,ring,topRing:ring});}}
+ if(s.archetype==='B'&&s.revision>=3){add('paired wings with recessed glazing',podium,h-6,.88);add('tapered twin shoulders',h-6,h,.88,.76);}
+ if(s.archetype==='B'&&s.revision<3){add('broad crescent shaft',podium,h-4,.87);if(s.revision===1)add('recessed crescent attic',h-4,h,.82);else{const ring=insetCrescent(footprint(s,.87),w,d,.05);sections.push({name:'recessed crescent attic',start:h-4,end:h,ring,topRing:ring});}}
  if(s.archetype==='C'){add('asymmetric curved-angular shaft',podium,h-10,.88);add('first offset setback',h-10,h-6,.78,.78,[-w*.012,-d*.008]);add('second offset setback',h-6,h-3,.68,.68,[-w*.024,-d*.016]);add('flat architectural crown',h-3,h,.58,.58,[-w*.036,-d*.024]);}
- const entrance={x:s.archetype==='C'?-w*.08:0,z:s.archetype==='B'?d*.06:d/2,width:s.archetype==='B'?9:7.2,doorWidth:s.archetype==='B'?7:5.2,height:5.8};
- return {sections,groundRing,entrance,volumes:[],roof:h*s.floorHeight,roofTop:h*s.floorHeight+(s.archetype==='A'?(s.revision>=2?10.3:3.3):s.archetype==='B'?2.6:2.1),identity:{A:'freestanding ellipse / tapered summit / recessed rectangular plant',B:'crescent court / broad arc / planted podium',C:'asymmetric rounded polygon / offset setbacks / flat blade crown'}[s.archetype]};
+ const entrance={x:s.archetype==='C'?-w*.08:0,z:s.archetype==='B'&&s.revision<3?d*.06:d/2,width:s.archetype==='B'?9:7.2,doorWidth:s.archetype==='B'?7:5.2,height:5.8};
+ return {sections,groundRing,entrance,volumes:[],roof:h*s.floorHeight,roofTop:h*s.floorHeight+(s.archetype==='A'?(s.revision>=2?10.3:3.3):s.archetype==='B'?2.6:2.1),identity:{A:'freestanding ellipse / tapered summit / recessed rectangular plant',B:s.revision>=3?'paired rounded wings / recessed spine / tapered shoulders':'crescent court / broad arc / planted podium',C:'asymmetric rounded polygon / offset setbacks / flat blade crown'}[s.archetype]};
 }
 export function fitToLot(input,{width,depth,setback=.3}){const q=v=>Math.floor((v-2*setback-2.2)/2.4)*2.4,w=q(width),d=input.archetype==='B'?Math.min(q(depth),Math.floor(w/1.4/2.4)*2.4):input.archetype==='A'?Math.min(q(depth),Math.floor(w*.76/2.4)*2.4):q(depth);return normalizeSpecification({...input,width:Math.round(w*10)/10,depth:Math.round(d*10)/10});}
 export const curvedTemplate=Object.freeze({id:'original-curved-modernist',version:VERSION,family:'office',maximumLot:{width:88.4,depth:69.2},ratios:()=>[1,.96,.92,.86,.8,.72],envelopeMargin:2.2,normalize:normalizeSpecification,fit:fitToLot,layout:massing});

@@ -540,3 +540,10 @@ Suggested smoke tests: load the world, camera movement, freeform road placement,
 - Arcus continues its existing curtain wall into two10.2m glazed roof fins screening the mechanical housing. Crescent has rounded ends, a doubled true inset on the upper four floors using existing polygon offset, and more central roof plant. Existing pooled materials/maps reused. Facet Point and all revision1 native buffers match the checkpoint byte-for-byte; old saved records retain revision1.
 - Full175-check build and nine targeted family tests pass. A/B roof/isometric views and Crescent plan inspected; demolition/Undo/Redo passed; browser errors empty. Exact playable HTTP hashes verified; direct file launch unverified. Normal spawning OFF. Scope, images and measurements: docs/CURVED_ROOF_REVISIONS*.
 - Checkpoint/pre-curved-roof-revisions-2e13596; local codex/original-curved-modernist only, no off-computer backup until approved push. Unrelated asset moves/exporter edit excluded.
+
+## Arcus taper and Splice Tower revision 3 — 2026-11-23
+
+- Continued Arcus’s upper facade taper through its glazed fins. Replaced Crescent with Splice Tower for new B selections. The new design pairs rounded office wings across a recessed glazed center and uses the existing lot, foundation and render systems.
+- Verified revision 1 and 2 geometry buffers and current Facet Point against 02fb229. Existing saved towers retain their original geometry. Normal spawning remains off.
+- Full build passed 177 checks, including 11 family checks. Chrome direct-file review covered Arcus’s roof, Splice’s elevation and footprint, and both towers’ demolition and Undo/Redo. [Details and export hashes](ORIGINAL_CURVED_MODERNIST.md#revision-3--arcus-taper-and-splice-tower).
+- Local checkpoint checkpoint/pre-arcus-taper-splice-02fb229. External backup awaits an approved push.

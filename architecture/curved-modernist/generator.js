@@ -22,17 +22,50 @@ export function buildCurved(input,materials){const s=normalizeSpecification(inpu
  part('original restrained roof termination',()=>{if(s.archetype!=='A'||s.revision===1)rail(top,y+.04,.92,'trim');
  if(s.archetype==='A'){// Recessed rectangular louver court, no oval screen or antenna.
  b.box('dark',0,y+1.3,0,s.width*.30,2.6,s.depth*.22);for(let i=0;i<9;i++)b.box('frame',-s.width*.15+i*s.width*.30/8,y+1.3,s.depth*.111,.10,2.4,.12);b.box('trim',0,y+2.7,0,s.width*.32,.20,s.depth*.24);for(const x of [-1,1]){b.box('roof',x*s.width*.23,y+.45,0,2.3,.85,3.0);fan(x*s.width*.23,0,y+.89,.6);for(let i=0;i<4;i++)b.box('dark',x*s.width*.23,y+.90,(i-1.5)*.6,1.9,.08,.25);}}
- if(s.archetype==='B'){// Paired low service courts follow the arc; the centre remains open.
+ if(s.archetype==='B'&&s.revision>=3){
+  const width=s.width*.24,depth=s.depth*.28;
+  b.box('dark',0,y+1.0,0,width,2,depth);
+  b.box('trim',0,y+2.07,0,width+.24,.14,depth+.24);
+  for(const sign of [-1,1])fan(sign*width*.25,0,y+2.15,.66);
+ }
+ if(s.archetype==='B'&&s.revision<3){// Paired low service courts follow the arc; the centre remains open.
  for(const sign of [-1,1]){const x=sign*s.width*(s.revision>=2?.13:.21),z=-s.depth*(s.revision>=2?.16:.18);b.box('dark',x,y+.9,z,s.width*.15,1.8,3.0);for(let i=0;i<6;i++)b.box('trim',x+(i-2.5)*s.width*.025,y+1,z+1.54,.10,1.9,.12);b.box('roof',x,y+1.88,z,s.width*.16,.16,3.2);for(const k of [-1,1])fan(x+k*s.width*.035,z,y+1.97,.62);}}
  if(s.archetype==='C'){// Offset flat blades, no pyramidal cap and no reference roof enclosure.
  const x=-s.width*.036,z=-s.depth*.024;for(const sign of [-1,1])b.box('trim',x+sign*s.width*.13,y+1.45,z,s.width*.10,.30,s.depth*.26);b.box('dark',x,y+.75,z,s.width*.18,1.5,s.depth*.18);for(let i=0;i<6;i++)b.box('frame',x+(i-2.5)*s.width*.03,y+.8,z+s.depth*.091,.08,1.3,.10);}
  });
- if(s.archetype==='A'&&s.revision>=2)part('continued glazing roof fins',()=>{const path=pathData(top),bays=grids.at(-1).bayCount,h=3*s.floorHeight,isFin=f=>Math.abs(Math.cos(f*Math.PI*2))>=.5,post=f=>{const q=sample(path,f);b.box('frame',q[0],y+h/2,q[1],.11,h,.12);};for(let i=0;i<bays;i++){if(!isFin((i+.5)/bays))continue;for(let j=0;j<4;j++){const a=(i+j/4)/bays,c=(i+(j+1)/4)/bays,q=sample(path,a),r=sample(path,c),uv=[a*bays/8,s.storeys/8,a*bays/8,(s.storeys+3)/8,c*bays/8,(s.storeys+3)/8,c*bays/8,s.storeys/8];b.quad('glass'+s.palette,[p(q,y),p(q,y+h),p(r,y+h),p(r,y)],uv);b.quad('glass'+s.palette,[p(r,y),p(r,y+h),p(q,y+h),p(q,y)],[uv[6],uv[7],uv[4],uv[5],uv[2],uv[3],uv[0],uv[1]]);}const q=sample(path,i/bays),r=sample(path,(i+1)/bays);b.beam('frame',p(q,y+h),p(r,y+h),.11,.12);post(i/bays);if(!isFin((i+1.5)/bays))post((i+1)/bays);}});
- if(s.archetype==='B')part('landscaped crescent podium terrace',()=>{const ring=plan.groundRing;for(let i=4;i<92;i+=6){const theta=-1.3+(i-4)/84*2.6,q=s.revision>=2?[s.width*.5*Math.sin(theta),s.depth*(.22-.72*Math.cos(theta))]:ring[i],x=q[0]*.95,z=q[1]*.95;b.box('stone',x,3*s.floorHeight+.2,z,1.6,.4,1.1);b.box('green',x,3*s.floorHeight+.7,z,1.3,.7,.85);}for(const sign of [-1,1])for(let i=0;i<3;i++){const zf=.26+i*.05,x=sign*s.width*(s.revision>=2?.5-(zf-.22)*.1/.28-.04:.37+i*.025),z=s.depth*(s.revision>=2?zf:.39);b.box('stone',x,3*s.floorHeight+.2,z,1.7,.4,1.6);b.box('green',x,3*s.floorHeight+1,z,1.25,1.5,1.2);}});
+ // Extend the final facade loft along its existing slope for three more storeys.
+ const upper=plan.sections.at(-1),finFloors=3;
+ const finHeight=finFloors*s.floorHeight;
+ const finTaper=s.archetype==='A'&&s.revision>=3
+  ? (1-upper.ring[0][1]/top[0][1])*finFloors/(upper.end-upper.start)
+  : 0;
+ if(s.archetype==='A'&&s.revision>=2)part('continued glazing roof fins',()=>{
+  const path=pathData(top),bays=grids.at(-1).bayCount;
+  const isFin=f=>Math.abs(Math.cos(f*Math.PI*2))>=.5;
+  const crest=v=>[v[0]*(1+finTaper),y+finHeight,v[1]*(1+finTaper)];
+  const post=f=>{
+   const q=sample(path,f);
+   if(finTaper)b.beam('frame',p(q,y),crest(q),.11,.12);
+   else b.box('frame',q[0],y+finHeight/2,q[1],.11,finHeight,.12);
+  };
+  for(let i=0;i<bays;i++){
+   if(!isFin((i+.5)/bays))continue;
+   for(let j=0;j<4;j++){
+    const a=(i+j/4)/bays,c=(i+(j+1)/4)/bays,q=sample(path,a),r=sample(path,c);
+    const uv=[a*bays/8,s.storeys/8,a*bays/8,(s.storeys+finFloors)/8,c*bays/8,(s.storeys+finFloors)/8,c*bays/8,s.storeys/8];
+    b.quad('glass'+s.palette,[p(q,y),crest(q),crest(r),p(r,y)],uv);
+    b.quad('glass'+s.palette,[p(r,y),crest(r),crest(q),p(q,y)],[uv[6],uv[7],uv[4],uv[5],uv[2],uv[3],uv[0],uv[1]]);
+   }
+   b.beam('frame',crest(sample(path,i/bays)),crest(sample(path,(i+1)/bays)),.11,.12);
+   post(i/bays);
+   if(!isFin((i+1.5)/bays))post((i+1)/bays);
+  }
+ });
+ if(s.archetype==='B'&&s.revision<3)part('landscaped crescent podium terrace',()=>{const ring=plan.groundRing;for(let i=4;i<92;i+=6){const theta=-1.3+(i-4)/84*2.6,q=s.revision>=2?[s.width*.5*Math.sin(theta),s.depth*(.22-.72*Math.cos(theta))]:ring[i],x=q[0]*.95,z=q[1]*.95;b.box('stone',x,3*s.floorHeight+.2,z,1.6,.4,1.1);b.box('green',x,3*s.floorHeight+.7,z,1.3,.7,.85);}for(const sign of [-1,1])for(let i=0;i<3;i++){const zf=.26+i*.05,x=sign*s.width*(s.revision>=2?.5-(zf-.22)*.1/.28-.04:.37+i*.025),z=s.depth*(s.revision>=2?zf:.39);b.box('stone',x,3*s.floorHeight+.2,z,1.7,.4,1.6);b.box('green',x,3*s.floorHeight+1,z,1.25,1.5,1.2);}});
  const model=b.finish(materials,s.name);
  // Smooth only curtain-wall surfaces. Angular edges and physical trim retain crisp normals.
- for(const v of plan.sections){const range=model.userData.partRanges.find(p=>p.label===v.name&&p.material===(v.podium?'entry':'glass'+s.palette));const mesh=model.children.find(m=>m.name===range.material),g=mesh.geometry,n=g.attributes.normal,pos=g.attributes.position;for(let i=range.start;i<range.end;i+=4){const previous=i===range.start?range.end-4:i-4,next=i+4===range.end?range.start:i+4;const normal=j=>new T.Vector3(n.getX(j),n.getY(j),n.getZ(j));const current=normal(i),left=normal(previous),right=normal(next),a=current.dot(left)>(s.archetype==='B'&&s.revision>=2?.80:.95)?current.clone().add(left).normalize():current,c=current.dot(right)>(s.archetype==='B'&&s.revision>=2?.80:.95)?current.clone().add(right).normalize():current;n.setXYZ(i,...a.toArray());n.setXYZ(i+1,...a.toArray());n.setXYZ(i+2,...c.toArray());n.setXYZ(i+3,...c.toArray());}n.needsUpdate=true;}
- for(const range of model.userData.partRanges.filter(p=>p.label==='continued glazing roof fins'&&p.material==='glass'+s.palette)){const g=model.children.find(m=>m.name===range.material).geometry,a=g.attributes.position,n=g.attributes.normal,rx=s.width*.35,rz=s.depth*.35;for(let i=range.start;i<range.end;i++){const v=new T.Vector3(a.getX(i)/(rx*rx),0,a.getZ(i)/(rz*rz)).normalize(),sign=v.x*n.getX(i)+v.z*n.getZ(i)<0?-1:1;n.setXYZ(i,v.x*sign,0,v.z*sign);}n.needsUpdate=true;}
+ for(const v of plan.sections){const range=model.userData.partRanges.find(p=>p.label===v.name&&p.material===(v.podium?'entry':'glass'+s.palette));const mesh=model.children.find(m=>m.name===range.material),g=mesh.geometry,n=g.attributes.normal,pos=g.attributes.position;for(let i=range.start;i<range.end;i+=4){const previous=i===range.start?range.end-4:i-4,next=i+4===range.end?range.start:i+4;const normal=j=>new T.Vector3(n.getX(j),n.getY(j),n.getZ(j));const current=normal(i),left=normal(previous),right=normal(next),a=current.dot(left)>(s.archetype==='B'&&s.revision===2?.80:.95)?current.clone().add(left).normalize():current,c=current.dot(right)>(s.archetype==='B'&&s.revision===2?.80:.95)?current.clone().add(right).normalize():current;n.setXYZ(i,...a.toArray());n.setXYZ(i+1,...a.toArray());n.setXYZ(i+2,...c.toArray());n.setXYZ(i+3,...c.toArray());}n.needsUpdate=true;}
+ for(const range of model.userData.partRanges.filter(p=>p.label==='continued glazing roof fins'&&p.material==='glass'+s.palette)){const g=model.children.find(m=>m.name===range.material).geometry,a=g.attributes.position,n=g.attributes.normal,rx=s.width*.35,rz=s.depth*.35;for(let i=range.start;i<range.end;i++){const scale=1+finTaper*(a.getY(i)-y)/finHeight,v=new T.Vector3(a.getX(i)/(rx*rx*scale),-finTaper/finHeight,a.getZ(i)/(rz*rz*scale)).normalize(),sign=v.x*n.getX(i)+v.z*n.getZ(i)<0?-1:1;n.setXYZ(i,v.x*sign,finTaper?v.y*sign:0,v.z*sign);}n.needsUpdate=true;}
  // Roof triangles receive metric coordinates after batching; never stretch a tile over a triangulation face.
  for(const mesh of model.children.filter(m=>m.name==='roof')){const g=mesh.geometry,p=g.attributes.position,n=g.attributes.normal,uv=g.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/4,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/4);uv.needsUpdate=true;}
  const bounds=new T.Box3().setFromObject(model);model.userData.specification=s;model.userData.triangles=model.children.reduce((n,m)=>n+m.geometry.index.count/3,0);model.userData.bounds={min:bounds.min.toArray(),max:bounds.max.toArray()};model.userData.architecture={experimental:true,identity:plan.identity,grids,roofTop:plan.roofTop,benchmarkImported:false};return model;
