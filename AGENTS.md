@@ -52,7 +52,7 @@
 - Use actual catalogue shader/material definitions for harmony. Keep warm limestone distinct from silver-grey offices; avoid arbitrary saturation, cream/mint lift or generic cartoon restyling. RT.jpg is the established visual reference, not permission to alter approved assets.
 - Use opaque glass, existing roughness/metalness conventions, SRGB colour maps, repeating metric UVs and restrained shared texture sizes. Respect each asset's sampler/orientation; do not repaint or stretch approved maps.
 
-- **Waterfall reference study:** one fixed unapproved reconstruction under architecture/waterfall/. No variations, parametric expansion or natural spawning before explicit visual approval. Review with export:waterfall; the launcher opens the single study. Preserve the archived rejected prototype and approved families. See docs/WATERFALL_REFERENCE_STUDY.md.
+- **Waterfall reference study:** one fixed unapproved reconstruction under architecture/waterfall/. No variations, parametric expansion or natural spawning before explicit visual approval. Review with export:waterfall; the launcher opens the single study. Preserve the archived rejected prototype and approved families. Latest SC4 benchmark is version0.2.0; prior0.1.0 is rejected/archive-only. See docs/SC4_WATERFALL_BENCHMARK.md.
 
 ## Parametric building and integration workflow
 

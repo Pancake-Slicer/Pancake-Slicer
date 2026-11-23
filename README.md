@@ -180,4 +180,4 @@ Art Deco correction review: `npm run export:original-deco` now produces **Art De
 
 Latest playable: npm run export:original-offices. Original Lind/Reamon growables are reference-only; Alderwick, Aster, Calder, Marlowe, BMO and Von remain available. [Retirement and legacy-save behaviour](docs/RETIRED_LIND_REAMON.md).
 
-Waterfall architectural study: `npm run export:waterfall` creates one fixed prototype with the original reference beside the game. The Test City/Chrome launcher open the review; variants and natural growth await visual approval. [Scope and validation](docs/WATERFALL_REFERENCE_STUDY.md).
+SC4 waterfall architectural benchmark: `npm run export:waterfall` creates one fixed prototype with the original reference beside the game. The Test City/Chrome launcher open the review; variants and natural growth await visual approval. [Scope, assumptions and validation](docs/SC4_WATERFALL_BENCHMARK.md).

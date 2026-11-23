@@ -1,3 +1,5 @@
+> Historical rejected 0.1.0 study. Superseded by [SC4 fixed benchmark](SC4_WATERFALL_BENCHMARK.md); its dimensions and approval status below are archival.
+
 # Waterfall reference reconstruction — fixed architectural study
 
 One unapproved prototype for visual evaluation against the supplied cropped reference. The rejected Rill/Cascade/Crestline variation work is archived; no additional configurations or25–70-storey family work is active. Stop for visual approval before parameterization or natural growth.
