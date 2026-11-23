@@ -183,3 +183,5 @@ Latest playable: npm run export:original-offices. Original Lind/Reamon growables
 Waterfall red-granite / rear-crown benchmark: `npm run export:waterfall` creates one fixed prototype with the original reference beside the game. The Test City/Chrome launcher open the review; variants and natural growth await visual approval. [Rear projections, equal-height bands and red granite](docs/WATERFALL_RED_GRANITE.md).
 
 Curved skyscraper fixed reconstruction: `npm run export:curved-reference` produces one interactive reference study with isometric, roof and ground comparisons. It remains outside normal gameplay and awaits visual approval. [Review and validation](docs/CURVED_SKYSCRAPER_REFERENCE.md).
+
+Original curved modernist experiments: `npm run export:curved-modernist` produces a playable A/B/C comparison with the archived curved benchmark. Normal spawning remains OFF; experimental development controls are opt-in. [Architecture, controls and validation](docs/ORIGINAL_CURVED_MODERNIST.md).

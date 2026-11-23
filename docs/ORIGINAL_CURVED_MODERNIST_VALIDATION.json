@@ -1,0 +1,373 @@
+{
+  "date": "2026-11-23",
+  "checkpoint": "checkpoint/pre-original-curved-79346b5",
+  "branch": "codex/original-curved-modernist",
+  "status": "Experimental only; visual approval pending; normal spawning disabled",
+  "originalSha256": "c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c",
+  "checks": {
+    "build": "passed",
+    "testCount": 173,
+    "targeted": 7,
+    "httpExportHashes": true,
+    "benchmarkAbsentFromPlaytest": true,
+    "browserConsoleErrors": [],
+    "viewport": [
+      1280,
+      720
+    ],
+    "demolitionUndoRedo": "A/B/C passed during in-game review; final suite verifies all three",
+    "coldHistoryAndPicking": "passed",
+    "flatSlopedFoundations": "targeted actual-game contract passed",
+    "nativeLots": "48x44 /62x56 /84x68 at0 and0.37rad; slivers/holes rejected",
+    "browserVariations": {
+      "Csmall": [
+        55.2,
+        38.4,
+        62
+      ],
+      "Clarge": [
+        50.4,
+        50.4,
+        62
+      ],
+      "heights": [
+        20,
+        70
+      ]
+    },
+    "finalPierSupport": "30cm facade plinth in existing terrain skirt; entrance remains open; old family defaults unchanged",
+    "neighbourhoodNote": "25-tower review before the final pier-plinth adjustment; subsequent final comparison and clear entrance recaptured",
+    "browserHistoryActions": [
+      {
+        "type": "A",
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "recordUnchanged": true
+      },
+      {
+        "type": "B",
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "recordUnchanged": true
+      },
+      {
+        "type": "C",
+        "demolition": true,
+        "undo": true,
+        "redo": true,
+        "recordUnchanged": true
+      }
+    ]
+  },
+  "prototypes": {
+    "A": {
+      "parameters": {
+        "family": "original-curved-modernist",
+        "version": "0.1.0",
+        "id": "curved-A:office-block:-211.70:-211.70:-28.30:-28.30:10:1000:0",
+        "name": "Arcus Corporate Tower · A",
+        "seed": "3131091882",
+        "archetype": "A",
+        "width": 50.4,
+        "depth": 36,
+        "storeys": 48,
+        "floorHeight": 3.4,
+        "palette": 0,
+        "podium": null
+      },
+      "triangles": 20548,
+      "materialBuckets": 7,
+      "bounds": {
+        "min": [
+          -25.43000030517578,
+          0,
+          -18.139999389648438
+        ],
+        "max": [
+          25.43000030517578,
+          166,
+          18.84000015258789
+        ]
+      },
+      "identity": "freestanding ellipse / tapered summit / recessed rectangular plant"
+    },
+    "B": {
+      "parameters": {
+        "family": "original-curved-modernist",
+        "version": "0.1.0",
+        "id": "curved-B:office-block:-11.70:-211.70:171.70:-28.30:9:1000:0",
+        "name": "Crescent Plaza · B",
+        "seed": "2024518431",
+        "archetype": "B",
+        "width": 50.4,
+        "depth": 36,
+        "storeys": 34,
+        "floorHeight": 3.4,
+        "palette": 2,
+        "podium": null
+      },
+      "triangles": 20462,
+      "materialBuckets": 8,
+      "bounds": {
+        "min": [
+          -25.43000030517578,
+          0,
+          -18.097410202026367
+        ],
+        "max": [
+          25.42350196838379,
+          117.6449966430664,
+          18.037364959716797
+        ]
+      },
+      "identity": "crescent court / broad arc / planted podium"
+    },
+    "C": {
+      "parameters": {
+        "family": "original-curved-modernist",
+        "version": "0.1.0",
+        "id": "curved-C:office-block:-11.70:-211.70:171.70:-28.30:9:0100:0",
+        "name": "Facet Point · C",
+        "seed": "68546786",
+        "archetype": "C",
+        "width": 50.4,
+        "depth": 50.4,
+        "storeys": 62,
+        "floorHeight": 3.4,
+        "palette": 1,
+        "podium": null
+      },
+      "triangles": 18285,
+      "materialBuckets": 7,
+      "bounds": {
+        "min": [
+          -25.238935470581055,
+          0,
+          -24.395042419433594
+        ],
+        "max": [
+          24.076904296875,
+          212.39999389648438,
+          26.040000915527344
+        ]
+      },
+      "identity": "asymmetric rounded polygon / offset setbacks / flat blade crown"
+    }
+  },
+  "performanceFixtures": [
+    {
+      "count": 10,
+      "generationCpuMs": 318.22409999999945,
+      "batchCpuMs": 801.7347000000009,
+      "triangles": 195105,
+      "batches": 11,
+      "maps": 5
+    },
+    {
+      "count": 25,
+      "generationCpuMs": 277.8883999999998,
+      "batchCpuMs": 112.84149999999863,
+      "triangles": 488380,
+      "batches": 23,
+      "maps": 5
+    },
+    {
+      "count": 50,
+      "generationCpuMs": 417.1541999999972,
+      "batchCpuMs": 5.601299999998446,
+      "triangles": 978388,
+      "batches": 31,
+      "maps": 5
+    }
+  ],
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Curved Modernist Experiments Playtest - 20261123T164432Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Curved Modernist Experiments Test City - 20261123T164432Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Original Curved Modernist Experiments in Chrome - 20261123T164432Z.cmd",
+    "playtestSha256": "c2934be3c27a6c9e048bda0071762c77cfeb7f873cb16d1ff6a0ecd26c2876d9",
+    "reviewSha256": "3427d4b5e9e7c6cb7ea05700f810e0a2a394dd419103cf8bb9a172500fc3b056"
+  },
+  "views": {
+    "mixed-overview": {
+      "image": ".tools/curved-modernist/final/mixed-overview.png",
+      "selected": "A",
+      "view": "overview",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 662192,
+        "sourceGeometryBytes": 4372186,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "renderer": {
+        "calls": 604,
+        "triangles": 395588,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    "A-isometric": {
+      "image": ".tools/curved-modernist/final/A-isometric.png",
+      "selected": "A",
+      "view": "isometric",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 662192,
+        "sourceGeometryBytes": 4372186,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "renderer": {
+        "calls": 233,
+        "triangles": 264523,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    "B-isometric": {
+      "image": ".tools/curved-modernist/final/B-isometric.png",
+      "selected": "B",
+      "view": "isometric",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 662192,
+        "sourceGeometryBytes": 4372186,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "renderer": {
+        "calls": 202,
+        "triangles": 335324,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    "C-isometric": {
+      "image": ".tools/curved-modernist/final/C-isometric.png",
+      "selected": "C",
+      "view": "isometric",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 662192,
+        "sourceGeometryBytes": 4372186,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "renderer": {
+        "calls": 392,
+        "triangles": 381050,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    "B-plan": {
+      "image": ".tools/curved-modernist/final/B-plan.png",
+      "selected": "B",
+      "view": "plan",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 662192,
+        "sourceGeometryBytes": 4372186,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "renderer": {
+        "calls": 154,
+        "triangles": 330583,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    "C-plan": {
+      "image": ".tools/curved-modernist/final/C-plan.png",
+      "selected": "C",
+      "view": "plan",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 662192,
+        "sourceGeometryBytes": 4372186,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "renderer": {
+        "calls": 210,
+        "triangles": 346061,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    "A-entrance": {
+      "image": ".tools/curved-modernist/final/A-entrance.png",
+      "selected": "A",
+      "view": "entrance",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 662192,
+        "sourceGeometryBytes": 4372186,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "renderer": {
+        "calls": 124,
+        "triangles": 165997,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    "neighbourhood": {
+      "image": ".tools/curved-modernist/final/neighbourhood.png",
+      "selected": "C",
+      "view": "overview",
+      "errors": [],
+      "resources": {
+        "activeBuildings": 25,
+        "batches": 48,
+        "mergedBytes": 33565514,
+        "sourceGeometryBytes": 32112300,
+        "materials": 11,
+        "textures": 5,
+        "cacheEntries": 24,
+        "leases": 25
+      },
+      "renderer": {
+        "calls": 632,
+        "triangles": 797711,
+        "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "neighbourhood": {
+        "lots": 25,
+        "originals": 25
+      }
+    }
+  },
+  "limitations": [
+    "Single Intel Iris Xe browser fixture; no GPU timing, frame-rate or large-city parity claim.",
+    "Fitter uses a conservative decorated envelope and rejects unsupported or holed lots rather than deforming defining features.",
+    "Very close entrance views can be obscured by existing street trees; normal orbit controls remain available.",
+    "Direct file launch not exercised; exact exported bytes validated over local HTTP.",
+    "Experimental visual quality remains subject to user approval; no normal spawning enabled."
+  ]
+}

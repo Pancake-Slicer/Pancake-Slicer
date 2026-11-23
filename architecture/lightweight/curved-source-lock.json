@@ -1,0 +1,21 @@
+{
+  "purpose": "Preserved benchmark and approved shared/architectural sources; original curved family is independently authored and opt-in.",
+  "preserved": {
+    "architecture/curved-reference/model.js": "b42f23816f45cd499d6e2c415cd97995218cc149fcd5c3c4f0f5d4eeb963b224",
+    "architecture/curved-reference/review/review.js": "3e12a7ba391fc15d01e2863f27c50ce4697d43301014d73370e76a16dc3fef86",
+    "benchmark/shared/batched-architecture.js": "2066b04453476f60a0315e61d9f9e8aa45afc0a63ed954ff2b4b5bca5e75d0b0",
+    "architecture/assemblies/optimized-renderer.js": "a4aea112f6491fdfacbc21c52b59517a879f565850049b6da1ce397806b53bb5",
+    "architecture/lightweight/template.mjs": "9473a9e4cb701524a798ca8bcd8bfec399b3d6d6e9ef69b9a30edd63555af496",
+    "architecture/bmo/generator.js": "3f490163779693a92133704ac099f0e78760e65043fb1957042566ba37801900",
+    "architecture/bmo/spec.mjs": "c80bc6e079887e0139ae12a0e645c03d816a864dc3a8f2360c77c36b6773e0fb",
+    "architecture/lind/generator.js": "5e929a82485f191b8eafde208d05d290e819f12b9fdd94221a5d41688e6d7e0f",
+    "architecture/lind/spec.mjs": "d5a8ab0f54dc6e74d90503e8aabac4b6aff10e14d076008d1615f90b10cdf938",
+    "architecture/lind/materials.js": "7b2d2e2501a4763a320c13323185c3625bdc94a9121e6880efe3c041be60c152",
+    "architecture/original-deco/generator.js": "d0a7f6cb641cb16fab4c3e54cf48def4bc6cf44c0393f3e4271ca60f7542e6ac",
+    "architecture/original-deco/spec.mjs": "fdd209d495f19ae18e3e25a6dc4e7047361ed04413f5e1364fc1ffe23ca68400",
+    "architecture/original-deco/materials.js": "83d5e756478bc66eb2b59e8a17c5e085a21313bd238d98864a2c3bbb10132163",
+    "architecture/waterfall/generator.js": "dafeb11d4f4860f3bab06faa6dff532cc70eafa8ce5cb193d31ce96d29a72954",
+    "architecture/waterfall/spec.mjs": "a91a48683094ca415c53c8f02ed39352ed4b6a034cc9863b48b1e825b73d3db9",
+    "architecture/waterfall/materials.js": "c133401458ee8dcbabe6d5a491280b80e974faf728ad2705e650aad438f242d7"
+  }
+}
