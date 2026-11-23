@@ -1,0 +1,208 @@
+{
+  "date": "2026-11-23",
+  "checkpoint": "checkpoint/pre-curved-roof-revisions-2e13596",
+  "branch": "codex/original-curved-modernist",
+  "revision": 2,
+  "changes": {
+    "arcus": "Two curved glazing fins, 3 storeys/10.2m above the roof, continuing existing mullion and texture grids.",
+    "crescent": "Rounded end corners; doubled .025 to .05 normalized native inset on the upper4 floors; mechanical centres moved from ±.21w/−.18d to ±.13w/−.16d.",
+    "compatibility": "Legacy revision1 buffers and all Facet Point buffers match2e13596 byte for byte."
+  },
+  "checks": {
+    "tests": 175,
+    "targeted": 9,
+    "build": "passed",
+    "browserConsoleErrors": [],
+    "httpHashesMatch": true,
+    "normalSpawning": false,
+    "benchmarkUnchanged": true,
+    "legacyBuffersUnchanged": true,
+    "facetPointBuffersUnchanged": true,
+    "directFileLaunch": "not exercised; exact exported bytes tested over local HTTP"
+  },
+  "prototypes": {
+    "A": {
+      "triangles": 22012,
+      "materials": 7,
+      "height": 173.4600067138672
+    },
+    "B": {
+      "triangles": 22305,
+      "materials": 8,
+      "height": 117.6449966430664
+    },
+    "C": {
+      "triangles": 18151,
+      "materials": 7,
+      "height": 212.39999389648438
+    }
+  },
+  "performanceFixtures": [
+    {
+      "count": 10,
+      "generationCpuMs": 355.84890000000087,
+      "batchCpuMs": 978.3414000000012,
+      "triangles": 205138,
+      "batches": 11,
+      "maps": 5
+    },
+    {
+      "count": 25,
+      "generationCpuMs": 328.45660000000134,
+      "batchCpuMs": 265.84100000000035,
+      "triangles": 512108,
+      "batches": 23,
+      "maps": 5
+    },
+    {
+      "count": 50,
+      "generationCpuMs": 376.8091000000022,
+      "batchCpuMs": 12.909899999998743,
+      "triangles": 1024951,
+      "batches": 31,
+      "maps": 5
+    }
+  ],
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Curved Modernist Experiments Playtest - 20261123T173404Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Original Curved Modernist Experiments Test City - 20261123T173404Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Original Curved Modernist Experiments in Chrome - 20261123T173404Z.cmd",
+    "playtestSha256": "eedb29de3835d48b27136fd52882307dbed54409439ee8181a40fdeba4cab8a1",
+    "reviewSha256": "5596ab80590ada446005fd908d35f91195f37db2059fc564939f38bf720f2c1b"
+  },
+  "views": {
+    "A-isometric": {
+      "image": ".tools/curved-modernist/roof-revisions/A-isometric.png",
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 746684,
+        "sourceGeometryBytes": 4696036,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "actions": [],
+      "errors": [],
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "A-roof": {
+      "image": ".tools/curved-modernist/roof-revisions/A-roof.png",
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 746684,
+        "sourceGeometryBytes": 4696036,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "actions": [
+        {
+          "type": "A",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "recordUnchanged": true
+        }
+      ],
+      "errors": [],
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "B-isometric": {
+      "image": ".tools/curved-modernist/roof-revisions/B-isometric.png",
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 746684,
+        "sourceGeometryBytes": 4696036,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "actions": [
+        {
+          "type": "A",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "recordUnchanged": true
+        },
+        {
+          "type": "B",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "recordUnchanged": true
+        }
+      ],
+      "errors": [],
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "B-roof": {
+      "image": ".tools/curved-modernist/roof-revisions/B-roof.png",
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 746684,
+        "sourceGeometryBytes": 4696036,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "actions": [
+        {
+          "type": "A",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "recordUnchanged": true
+        },
+        {
+          "type": "B",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "recordUnchanged": true
+        }
+      ],
+      "errors": [],
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "B-plan": {
+      "image": ".tools/curved-modernist/roof-revisions/B-plan.png",
+      "resources": {
+        "activeBuildings": 3,
+        "batches": 22,
+        "mergedBytes": 746684,
+        "sourceGeometryBytes": 4696036,
+        "materials": 10,
+        "textures": 4,
+        "cacheEntries": 3,
+        "leases": 3
+      },
+      "actions": [
+        {
+          "type": "A",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "recordUnchanged": true
+        },
+        {
+          "type": "B",
+          "demolition": true,
+          "undo": true,
+          "redo": true,
+          "recordUnchanged": true
+        }
+      ],
+      "errors": [],
+      "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  }
+}
