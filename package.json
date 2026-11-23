@@ -73,7 +73,10 @@
     "review:original-deco": "node scripts/review-original-deco.cjs",
     "export:original-offices": "npm run build && node scripts/export-original-offices.cjs",
     "export:waterfall": "npm run build && node scripts/export-waterfall.cjs",
-    "review:waterfall": "node scripts/review-waterfall.cjs"
+    "review:waterfall": "node scripts/review-waterfall.cjs",
+    "architecture:curved:check": "node scripts/prepare-curved-reference.cjs --geometry-only && node --test scripts/curved-reference.test.cjs",
+    "export:curved-reference": "node scripts/export-curved-reference.cjs",
+    "review:curved-reference": "node scripts/review-curved-reference.cjs"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

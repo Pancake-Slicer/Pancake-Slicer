@@ -102,3 +102,5 @@ Run from the correct checkout root; on PowerShell use npm.cmd if npm.ps1 is bloc
 - Keep progress updates, explanations and final reports concise. Explain required user actions in simple language; no manual model selection or JSON editing for routine approved-building imports.
 - Before committing, inspect status/diff and stage only the milestone's files. Report commit, branch, checks and limitations; a local commit is not an off-computer backup.
 - Request approval for that specific push. After approval, fetch/check remote changes, push without force, verify the remote commit matches and confirm main stayed unchanged.
+
+- **Curved skyscraper reference:** one fixed unapproved study under architecture/curved-reference/. No variants, normal spawning, original redesign or parameterization before visual approval. Review via export:curved-reference / review:curved-reference; preserve the separate Waterfall study. See docs/CURVED_SKYSCRAPER_REFERENCE.md.
