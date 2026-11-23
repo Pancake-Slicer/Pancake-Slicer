@@ -1,0 +1,393 @@
+{
+  "date": "2026-11-22",
+  "branch": "codex/waterfall-stepped-edges",
+  "restoredIteration": "6135a43",
+  "abandonedDetailCheckpoint": "1bbb929 / checkpoint/waterfall-details-before-rollback",
+  "version": "0.4.0",
+  "status": "One internal benchmark; no variations or natural spawning; awaiting visual review",
+  "geometry": {
+    "outerHalfWidthsHighestToLowest": [
+      20.8,
+      21.45,
+      22.1,
+      22.75,
+      23.4
+    ],
+    "outerInsetPerTier": 0.65,
+    "angledRoofUpperElevations": [
+      139.2,
+      129.6,
+      120
+    ],
+    "neighbouringFlatRoofElevations": [
+      140.8,
+      131.2,
+      121.6
+    ],
+    "roofReveal": 1.6,
+    "groundPerimeterVertices": 28,
+    "groundArea": 1443.936,
+    "triangles": 18514,
+    "materials": 6,
+    "maps": 3
+  },
+  "tests": {
+    "build": true,
+    "suites": [
+      143,
+      4,
+      8,
+      4,
+      5
+    ],
+    "total": 164
+  },
+  "exports": {
+    "playtest": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Waterfall Stepped Edges and Lower Roofs Playtest - 20261123T034947Z.html",
+    "review": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Pancake City - Waterfall Stepped Edges and Lower Roofs Test City - 20261123T034947Z.html",
+    "launcher": "C:\\Users\\camsh\\Desktop\\Pancake-City-restored-v53-20261112-153759\\dist\\Play Waterfall Stepped Edges and Lower Roofs in Chrome - 20261123T034947Z.cmd",
+    "playtestSha256": "3f21826a19b5247d7981933862fa9da5c01209625ca5f37b41acfeb430e5cf29",
+    "reviewSha256": "6ecc458dbc35a0d320f4482f1564ba2da341c4ab024a6adc0512bd239a2fa370"
+  },
+  "http": {
+    "review": {
+      "bytes": 3555416,
+      "sha256": "6ecc458dbc35a0d320f4482f1564ba2da341c4ab024a6adc0512bd239a2fa370"
+    },
+    "playtest": {
+      "bytes": 3240247,
+      "sha256": "3f21826a19b5247d7981933862fa9da5c01209625ca5f37b41acfeb430e5cf29"
+    }
+  },
+  "referenceSha256": "2490c0726f88f60134663c0a9ab40ea19b0b95390e9a6434ede6ddebc0040cc0",
+  "browser": {
+    "gpu": "Intel Iris Xe / ANGLE D3D11",
+    "viewport": [
+      1280,
+      720
+    ],
+    "consoleErrors": [],
+    "views": {
+      "isometric": {
+        "errors": [],
+        "actions": [],
+        "study": true,
+        "approved": false,
+        "reference": "Supplied original waterfall image",
+        "naturalSpawning": false,
+        "lot": {
+          "id": "office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "width": 50,
+          "depth": 50
+        },
+        "retired": {
+          "lind": null,
+          "reamon": null
+        },
+        "camera": {
+          "azimuth": 22.5,
+          "elevation": 35.26,
+          "fov": 18
+        },
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.4.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "name": "SC4 waterfall benchmark",
+          "seed": "reference-study",
+          "width": 46.8,
+          "depth": 36.4,
+          "storeys": 50,
+          "floorHeight": 3.2,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1115442,
+          "sourceGeometryBytes": 1423564,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 449.7999999523163,
+          "timings": {
+            "layout": 17.09999990463257,
+            "contours": 17,
+            "baseTilesRebuilt": 16,
+            "baseTilesTotal": 16,
+            "meshes": 48.39999997615814,
+            "paintPrep": 27.200000047683716,
+            "paintMeshes": 44.5,
+            "surfaces": 137.5,
+            "structures": 0.10000002384185791,
+            "fixtures": 11.399999976158142,
+            "developmentForest": 280.3000000715256,
+            "drape": 3.399999976158142
+          },
+          "initialBuildCpuMs": 93.90000009536743,
+          "triangles": 145429,
+          "calls": 174,
+          "memory": {
+            "geometries": 173,
+            "textures": 15
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "prototypeCount": 1,
+        "view": "isometric"
+      },
+      "roof": {
+        "errors": [],
+        "actions": [],
+        "study": true,
+        "approved": false,
+        "reference": "Supplied original waterfall image",
+        "naturalSpawning": false,
+        "lot": {
+          "id": "office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "width": 50,
+          "depth": 50
+        },
+        "retired": {
+          "lind": null,
+          "reamon": null
+        },
+        "camera": {
+          "view": "roof",
+          "fov": 45
+        },
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.4.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "name": "SC4 waterfall benchmark",
+          "seed": "reference-study",
+          "width": 46.8,
+          "depth": 36.4,
+          "storeys": 50,
+          "floorHeight": 3.2,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1115442,
+          "sourceGeometryBytes": 1423564,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 449.7999999523163,
+          "timings": {
+            "layout": 17.09999990463257,
+            "contours": 17,
+            "baseTilesRebuilt": 16,
+            "baseTilesTotal": 16,
+            "meshes": 48.39999997615814,
+            "paintPrep": 27.200000047683716,
+            "paintMeshes": 44.5,
+            "surfaces": 137.5,
+            "structures": 0.10000002384185791,
+            "fixtures": 11.399999976158142,
+            "developmentForest": 280.3000000715256,
+            "drape": 3.399999976158142
+          },
+          "initialBuildCpuMs": 93.90000009536743,
+          "triangles": 123754,
+          "calls": 178,
+          "memory": {
+            "geometries": 205,
+            "textures": 15
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "prototypeCount": 1,
+        "view": "roof"
+      },
+      "plan": {
+        "errors": [],
+        "actions": [
+          {
+            "demolition": true,
+            "undo": true,
+            "redo": true,
+            "restoredIdentically": true
+          }
+        ],
+        "study": true,
+        "approved": false,
+        "reference": "Supplied original waterfall image",
+        "naturalSpawning": false,
+        "lot": {
+          "id": "office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "width": 50,
+          "depth": 50
+        },
+        "retired": {
+          "lind": null,
+          "reamon": null
+        },
+        "camera": {
+          "view": "plan",
+          "fov": 45
+        },
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.4.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "name": "SC4 waterfall benchmark",
+          "seed": "reference-study",
+          "width": 46.8,
+          "depth": 36.4,
+          "storeys": 50,
+          "floorHeight": 3.2,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1115442,
+          "sourceGeometryBytes": 1423564,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 449.7999999523163,
+          "timings": {
+            "layout": 17.09999990463257,
+            "contours": 17,
+            "baseTilesRebuilt": 16,
+            "baseTilesTotal": 16,
+            "meshes": 48.39999997615814,
+            "paintPrep": 27.200000047683716,
+            "paintMeshes": 44.5,
+            "surfaces": 137.5,
+            "structures": 0.10000002384185791,
+            "fixtures": 11.399999976158142,
+            "developmentForest": 280.3000000715256,
+            "drape": 3.399999976158142
+          },
+          "initialBuildCpuMs": 93.90000009536743,
+          "triangles": 141048,
+          "calls": 246,
+          "memory": {
+            "geometries": 278,
+            "textures": 15
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "prototypeCount": 1,
+        "view": "plan"
+      },
+      "entrance": {
+        "errors": [],
+        "actions": [
+          {
+            "demolition": true,
+            "undo": true,
+            "redo": true,
+            "restoredIdentically": true
+          }
+        ],
+        "study": true,
+        "approved": false,
+        "reference": "Supplied original waterfall image",
+        "naturalSpawning": false,
+        "lot": {
+          "id": "office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "width": 50,
+          "depth": 50
+        },
+        "retired": {
+          "lind": null,
+          "reamon": null
+        },
+        "camera": {
+          "view": "entrance",
+          "fov": 45
+        },
+        "specification": {
+          "family": "waterfall-reference-study",
+          "version": "0.4.0",
+          "archetype": "P",
+          "id": "waterfall-study:office-block:188.30:188.30:291.70:291.70:0:11:0",
+          "name": "SC4 waterfall benchmark",
+          "seed": "reference-study",
+          "width": 46.8,
+          "depth": 36.4,
+          "storeys": 50,
+          "floorHeight": 3.2,
+          "podium": null
+        },
+        "resources": {
+          "activeBuildings": 1,
+          "batches": 6,
+          "mergedBytes": 1115442,
+          "sourceGeometryBytes": 1423564,
+          "materials": 6,
+          "textures": 3,
+          "cacheEntries": 1,
+          "leases": 1
+        },
+        "renderer": {
+          "rebuilds": 2,
+          "cacheHits": 1,
+          "layerBuilds": 1,
+          "layerHits": 0,
+          "lastBuildMs": 449.7999999523163,
+          "timings": {
+            "layout": 17.09999990463257,
+            "contours": 17,
+            "baseTilesRebuilt": 16,
+            "baseTilesTotal": 16,
+            "meshes": 48.39999997615814,
+            "paintPrep": 27.200000047683716,
+            "paintMeshes": 44.5,
+            "surfaces": 137.5,
+            "structures": 0.10000002384185791,
+            "fixtures": 11.399999976158142,
+            "developmentForest": 280.3000000715256,
+            "drape": 3.399999976158142
+          },
+          "initialBuildCpuMs": 93.90000009536743,
+          "triangles": 108976,
+          "calls": 90,
+          "memory": {
+            "geometries": 278,
+            "textures": 15
+          },
+          "gpuRenderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "prototypeCount": 1,
+        "view": "entrance"
+      }
+    }
+  },
+  "limitations": [
+    "Direct file launch unverified; exact packaged bytes tested over localhost",
+    "No FPS/GPU-time or city-scale performance claim",
+    "Architectural appearance remains subject to user visual review"
+  ]
+}
