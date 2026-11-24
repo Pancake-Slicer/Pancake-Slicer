@@ -25,6 +25,7 @@ function chamfer(x,z,w,d,cut=2.3){
 export function layout(input){
   const s=normalize(input),{width:w,depth:d,storeys:h,archetype}=s;
   const form=s.form,production=form!==undefined;
+  const offset=production&&archetype==='C'?[-.011,0,.015][form]:0;
   const podiumFloors={A:2,B:3,C:4}[archetype]+(production?[0,1,2][form]:0);
   const front=d*(production?[.40,.43,.455][form]:.365);
   const entranceX=production?0:{A:0,B:-.05*w,C:-.18*w}[archetype];
@@ -62,38 +63,20 @@ export function layout(input){
   }else{
     const shoulder=h-(production?[7,10,12][form]:8),upper=h-(production?[3,5,6][form]:4);
     const [shaft,middle,top]=production?[[.62,.54,.45],[.66,.57,.47],[.65,.535,.44]][form]:[.64,.55,.45];
-    const offset=production?[-.011,0,.015][form]:0;
     add(chamfer((.10+offset)*w,-.04*d,shaft*w,.69*d,2.1),podiumFloors,shoulder);
     add(chamfer((.135+offset)*w,-.064*d,middle*w,.60*d,1.85),shoulder,upper);
     add(chamfer((.151+offset)*w,-.104*d,top*w,.495*d,1.65),upper,h);
   }
   const unit=(x,z,level)=>({x:x*w,z:z*d,y:level*FLOOR,width:Math.min(8,w*.17),depth:Math.min(4.8,d*.16),height:EQUIPMENT_HEIGHT});
   const equipment=archetype==='B'?[unit(-.205,.025,h-6),unit(.193,-.083,h)]:
-    [archetype==='A'?unit(0,-.115,h):unit(.151,-.104,h)];
-  const entrance={x:entranceX,z:front,width:7.5,doorWidth:6.2,height:3.25};
-  if(!production)return {groundRing:podium,slabs,volumes:[],equipment,entrance,roofTop:h*FLOOR+EQUIPMENT_HEIGHT};
-  const crowns=[];
-  const crown=(x,z,axis,length,span,rise,y)=>crowns.push({x:x*w,z:z*d,axis,length:length*(axis==='x'?w:d),radius:span*(axis==='x'?d:w),rise,y});
-  const top=h*FLOOR;
-  if(archetype==='A'){
-    if(form===2){
-      for(const x of [-.151,.151])crown(x,-.126,'x',.26,.126,4.5,top);
-    }else crown(0,-.12,'x',[.56,.61][form],[.118,.135][form],[4.9,6.1][form],top);
-    Object.assign(equipment[0],{z:-.289*d,depth:d*.055});
-  }else if(archetype==='B'){
-    const [left,right]=equipment;left.y=slabs.at(-2).end;
-    if(form===1)crown(-.205,.001,'x',.248,.138,4.6,left.y);
-    else crown(-.205,.009,'z',[.280,.30,.315][form],[.102,.109,.101][form],[4.1,4.8,4.9][form],left.y);
-    crown(.193,-.092,'x',[.25,.273,.275][form],[.155,.16,.17][form],[5.5,5.8,6.5][form],top);
-    Object.assign(left,{z:.206*d,depth:d*.065,width:left.width*.72});
-    Object.assign(right,{z:-.298*d,depth:d*.052,width:right.width*.72});
-  }else{
-    const offset=[-.011,0,.015][form];
-    if(form===1)crown(.205+offset,-.108,'x',.234,.146,5.0,top);
-    else crown(.224+offset,-.108,'z',[.34,.36,.39][form],[.101,.104,.096][form],[4.8,5.2,6.2][form],top);
-    Object.assign(equipment[0],{x:(.020+offset)*w,width:Math.min(4.4,w*.09),depth:d*.11});
+    [archetype==='A'?unit(0,-.115,h):unit(.151+offset,-.104,h)];
+  if(production&&archetype==='B')equipment[0].y=slabs.at(-2).end;
+  if(production&&archetype==='A'){
+    if(form===1)equipment[0]=unit(0,-.19,h);
+    if(form===2)equipment.splice(0,1,unit(-.13,-.115,h),unit(.13,-.115,h));
   }
-  return {groundRing:podium,slabs,volumes:[],equipment,entrance,crowns,roofTop:Math.max(...crowns.map(v=>v.y+v.rise+.12))};
+  const entrance={x:entranceX,z:front,width:7.5,doorWidth:6.2,height:3.25};
+  return {groundRing:podium,slabs,volumes:[],equipment,entrance,roofTop:h*FLOOR+EQUIPMENT_HEIGHT};
 }
 export const definition=Object.freeze({
   id:'original-vaults',version:VERSION, family:'office',maximumLot:{width:79.6,depth:60.4},envelopeMargin:2.2,
@@ -139,12 +122,6 @@ export function createMaterials(){
   };
   for(const [palette,tint] of colors.entries()){
     materials['ribbon'+palette]=make('ribbons '+palette,'#ffffff',.66,ribbon([187,187,191],tint));
-    const roof=map(256,128,(x,y)=>{
-      const t=y/127, reflected=29*Math.exp(-((t-.30)**4)/.0012)+13*Math.exp(-((t-.72)**4)/.0019);
-      const light=reflected+variation(x>>4,y>>4)*.33;
-      return tint.map(channel=>channel+light);
-    });
-    materials['vault'+palette]=make('vault glazing '+palette,'#ffffff',.66,roof);
     const color=new T.Color().setRGB(...tint.map(channel=>channel/255),T.SRGBColorSpace);
     materials['door'+palette]=make('entry glazing '+palette,color,.66);
   }
@@ -198,48 +175,12 @@ function roofEquipment(batch,{x,y,z,width,depth,height}){
   batch.box('trim',x+width*.365,y+.95,z,width*.21,.10,depth*.61);
   batch.end(part);
 }
-function glazedVault(batch,v){
-  const place=(x,y,z)=>v.axis==='x'?[v.x+x,y,v.z+z]:[v.x-z,y,v.z+x];
-  const p=(x,t,lift=0)=>place(x,v.y+(v.rise+lift)*Math.sin(t),(v.radius+lift)*Math.cos(t));
-  const half=v.length/2,bays=Math.max(4,Math.round(v.length/3.3)),part=batch.begin('glazed barrel vault');
-  for(let i=0;i<64;i++){
-    const a=Math.PI*i/64,b=Math.PI*(i+1)/64;
-    batch.quad('vault0',[p(-half,a),p(half,a),p(half,b),p(-half,b)],[0,i/64,bays/4,i/64,bays/4,(i+1)/64,0,(i+1)/64]);
-  }
-  batch.end(part);
-  for(let j=0;j<=bays;j++){
-    const x=-half+v.length*j/bays,edge=j===0||j===bays,halfRib=edge?.14:.061,lift=edge?.11:.053;
-    for(let i=0;i<32;i++){
-      const a=Math.PI*i/32,b=Math.PI*(i+1)/32;
-      batch.quad('trim',[p(x-halfRib,a,lift),p(x+halfRib,a,lift),p(x+halfRib,b,lift),p(x-halfRib,b,lift)]);
-    }
-  }
-  for(let j=0;j<=6;j++){
-    const a=Math.PI*j/6,delta=.045/Math.hypot(v.radius*Math.sin(a),v.rise*Math.cos(a));
-    batch.quad('trim',[p(-half,a-delta,.072),p(half,a-delta,.072),p(half,a+delta,.072),p(-half,a+delta,.072)]);
-  }
-  for(const sign of [-1,1])for(let i=0;i<32;i++){
-    const x=sign*half,middle=place(x,v.y,0),a=p(x,Math.PI*i/32),b=p(x,Math.PI*(i+1)/32);
-    batch.triangle('mechanical',sign>0?[middle,b,a]:[middle,a,b]);
-  }
-}
 export function buildVaultTower(input,materials){
   const s=normalize(input),plan=layout(s),batch=new ArchitectureBatch;
   for(const slab of plan.slabs)facade(batch,slab);
   entrance(batch,plan.entrance);
   for(const unit of plan.equipment)roofEquipment(batch,unit);
-  for(const crown of plan.crowns??[])glazedVault(batch,crown);
   const model=batch.finish(materials,NAMES[s.archetype]);
-  if(plan.crowns){
-    const {position,normal}=model.children.find(m=>m.name==='vault0').geometry.attributes;
-    const ranges=model.userData.partRanges.filter(r=>r.material==='vault0'),direction=new T.Vector3();
-    for(const [index,v] of plan.crowns.entries())for(let i=ranges[index].start;i<ranges[index].end;i++){
-      const y=(position.getY(i)-v.y)/v.rise**2,c=(v.axis==='x'?position.getZ(i)-v.z:v.x-position.getX(i))/v.radius**2;
-      direction.set(v.axis==='x'?0:-c,y,v.axis==='x'?c:0).normalize();
-      normal.setXYZ(i,direction.x,direction.y,direction.z);
-    }
-    normal.needsUpdate=true;
-  }
   const deck=model.children.find(m=>m.name==='deck').geometry;
   for(let i=0;i<deck.attributes.position.count;i++)deck.attributes.uv.setXY(i,deck.attributes.position.getX(i)/6,deck.attributes.position.getZ(i)/6);
   model.userData.triangles=model.children.reduce((n,m)=>n+m.geometry.index.count/3,0);
@@ -255,7 +196,6 @@ export class VaultGenerator{
     for(const mesh of model.children){
       if(mesh.name==='ribbon0')mesh.material=this.materials['ribbon'+palette];
       if(mesh.name==='door0')mesh.material=this.materials['door'+palette];
-      if(mesh.name==='vault0')mesh.material=this.materials['vault'+palette];
     }
     entry.users++;this.leases.set(model,key);return model;
   }

@@ -30,8 +30,8 @@ function pcVaultRestore(c,snapshot){
     pcVaultReady().system.validateRecord(r);
     if(id!==r.lotId||next.has(id))throw Error('Invalid vault assignment');
     const record=structuredClone(r);
-    // Refresh the derived roof and threshold geometry for earlier prototypes.
-    if(!record.grid?.equipment)record.grid=pcVaultReady().system.definition.layout(record.parameters);
+    // Refresh derived geometry for earlier prototypes and vaulted production saves.
+    if(!record.grid?.equipment||record.grid.crowns)record.grid=pcVaultReady().system.definition.layout(record.parameters);
     next.set(id,record);
   }
   c.pcVaultAssignments=next;c.pcVaultControl={enabled:control?.catalogue?!!control.enabled:true,type};c.pcVaultRefresh?.();

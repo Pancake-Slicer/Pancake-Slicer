@@ -616,3 +616,10 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Playtest Pancake City - Original Vault Offices Playtest - 20261124T180711Z.html (SHA-256 e223a015b042c4b0364ff7293e98ab6ad72111b82282d49d0e30c14328c68b50).
 - Test City Pancake City - Original Vault Offices Test City - 20261124T180711Z.html (SHA-256 fabca17d6b43a2279edacdcdff0272d446479f5d831218e0ad987fadd40147f8).
 - Checkpoint checkpoint/pre-parametric-vaults-77572e6.
+
+## Postmodern Office growable rooftop equipment — 2026-11-24
+
+- Replaced production glass crowns with flat decks and the approved 1.65 m galvanized HVAC assemblies. Twin carries equipment on both roofs. Older vaulted saves regenerate their roofs from existing fitted parameters.
+- All 15 configurations passed roof support and overlap checks. Samples used 890–1,168 triangles and six material batches per model. Offline Chrome verified the three roof views, normal spawning (20 towers among 229 offices), and deterministic redevelopment. Captures are in .tools/original-vaults/production-mechanical/. Hardware FPS was unmeasured.
+- Playtest Pancake City - Original Vault Offices Playtest - 20261124T181438Z.html (SHA-256 23313755358eaba313f720c27ee0f581fbc8f0e82722859e8625fa480e76fd77).
+- Test City Pancake City - Original Vault Offices Test City - 20261124T181438Z.html (SHA-256 2bea55e69dbed7bf8fefcbd33c9b41c93698e4da938ae00caa1ac3c94e9b2fcd).

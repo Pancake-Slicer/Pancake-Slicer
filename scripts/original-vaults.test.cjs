@@ -93,10 +93,15 @@ test('explicit family selection preserves picking, terrain foundations and histo
   assert.equal(n.redo(),true);z.rebuild();assert.ok(!z.buildings.some(item=>item.id===b.id));
   const fresh=network(api());
   for(const [,record] of saved.lightweightVault.assignments){
-    delete record.grid.equipment;record.grid.roofTop=record.parameters.storeys*record.parameters.floorHeight;
+    if(record.parameters.archetype!=='B')delete record.grid.equipment;
+    record.grid.roofTop=record.parameters.storeys*record.parameters.floorHeight;
     if(record.parameters.archetype==='A'){
       record.grid.atrium={y:7};record.grid.crowns=[{rise:5}];
       record.grid.roofTop+=5;record.grid.entrance.z=record.parameters.depth/2;
+    }
+    if(record.parameters.archetype==='B'){
+      record.grid.crowns=[{rise:6}];record.grid.roofTop+=6;
+      record.grid.equipment[0].depth*=.3;
     }
   }
   fresh.n.historyParticipants.get('zoning').restore(saved);fresh.z.rebuild();
@@ -129,7 +134,7 @@ test('the three street thresholds and perimeter foundations meet sloped terrain'
   rt.generator.prune();
 });
 
-test('15 production forms fit rotated lots, preserve native bays and carry supported vaults and plant',()=>{
+test('15 production forms fit rotated lots, preserve native bays and carry supported mechanical plant',()=>{
   const a=api(),rt=a.pcVaultReady(),measurements=[],polygon=ring=>a.Te(ring.map(([x,z])=>({x,z})));
   for(const type of ['A','B','C']){
     const shapes=new Set;
@@ -142,33 +147,37 @@ test('15 production forms fit rotated lots, preserve native bays and carry suppo
       assert.equal(s.form,form);assert.equal(s.storeys,h);assert.equal(g.entrance.x,0);
       for(const value of [s.width,s.depth])assert.ok(Math.abs(value/2.4-Math.round(value/2.4))<.00001);
       assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(lot.footprint)))<.001);
-      assert.ok(g.crowns.length>=1&&g.crowns.length<=2);
-      assert.equal(g.equipment.length,type==='B'?2:1);
+      assert.equal('crowns' in g,false);
+      assert.equal(g.equipment.length,type==='B'||type==='A'&&form===2?2:1);
+      assert.equal(g.roofTop,h*s.floorHeight+1.65);
+      const topSlabs=type==='B'?g.slabs.slice(-2):g.slabs.slice(-1);
+      assert.deepEqual([...new Set(g.equipment.map(unit=>unit.y))],Array.from(topSlabs,slab=>slab.end));
       for(const slab of g.slabs.slice(1)){
         const lower=g.slabs.find(v=>v.end===slab.start);
         assert.ok(a.sn(a.je(polygon(slab.ring),polygon(lower.ring)))<.001,type+' unsupported slab');
       }
       const placed=[];
-      for(const v of [...g.crowns,...g.equipment]){
-        const along=v.axis?v.length/2+.14:v.width/2,wide=v.axis?v.radius+.12:v.depth/2;
-        const ring=[[-along,-wide],[along,-wide],[along,wide],[-along,wide]].map(([x,z])=>v.axis==='z'?[v.x-z,v.z+x]:[v.x+x,v.z+z]);
-        const roof=g.slabs.find(slab=>slab.end===v.y),shape=polygon(ring);
-        assert.ok(a.sn(a.je(shape,polygon(roof.ring)))<.001,type+' unsupported roof attachment');
-        for(const p of placed.filter(p=>p.y===v.y))assert.ok(a.sn(shape)-a.sn(a.je(shape,p.shape))<.001,type+' overlapping roof attachments');
-        placed.push({y:v.y,shape});
+      for(const {x,y,z,width,depth,height} of g.equipment){
+        const half=width/2,span=depth/2;
+        const shape=polygon([[x-half,z-span],[x+half,z-span],[x+half,z+span],[x-half,z+span]]);
+        const roof=topSlabs.find(slab=>slab.end===y);
+        assert.ok(a.sn(a.je(shape,polygon(roof.ring)))<.001,type+' unsupported roof equipment');
+        for(const p of placed.filter(p=>p.y===y))assert.ok(a.sn(shape)-a.sn(a.je(shape,p.shape))<.001,type+' overlapping roof equipment');
+        placed.push({y,shape});
+        assert.equal(height,1.65);
       }
-      const vault=m.children.find(mesh=>mesh.name==='vault0'),door=m.children.find(mesh=>mesh.name==='door0');
-      assert.equal(vault.material,rt.generator.materials['vault'+s.palette]);
+      const ribbon=m.children.find(mesh=>mesh.name==='ribbon0'),door=m.children.find(mesh=>mesh.name==='door0');
+      assert.ok(!m.children.some(mesh=>mesh.name.startsWith('vault')));
+      assert.ok(m.children.some(mesh=>mesh.name==='mechanical'));
+      assert.equal(ribbon.material,rt.generator.materials['ribbon'+s.palette]);
       assert.equal(door.material,rt.generator.materials['door'+s.palette]);
-      const data=vault.material.map.image.data,color=door.material.color.getHex(),pixel=(39*256+10)*4;
+      const data=ribbon.material.map.image.data,color=door.material.color.getHex(),pixel=(39*256+10)*4;
       assert.equal(data[pixel+1]-data[pixel],((color>>8)&255)-(color>>16));
       assert.equal(data[pixel+2]-data[pixel],(color&255)-(color>>16));
-      const n=vault.geometry.attributes.normal;
-      for(let k=0;k<n.count;k++)assert.ok(Math.abs(Math.hypot(n.getX(k),n.getY(k),n.getZ(k))-1)<.0001);
       assert.ok(m.children.every(c=>!c.material.transparent));
-      assert.ok(m.userData.triangles<4400&&m.children.length<=7);
+      assert.ok(m.userData.triangles<1900&&m.children.length<=6);
       const fixed=rt.system.definition.layout({archetype:type,height:32,width:57.6,depth:43.2,storeys:32,form});
-      shapes.add(JSON.stringify([fixed.slabs,fixed.crowns]));
+      shapes.add(JSON.stringify([fixed.slabs,fixed.equipment]));
       measurements.push([type,form,s.width,s.depth,h,m.userData.triangles,m.children.length]);
       rt.generator.release(m);
     }
