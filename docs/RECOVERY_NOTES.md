@@ -554,3 +554,12 @@ Suggested smoke tests: load the world, camera movement, freeform road placement,
 - Added chunk-based distance detail using shared batches and materials. Existing saved revisions, foundations, picking and redevelopment are covered by regression tests.
 - Full build passed 180 checks. Browser review confirmed 15 fitted towers, 28 natural curved growables, deterministic redevelopment, and 68% fewer active curved triangles at distance in the fixture. [Playable exports and measured scope](ORIGINAL_CURVED_MODERNIST.md#revision-4--normal-curved-office-growth).
 - Recoverable checkpoint checkpoint/pre-curved-family-61cc87d. The milestone is a local commit until an approved push.
+
+## Barrel-vault skyscraper fixed benchmark — 2026-11-24
+
+- Reconstructed one 29-storey reference tower with a chamfered shaft, projecting centre, stepped shoulders, banded podium, and recessed terraces. The full-width jade crown and street atrium are closed elliptical vaults with fine metallic framing. Reflections and interior cues are baked into opaque maps.
+- Fixed dimensions are inferred from the supplied single view. The model uses an approximately 60 × 32 m tower envelope, 19 m podium and 10.4 m crown rise. The hidden elevations are inferred.
+- Run npm run export:barrel-vault for the matched side-by-side viewer and npm run export:barrel-vault:city for the playable Test City. Set PANCAKE_BARREL_VAULT_REFERENCE to the supplied PNG when rebuilding the viewer from a fresh checkout. Its SHA-256 is b4b062d2212e792f9f5b49032f3b781a18433b533b7b45c010390f3776aea4ed.
+- Pancake City - Barrel-Vault Benchmark - 20261124T170336Z.html (SHA-256 387024644ec45c5fd94982d36e20da0b4fe6f0f26f1087a30be33b7b0c8ab0cd). Pancake City - Barrel-Vault Test City - 20261124T170451Z.html (SHA-256 fefb7e0d61c6865820487956d04a6ea6bed277c3769acc99a72a8c500e83c15b).
+- Full npm run build and two focused benchmark checks passed. Chrome opened both exports directly from disk offline with no browser errors or external requests. The reference-angle, crown, entrance and orbit views passed. The Test City kept the benchmark scene-only and allowed ordinary Office zoning. The model uses 3,672 triangles and 8 material batches. Comparison captures are in .tools/barrel-vault-reference/.
+- Checkpoint checkpoint/pre-barrel-vault-f3c8547. Normal spawning and the assembled game assets are unchanged. Await visual approval before original designs or parametric work.
