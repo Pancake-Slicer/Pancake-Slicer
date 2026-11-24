@@ -73,11 +73,11 @@ export function createMaterials() {
 
 const point = ([x, z], y) => [x, y, z];
 
-function towerRing(width, depth) {
-  const x = width / 2, z = depth / 2;
-  return [[-x + 4,-z],[x - 4,-z],[x,-z + 4],[x,z - 7.2],[x - 4,z - 3.4],
+function towerRing(width, depth, squareOuter = false) {
+  const x = width / 2, z = depth / 2, bevel = squareOuter ? 0 : 4;
+  return [[-x + bevel,-z],[x - bevel,-z],[x,-z + 4],[x,z - 7.2],[x - bevel,z - 3.4],
     [19.8,z - 3.4],[14.1,z + 1],[ -14.1,z + 1],[-19.8,z - 3.4],
-    [-x + 4,z - 3.4],[-x,z - 7.2],[-x,-z + 4]];
+    [-x + bevel,z - 3.4],[-x,z - 7.2],[-x,-z + 4]];
 }
 
 function walls(batch, bottom, top, y0, y1, bandHeight, surfaces, floorStart = 0) {
@@ -161,7 +161,7 @@ export function buildStudy(materials = createMaterials()) {
   walls(batch,topInset,topInset,17.97,s.podiumHeight,3.1,()=> 'end');
   batch.box('terrace',0,17.96,0,s.podiumWidth-.86,.08,s.podiumDepth-.86);
 
-  const shaft=towerRing(56,29), cap=towerRing(s.width,s.depth), skirt=s.podiumHeight+2.75;
+  const shaft=towerRing(56,29), cap=towerRing(s.width,s.depth,true), skirt=s.podiumHeight+2.75;
   const shoulder=s.podiumHeight+23*s.floorHeight, shoulderTop=shoulder+2*s.floorHeight;
   const facade=i=>i===5||i===6||i===7?'blue':'teal';
   walls(batch,shaft,shaft,17.99,skirt,3.4,()=> 'stone');
@@ -170,7 +170,7 @@ export function buildStudy(materials = createMaterials()) {
   walls(batch,cap,cap,shoulderTop,crownSpring,s.floorHeight,facade,(shoulderTop-skirt)/s.floorHeight);
 
   // Close the tower at the vault spring, including the chamfered shoulders.
-  const capFaces=[[10,11,0],[0,1,2],[2,3,4],[5,6,7],[8,9,10],[10,0,2],[2,4,5],[5,7,8],[8,10,2],[2,5,8]];
+  const capFaces=[[0,1,2],[5,6,7],[8,9,10],[10,0,2],[2,4,5],[5,7,8],[8,10,2],[2,5,8]];
   for(const [i,j,k] of capFaces){
     const [a,b,c]=[cap[i],cap[j],cap[k]];
     const upward=(b[1]-a[1])*(c[0]-a[0])>(b[0]-a[0])*(c[1]-a[1]);

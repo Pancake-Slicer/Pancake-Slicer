@@ -563,3 +563,9 @@ Suggested smoke tests: load the world, camera movement, freeform road placement,
 - Pancake City - Barrel-Vault Benchmark - 20261124T170336Z.html (SHA-256 387024644ec45c5fd94982d36e20da0b4fe6f0f26f1087a30be33b7b0c8ab0cd). Pancake City - Barrel-Vault Test City - 20261124T170451Z.html (SHA-256 fefb7e0d61c6865820487956d04a6ea6bed277c3769acc99a72a8c500e83c15b).
 - Full npm run build and two focused benchmark checks passed. Chrome opened both exports directly from disk offline with no browser errors or external requests. The reference-angle, crown, entrance and orbit views passed. The Test City kept the benchmark scene-only and allowed ordinary Office zoning. The model uses 3,672 triangles and 8 material batches. Comparison captures are in .tools/barrel-vault-reference/.
 - Checkpoint checkpoint/pre-barrel-vault-f3c8547. Normal spawning and the assembled game assets are unchanged. Await visual approval before original designs or parametric work.
+
+## Barrel-vault eave supports — 2026-11-24
+
+- Squared the four outer corners on the top four storeys so the side walls extend beneath both vault eaves. The lower shaft retains its chamfers and the front projection retains its angled transitions. The vault itself keeps the previous geometry.
+- Added a geometry check for wall support at both eaves on both ends. Reviewed the crown close-up and verified both revised standalone previews offline in Chrome.
+- Pancake City - Barrel-Vault Benchmark - 20261124T170800Z.html (SHA-256 30f3d8d902925ceb9aac122c6c2fc4d83bd9dcc829f4d45b919d474f22a4a1ef). Pancake City - Barrel-Vault Test City - 20261124T170802Z.html (SHA-256 25da881efd9a9a4504bd17a5ceb203d8bf5bfc62e72920beee81ffbf87a1d1a9). Reference comparison captures are in .tools/barrel-vault-reference/square-corners/.

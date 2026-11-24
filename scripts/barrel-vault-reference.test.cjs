@@ -28,6 +28,13 @@ test('fixed reference uses two smooth opaque vaults, a street entry and shared b
     }
     assert.ok(Math.abs(rise-section.rise)<.001);
   }
+  const crown=model.userData.vaults.crown,side=model.children.find(mesh=>mesh.name==='teal').geometry.attributes.position;
+  for(const sign of [-1,1]){
+    const zAtSpring=[];
+    for(let i=0;i<side.count;i++)if(Math.abs(side.getY(i)-crown.spring)<.001&&Math.abs(side.getX(i)-sign*STUDY.width/2)<.001)zAtSpring.push(side.getZ(i));
+    assert.ok(Math.min(...zAtSpring)<=crown.center-crown.radius,'Support at the back eave');
+    assert.ok(Math.max(...zAtSpring)>=crown.center+crown.radius,'Support at the front eave');
+  }
   for(const mesh of model.children)mesh.geometry.dispose();
   for(const material of Object.values(materials)){material.map?.dispose();material.dispose();}
 });
