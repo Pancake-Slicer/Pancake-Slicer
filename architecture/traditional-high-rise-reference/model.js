@@ -83,7 +83,7 @@ function elevation(batch,a,b,count,side){
   };
   panel('recess',0,length,0,roofY,-.52);
   for(const [y,d,h] of [[.24,.72,.48],[4.73,.92,.31],[5.03,.71,.21],[8.0,.9,.34],[8.38,1.12,.34],
-    [89.87,.92,.25],[90.21,1.12,.36],[94.52,1.12,.26],[94.84,1.34,.26]]){
+    [89.87,.92,.25],[90.21,1.12,.36]]){
     band(trim,y,.08,d,h);
   }
   for(let i=0;i<=count;i++){
@@ -121,6 +121,33 @@ function elevation(batch,a,b,count,side){
   band('stone',95.18,.025,.40,.81);
   band('trim',95.61,.03,.59,.17);
   band('flashing',95.72,.03,.48,.09);
+}
+function roofCornice(batch){
+  const perimeter=plan.perimeter;
+  const normals=perimeter.map(([x,z],i)=>{
+    const [nextX,nextZ]=perimeter[(i+1)%perimeter.length];
+    const length=Math.hypot(nextX-x,nextZ-z);
+    return [(z-nextZ)/length,(nextX-x)/length];
+  });
+  const ring=(y,projection)=>perimeter.map(([x,z],i)=>{
+    const previous=normals[(i+normals.length-1)%normals.length], next=normals[i];
+    return [x+(previous[0]+next[0])*projection,y,z+(previous[1]+next[1])*projection];
+  });
+  // Miter each limestone course around all ten corners, including the lightwell.
+  const profile=[
+    [94.38,-.28],[94.38,.43],[94.55,.62],[94.63,.83],
+    [94.63,1.13],[94.76,1.13],[94.76,1.63],[94.98,1.63],
+    [95.07,1.57],[95.12,1.49],[95.12,-.22]
+  ];
+  const part=batch.begin('projecting roof cornice');
+  for(let step=1;step<profile.length;step++){
+    const lower=ring(...profile[step-1]),upper=ring(...profile[step]);
+    for(let i=0;i<perimeter.length;i++){
+      const j=(i+1)%perimeter.length;
+      batch.quad(step===8?'flashing':'trim',[lower[i],lower[j],upper[j],upper[i]]);
+    }
+  }
+  batch.end(part);
 }
 function roofRect(batch,material,x0,x1,z0,z1,y,tile){
   batch.quad(material,[[x0,y,z0],[x0,y,z1],[x1,y,z1],[x1,y,z0]],
@@ -190,6 +217,7 @@ function rooftop(batch){
 export function buildStudy(materials=createMaterials()){
   const batch=new ArchitectureBatch;
   for(const [i,a] of plan.perimeter.entries())elevation(batch,a,plan.perimeter[(i+1)%plan.perimeter.length],plan.bayCounts[i],i);
+  roofCornice(batch);
   for(const [x0,x1,z0,z1] of plan.roofSlabs)roofRect(batch,'gravel',x0,x1,z0,z1,roofY,8);
   rooftop(batch);
   const model=batch.finish(materials,'Traditional Commercial High-Rise · fixed benchmark');

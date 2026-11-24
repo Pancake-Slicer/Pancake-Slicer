@@ -630,3 +630,8 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - The benchmark loads only in its dedicated Test City, which includes a matched orthographic side-by-side comparison. The normal Playtest exactly matches the fcbc1cb export. Offline Chrome verified the lightwell, roof and entrance views, comparison, and exclusion from the growable catalogue. The model uses 39,354 triangles and 12 opaque batches. Hardware frame rate is unmeasured.
 - Rebuild with node scripts/export-traditional-high-rise.cjs <reference.png>. The supplied reference is retained in the ignored .tools/traditional-high-rise-reference/ folder with the comparison capture. Reference SHA-256 08f209c742b6518f92843ea4ec01dda1db1c31bd27c3ee089de136e18314f891.
 - Playable Pancake City - Traditional High-Rise Test City - 20261124T194543Z.html (SHA-256 3dd1b4b5044b5b68bb181d639cbe904375936c346abc321f3cda75ebf9bc4e3a). Recovery checkpoint checkpoint/pre-traditional-high-rise-fcbc1cb. Await visual approval before developing variants.
+
+### Roof cornice revision
+
+- Replaced the two shallow roof bands with mitered limestone courses and a patinated upper edge. The shelf projects 1.63 m from the facade and follows the open lightwell perimeter. Offline Chrome verified the projection and the matched-angle and roof views. The model uses 39,314 triangles and 12 opaque batches.
+- Playable Pancake City - Traditional High-Rise Test City - 20261124T203057Z.html (SHA-256 a1c4b7bfe001e9392c9e694b0456cfcf14f0ef6c4f5f40625418bbda7c92253b). Before this change, the benchmark was at fea5d9a.
