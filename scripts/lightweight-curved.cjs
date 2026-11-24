@@ -13,7 +13,8 @@ function applyCurvedIntegration(source){const replace=(a,b)=>{assert.equal(sourc
  replace('pcWaterfallRemember(collection,property,asset);','pcWaterfallRemember(collection,property,asset);pcCurvedRemember(collection,property,asset);');
  replace('decos=[],waterfalls=[];','decos=[],waterfalls=[],curveds=[];');
  replace("if(asset.model.format==='lightweight-waterfall'){","if(asset.model.format==='lightweight-curved'){curveds.push(...buildings);continue;}if(asset.model.format==='lightweight-waterfall'){");
- replace('pcBmoFlush(waterfalls,group,pcWaterfallAdapter);','pcBmoFlush(waterfalls,group,pcWaterfallAdapter);pcBmoFlush(curveds,group,pcCurvedAdapter);');
+ replace('pcBmoFlush(waterfalls,group,pcWaterfallAdapter);','pcBmoFlush(waterfalls,group,pcWaterfallAdapter);pcCurvedFlush(curveds,group);');
+ replace('j.updateLOD(ut)&&','pcCurvedUpdateLOD(ut.position)&&(w(),I.requestShadows()),j.updateLOD(ut)&&');
  replace('pcWaterfallRuntime?.generator.prune();E={','pcWaterfallRuntime?.generator.prune();pcCurvedRuntime?.generator.prune();E={');
  replace('lightweightWaterfall:pcWaterfallHistory(this)}','lightweightWaterfall:pcWaterfallHistory(this),lightweightCurved:pcCurvedHistory(this)}');
  replace('s=pcWaterfallRestore(this,i?.lightweightWaterfall)||s;','s=pcWaterfallRestore(this,i?.lightweightWaterfall)||s;s=pcCurvedRestore(this,i?.lightweightCurved)||s;');

@@ -547,3 +547,10 @@ Suggested smoke tests: load the world, camera movement, freeform road placement,
 - Verified revision 1 and 2 geometry buffers and current Facet Point against 02fb229. Existing saved towers retain their original geometry. Normal spawning remains off.
 - Full build passed 177 checks, including 11 family checks. Chrome direct-file review covered Arcus’s roof, Splice’s elevation and footprint, and both towers’ demolition and Undo/Redo. [Details and export hashes](ORIGINAL_CURVED_MODERNIST.md#revision-3--arcus-taper-and-splice-tower).
 - Local checkpoint checkpoint/pre-arcus-taper-splice-02fb229. External backup awaits an approved push.
+
+## Curved Office growables revision 4 — 2026-11-24
+
+- Added Arcus, Splice Crescent and Facet Point to mixed Office growth and the normal selector. Seeded forms vary the silhouettes, podiums, upper tapers, setbacks and crowns on native polygon-fitted lots. Approved geometry and archived SC4 benchmark remain preserved.
+- Added chunk-based distance detail using shared batches and materials. Existing saved revisions, foundations, picking and redevelopment are covered by regression tests.
+- Full build passed 180 checks. Browser review confirmed 15 fitted towers, 28 natural curved growables, deterministic redevelopment, and 68% fewer active curved triangles at distance in the fixture. [Playable exports and measured scope](ORIGINAL_CURVED_MODERNIST.md#revision-4--normal-curved-office-growth).
+- Recoverable checkpoint checkpoint/pre-curved-family-61cc87d. The milestone is a local commit until an approved push.

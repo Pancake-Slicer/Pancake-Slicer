@@ -19,7 +19,7 @@
 - Use the [approved building workflow](docs/APPROVED_BUILDING_WORKFLOW.md) for GLBs. Preserve archived assets and existing versioned assignments. Introduce new procedural families in versioned modules and review them in the Lab before gameplay activation unless explicitly authorized.
 - Reuse `architecture/lightweight/template.mjs` and the existing lot fitting, foundations, picker, history, and batching. Fit the complete decorated envelope at native scale using street alignment and polygon containment. Keep metres, Y-up, +Z frontage, and an explicit entrance. Preserve deterministic generation, saved revisions, Undo/Redo, cold restore, and catalogue fallbacks.
 - Use existing opaque materials, metric UVs, geometry reuse, and chunked batches. Preserve material provenance and release owned resources when removed.
-- Check current family status in the recovery notes. Keep the [curved modernist experiments](docs/ORIGINAL_CURVED_MODERNIST.md) opt-in. Keep the [curved benchmark](docs/CURVED_SKYSCRAPER_REFERENCE.md) and [Waterfall study](docs/WATERFALL_RED_GRANITE.md) out of normal spawning.
+- Check current family status in the recovery notes. Use the [curved Office family](docs/ORIGINAL_CURVED_MODERNIST.md) for normal Office growth and preserve its approved reference revisions. Keep the [curved benchmark](docs/CURVED_SKYSCRAPER_REFERENCE.md) and [Waterfall study](docs/WATERFALL_RED_GRANITE.md) out of normal spawning.
 
 ## Validate and deliver
 

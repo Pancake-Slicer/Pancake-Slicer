@@ -1,4 +1,5 @@
 // pcSC4Catalogue is embedded from the reviewed reference JSON at assembly time.
+function pcCatalogueCurvedEntries(){return typeof pcCurvedDefinitions==='undefined'?[]:pcCurvedDefinitions;}
 function pcCatalogueFind(id){return pcSC4Catalogue.entries.find(entry=>entry.id===Number(id));}
 function pcCatalogueReference(collection,property){
   const assigned=collection.pcCatalogueAssignments?.get(property.id);
@@ -11,7 +12,8 @@ function pcCatalogueReference(collection,property){
 }
 function pcCatalogueNeedsChange(collection,properties,zone,erase){
   if(erase||zone!=='offices'||!collection.pcCatalogueChoice)return false;
-  return properties.some(property=>Number(collection.pcCatalogueAssignments?.get(property.id))!==Number(collection.pcCatalogueChoice));
+  const choice=collection.pcCatalogueChoice,curved=pcCatalogueCurvedEntries().some(d=>d.key===choice);
+  return properties.some(property=>{const assigned=collection.pcCatalogueAssignments?.get(property.id);return curved?assigned!==choice:Number(assigned)!==Number(choice);});
 }
 function pcCatalogueAssign(collection,properties,zone,erase){
   if(zone!=='offices'||erase)return;
@@ -140,13 +142,14 @@ function pcCatalogueInitMenu(container,collection,redraw){
   const refreshHelp=()=>{if(collection.propertyZone==='offices'&&helpText)helpText.textContent='SC4-inspired buildings retain their reference proportions. Parcels range up to 76 × 76 m; choose a large enough parcel for the selected building. Paint or bucket-fill to apply it.';};
   for(const tab of container.querySelectorAll?.('[data-zone]')||[])tab.addEventListener('click',refreshHelp);
   const option=entry=>`<option value="${entry.id}">${entry.name.replace(/&/g,'&amp;').replace(/</g,'&lt;')} [${entry.id}]</option>`;
-  select.innerHTML='<option value="">Mix all 98 commercial $$$ buildings</option>'+['office','services'].map(type=>`<optgroup label="${type==='office'?'Offices (64)':'Shops, hotels and services (34)'}">${pcSC4Catalogue.entries.filter(entry=>entry.type===type).map(option).join('')}</optgroup>`).join('');
+  select.innerHTML='<option value="">Mix commercial $$$ buildings</option>'+['office','services'].map(type=>`<optgroup label="${type==='office'?'Offices (64)':'Shops, hotels and services (34)'}">${pcSC4Catalogue.entries.filter(entry=>entry.type===type).map(option).join('')}</optgroup>`).join('')+'<optgroup label="Curved offices">'+pcCatalogueCurvedEntries().map(d=>'<option value="'+d.key+'">'+d.name+'</option>').join('')+'</optgroup>';
   select.value=collection.pcCatalogueChoice?String(collection.pcCatalogueChoice):'';
   select.addEventListener('change',()=>{
-    collection.pcCatalogueChoice=select.value?Number(select.value):null;
+    const curved=pcCatalogueCurvedEntries().find(d=>d.key===select.value);
+    collection.pcCatalogueChoice=curved?.key??(select.value?Number(select.value):null);
     const entry=pcCatalogueFind(select.value),help=container.querySelector('#catalogue-help');
     const original=entry&&pcSC4Model(entry.id);
-    help.textContent=original?`${entry.name} · SC4-inspired rebuild · ${original.size[0]} × ${original.size[2]} m building, ${original.size[1]} m reference height. A full-lot ground floor meets the sidewalk; upper floors adapt to the site.`:entry?`${entry.name} · ${entry.tileset} · reference lots ${entry.lots.join(', ')} · approximately ${entry.estimatedFloors} storeys. Paint or refill an Office parcel to apply this design.`:'Mix all 98 referenced offices, shops, hotels and services. Existing buildings keep their chosen design.';
+    help.textContent=curved?curved.name+' · Paint or refill a compatible Office parcel.':original?`${entry.name} · SC4-inspired rebuild · ${original.size[0]} × ${original.size[2]} m building, ${original.size[1]} m reference height. A full-lot ground floor meets the sidewalk; upper floors adapt to the site.`:entry?`${entry.name} · ${entry.tileset} · reference lots ${entry.lots.join(', ')} · approximately ${entry.estimatedFloors} storeys. Paint or refill an Office parcel to apply this design.`:'Mix offices, shops, hotels and services, including curved offices on eligible parcels. Existing buildings keep their chosen design.';
     redraw();
   });
 }

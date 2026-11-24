@@ -4,37 +4,42 @@ import {normalizeSpecification,massing} from './spec.mjs';
 import {createCurvedMaterials} from './materials.js';
 function pathData(ring){const distances=[0];for(let i=0;i<ring.length;i++)distances.push(distances.at(-1)+Math.hypot(ring[(i+1)%ring.length][0]-ring[i][0],ring[(i+1)%ring.length][1]-ring[i][1]));return {ring,distances,length:distances.at(-1)};}
 function sample(path,f){const distance=((f%1)+1)%1*path.length;let i=0;while(path.distances[i+1]<distance)i++;const a=path.ring[i],c=path.ring[(i+1)%path.ring.length],t=(distance-path.distances[i])/(path.distances[i+1]-path.distances[i]);return [a[0]+(c[0]-a[0])*t,a[1]+(c[1]-a[1])*t];}
-export function buildCurved(input,materials){const s=normalizeSpecification(input),plan=massing(s),b=new ArchitectureBatch,smooth=[];
+export function buildCurved(input,materials,distant=false){const s=normalizeSpecification(input),plan=massing(s),b=new ArchitectureBatch,smooth=[];
  const p=(v,y)=>[v[0],y,v[1]],part=(label,fn)=>{const a=b.begin(label);fn();b.end(a);return label;};
  function cap(ring,y,key='roof'){const g=new T.ExtrudeGeometry(new T.Shape(ring.map(v=>new T.Vector2(v[0],-v[1]))),{depth:.01,bevelEnabled:false,steps:1,curveSegments:1}),a=g.attributes.position,n=g.attributes.normal;for(let i=0;i<a.count;i+=3)if(n.getZ(i)>.5){const points=[0,1,2].map(j=>[a.getX(i+j),y,-a.getY(i+j)]);b.triangle(key,points,points.flatMap(p=>[p[0]/4,p[2]/4]));}g.dispose();}
  function rail(ring,y,height,key='frame'){const outer=ring.map((v,i)=>{const a=ring[(i+ring.length-1)%ring.length],c=ring[(i+1)%ring.length],dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz);return [v[0]+dz/len*.08,v[1]-dx/len*.08];});for(let i=0;i<ring.length;i++){const j=(i+1)%ring.length,a=outer[i],c=outer[j];b.quad(key,[p(a,y),p(a,y+height),p(c,y+height),p(c,y)]);b.quad(key,[p(ring[i],y+height),p(ring[j],y+height),p(c,y+height),p(a,y+height)]);}}
- function facade(v){const lo=v.start*s.floorHeight,hi=v.end*s.floorHeight,a=pathData(v.ring),c=pathData(v.topRing),count=Math.max(96,Math.ceil(a.length/.65)),bayCount=Math.round(a.length/(v.podium?3.2:1.5)),pitch=a.length/bayCount,glass=v.podium?'entry':'glass'+s.palette,label=part(v.name,()=>{
+ function facade(v){const lo=v.start*s.floorHeight,hi=v.end*s.floorHeight,a=pathData(v.ring),c=pathData(v.topRing),count=distant?Math.max(32,Math.ceil(a.length/2.8)):Math.max(96,Math.ceil(a.length/.65)),bayCount=Math.round(a.length/(v.podium?3.2:1.5)),pitch=a.length/bayCount,glass=v.podium?'entry':'glass'+s.palette,label=part(v.name,()=>{
  for(let i=0;i<count;i++){const f=i/count,g=(i+1)/count,q=sample(a,f),r=sample(a,g),u=sample(c,f),w=sample(c,g),uv=[f*bayCount/8,lo/s.floorHeight/8,f*bayCount/8,hi/s.floorHeight/8,g*bayCount/8,hi/s.floorHeight/8,g*bayCount/8,lo/s.floorHeight/8];b.quad(glass,[p(q,lo),p(u,hi),p(w,hi),p(r,lo)],uv);}
- for(let i=0;i<bayCount;i++){const f=i/bayCount,q=sample(a,f),r=sample(c,f),door=v.podium&&Math.abs(q[1]-plan.entrance.z)<.7&&Math.abs(q[0]-plan.entrance.x)<plan.entrance.width/2;if(door)continue;const key=v.podium?'stone':'frame',width=v.podium?.46:.11,depth=v.podium?.28:.12;if(Math.hypot(q[0]-r[0],q[1]-r[1])<1e-6)b.box(key,q[0],(lo+hi)/2,q[1],width,hi-lo,depth);else b.beam(key,p(q,lo),p(r,hi),width,depth);}
+ for(let i=0;(!distant||v.podium)&&i<bayCount;i++){const f=i/bayCount,q=sample(a,f),r=sample(c,f),door=v.podium&&Math.abs(q[1]-plan.entrance.z)<.7&&Math.abs(q[0]-plan.entrance.x)<plan.entrance.width/2;if(door)continue;const key=v.podium?'stone':'frame',width=v.podium?.46:.11,depth=v.podium?.28:.12;if(Math.hypot(q[0]-r[0],q[1]-r[1])<1e-6)b.box(key,q[0],(lo+hi)/2,q[1],width,hi-lo,depth);else b.beam(key,p(q,lo),p(r,hi),width,depth);}
  // Fine floor lines live in the repeating atlas; every third floor has shallow physical relief.
- for(let floor=v.start;floor<=v.end;floor+=v.podium?1:3){if(floor===0)continue;const t=(floor-v.start)/(v.end-v.start),ring=v.ring.map((q,i)=>q.map((n,j)=>n+(v.topRing[i][j]-n)*t));rail(ring,floor*s.floorHeight-.04,v.podium?.18:.095,v.podium?'stone':'frame');}
+ for(let floor=v.start;floor<=v.end;floor+=v.podium?1:3){if(floor===0||distant&&!v.podium)continue;const t=(floor-v.start)/(v.end-v.start),ring=v.ring.map((q,i)=>q.map((n,j)=>n+(v.topRing[i][j]-n)*t));rail(ring,floor*s.floorHeight-.04,v.podium?.18:.095,v.podium?'stone':'frame');}
  rail(v.topRing,hi-.18,v.podium?.34:.20,v.podium?'stone':'frame');cap(v.topRing,hi+.025);
  });smooth.push(label);return {pitch,bayCount};}
  const grids=plan.sections.map(facade),e=plan.entrance;
  part('native entrance and restrained canopy',()=>{for(const x of [-1,0,1]){b.box('entry',e.x+x*1.7,e.height/2,e.z+.035,1.62,e.height,.08);b.box('frame',e.x+x*1.7-.83,e.height/2,e.z+.105,.08,e.height,.10);}b.box('trim',e.x,e.height+.12,e.z+.42,e.width+.4,.24,.84);for(const x of [-1,1])b.box('stone',e.x+x*(e.width/2+.16),e.height/2,e.z+.05,.32,e.height,.26);});
  function fan(x,z,y,r=.65){for(let i=0;i<24;i++){const a=i/24*Math.PI*2,c=(i+1)/24*Math.PI*2;b.triangle('dark',[[x,y,z],[x+r*Math.sin(a),y,z+r*Math.cos(a)],[x+r*Math.sin(c),y,z+r*Math.cos(c)]]);}for(let i=0;i<4;i++){const a=i*Math.PI/2;b.beam('frame',[x-r*.7*Math.sin(a),y+.04,z-r*.7*Math.cos(a)],[x+r*.7*Math.sin(a),y+.04,z+r*.7*Math.cos(a)],.07,.07);}}
  const y=plan.roof,top=plan.sections.at(-1).topRing;
+ const production=s.revision===4;
  part('original restrained roof termination',()=>{if(s.archetype!=='A'||s.revision===1)rail(top,y+.04,.92,'trim');
  if(s.archetype==='A'){// Recessed rectangular louver court, no oval screen or antenna.
  b.box('dark',0,y+1.3,0,s.width*.30,2.6,s.depth*.22);for(let i=0;i<9;i++)b.box('frame',-s.width*.15+i*s.width*.30/8,y+1.3,s.depth*.111,.10,2.4,.12);b.box('trim',0,y+2.7,0,s.width*.32,.20,s.depth*.24);for(const x of [-1,1]){b.box('roof',x*s.width*.23,y+.45,0,2.3,.85,3.0);fan(x*s.width*.23,0,y+.89,.6);for(let i=0;i<4;i++)b.box('dark',x*s.width*.23,y+.90,(i-1.5)*.6,1.9,.08,.25);}}
  if(s.archetype==='B'&&s.revision>=3){
-  const width=s.width*.24,depth=s.depth*.28;
-  b.box('dark',0,y+1.0,0,width,2,depth);
-  b.box('trim',0,y+2.07,0,width+.24,.14,depth+.24);
-  for(const sign of [-1,1])fan(sign*width*.25,0,y+2.15,.66);
+  const split=production&&s.variant===2,z=production?-s.depth*.14:0;
+  const width=s.width*(split?.135:production&&s.variant===0?.20:.24),depth=s.depth*(production?.22:.28);
+  for(const x of split?[-s.width*.16,s.width*.16]:[0]){
+   b.box('dark',x,y+1.0,z,width,2,depth);
+   b.box('trim',x,y+2.07,z,width+.24,.14,depth+.24);
+   if(!distant)for(const sign of [-1,1])fan(x+sign*width*.25,z,y+2.15,.66);
+  }
  }
  if(s.archetype==='B'&&s.revision<3){// Paired low service courts follow the arc; the centre remains open.
  for(const sign of [-1,1]){const x=sign*s.width*(s.revision>=2?.13:.21),z=-s.depth*(s.revision>=2?.16:.18);b.box('dark',x,y+.9,z,s.width*.15,1.8,3.0);for(let i=0;i<6;i++)b.box('trim',x+(i-2.5)*s.width*.025,y+1,z+1.54,.10,1.9,.12);b.box('roof',x,y+1.88,z,s.width*.16,.16,3.2);for(const k of [-1,1])fan(x+k*s.width*.035,z,y+1.97,.62);}}
  if(s.archetype==='C'){// Offset flat blades, no pyramidal cap and no reference roof enclosure.
- const x=-s.width*.036,z=-s.depth*.024;for(const sign of [-1,1])b.box('trim',x+sign*s.width*.13,y+1.45,z,s.width*.10,.30,s.depth*.26);b.box('dark',x,y+.75,z,s.width*.18,1.5,s.depth*.18);for(let i=0;i<6;i++)b.box('frame',x+(i-2.5)*s.width*.03,y+.8,z+s.depth*.091,.08,1.3,.10);}
+ const dx=production?[.023,.034,.043][s.variant]:.036,x=-s.width*dx,z=-s.depth*(production?dx*2/3:.024),span=production?[.15,.13,.10][s.variant]:.13;
+ for(const sign of [-1,1])b.box('trim',x+sign*s.width*span,y+1.45,z,s.width*.10,.30,s.depth*(production?[.29,.26,.22][s.variant]:.26));b.box('dark',x,y+.75,z,s.width*.18,1.5,s.depth*.18);for(let i=0;i<6;i++)b.box('frame',x+(i-2.5)*s.width*.03,y+.8,z+s.depth*.091,.08,1.3,.10);}
  });
  // Extend the final facade loft along its existing slope for three more storeys.
- const upper=plan.sections.at(-1),finFloors=3;
+ const upper=plan.sections.at(-1),finFloors=production&&s.archetype==='A'?[2,3,4][s.variant]:3;
  const finHeight=finFloors*s.floorHeight;
  const finTaper=s.archetype==='A'&&s.revision>=3
   ? (1-upper.ring[0][1]/top[0][1])*finFloors/(upper.end-upper.start)
@@ -50,8 +55,9 @@ export function buildCurved(input,materials){const s=normalizeSpecification(inpu
   };
   for(let i=0;i<bays;i++){
    if(!isFin((i+.5)/bays))continue;
-   for(let j=0;j<4;j++){
-    const a=(i+j/4)/bays,c=(i+(j+1)/4)/bays,q=sample(path,a),r=sample(path,c);
+   const segments=distant?1:4;
+   for(let j=0;j<segments;j++){
+    const a=(i+j/segments)/bays,c=(i+(j+1)/segments)/bays,q=sample(path,a),r=sample(path,c);
     const uv=[a*bays/8,s.storeys/8,a*bays/8,(s.storeys+finFloors)/8,c*bays/8,(s.storeys+finFloors)/8,c*bays/8,s.storeys/8];
     b.quad('glass'+s.palette,[p(q,y),crest(q),crest(r),p(r,y)],uv);
     b.quad('glass'+s.palette,[p(r,y),crest(r),crest(q),p(q,y)],[uv[6],uv[7],uv[4],uv[5],uv[2],uv[3],uv[0],uv[1]]);
@@ -65,9 +71,9 @@ export function buildCurved(input,materials){const s=normalizeSpecification(inpu
  const model=b.finish(materials,s.name);
  // Smooth only curtain-wall surfaces. Angular edges and physical trim retain crisp normals.
  for(const v of plan.sections){const range=model.userData.partRanges.find(p=>p.label===v.name&&p.material===(v.podium?'entry':'glass'+s.palette));const mesh=model.children.find(m=>m.name===range.material),g=mesh.geometry,n=g.attributes.normal,pos=g.attributes.position;for(let i=range.start;i<range.end;i+=4){const previous=i===range.start?range.end-4:i-4,next=i+4===range.end?range.start:i+4;const normal=j=>new T.Vector3(n.getX(j),n.getY(j),n.getZ(j));const current=normal(i),left=normal(previous),right=normal(next),a=current.dot(left)>(s.archetype==='B'&&s.revision===2?.80:.95)?current.clone().add(left).normalize():current,c=current.dot(right)>(s.archetype==='B'&&s.revision===2?.80:.95)?current.clone().add(right).normalize():current;n.setXYZ(i,...a.toArray());n.setXYZ(i+1,...a.toArray());n.setXYZ(i+2,...c.toArray());n.setXYZ(i+3,...c.toArray());}n.needsUpdate=true;}
- for(const range of model.userData.partRanges.filter(p=>p.label==='continued glazing roof fins'&&p.material==='glass'+s.palette)){const g=model.children.find(m=>m.name===range.material).geometry,a=g.attributes.position,n=g.attributes.normal,rx=s.width*.35,rz=s.depth*.35;for(let i=range.start;i<range.end;i++){const scale=1+finTaper*(a.getY(i)-y)/finHeight,v=new T.Vector3(a.getX(i)/(rx*rx*scale),-finTaper/finHeight,a.getZ(i)/(rz*rz*scale)).normalize(),sign=v.x*n.getX(i)+v.z*n.getZ(i)<0?-1:1;n.setXYZ(i,v.x*sign,finTaper?v.y*sign:0,v.z*sign);}n.needsUpdate=true;}
+ for(const range of model.userData.partRanges.filter(p=>p.label==='continued glazing roof fins'&&p.material==='glass'+s.palette)){const g=model.children.find(m=>m.name===range.material).geometry,a=g.attributes.position,n=g.attributes.normal,rx=production?Math.max(...top.map(v=>v[0])):s.width*.35,rz=production?top[0][1]:s.depth*.35;for(let i=range.start;i<range.end;i++){const scale=1+finTaper*(a.getY(i)-y)/finHeight,v=new T.Vector3(a.getX(i)/(rx*rx*scale),-finTaper/finHeight,a.getZ(i)/(rz*rz*scale)).normalize(),sign=v.x*n.getX(i)+v.z*n.getZ(i)<0?-1:1;n.setXYZ(i,v.x*sign,finTaper?v.y*sign:0,v.z*sign);}n.needsUpdate=true;}
  // Roof triangles receive metric coordinates after batching; never stretch a tile over a triangulation face.
  for(const mesh of model.children.filter(m=>m.name==='roof')){const g=mesh.geometry,p=g.attributes.position,n=g.attributes.normal,uv=g.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/4,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/4);uv.needsUpdate=true;}
  const bounds=new T.Box3().setFromObject(model);model.userData.specification=s;model.userData.triangles=model.children.reduce((n,m)=>n+m.geometry.index.count/3,0);model.userData.bounds={min:bounds.min.toArray(),max:bounds.max.toArray()};model.userData.architecture={experimental:true,identity:plan.identity,grids,roofTop:plan.roofTop,benchmarkImported:false};return model;
 }
-export class CurvedGenerator{constructor(materials=createCurvedMaterials()){this.materials=materials;this.cache=new Map;this.leases=new Map;}generate(input){const s=normalizeSpecification(input),{id,name,seed,palette,...shape}=s,key=JSON.stringify(shape);let e=this.cache.get(key);if(!e){e={model:buildCurved({...s,palette:0},this.materials),users:0};this.cache.set(key,e);}const model=e.model.clone(true);model.name=name;for(const mesh of model.children)if(mesh.name==='glass0'){mesh.name='glass'+palette;mesh.material=this.materials[mesh.name];}for(const range of model.userData.partRanges)if(range.material==='glass0')range.material='glass'+palette;model.userData.specification=s;e.users++;this.leases.set(model,key);return model;}release(model){const key=this.leases.get(model);if(key===undefined)return false;this.cache.get(key).users--;this.leases.delete(model);model.removeFromParent();return true;}prune(){for(const [k,e]of this.cache)if(!e.users){e.model.traverse(m=>m.geometry?.dispose());this.cache.delete(k);}}}
+export class CurvedGenerator{constructor(materials=createCurvedMaterials()){this.materials=materials;this.cache=new Map;this.leases=new Map;}generate(input,{distant=false}={}){const s=normalizeSpecification(input),{id,name,seed,palette,...shape}=s;distant=distant&&s.revision===4;const key=JSON.stringify({...shape,distant});let e=this.cache.get(key);if(!e){e={model:buildCurved({...s,palette:0},this.materials,distant),users:0};this.cache.set(key,e);}const model=e.model.clone(true);model.name=name;for(const mesh of model.children)if(mesh.name==='glass0'){mesh.name='glass'+palette;mesh.material=this.materials[mesh.name];}for(const range of model.userData.partRanges)if(range.material==='glass0')range.material='glass'+palette;model.userData.specification=s;e.users++;this.leases.set(model,key);return model;}release(model){const key=this.leases.get(model);if(key===undefined)return false;this.cache.get(key).users--;this.leases.delete(model);model.removeFromParent();return true;}prune(){for(const [k,e]of this.cache)if(!e.users){e.model.traverse(m=>m.geometry?.dispose());this.cache.delete(k);}}}

@@ -58,3 +58,25 @@ Run npm run export:curved-modernist to reproduce the Playtest and Test City. In 
 - Playtest: Pancake City - Original Curved Modernist Experiments Playtest - 20261123T203639Z.html (SHA-256 e1a2609325f0a9035c3b629601ff83fa4c47918519a23de6274771059605a712).
 - Full build passed 177 checks, including 11 family checks. Both exported hashes verified. Chrome opened the Test City directly from disk and passed in-game demolition, Undo and Redo for both towers with zero browser errors.
 - Local review captures: .tools/curved-modernist/splice-review/. Default A/B/C models have 22,012 / 16,576 / 18,151 triangles respectively, with seven material batches each. No performance benchmark was run.
+
+## Revision 4 — normal curved Office growth
+
+Arcus Corporate Tower, Splice Crescent, and Facet Point now appear in mixed Office growth and as explicit choices in the Curved offices group. Earlier selections and saved assignments retain their recorded revision. The approved Arcus, Splice Tower, and Facet Point can be inspected with **Approved originals**. The SC4 reconstruction appears only in the review comparison.
+
+| Subfamily | Variation rules |
+| --- | --- |
+| Arcus | Three combinations of elliptical shaft proportions, podium, upper taper length and crown radius. The two glazed fins follow the upper slope and span two to four floor modules. |
+| Splice Crescent | Three bow depths applied to Splice’s rounded wings and recessed glazed center. Podium heights, tapered shoulders, and single or paired roof plant vary with form. |
+| Facet Point | Three combinations of corner rounding, setback depth, offsets, and blade crown span. The tower keeps its asymmetric footprint and street entrance. |
+
+New assignments use 3.4 m storeys, a 20–70 floor range, 2.4 m planning modules and a persisted seeded form. The shared fitter tests the decorated envelope on the actual street-aligned parcel and can cap automatic height to a supported floor count. It rejects incompatible lots. The existing facade-to-grade foundations, shared materials, picker and history remain in charge.
+
+Distance detail switches by existing 256 m render chunk, with a 1.1 km exit and 0.9 km return threshold. Distant profiles keep the crowns, podium, material maps and silhouette. They reduce curve subdivisions and rely on the facade atlas for small mullions and relief. Each chunk attaches one batch set at a time, while holding both sets in memory for immediate switching.
+
+Run npm run export:curved-modernist to reproduce both standalone files. In the Test City choose **15 variations** and **Next variation** to inspect the 20, 32, 44, 56 and 70-storey examples in each subfamily. **Natural Office growth** paints eligible lots using normal selection.
+
+- Test City: Pancake City - Curved Office Growables Test City - 20261124T164418Z.html (SHA-256 6ef51b82de21ece57ec2be5a9f4ac462387832960a480d0dca988a7aa91d7fc3).
+- Playtest: Pancake City - Curved Office Growables Playtest - 20261124T164418Z.html (SHA-256 e30800e1260269dfc56767e6e8626050e2aa941679dc47d440aa2783ef742881).
+- Full build passed 180 checks. The model set covers 43.2–79.2 m fitted widths, rotated lots, decorated containment, supported upper sections, bay pitch and street-facing entrances. Geometry buffers for all nine earlier archetype/revision pairs match 0992f9d.
+- Direct-file Chrome review confirmed all 15 fitted variations and 28 naturally selected curved towers across 283 Office lots. Natural Splice Crescent demolished and regrew with an identical saved specification. Local comparison captures are in .tools/curved-modernist/full-family/.
+- In the natural-growth city, the active curved mesh set went from 484,562 to 155,100 triangles (68% reduction), with 176 near and 176 distant batches. These counts cover the curved family, including its foundations. This is a geometry comparison from a local Chrome fixture, without a hardware FPS benchmark.

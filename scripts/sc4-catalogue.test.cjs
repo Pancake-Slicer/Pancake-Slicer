@@ -20,7 +20,7 @@ test('all 96 active catalogue IDs remain independently selectable, including rep
   assert.equal(full.entries.length,98);const local={...full,count:96,entries:full.entries.filter(e=>![420,423].includes(e.id))};assert.deepEqual(plain(api.pcSC4Catalogue),local);
   const select={addEventListener(type,handler){this[type]=handler;}},help={};
   const {zoning}=city();api.pcCatalogueInitMenu({querySelector:s=>s==='#commercial-catalogue'?select:help},zoning,()=>{});
-  assert.equal((select.innerHTML.match(/<option /g)||[]).length,97);assert.ok(select.innerHTML.includes('Offices (62)'));assert.ok(!select.innerHTML.includes('Lind Entertainment')&&!select.innerHTML.includes('Reamon Plaza'));
+  assert.equal((select.innerHTML.match(/<option value="\d+"/g)||[]).length,96);assert.ok(select.innerHTML.includes('Offices (62)'));assert.ok(!select.innerHTML.includes('Lind Entertainment')&&!select.innerHTML.includes('Reamon Plaza'));
   for(const entry of entries){select.value=String(entry.id);select.change();assert.equal(zoning.pcCatalogueChoice,entry.id);assert.ok(help.textContent.includes(entry.name));assert.ok(help.textContent.includes('SC4-inspired rebuild'));}
   select.value='';select.change();assert.equal(zoning.pcCatalogueChoice,null);
 });

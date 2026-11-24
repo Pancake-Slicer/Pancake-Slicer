@@ -1,10 +1,10 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),crypto=require('node:crypto');
 const source=fs.readFileSync(path.join(__dirname,'../web/assets/game.bundle.js'),'utf8'),plain=x=>JSON.parse(JSON.stringify(x));
-function api(){const ctx=vm.createContext({console,performance,structuredClone,atob,URL,location:{href:'http://localhost/'},document:{documentElement:{hasAttribute:()=>false},createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}});vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.a={zb,qb,Se,pS,pcCurvedReady,pcCurvedSetControl,pcCurvedFit,pcCurvedInfo,pcCurvedHistory,pcCurvedDefinitions,pcCurvedBatches,pcBmoSetControl,pcLindSetControl,pcVonSetControl,pcBrickSetControl,pcAlderwickSetControl,pcCurvedControl,pcGrowableChoose,pcOfficeParcels,pcFacadeSites,pcFacadeAttach,pcFacadeRelease,pcOfficePave,pcGrowableFacing,pcGrowableDefinitions,Te,je,sn,ur,get runtime(){return pcCurvedRuntime;},get lind(){return pcLindRuntime;},get heavy(){return pcOhneeRuntime;}};',ctx);return ctx.a;}
+function api(){const ctx=vm.createContext({console,performance,structuredClone,atob,URL,location:{href:'http://localhost/'},document:{documentElement:{hasAttribute:()=>false},createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}});vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.a={zb,qb,Se,pS,Pw,pcCurvedReady,pcCurvedSetControl,pcCurvedFit,pcCurvedInfo,pcCurvedHistory,pcCurvedDefinitions,pcCurvedBatches,pcCurvedUpdateLOD,pcCurvedChunks,pcCatalogueInitMenu,pcBmoSetControl,pcLindSetControl,pcVonSetControl,pcBrickSetControl,pcAlderwickSetControl,pcCurvedControl,pcGrowableChoose,pcOfficeParcels,pcFacadeSites,pcFacadeAttach,pcFacadeRelease,pcOfficePave,pcGrowableFacing,pcGrowableDefinitions,Te,je,sn,ur,get runtime(){return pcCurvedRuntime;},get lind(){return pcLindRuntime;},get heavy(){return pcOhneeRuntime;}};',ctx);return ctx.a;}
 function city(a,angle=0){const n=new a.zb,lines=[],p=(x,z)=>({x:x*Math.cos(angle)+z*Math.sin(angle),z:z*Math.cos(angle)-x*Math.sin(angle)});for(const v of [-180,-60,60,180])lines.push([p(v,-180),p(v,180)],[p(-180,v),p(180,v)]);n.addBatch(lines);const z=new a.qb(n,{items:[]});z.setPropertyZone('offices');return {n,z};}
 
 
-test('curved family is lazy and disabled in normal gameplay; benchmark is absent from all spawning dependencies',()=>{const a=api(),{z}=city(a);z.applyProperties(z.properties.slice(0,12),'offices');assert.equal(a.runtime,null);assert.equal(a.pcCurvedControl(z).enabled,false);assert.equal(a.pcCurvedDefinitions.length,3);assert.ok(!a.pcGrowableDefinitions.some(d=>d.id.includes('curved-skyscraper-fixed')));const pack=require('./lightweight-curved.cjs').curvedSource();assert.ok(!pack.includes('buildReference')&&!pack.includes('curved-reference/model'));const before=plain(z.buildings.map(b=>b.signature));a.pcCurvedSetControl(z,{enabled:true,favour:true,type:'A'});z.rebuild();assert.deepEqual(plain(z.buildings.map(b=>b.signature)),before);assert.equal(a.lind,null);assert.equal(a.heavy,null);});
+test('curved family is lazy at startup, available in normal gameplay, and excludes the benchmark',()=>{const a=api(),{z}=city(a);assert.equal(a.runtime,null);assert.equal(a.pcCurvedControl(z).enabled,true);z.applyProperties(z.properties.slice(0,12),'rowhouses');assert.equal(a.runtime,null);assert.equal(a.pcCurvedDefinitions.length,3);assert.ok(!a.pcGrowableDefinitions.some(d=>d.id.includes('curved-skyscraper-fixed')));const pack=require('./lightweight-curved.cjs').curvedSource();assert.ok(!pack.includes('buildReference')&&!pack.includes('curved-reference/model'));const before=plain(z.buildings.map(b=>b.signature));a.pcCurvedSetControl(z,{enabled:true,favour:true,type:'A'});z.rebuild();assert.deepEqual(plain(z.buildings.map(b=>b.signature)),before);assert.equal(a.lind,null);assert.equal(a.heavy,null);});
 test('three original plans, rooflines and smooth metric grids support20–70 storeys with pooled resources',()=>{const a=api(),rt=a.pcCurvedReady(),identities=new Set;for(const archetype of ['A','B','C'])for(const storeys of [20,45,70]){const spec={archetype,storeys,width:archetype==='B'?72:60,depth:48,palette:storeys%4},plan=rt.module.massing(spec),m=rt.generator.generate(spec),other=rt.generator.generate({...spec,id:'other',seed:'other',palette:(spec.palette+1)%4});identities.add(plan.identity);assert.equal(m.children[0].geometry,other.children[0].geometry);assert.ok(m.userData.triangles<35000);assert.ok(plan.sections.length>=3);for(const g of m.userData.architecture.grids)assert.ok(g.pitch>1.35&&g.pitch<3.5);for(const mesh of m.children){if(mesh.name==='roof'){const p=mesh.geometry.attributes.position,n=mesh.geometry.attributes.normal,uv=mesh.geometry.attributes.uv;for(let i=0;i<p.count;i++)if(n.getY(i)>.5){assert.ok(Math.abs(uv.getX(i)-p.getX(i)/4)<1e-5);assert.ok(Math.abs(uv.getY(i)-p.getZ(i)/4)<1e-5);}}assert.equal(mesh.material.transparent,false);for(const key of ['position','normal','uv'])for(const v of mesh.geometry.attributes[key].array)assert.ok(Number.isFinite(v));const p=mesh.geometry.attributes.position;for(let i=0;i<p.count;i++){assert.ok(Math.abs(p.getX(i))<spec.width/2+1.1);assert.ok(Math.abs(p.getZ(i))<spec.depth/2+1.1);}}if(archetype==='A'){assert.ok(plan.groundRing.length>40);assert.ok(plan.sections.at(-1).topRing[0][1]<plan.sections.at(-1).ring[0][1]);assert.equal(plan.sections.length,3);}if(archetype==='B'){assert.equal(plan.entrance.z,spec.depth/2);assert.equal(plan.sections[1].name,"paired wings with recessed glazing");}if(archetype==='C')assert.equal(plan.sections.length,5);rt.generator.release(m);rt.generator.release(other);}assert.equal(identities.size,3);const maps=new Set(Object.values(rt.generator.materials).map(m=>m.map).filter(Boolean));assert.equal(maps.size,5);rt.generator.prune();assert.equal(rt.generator.leases.size,0);assert.equal(rt.generator.cache.size,0);});
 test('native polygon fitting spans sizes and rotations, preserves shape and rejects slivers and hole lots',()=>{const a=api();for(const type of ['A','B','C'])for(const [w,d]of [[48,44],[62,56],[84,68]])for(const angle of [0,.37]){const p={id:type+w+d+angle,x:0,z:0,y:0,zone:'offices',area:w*d,towardRoad:{x:Math.sin(angle),z:Math.cos(angle)},footprint:[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([x,z])=>({x:x*Math.cos(angle)+z*Math.sin(angle),z:z*Math.cos(angle)-x*Math.sin(angle)}))},before=JSON.stringify(p),fit=a.pcCurvedFit(p,type,{storeys:24});assert.ok(fit.ok,type+': '+fit.reason);const r=fit.record;assert.equal(r.placement.scale,1);assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(p.footprint)))<.0001);assert.equal(JSON.stringify(p),before);assert.equal(a.pcCurvedFit({...p,id:'sliver',footprint:[{x:0,z:0},{x:80,z:0},{x:80,z:6},{x:0,z:6}]},type).ok,false);assert.equal(a.pcCurvedFit({...p,id:'hole',holes:[p.footprint]},type).ok,false);}});
 test('opt-in growth preserves picking, stable frames, demolition, history, cold saves and cleanup',()=>{const a=api();for(const type of ['A','B','C']){const {n,z}=city(a);a.pcCurvedSetControl(z,{enabled:true,favour:true,type});z.applyProperties(z.properties.slice(0,12),'offices');const scene=new a.Se,renderer=a.pS(scene);renderer.render(z);const b=z.buildings.find(b=>b.office.lightweightCurved);assert.ok(b,type);const before=plain(z.buildings.map(b=>b.signature)),history=plain(a.pcCurvedHistory(z)),saved=plain(n.captureState().participants.zoning);assert.equal(renderer.render(z),false);assert.ok(a.pcCurvedInfo().textures<=5);let picks=0;scene.traverse(mesh=>{for(const building of mesh.userData.pcBmoBuildings||[]){if(!building.office.lightweightCurved)continue;const p=building.office.assetPlacement;assert.equal(renderer.at({object:mesh,point:{x:p.x,y:building.y+5,z:p.z},instanceId:0}),building.id);picks++;}});assert.ok(picks);assert.equal(z.demolish(b.id),true);renderer.render(z);assert.equal(n.undo(),true);z.rebuild();renderer.render(z);assert.deepEqual(plain(z.buildings.map(b=>b.signature)),before);assert.equal(n.redo(),true);z.rebuild();renderer.render(z);assert.equal(n.undo(),true);z.rebuild();renderer.render(z);const fresh=api(),other=city(fresh);other.n.historyParticipants.get('zoning').restore(saved);other.z.rebuild();assert.deepEqual(plain(fresh.pcCurvedHistory(other.z)),history);assert.deepEqual(plain(other.z.buildings.map(b=>b.signature)),before);a.pcCurvedSetControl(z,{enabled:false,favour:false});z.rebuild();assert.deepEqual(plain(z.buildings.map(b=>b.signature)),before);n.historyParticipants.get('zoning').restore({regions:{rowhouses:[],offices:[]},catalogueAssignments:[],suppressed:[]});z.rebuild();renderer.render(z);assert.equal(a.pcCurvedInfo().leases,0);assert.equal(a.pcCurvedInfo().cacheEntries,0);}});
@@ -44,9 +44,9 @@ test('new Arcus glazing follows the upper facade angle along both axes',()=>{
  rt.generator.prune();
 });
 
-test('new B assignments place Splice Tower while saved Crescent revisions retain their footprint and record',()=>{
+test('the approved Splice reference and saved Crescent revisions retain their footprint and record',()=>{
  const a=api(),rt=a.pcCurvedReady(),{z,n}=city(a);
- const lot=z.properties.find(p=>a.pcCurvedFit(p,'B').ok),fresh=a.pcCurvedFit(lot,'B').record;
+ const lot=z.properties.find(p=>a.pcCurvedFit(p,'B',{revision:3}).ok),fresh=a.pcCurvedFit(lot,'B',{revision:3}).record;
  assert.equal(fresh.parameters.revision,3);
  assert.match(fresh.parameters.name,/Splice Tower/);
  const shaft=fresh.grid.sections[1].ring;
@@ -68,4 +68,91 @@ test('new B assignments place Splice Tower while saved Crescent revisions retain
   assert.equal(rt.module.massing(restored.parameters).sections[1].name,'broad crescent shaft');
   assert.ok(grid.entrance.z<depth*.1);
  }
+});
+
+test('15 production towers reflow their forms on native lots with full-detail and distant geometry',()=>{
+ const a=api(),rt=a.pcCurvedReady(),rows=[];
+ for(const archetype of ['A','B','C']){
+  const forms=new Set,shapes=new Set;
+  for(const [i,[width,depth,storeys]] of [[48,44,20],[55,49,32],[64,54,44],[74,59,56],[84,68,70]].entries()){
+   const angle=i%2?.43:0;
+   const lot={id:archetype+i,x:0,z:0,y:0,zone:'offices',area:width*depth,towardRoad:{x:Math.sin(angle),z:Math.cos(angle)},
+    footprint:[[-width/2,-depth/2],[width/2,-depth/2],[width/2,depth/2],[-width/2,depth/2]].map(([x,z])=>({x:x*Math.cos(angle)+z*Math.sin(angle),z:z*Math.cos(angle)-x*Math.sin(angle)}))};
+   const fit=a.pcCurvedFit(lot,archetype,{storeys,variant:i%3});
+   assert.ok(fit.ok,archetype+storeys+': '+fit.reason);
+   const r=fit.record,{parameters:s,grid,placement}=r,near=rt.generator.generate(s),far=rt.generator.generate(s,{distant:true});
+   assert.equal(s.revision,4);assert.equal(s.storeys,storeys);assert.equal(placement.scale,1);assert.equal(s.floorHeight,3.4);
+   assert.ok(Math.abs(placement.angle-angle)<1e-6);
+   assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(lot.footprint)))<.0001);
+   assert.ok(grid.entrance.z>0);
+   assert.ok(grid.sections.every(section=>section.end>section.start));
+   assert.ok(near.userData.architecture.grids.every(g=>g.pitch>1.35&&g.pitch<3.5));
+   assert.ok(near.userData.triangles<38000);
+   assert.ok(far.userData.triangles<near.userData.triangles*.65);
+   assert.equal(near.children.length,far.children.length);
+   for(const mesh of near.children){
+    assert.equal(mesh.material,far.children.find(c=>c.name===mesh.name).material);
+    const p=mesh.geometry.attributes.position;
+    for(let j=0;j<p.count;j++)assert.ok(Math.abs(p.getX(j))<s.width/2+1.1&&Math.abs(p.getZ(j))<s.depth/2+1.1);
+   }
+   for(let j=1;j<grid.sections.length;j++){
+    const lower=grid.sections[j-1].topRing,upper=grid.sections[j].ring;
+    const polygon=ring=>a.Te(ring.map(([x,z])=>({x,z})));
+    assert.ok(a.sn(a.je(polygon(upper),polygon(lower)))<.001,archetype+' unsupported section '+j);
+   }
+   forms.add(s.variant);
+   const unit=rt.module.massing({...s,width:60,depth:48,storeys:48});
+   shapes.add(JSON.stringify(unit.sections));
+   rows.push({archetype,form:s.variant,width:s.width,depth:s.depth,storeys,near:near.userData.triangles,far:far.userData.triangles});
+   rt.generator.release(near);rt.generator.release(far);
+  }
+  assert.equal(forms.size,3);assert.equal(shapes.size,3);
+ }
+ rt.generator.prune();assert.equal(rt.generator.cache.size,0);
+ console.log('Curved production portfolio',JSON.stringify(rows));
+});
+
+test('normal Office paint grows all three designs and redevelopment stays deterministic through LOD and history',()=>{
+ const a=api(),n=new a.zb,roads=[];
+ n.terrain=a.Pw({kind:'inland',seed:1138,hills:0,mountains:0,slope:0,river:0,coast:0},{size:900,tileSize:900});
+ for(const v of [-400,-220,-20,180,400])roads.push([{x:v,z:-400},{x:v,z:400}],[{x:-400,z:v},{x:400,z:v}]);
+ n.addBatch(roads);const z=new a.qb(n,{items:[]});z.setPropertyZone('offices');
+ const eligible=z.properties.filter(p=>['A','B','C'].some(type=>a.pcCurvedFit(p,type).ok)).filter((_,i)=>i%2===0);
+ z.applyProperties(eligible,'offices');
+ const towers=z.buildings.filter(b=>b.office.lightweightCurved);
+ assert.deepEqual([...new Set(towers.map(b=>b.office.lightweightCurved.parameters.archetype))].sort(),['A','B','C']);
+ assert.ok(towers.length<z.buildings.length);
+ const b=towers[0],property=eligible.find(p=>p.id===b.propertyIds[0]),before=plain(b.office.lightweightCurved);
+ assert.equal(z.demolish(b.id),true);z.applyProperties([property],'offices');
+ assert.deepEqual(plain(z.buildings.find(b=>b.propertyIds.includes(property.id)).office.lightweightCurved),before);
+ const scene=new a.Se,renderer=a.pS(scene);renderer.render(z);
+ const near=a.pcCurvedInfo(),chunks=[...a.pcCurvedChunks],anchor=chunks[0];
+ assert.ok(chunks.length&&near.nearTriangles>0);
+ assert.equal(a.pcCurvedUpdateLOD({x:5000,y:5000,z:5000}),true);
+ const far=a.pcCurvedInfo();
+ assert.equal(far.distantChunks,chunks.length);
+ assert.ok(far.visibleTriangles<near.visibleTriangles*.65);
+ assert.ok(far.batches<=near.batches);
+ assert.equal(anchor.layer.children.length,1);assert.equal(anchor.layer.children[0],anchor.far);
+ const mesh=anchor.far.children[0],subject=mesh.userData.pcBmoBuildings[0],p=subject.office.assetPlacement;
+ assert.equal(renderer.at({object:mesh,point:{x:p.x,y:subject.y+5,z:p.z}}),subject.id);
+ assert.equal(a.pcCurvedUpdateLOD({x:5000,y:5000,z:5000}),false);
+ assert.equal(a.pcCurvedUpdateLOD({x:anchor.x,y:anchor.y,z:anchor.z}),true);
+ assert.equal(anchor.layer.children[0],anchor.near);
+ n.historyParticipants.get('zoning').restore({regions:{rowhouses:[],offices:[]},catalogueAssignments:[],suppressed:[]});z.rebuild();renderer.render(z);
+ assert.equal(a.pcCurvedChunks.size,0);assert.equal(a.pcCurvedInfo().leases,0);
+});
+
+test('explicit curved Office options work through the normal selector and preserve numeric choices',()=>{
+ const a=api(),{z}=city(a),select={value:'',addEventListener(_event,change){this.change=change;}},help={};
+ a.pcCatalogueInitMenu({querySelector:s=>s==='#commercial-catalogue'?select:help},z,()=>{});
+ assert.match(select.innerHTML,/Curved offices/);
+ for(const d of a.pcCurvedDefinitions){
+  assert.ok(select.innerHTML.includes(d.key));
+  select.value=d.key;select.change();assert.equal(z.pcCatalogueChoice,d.key);
+  const property=z.properties.find(p=>a.pcCurvedFit(p,d.archetype).ok);
+  z.applyProperties([property],'offices');
+  assert.equal(z.buildings.find(b=>b.propertyIds.includes(property.id)).office.lightweightCurved.parameters.archetype,d.archetype);
+ }
+ select.value='400';select.change();assert.equal(z.pcCatalogueChoice,400);
 });
