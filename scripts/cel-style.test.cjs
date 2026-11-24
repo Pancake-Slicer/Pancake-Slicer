@@ -1,8 +1,16 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const source=fs.readFileSync(require('node:path').join(__dirname,'../web/assets/game.bundle.js'),'utf8');
 const context=vm.createContext({console,performance,structuredClone,document:{createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}});
-vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={NS,Ji,$w,Ne,pcRebuiltMaterials,pcRebuiltDesigns,pS,Se,zb,qb};',context);
+vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={NS,Ji,$w,Ne,pcRebuiltMaterials,pcRebuiltDesigns,pcRichCataloguePalette,pS,Se,zb,qb};',context);
 const a=context.api;
+test('the full catalogue spans rich masonry and glazing palettes instead of one cream tint',()=>{
+ const palettes=a.pcRebuiltDesigns.entries.map(d=>a.pcRichCataloguePalette(d)),colours=new Set(palettes.map(p=>p.stone));assert.ok(colours.size>=10);
+ const channel=(hex,shift)=>(parseInt(hex.slice(1),16)>>shift)&255;
+ assert.ok(palettes.some(p=>channel(p.stone,16)-channel(p.stone,8)>50),'Include saturated red/terracotta masonry');
+ assert.ok(palettes.some(p=>channel(p.glass,8)-channel(p.glass,16)>50),'Include mint/turquoise glass');
+ assert.ok(palettes.some(p=>channel(p.glass,16)<50),'Keep charcoal glass for International-style contrast');
+ for(const p of palettes)for(const colour of Object.values(p))assert.match(colour,/^#[0-9a-f]{6}$/i);
+});
 test('illustrated office shader gently groups sunlight while retaining shadows and facade maps',()=>{
  for(const d of a.pcRebuiltDesigns.entries){
   const m=a.pcRebuiltMaterials(d).facade,map=m.map,bump=m.bumpMap,rough=m.roughnessMap;

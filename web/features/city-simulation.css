@@ -1,0 +1,10 @@
+.city-hud{position:fixed;left:16px;top:14px;z-index:30;max-width:calc(100vw - 150px);font:12px system-ui;color:#eef3df}
+.city-hud [hidden],.city-hud[hidden]{display:none!important}
+.landmark-portrait[hidden]{display:none!important}
+.city-summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#243d3bea;padding:10px 12px;border:1px solid #78958a;border-radius:7px;box-shadow:0 2px 8px #0003}
+.city-hud button,.city-hud select,.city-hud input[type=number]{background:#355651;color:#f1f3e4;border:1px solid #78958a;border-radius:4px;padding:6px;font:inherit}
+.city-hud button{cursor:pointer}.city-hud button:hover{background:#4c7165}
+.city-dashboard{margin-top:8px;background:#243d3bf5;border:1px solid #78958a;border-radius:7px;padding:14px;width:350px;max-width:calc(100vw - 65px);max-height:calc(100vh - 200px);overflow:auto;overscroll-behavior:contain}
+.city-dashboard h2{margin:0 0 8px;font-size:17px}.city-dashboard p{line-height:1.5}.city-dashboard label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:9px 0}.city-dashboard select{max-width:245px;width:100%}.city-dashboard input[type=number]{width:62px}.city-dashboard input[type=range]{width:140px}.city-dashboard meter{width:145px}
+.city-dashboard details{border-top:1px solid #607d71;padding:10px 0}.city-dashboard summary{cursor:pointer;font-weight:600}.city-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.city-metrics>div{display:flex;justify-content:space-between;gap:10px;background:#ffffff0b;padding:7px}.city-note{font-size:11px;color:#b8cdc1}.city-mode{border-top:1px solid #607d71;padding-top:12px}
+@media(max-width:800px){.city-hud{max-width:calc(100vw - 32px);top:64px}.city-summary{gap:8px}.city-dashboard{max-height:45vh}.city-summary strong{display:none}}

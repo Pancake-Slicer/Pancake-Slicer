@@ -19,10 +19,11 @@ const { applyReferenceOfficeRetirement } = require('./retire-reference-offices.c
 const { applyWaterfallIntegration } = require('./lightweight-waterfall.cjs');
 const { applyCurvedIntegration } = require('./lightweight-curved.cjs');
 const { applyVaultIntegration } = require('./lightweight-vaults.cjs');
-assert.deepEqual(read('web/assets/game.bundle.js'), Buffer.from(applyVaultIntegration(applyCurvedIntegration(applyWaterfallIntegration(applyReferenceOfficeRetirement(applyGrowableAssets(applyLandmarkPerformance(applyOfficeZoning(applyRenderingFixes(scripts[0][1]))))))))), 'Runtime differs from the reviewed rendering, landmark, Office and growable-asset changes applied to v52');
-assert.deepEqual(read('web/assets/game.css'), Buffer.from(styles[0][1] + '\n' + read('web/features/offices.css').toString('utf8')), 'CSS differs from v52 plus the Office tabs');
+const { applyCitySimulation } = require('./city-simulation.cjs');
+assert.deepEqual(read('web/assets/game.bundle.js'), Buffer.from(applyCitySimulation(applyVaultIntegration(applyCurvedIntegration(applyWaterfallIntegration(applyReferenceOfficeRetirement(applyGrowableAssets(applyLandmarkPerformance(applyOfficeZoning(applyRenderingFixes(scripts[0][1])))))))))), 'Runtime differs from the reviewed rendering, landmark, Office, growable-asset and simulation changes applied to v52');
+assert.deepEqual(read('web/assets/game.css'), Buffer.from(styles[0][1] + '\n' + read('web/features/offices.css').toString('utf8') + '\n' + read('web/features/city-simulation.css').toString('utf8')), 'CSS differs from v52 plus the Office and city simulation styles');
 const shell = read('web/index.html').toString('utf8');
 assert.ok(shell.includes('./assets/game.bundle.js') && shell.includes('./assets/game.css'));
 assert.ok(!shell.includes('sc4-originals.local.js'),'The game must not load view-dependent imported artwork');
 assert.ok(shell.includes(read('reference/third-party-notices.txt').toString('utf8').trim()), 'License notices missing');
-console.log('PASS: original SHA-256, reviewed rendering/landmark/Office changes, original CSS plus Office tabs, HTML references, and license notices.');
+console.log('PASS: original SHA-256, reviewed rendering, landmark, Office and simulation changes, original CSS plus reviewed styles, HTML references, and license notices.');

@@ -1,5 +1,12 @@
 # Pancake City Codex guide
 
+## Canonical development
+
+- Work in `C:/Users/camsh/Desktop/Pancake-City-restored-v53-20261112-153759` on `codex/pancake-city-consolidated`. The older Pancake-Slicer-main checkout is recovery history.
+- Run `npm run build` for the full checks and distribution, `npm run export:html` for the standalone `dist/Pancake City - Playtest.html`, and `npm start` to serve the web build. `Play Pancake City.cmd` opens the canonical offline export.
+- Default mixed Office growth includes lightweight BMO and Von Badel, Aster Tower, Calder Exchange, Marlowe House, Alderwick, Arcus / Splice Crescent / Facet Point and the three Postmodern Office designs. Lots still require native fit and zoning capacity.
+- Ohneeohnee procedural candidates are experimental. Retired Lind/Reamon growables, the bespoke Lind/Von Badel/Ohneeohnee models, and the fixed Reamon, curved, barrel-vault and Waterfall benchmarks stay out of normal growth.
+
 ## Work efficiently
 
 - Verify the worktree, branch, and Git status before editing. Inspect only task-relevant files. Use targeted `rg` searches and narrow reads. Expand the search only when needed.

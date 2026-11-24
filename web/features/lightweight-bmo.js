@@ -13,7 +13,7 @@ function pcBmoHistory(collection){return {control:{...pcBmoControl(collection)},
 function pcBmoRestore(collection,snapshot){
  const before=JSON.stringify(pcBmoHistory(collection)),records=new Map;
  for(const [id,record]of snapshot?.assignments||[]){pcBmoReady().system.validateRecord(record);if(id!==record.lotId||records.has(id))throw Error('Invalid BMO history');records.set(id,structuredClone(record));}
- collection.pcBmoAssignments=records;collection.pcBmoControl={enabled:!!snapshot?.control?.enabled,favour:!!snapshot?.control?.favour};if(collection.pcBmoControl.enabled)pcBmoReady();collection.pcBmoRefresh?.();return before!==JSON.stringify(pcBmoHistory(collection));
+ collection.pcBmoAssignments=records;collection.pcBmoControl={enabled:!!(snapshot?.control?.enabled??pcLightweightDefaults()),favour:!!snapshot?.control?.favour};if(collection.pcBmoControl.enabled)pcBmoReady();collection.pcBmoRefresh?.();return before!==JSON.stringify(pcBmoHistory(collection));
 }
 function pcBmoFit(property){
  if(pcBmoFits.has(property))return pcBmoFits.get(property);

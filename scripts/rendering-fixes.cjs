@@ -7,8 +7,9 @@ function applyRenderingFixes(source) {
   };
   const fs=require('node:fs'),path=require('node:path');
   const cel=fs.readFileSync(path.join(__dirname,'../web/features/cel-style.js'),'utf8');
+  const roofs=fs.readFileSync(path.join(__dirname,'../web/features/landmark-roofs.js'),'utf8');
   const finish=fs.readFileSync(path.join(__dirname,'../web/features/comic-finish.glsl'),'utf8');
-  replace('const Lg=Object.freeze([.24,.58,1])',cel+'\nconst Lg=Object.freeze([.42,.72,1])');
+  replace('const Lg=Object.freeze([.24,.58,1])',cel+'\n'+roofs+'\nconst Lg=Object.freeze([.42,.72,1])');
   replace('function $w(n=1.35)', 'function $w(n=.75)');
   replace('function ph(n,{width:t=1.35}', 'function ph(n,{width:t=.75}');
   replace('color:2436144,side:ci', 'color:5067868,side:ci');
@@ -22,6 +23,8 @@ function applyRenderingFixes(source) {
   replace('s.shadow.normalBias=.2,s.shadow.bias=-8e-5,','Object.assign(s.shadow,pcShadowSurfaceBias(940/i,20,1300)),');
   replace('s.shadow.normalBias=Math.max(.025,Math.min(.25,M.texel*.5)),s.shadow.bias=-.015/(M.far-M.near),','Object.assign(s.shadow,pcShadowSurfaceBias(M.texel,M.near,M.far)),');
   replace('cel-physical-sun-horizon-v1','cel-physical-sun-horizon-illustrated-v3');
+  replace('Ug(n);const Pt=t("Prudential major architectural outlines")','pcCleanLandmarkCaps(n),Ug(n);const Pt=t("Prudential major architectural outlines")');
+  replace('return lu(t),lu(e),lu(i),Ug(n),XS(n,', 'return lu(t),lu(e),lu(i),pcCleanLandmarkCaps(n),Ug(n),XS(n,');
   // Real architectural creases, batched once per neighborhood chunk. Texture
   // grain, triangle diagonals and shadows do not become black contours.
   replace('for(const[J,at]of X){let ut=0;', 'const pcLines=[];for(const[J,at]of X){let ut=0;');

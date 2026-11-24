@@ -623,3 +623,12 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - All 15 configurations passed roof support and overlap checks. Samples used 890–1,168 triangles and six material batches per model. Offline Chrome verified the three roof views, normal spawning (20 towers among 229 offices), and deterministic redevelopment. Captures are in .tools/original-vaults/production-mechanical/. Hardware FPS was unmeasured.
 - Playtest Pancake City - Original Vault Offices Playtest - 20261124T181438Z.html (SHA-256 23313755358eaba313f720c27ee0f581fbc8f0e82722859e8625fa480e76fd77).
 - Test City Pancake City - Original Vault Offices Test City - 20261124T181438Z.html (SHA-256 2bea55e69dbed7bf8fefcbd33c9b41c93698e4da938ae00caa1ac3c94e9b2fcd).
+
+## Architectural catalogue and gameplay consolidation — 2026-11-24
+
+- Canonical development is codex/pancake-city-consolidated in the restored v53 checkout. The pre-consolidation checkpoint is checkpoint/pre-catalogue-consolidation-fcbc1cb.
+- Ported the v52 budget, growth and civic services from 583ecaa, and the catalogue facade and landmark roof fixes from 30ef904. Kept the v53 material settings for the approved procedural families, native lot fitting, terrain foundations, batching and distance detail.
+- BMO, Von Badel, the three original Art Deco towers, Alderwick, curved glass and Postmodern Offices participate in default mixed growth. Ohneeohnee is experimental. Retired growables and benchmark reconstructions retain their existing exclusions.
+- Full build and 198 checks passed. The separately replayed v52 palette regression also passed. Offline Chrome confirmed every requested family across 210 Office lots, fully supplied City Hall growth, and identical Postmodern Office Undo, redevelopment and snapshot restoration. Full-city save/load is still unavailable.
+- The 387-building headless mixed city reported 2,195 scene draw calls and 2,458,277 triangles at the sampled camera pose. Median/p95 camera-motion frame intervals were 35.1/45.9 ms over 20 observations. This is a headless fixture, with no hardware FPS or before/after parity claim. Local capture and counters are under .tools/consolidation/.
+- Standalone Pancake City - Consolidated Playtest - 20261124T185254Z.html (SHA-256 3ad0a7badb5ef2e09942ad97777eb82ada93e5330c324743cd895e58d26bbf87). The desktop launcher targets the stable copy in dist/.

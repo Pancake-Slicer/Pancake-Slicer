@@ -5,10 +5,33 @@ function pcSC4Model(id){return pcRebuiltById.get(Number(id))||null;}
 function pcSC4Fits(property,model){return !!model&&property.area>=4;}
 const pcRebuiltMaterialCache=new Map,pcRebuiltSharedCache=new Map;
 function pcRebuiltLighting(material){material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\nreflectedLight.directDiffuse *= 1.7;\nreflectedLight.indirectDiffuse *= 3.0;');pcCelPhysicalShader(shader);};material.customProgramCacheKey=()=> 'pc-illustrated-office-v2';material.userData.pcRebuiltLighting=true;return material;}
+function pcCatalogueFacadeLighting(material){material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\nreflectedLight.directDiffuse *= 1.7;\nreflectedLight.indirectDiffuse *= 2.25;');pcCelPhysicalShader(shader);};material.customProgramCacheKey=()=> 'pc-rich-illustrated-office-v3';material.userData.pcRebuiltLighting=true;return material;}
 function pcRebuiltSolid(key,colour,roughness=.8,metalness=0){if(!pcRebuiltSharedCache.has(key))pcRebuiltSharedCache.set(key,pcRebuiltLighting(new Re({color:colour,roughness,metalness})));return pcRebuiltSharedCache.get(key);}
+function pcRichCataloguePalette(design){
+ // Distinct material families, rather than mixing every building into cream.
+ const masonry=[
+  ['#cfcec4','#47545d','#f0e9d7'], // limestone and graphite windows
+  ['#b45e49','#40565c','#dfcdb1'], // red brick and cream lintels
+  ['#8f493e','#394b50','#c9bba8'], // deep terracotta
+  ['#b47b52','#485d64','#ead9b8'], // copper-brown masonry
+  ['#a2afa6','#405763','#e8e9da'], // green-grey stone
+  ['#829ca9','#344b5d','#dce5e2']  // blue-grey masonry
+ ];
+ const modern=[
+  ['#e4e9e0','#91beb7','#f4f1df'], // mint glass and white framing
+  ['#525e67','#263b4b','#aebcbf'], // charcoal International style
+  ['#d7e0de','#709eae','#edf0df'], // blue glass and concrete
+  ['#c8dbd1','#65a99e','#f1ebd8'], // turquoise ribbons
+  ['#9aacae','#4d7489','#dce5df']  // steel blue and pale mullions
+ ];
+ const solid=['classic','deco','brick'].includes(design.facade),choices=solid?masonry:modern;
+ const scheme=choices[pcOfficeHash('illustrated-palette:'+design.id)%choices.length];
+ return {stone:scheme[0],glass:scheme[1],trim:scheme[2],accent:solid?'#593e35':'#395461'};
+}
+
 function pcRebuiltMaterials(design){
  if(pcRebuiltMaterialCache.has(design.id))return pcRebuiltMaterialCache.get(design.id);
- const palette=pcIllustratedPalette(design);
+ const palette=pcRichCataloguePalette(design);
  const colour=document.createElement('canvas'),relief=document.createElement('canvas'),roughness=document.createElement('canvas');
  for(const canvas of [colour,relief,roughness]){canvas.width=256;canvas.height=512;}
  const c=colour.getContext('2d'),b=relief.getContext('2d'),r=roughness.getContext('2d'),masonry=['classic','deco','brick'].includes(design.facade),ribbon=design.facade==='ribbon';
@@ -18,22 +41,33 @@ function pcRebuiltMaterials(design){
  if(masonry)for(let y=0;y<512;y+=8){c.fillStyle='#00000014';c.fillRect(0,y,256,1);for(let x=(y%16?0:16);x<256;x+=32)c.fillRect(x,y,1,8);}
  for(let floor=0;floor<8;floor++)for(let bay=0;bay<8;bay++){
   const x=bay*32,y=floor*64,seed=pcOfficeHash(design.id+':window:'+floor+':'+bay),wx=x+(masonry?8:2),wy=y+(masonry?10:ribbon?17:5),ww=masonry?16:28,wh=masonry?43:ribbon?35:54;
+  c.fillStyle=palette.accent;c.fillRect(wx-2,wy-2,ww+4,wh+4);
   c.fillStyle=palette.trim;c.fillRect(wx-1,wy-1,ww+2,wh+2);b.fillStyle='#d0d0d0';b.fillRect(wx-1,wy-1,ww+2,wh+2);
   c.fillStyle=palette.glass;c.fillRect(wx,wy,ww,wh);b.fillStyle='#535353';b.fillRect(wx,wy,ww,wh);r.fillStyle=masonry?'#696969':'#494949';r.fillRect(wx,wy,ww,wh);
   // Each pane has a flat material tone; no fixed directional reflections.
   c.fillStyle=seed%3?'#ffffff04':'#0000000e';c.fillRect(wx,wy,ww,wh);
+  if(!masonry){
+   c.fillStyle=pcIllustratedMix(palette.glass,'#e6f0ec',.24);c.fillRect(wx,wy,ww,Math.max(2,wh*.14));
+   c.fillStyle=pcIllustratedMix(palette.glass,'#243e50',.18);c.fillRect(wx,wy+wh-3,ww,3);
+   c.fillStyle=palette.trim;c.fillRect(wx,wy+wh*.5,ww,1.2);
+   c.fillStyle=palette.accent;c.fillRect(x,y+61,32,1);
+  }
   if(masonry&&seed%9===0){c.fillStyle='#c4bdab';c.fillRect(wx+1,wy+1,ww-2,6+seed%16);r.fillStyle='#b8b8b8';r.fillRect(wx+1,wy+1,ww-2,6+seed%16);}
   c.fillStyle=palette.trim;c.fillRect(wx+ww/2-.5,wy,1,wh);
-  if(masonry){c.fillRect(wx,wy+wh*.58,ww,1);c.fillRect(wx-2,wy+wh+2,ww+4,2);b.fillStyle='#d0d0d0';b.fillRect(wx-2,wy+wh+2,ww+4,2);}
+  if(masonry){c.fillRect(wx,wy+wh*.58,ww,1);c.fillRect(wx-2,wy+wh+2,ww+4,2);b.fillStyle='#d0d0d0';b.fillRect(wx-2,wy+wh+2,ww+4,2);
+   c.fillStyle=palette.accent;c.fillRect(wx-2,wy+wh+4,ww+4,1);
+   if(floor%4===3){c.fillRect(x,y+60,32,1);c.fillStyle=palette.trim;c.fillRect(x,y+61,32,2);}
+   if(design.facade==='brick'){c.fillStyle=pcIllustratedMix(palette.stone,'#f2d5b0',.20);for(let course=0;course<8;course++){const py=y+course*8;c.fillRect(x,py,32,.65);c.fillRect(x+(course%2?16:0),py,.65,8);}}
+  }
   if(design.facade==='classic')for(let u=0;u<ww;u++){const d=(u-ww/2)/(ww/2),height=9*(1-Math.sqrt(Math.max(0,1-d*d)));c.fillStyle=palette.stone;c.fillRect(wx+u,wy,1,height);b.fillStyle='#a0a0a0';b.fillRect(wx+u,wy,1,height);}
   if(design.facade==='deco'){c.fillStyle=palette.trim;c.fillRect(x+2,y,2,64);c.fillRect(x+28,y,2,64);}
   if(ribbon){c.fillStyle=palette.stone;c.fillRect(x,y+1,32,10);b.fillStyle='#cccccc';b.fillRect(x,y+1,32,10);}
  }
  const texture=new vr(colour),bump=new vr(relief),rough=new vr(roughness);texture.colorSpace=hn;
  for(const map of [texture,bump,rough]){map.wrapS=map.wrapT=gr;map.anisotropy=4;}
- const facade=pcRebuiltLighting(new Re({map:texture,bumpMap:bump,bumpScale:masonry?.012:.004,roughnessMap:rough,roughness:1,metalness:masonry?.01:.025}));facade.userData.pcRebuiltFacade=design.id;
+ const facade=pcCatalogueFacadeLighting(new Re({map:texture,bumpMap:bump,bumpScale:masonry?.012:.004,roughnessMap:rough,roughness:1,metalness:masonry?.01:.025}));facade.userData.pcRebuiltFacade=design.id;
  const roofMaterial=pcRebuiltSolid('roof','#767a78',.94);
- if(!roofMaterial.map){const tile=document.createElement('canvas');tile.width=tile.height=128;const brush=tile.getContext('2d');brush.fillStyle='#b9b7a5';brush.fillRect(0,0,128,128);for(let i=0;i<450;i++){const hash=pcOfficeHash('roof-grain:'+i);brush.fillStyle=hash%2?'#ffffff05':'#00000004';brush.fillRect(hash%128,(hash>>>8)%128,1,1);}brush.fillStyle='#777f78';brush.fillRect(0,0,128,1);brush.fillRect(0,0,1,128);roofMaterial.map=new vr(tile);roofMaterial.map.colorSpace=hn;roofMaterial.map.wrapS=roofMaterial.map.wrapT=gr;roofMaterial.map.anisotropy=4;roofMaterial.color.set(0xffffff);roofMaterial.needsUpdate=true;}
+ if(!roofMaterial.map){const tile=document.createElement('canvas');tile.width=tile.height=128;const brush=tile.getContext('2d');brush.fillStyle='#9ba8a8';brush.fillRect(0,0,128,128);for(let i=0;i<450;i++){const hash=pcOfficeHash('roof-grain:'+i);brush.fillStyle=hash%2?'#ffffff05':'#00000004';brush.fillRect(hash%128,(hash>>>8)%128,1,1);}brush.fillStyle='#777f78';brush.fillRect(0,0,128,1);brush.fillRect(0,0,1,128);roofMaterial.map=new vr(tile);roofMaterial.map.colorSpace=hn;roofMaterial.map.wrapS=roofMaterial.map.wrapT=gr;roofMaterial.map.anisotropy=4;roofMaterial.color.set(0xffffff);roofMaterial.needsUpdate=true;}
  const materials={facade,stone:pcRebuiltSolid('stone:'+palette.stone,palette.stone),trim:pcRebuiltSolid('trim:'+palette.trim,palette.trim,.65,.06),
   roof:roofMaterial,metal:pcRebuiltSolid('metal','#777e7f',.55,.32),glass:pcRebuiltSolid('glass:'+palette.glass,palette.glass,.25,.2),
   copper:pcRebuiltSolid('copper','#56837b',.55,.18),dark:pcRebuiltSolid('dark','#394448',.75),plants:pcRebuiltSolid('plants','#536f3c',.9)};
@@ -152,6 +186,11 @@ function pcRebuiltRender(building,B,U,statistics){
     // Cornices and pilasters are actual geometry and receive the same sunlight.
     U(at(.5,building.y+band.top-.11,-.13),length,.22,.25,yaw,materials.trim,id);
     if(design.style==='art-deco'&&length>5&&!curved){const bays=Math.min(14,Math.max(2,Math.round(length/design.bayWidth)));for(let bay=0;bay<=bays;bay++)U(at(bay/bays,building.y+(band.y+band.top)/2),.16,band.top-band.y,.24,yaw,materials.trim,id);}
+    if(['classic','glass','shop'].includes(design.facade)&&length>6&&!curved){
+     const bays=Math.min(10,Math.max(2,Math.round(length/(design.bayWidth*2))));
+     for(let bay=0;bay<=bays;bay++)U(at(bay/bays,building.y+(band.y+band.top)/2,.11),design.facade==='classic'?.25:.10,band.top-band.y,.22,yaw,materials.trim,id);
+    }
+    if(length>4&&design.facade!=='ribbon')for(let y=band.y+design.floorHeight*4;y<band.top-.3;y+=design.floorHeight*4)U(at(.5,building.y+y,.08),length,.22,.24,yaw,materials.trim,id);
     if(design.facade==='ribbon'&&length>4)for(let y=band.y+design.floorHeight;y<band.top-.2;y+=design.floorHeight)U(at(.5,building.y+y,0),length,.15,.22,yaw,materials.stone,id);
    }
   }

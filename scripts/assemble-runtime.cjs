@@ -10,12 +10,13 @@ const { applyReferenceOfficeRetirement } = require('./retire-reference-offices.c
 const { applyWaterfallIntegration } = require('./lightweight-waterfall.cjs');
 const { applyCurvedIntegration } = require('./lightweight-curved.cjs');
 const { applyVaultIntegration } = require('./lightweight-vaults.cjs');
+const { applyCitySimulation } = require('./city-simulation.cjs');
 const root = path.resolve(__dirname, '..');
 const original = fs.readFileSync(path.join(root, 'original/Pancake (52).html'));
 assert.equal(createHash('sha256').update(original).digest('hex'), 'c8eff97d4c0daefd2cf7b6d967a694ce8a999e4a3e1402d88fee4fea6077778c');
 const html = original.toString('utf8');
 const script = html.match(/<script\b[^>]*type=["']module["'][^>]*>([\s\S]*?)<\/script>/i)[1];
 const style = html.match(/<style\b[^>]*>([\s\S]*?)<\/style>/i)[1];
-fs.writeFileSync(path.join(root, 'web/assets/game.bundle.js'), applyVaultIntegration(applyCurvedIntegration(applyWaterfallIntegration(applyReferenceOfficeRetirement(applyGrowableAssets(applyLandmarkPerformance(applyOfficeZoning(applyRenderingFixes(script)))))))));
-fs.writeFileSync(path.join(root, 'web/assets/game.css'), style + '\n' + fs.readFileSync(path.join(root, 'web/features/offices.css'), 'utf8'));
-console.log('Assembled rendering, landmark performance and detailed Office architecture; original v52 untouched.');
+fs.writeFileSync(path.join(root, 'web/assets/game.bundle.js'), applyCitySimulation(applyVaultIntegration(applyCurvedIntegration(applyWaterfallIntegration(applyReferenceOfficeRetirement(applyGrowableAssets(applyLandmarkPerformance(applyOfficeZoning(applyRenderingFixes(script))))))))));
+fs.writeFileSync(path.join(root, 'web/assets/game.css'), style + '\n' + fs.readFileSync(path.join(root, 'web/features/offices.css'), 'utf8') + '\n' + fs.readFileSync(path.join(root, 'web/features/city-simulation.css'), 'utf8'));
+console.log('Assembled rendering, landmark performance, Office architecture and city simulation; original v52 untouched.');

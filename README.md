@@ -1,5 +1,7 @@
 # Pancake City — v52 recovery
 
+The canonical development branch is **codex/pancake-city-consolidated** in the restored v53 checkout. Run **npm run export:html** and open **Play Pancake City.cmd** for the consolidated offline game with City Hall and the approved Office catalogue. For an instant growable review, enable **Free-building sandbox** in City Hall. The milestone descriptions below document earlier builds.
+
 ## Original Alderwick heritage tower — fixed review
 
 One independently designed 26-storey commercial tower with isometric/front/side previews. Approved Reamon remains unchanged and reference-only. No fitting or gameplay integration. Run `npm run review:heritage:export`. [Composition, provenance and validation](docs/ORIGINAL_HERITAGE_TOWER.md).
