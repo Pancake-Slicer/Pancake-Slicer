@@ -623,3 +623,10 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - All 15 configurations passed roof support and overlap checks. Samples used 890–1,168 triangles and six material batches per model. Offline Chrome verified the three roof views, normal spawning (20 towers among 229 offices), and deterministic redevelopment. Captures are in .tools/original-vaults/production-mechanical/. Hardware FPS was unmeasured.
 - Playtest Pancake City - Original Vault Offices Playtest - 20261124T181438Z.html (SHA-256 23313755358eaba313f720c27ee0f581fbc8f0e82722859e8625fa480e76fd77).
 - Test City Pancake City - Original Vault Offices Test City - 20261124T181438Z.html (SHA-256 2bea55e69dbed7bf8fefcbd33c9b41c93698e4da938ae00caa1ac3c94e9b2fcd).
+
+## Traditional Commercial High-Rise reconstruction — 2026-11-24
+
+- One fixed 24-storey, nine-bay benchmark. Inferred plan and dimensions from the supplied isometric image, including the unequal rear wings and full-depth open lightwell. Opaque procedural finishes, recessed windows, masonry piers, a two-storey commercial base, cornices, gravel roof, mechanical equipment and water tank use the shared architecture batcher.
+- The benchmark loads only in its dedicated Test City, which includes a matched orthographic side-by-side comparison. The normal Playtest exactly matches the fcbc1cb export. Offline Chrome verified the lightwell, roof and entrance views, comparison, and exclusion from the growable catalogue. The model uses 39,354 triangles and 12 opaque batches. Hardware frame rate is unmeasured.
+- Rebuild with node scripts/export-traditional-high-rise.cjs <reference.png>. The supplied reference is retained in the ignored .tools/traditional-high-rise-reference/ folder with the comparison capture. Reference SHA-256 08f209c742b6518f92843ea4ec01dda1db1c31bd27c3ee089de136e18314f891.
+- Playable Pancake City - Traditional High-Rise Test City - 20261124T194543Z.html (SHA-256 3dd1b4b5044b5b68bb181d639cbe904375936c346abc321f3cda75ebf9bc4e3a). Recovery checkpoint checkpoint/pre-traditional-high-rise-fcbc1cb. Await visual approval before developing variants.
