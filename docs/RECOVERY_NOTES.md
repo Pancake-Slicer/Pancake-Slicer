@@ -569,3 +569,23 @@ Suggested smoke tests: load the world, camera movement, freeform road placement,
 - Squared the four outer corners on the top four storeys so the side walls extend beneath both vault eaves. The lower shaft retains its chamfers and the front projection retains its angled transitions. The vault itself keeps the previous geometry.
 - Added a geometry check for wall support at both eaves on both ends. Reviewed the crown close-up and verified both revised standalone previews offline in Chrome.
 - Pancake City - Barrel-Vault Benchmark - 20261124T170800Z.html (SHA-256 30f3d8d902925ceb9aac122c6c2fc4d83bd9dcc829f4d45b919d474f22a4a1ef). Pancake City - Barrel-Vault Test City - 20261124T170802Z.html (SHA-256 25da881efd9a9a4504bd17a5ceb203d8bf5bfc62e72920beee81ffbf87a1d1a9). Reference comparison captures are in .tools/barrel-vault-reference/square-corners/.
+
+## Original Vault Offices — 2026-11-24
+
+Three experimental Office types support 20–40 storeys at 3.35 m per floor. Each uses native 2.4 m lot and bay modules, supported upper slabs, silver-grey ribbon cladding, opaque jade vaults, solid trimmed arch ends and terrain-grade foundations. The benchmark supplies visual and technical precedent. Its mesh and source are unchanged and appear only in the comparison export.
+
+| Review model | Architectural distinction | Ground footprint in its lot | Model triangles | Material batches |
+| --- | --- | ---: | ---: | ---: |
+| Symmetrical Vault Tower | Recessed front, two supported stepped shoulders, centered long vault, and a compact entry porch. | 74.5% | 2,354 | 7 |
+| Twin Vault Tower | Angular link, unequal tower wings, perpendicular crowns, and a stepped shared podium. | 77.6% | 3,010 | 8 |
+| Asymmetric Atrium Tower | Offset slender terraces, off-center crown, and a tall street-side curved atrium. | 75.9% | 2,188 | 8 |
+| Approved fixed benchmark | Projecting center and full-width crown preserved as a scene reference. | — | 3,670 | 8 |
+
+The three real Office assignments used 26 rendered batches including foundations and shared 6 maps. The fixed benchmark has no growable parcel. Counts compare mesh cost in this fixture. Hardware FPS was not measured.
+
+Enable **Experimental Vault Offices** under **Development → Lightweight offices** to grow the selected design on compatible new Office lots. The Playtest defaults to off. Test City provides the three assigned models and an archived benchmark with individual crown and entrance views.
+
+- Playtest Pancake City - Original Vault Offices Playtest - 20261124T173930Z.html (SHA-256 f06770c77b6188a6ab69b35038047a91684b83b2d8a20b60c93e8acab7da2403).
+- Test City Pancake City - Original Vault Offices Test City - 20261124T173930Z.html (SHA-256 33b26a21587790dac4973f4f47f4570bfc7ba3a6754e37b8ab8bf0e9cbf287f5).
+- Nine fitted samples across 20, 30 and 40 storeys passed crown and slab support, rotation, envelope and material checks. Automated coverage also verified sloped thresholds, picking, history, and cold restore. Offline Chrome verified both exports, the default-off state, new opt-in Office growth and deterministic Twin Vault redevelopment. Captures are in .tools/original-vaults/.
+- Reproduce with npm run export:original-vaults. Checkpoint checkpoint/pre-original-vault-family-080e10b. Await visual approval before expanding the family.

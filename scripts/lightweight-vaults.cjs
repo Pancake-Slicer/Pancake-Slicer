@@ -1,0 +1,32 @@
+const {readFileSync}=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+const read=file=>readFileSync(path.join(root,file),'utf8');
+const strip=source=>source.replace(/^import .*;\r?$/gm,'').replace(/^export /gm,'');
+function applyVaultIntegration(source){
+  const replace=(a,b)=>{assert.equal(source.split(a).length,2,'Vault boundary changed: '+a);source=source.replace(a,()=>b);};
+  const model=strip(read('architecture/original-vaults/model.js')),batch=strip(read('benchmark/shared/batched-architecture.js'));
+  const code='function pcVaultPackage(T){\n'+batch+'\n'+model+'\nreturn {definition,VaultGenerator,NAMES};\n}\n'+read('web/features/lightweight-vaults.js');
+  replace('const pcGrowableDefinitions=',code+'\nconst pcGrowableDefinitions=');
+  replace('function pcGrowableFind(key){','function pcGrowableFind(key){const vault=pcVaultDefinitions.find(d=>d.key===key);if(vault)return vault;');
+  replace('function pcGrowablePlacement(property,asset){','function pcGrowablePlacement(property,asset){if(asset.model.format==="lightweight-vault")return asset.record?pcCurvedPlacement(property,asset):null;');
+  replace('function pcGrowableChoose(collection,property,forPaint=false){','function pcGrowableChoose(collection,property,forPaint=false){const vault=pcVaultChoose(collection,property,forPaint);if(vault)return vault;');
+  replace("...(asset.model.format==='lightweight-curved'?{lightweightCurved:structuredClone(asset.record)}:{})","...(asset.model.format==='lightweight-curved'?{lightweightCurved:structuredClone(asset.record)}:{}),...(asset.model.format==='lightweight-vault'?{lightweightVault:structuredClone(asset.record)}:{})");
+  replace('pcCurvedRemember(collection,property,asset);','pcCurvedRemember(collection,property,asset);pcVaultRemember(collection,property,asset);');
+  replace('waterfalls=[],curveds=[];','waterfalls=[],curveds=[],vaults=[];');
+  replace("if(asset.model.format==='lightweight-curved'){curveds.push", "if(asset.model.format==='lightweight-vault'){vaults.push(...buildings);continue;}if(asset.model.format==='lightweight-curved'){curveds.push");
+  replace('pcCurvedFlush(curveds,group);','pcCurvedFlush(curveds,group);pcBmoFlush(vaults,group,pcVaultAdapter);');
+  replace('pcCurvedRuntime?.generator.prune();E={','pcCurvedRuntime?.generator.prune();pcVaultRuntime?.generator.prune();E={');
+  replace('lightweightCurved:pcCurvedHistory(this)}','lightweightCurved:pcCurvedHistory(this),lightweightVault:pcVaultHistory(this)}');
+  replace('s=pcCurvedRestore(this,i?.lightweightCurved)||s;','s=pcCurvedRestore(this,i?.lightweightCurved)||s;s=pcVaultRestore(this,i?.lightweightVault)||s;');
+  replace('pcCurvedInitControls(Vh);','pcCurvedInitControls(Vh);pcVaultInitControls(Vh);');
+  replace('window.__sandbox={experimentalCurved:','window.__sandbox={experimentalVaults:{setControl:pcVaultSetControl,fit:pcVaultFit,info:pcVaultInfo,history:pcVaultHistory},experimentalCurved:');
+  replace('function pcFacadeRecord(b){return b.office?.lightweightCurved','function pcFacadeRecord(b){return b.office?.lightweightVault||b.office?.lightweightCurved');
+  replace('function pcFacadeParts(b){if(b.office?.lightweightCurved)','function pcFacadeParts(b){if(b.office?.lightweightVault||b.office?.lightweightCurved)');
+  replace('const front=b.office.lightweightCurved?', 'const front=b.office.lightweightVault||b.office.lightweightCurved?');
+  replace('const doorX=b.office.lightweightCurved?', 'const doorX=b.office.lightweightVault||b.office.lightweightCurved?');
+  replace('doorHalf=b.office.lightweightCurved?', 'doorHalf=b.office.lightweightVault||b.office.lightweightCurved?');
+  replace('const rings=b.office.lightweightCurved?', 'const rings=b.office.lightweightVault||b.office.lightweightCurved?');
+  replace('...((b.office.lightweightCurved||b.office.lightweightWaterfall', '...((b.office.lightweightVault||b.office.lightweightCurved||b.office.lightweightWaterfall');
+  return source;
+}
+module.exports={applyVaultIntegration};
