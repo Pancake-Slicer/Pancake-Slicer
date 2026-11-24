@@ -7777,19 +7777,16 @@ function chamfer(x,z,w,d,cut=2.3){
 }
 function layout(input){
   const s=normalize(input),{width:w,depth:d,storeys:h,archetype}=s;
-  const podiumFloors={A:2,B:3,C:4}[archetype],podiumY=podiumFloors*FLOOR;
+  const podiumFloors={A:2,B:3,C:4}[archetype];
   const front=d*.365, entranceX={A:0,B:-.05*w,C:-.18*w}[archetype];
-  const entryWidth=w*{A:.34,B:.51,C:.36}[archetype],right=entranceX+entryWidth/2,left=entranceX-entryWidth/2;
   const podium=chamfer(0,(front-d*.48)/2,w*.98,front+d*.48,{A:2.25,B:3.2,C:3}[archetype]);
-  const groundRing=[...podium.slice(0,5),[right,front],[right,d/2],[left,d/2],[left,front],...podium.slice(5)];
-  const slabs=[],crowns=[];
-  const add=(ring,start,end,style='blue')=>slabs.push({ring,start:start*FLOOR,end:end*FLOOR,style});
-  const roof=(x,z,length,radius,rise,storey,axis='x')=>crowns.push({x,z,length,radius,rise,y:storey*FLOOR,axis});
-  if(archetype==='A')add(podium,0,podiumFloors,'podium');
+  const slabs=[];
+  const add=(ring,start,end)=>slabs.push({ring,start:start*FLOOR,end:end*FLOOR});
+  if(archetype==='A')add(podium,0,podiumFloors);
   else{
-    add(podium,0,2,'podium');
+    add(podium,0,2);
     const upper=archetype==='B'?chamfer(-.012*w,-.065*d,.93*w,.80*d,2.7):chamfer(.038*w,-.057*d,.87*w,.77*d,3.2);
-    add(upper,2,podiumFloors,'podium');
+    add(upper,2,podiumFloors);
   }
   if(archetype==='A'){
     const base=[[-.36,-.39],[.36,-.39],[.43,-.32],[.43,.21],[.36,.29],[.18,.29],[.125,.14],[-.125,.14],[-.18,.29],[-.36,.29],[-.43,.21],[-.43,-.32]];
@@ -7801,25 +7798,18 @@ function layout(input){
     add(form(1),podiumFloors,h-6);
     add(form(.88,-.022),h-6,h-3);
     add(form(.78,-.038),h-3,h);
-    roof(0,-.10*d,.61*w,.151*d,Math.min(7.2,d*.19),h);
   }else if(archetype==='B'){
     const joined=[[-.41,-.28],[-.13,-.28],[-.04,-.38],[.39,-.38],[.43,-.30],[.43,.19],[.34,.23],[.07,.23],[-.03,.30],[-.40,.30],[-.43,.24],[-.43,-.21]];
     add(joined.map(([x,z])=>[x*w,z*d]),podiumFloors,h-9);
-    add(chamfer(-.205*w,.025*d,.34*w,.50*d,1.7),h-9,h-6,'teal');
+    add(chamfer(-.205*w,.025*d,.34*w,.50*d,1.7),h-9,h-6);
     add(chamfer(.193*w,-.083*d,.35*w,.55*d,1.9),h-9,h);
-    roof(-.205*w,.025*d,.425*d,.145*w,Math.min(5.7,w*.099),h-6,'z');
-    roof(.193*w,-.083*d,.30*w,.229*d,Math.min(7.1,d*.18),h);
   }else{
     add(chamfer(.10*w,-.04*d,.64*w,.69*d,2.1),podiumFloors,h-8);
-    add(chamfer(.135*w,-.064*d,.55*w,.60*d,1.85),h-8,h-4,'teal');
+    add(chamfer(.135*w,-.064*d,.55*w,.60*d,1.85),h-8,h-4);
     add(chamfer(.151*w,-.104*d,.45*w,.495*d,1.65),h-4,h);
-    roof(.23*w,-.107*d,.422*d,.115*w,Math.min(6.9,w*.15),h,'z');
   }
-  const atrium={x:entranceX,z:d*.404,length:entryWidth,radius:d*.096,rise:{A:2.6,B:3.9,C:5.1}[archetype],
-    y:{A:3.9,B:5.2,C:7.3}[archetype],axis:'x'};
-  return {groundRing,slabs,crowns,atrium,front,podiumY,volumes:[],
-    entrance:{x:entranceX,z:d/2,width:7.5,doorWidth:6.2,height:3.25},
-    roofTop:Math.max(...crowns.map(c=>c.y+c.rise+.15))};
+  return {groundRing:podium,slabs,volumes:[],
+    entrance:{x:entranceX,z:front,width:7.5,doorWidth:6.2,height:3.25},roofTop:h*FLOOR};
 }
 const definition=Object.freeze({
   id:'original-vaults',version:VERSION, family:'office',maximumLot:{width:79.6,depth:60.4},envelopeMargin:2.2,
@@ -7846,40 +7836,33 @@ function createMaterials(){
     const color=v<31?clad:glass,n=variation(x>>6,y>>6)*.67+(u<2?(v<31?-15:23):0)+(v<3?-12:v<34&&v>=31?21:0);
     return color.map(c=>c+n);
   });
-  const jade=map(256,256,(x,y)=>{
-    const v=y/255,n=variation(x>>3,y>>3)*.55+3*Math.sin(x/21+v*8);
-    const reflection=64*Math.exp(-((v-.24)**4)/.0012)+29*Math.exp(-((v-.67)**4)/.0013);
-    const trace=5*Math.exp(-((Math.hypot(x%64-32,y%64-32)-18)**2)/30);
-    return [62+reflection*1.29+n-trace,126+reflection*1.34+n-trace,111+reflection*1.28+n-trace];
-  });
   const tile=map(128,128,(x,y)=>{
     const c=154+variation(x>>4,y>>4)*.73-(x%32<2||y%32<2?12:0);
     return [c+4,c+2,c+5];
   });
   const make=(name,color,roughness,texture=null)=>new T.MeshStandardMaterial({name:'Original vaults · '+name,color,roughness,map:texture});
-  return {
-    blue0:make('marine ribbons','#ffffff',.66,ribbon([187,187,191],[63,94,130])),
-    blue1:make('slate ribbons','#ffffff',.66,ribbon([183,188,193],[66,100,128])),
-    blue2:make('midnight ribbons','#ffffff',.66,ribbon([186,183,189],[54,83,117])),
-    teal:make('muted teal ribbons','#ffffff',.68,ribbon([176,181,185],[59,112,117])),
-    podium:make('podium bands','#ffffff',.74,ribbon([174,174,179],[61,95,115])),
-    jade:make('opaque jade glass','#ffffff',.62,jade),
+  const colors=[[63,94,130],[59,112,99],[54,83,117]];
+  const materials={
     trim:make('silver frames','#dce1e1',.62),
     stone:make('silver-grey plinth','#b0afb5',.83),
-    deck:make('terrace paving','#dbd6da',.90,tile),
-    end:make('solid arch framing','#707b8b',.77),
-    door:make('dark entry glazing','#416273',.57)
+    deck:make('terrace paving','#dbd6da',.90,tile)
   };
+  for(const [palette,tint] of colors.entries()){
+    materials['ribbon'+palette]=make('ribbons '+palette,'#ffffff',.66,ribbon([187,187,191],tint));
+    const color=new T.Color().setRGB(...tint.map(channel=>channel/255),T.SRGBColorSpace);
+    materials['door'+palette]=make('entry glazing '+palette,color,.66);
+  }
+  return materials;
 }
 
 const point=([x,z],y)=>[x,y,z];
-function facade(batch,section,style){
+function facade(batch,section){
   const {ring,start,end}=section;
   let u=0;
   for(let i=0;i<ring.length;i++){
     const a=ring[i],b=ring[(i+1)%ring.length],bays=Math.max(1,Math.round(Math.hypot(b[0]-a[0],b[1]-a[1])/2.4));
     const next=u+bays/4,v=(end-start)/FLOOR/4;
-    batch.quad(style,[point(a,start),point(a,end),point(b,end),point(b,start)],[u,0,u,v,next,v,next,0]);
+    batch.quad('ribbon0',[point(a,start),point(a,end),point(b,end),point(b,start)],[u,0,u,v,next,v,next,0]);
     batch.beam('trim',point(a,end-.035),point(b,end-.035),.105,.11);
     u=next;
   }
@@ -7891,80 +7874,20 @@ function facade(batch,section,style){
   }
   geometry.dispose();
 }
-function buildVault(batch,v,label){
-  const {length,radius,rise,axis}=v;
-  const transform=(a,y,c)=>axis==='x'?[v.x+a,y,v.z+c]:[v.x-c,y,v.z+a];
-  const p=(x,t,offset=0)=>transform(x,v.y+(rise+offset)*Math.sin(t),(radius+offset)*Math.cos(t));
-  const half=length/2,bays=Math.max(4,Math.round(length/3.7)),part=batch.begin(label);
-  for(let i=0;i<64;i++){
-    const a=Math.PI*i/64,b=Math.PI*(i+1)/64;
-    batch.quad('jade',[p(-half,a),p(half,a),p(half,b),p(-half,b)],[0,i/64,bays/4,i/64,bays/4,(i+1)/64,0,(i+1)/64]);
-  }
-  batch.end(part);
-  for(let bay=0;bay<=bays;bay++){
-    const x=-half+length*bay/bays,edge=bay===0||bay===bays,halfRib=edge?.19:.075;
-    for(let i=0;i<32;i++){
-      const a=Math.PI*i/32,b=Math.PI*(i+1)/32,lift=edge?.13:.06;
-      batch.quad(edge?'end':'trim',[p(x-halfRib,a,lift),p(x+halfRib,a,lift),p(x+halfRib,b,lift),p(x-halfRib,b,lift)]);
-    }
-  }
-  for(let i=0;i<=6;i++){
-    const a=Math.PI*i/6,delta=.065/Math.hypot(radius*Math.sin(a),rise*Math.cos(a));
-    batch.quad('trim',[p(-half,a-delta,.077),p(half,a-delta,.077),p(half,a+delta,.077),p(-half,a+delta,.077)]);
-  }
-  for(const sign of [-1,1]){
-    const x=sign*half,middle=transform(x,v.y,0);
-    for(let i=0;i<32;i++){
-      const a=p(x,Math.PI*i/32),b=p(x,Math.PI*(i+1)/32);
-      batch.triangle('end',sign>0?[middle,b,a]:[middle,a,b]);
-    }
-    if(label!=='entry vault')for(let i=0;i<18;i++){
-      const a=.40+i*(Math.PI-.80)/18,b=.40+(i+1)*(Math.PI-.80)/18;
-      const inset=(t,lift)=>transform(x+sign*.025,v.y+(rise*.71+lift)*Math.sin(t),(radius*.71+lift)*Math.cos(t));
-      const strip=[inset(a,0),inset(b,0),inset(b,.15),inset(a,.15)];
-      batch.quad('trim',sign<0?strip:strip.reverse());
-    }
-  }
-}
-function entrance(batch,plan){
-  const v=plan.atrium,e=plan.entrance,half=v.length/2,door=3.1;
-  const glass=(a,b,lo,hi)=>batch.quad('jade',[[a,lo,e.z],[b,lo,e.z],[b,hi,e.z],[a,hi,e.z]],[0,.01,(b-a)/14,.01,(b-a)/14,.11,0,.11]);
-  glass(v.x-half,e.x-door,0,v.y);glass(e.x+door,v.x+half,0,v.y);
-  glass(e.x-door,e.x+door,e.height,v.y);
-  const bays=Math.round(v.length/2.4);
-  for(let i=0;i<=bays;i++){
-    const x=v.x-half+i*v.length/bays,base=Math.abs(x-e.x)<door?e.height:0;
-    batch.box('trim',x,(v.y+base)/2,e.z+.018,.09,v.y-base,.09);
-  }
-  for(const x of [v.x-half,v.x+half])batch.box('end',x,v.y/2,(plan.front+e.z)/2,.18,v.y,e.z-plan.front);
-  for(const x of [-2.31,-.77,.77,2.31]){
-    batch.box('door',e.x+x,e.height/2,e.z-.04,1.48,e.height,.07);
-    batch.box('trim',e.x+x-.77,e.height/2,e.z,.08,e.height,.11);
-  }
-  for(const x of [-door,door])batch.box('trim',e.x+x,e.height/2,e.z,.14,e.height,.16);
-  batch.box('trim',e.x,e.height,e.z,6.32,.15,.19);
-  if(v.y>5)batch.box('trim',e.x,4.46,e.z,v.length,.13,.14);
+function entrance(batch,e){
+  // Keep the standard doorway on the podium face with a narrow metal surround.
+  const half=e.doorWidth/2;
+  batch.box('door0',e.x,e.height/2,e.z+.015,e.doorWidth,e.height,.04);
+  for(const x of [-half,-half/2,0,half/2,half])batch.box('trim',e.x+x,e.height/2,e.z+.043,.085,e.height,.055);
+  batch.box('trim',e.x,e.height,e.z+.043,e.doorWidth+.09,.13,.095);
 }
 function buildVaultTower(input,materials){
   const s=normalize(input),plan=layout(s),batch=new ArchitectureBatch;
-  for(const slab of plan.slabs)facade(batch,slab,slab.style==='blue'?'blue0':slab.style);
-  for(const [i,v] of plan.crowns.entries())buildVault(batch,v,'crown '+i);
-  buildVault(batch,plan.atrium,'entry vault');
-  entrance(batch,plan);
+  for(const slab of plan.slabs)facade(batch,slab);
+  entrance(batch,plan.entrance);
   const model=batch.finish(materials,NAMES[s.archetype]);
   const deck=model.children.find(m=>m.name==='deck').geometry;
   for(let i=0;i<deck.attributes.position.count;i++)deck.attributes.uv.setXY(i,deck.attributes.position.getX(i)/6,deck.attributes.position.getZ(i)/6);
-  const glass=model.children.find(m=>m.name==='jade').geometry,n=glass.attributes.normal,p=glass.attributes.position;
-  const direction=new T.Vector3();
-  for(const [label,v] of [...plan.crowns.map((v,i)=>['crown '+i,v]),['entry vault',plan.atrium]]){
-    const {start,end}=model.userData.partRanges.find(r=>r.label===label&&r.material==='jade');
-    for(let i=start;i<end;i++){
-      const y=(p.getY(i)-v.y)/v.rise**2,c=(v.axis==='x'?p.getZ(i)-v.z:v.x-p.getX(i))/v.radius**2;
-      direction.set(v.axis==='x'?0:-c,y,v.axis==='x'?c:0).normalize();
-      n.setXYZ(i,direction.x,direction.y,direction.z);
-    }
-  }
-  n.needsUpdate=true;
   model.userData.triangles=model.children.reduce((n,m)=>n+m.geometry.index.count/3,0);
   return model;
 }
@@ -7975,7 +7898,10 @@ class VaultGenerator{
     let entry=this.cache.get(key);
     if(!entry){entry={model:buildVaultTower(shape,this.materials),users:0};this.cache.set(key,entry);}
     const model=entry.model.clone(true);
-    const glass=model.children.find(m=>m.name==='blue0');glass.material=this.materials['blue'+palette];
+    for(const mesh of model.children){
+      if(mesh.name==='ribbon0')mesh.material=this.materials['ribbon'+palette];
+      if(mesh.name==='door0')mesh.material=this.materials['door'+palette];
+    }
     entry.users++;this.leases.set(model,key);return model;
   }
   release(model){const k=this.leases.get(model);if(k===undefined)return false;this.cache.get(k).users--;this.leases.delete(model);model.removeFromParent();return true;}
@@ -8014,7 +7940,10 @@ function pcVaultRestore(c,snapshot){
   for(const [id,r] of snapshot?.assignments||[]){
     pcVaultReady().system.validateRecord(r);
     if(id!==r.lotId||next.has(id))throw Error('Invalid vault assignment');
-    next.set(id,structuredClone(r));
+    const record=structuredClone(r);
+    // Refresh the derived roof and threshold geometry for saved domed prototypes.
+    if(record.grid?.atrium)record.grid=pcVaultReady().system.definition.layout(record.parameters);
+    next.set(id,record);
   }
   c.pcVaultAssignments=next;c.pcVaultControl={enabled:!!snapshot?.control?.enabled,type};c.pcVaultRefresh?.();
   return before!==JSON.stringify(pcVaultHistory(c));

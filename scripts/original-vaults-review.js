@@ -3,7 +3,7 @@
   const panel=document.createElement('details');
   panel.open=true;
   panel.style.cssText='position:fixed;top:12px;left:12px;z-index:46;padding:11px;max-width:275px;background:#173044ed;color:white;font:13px system-ui;border-radius:5px';
-  panel.innerHTML='<summary>Original Vault Offices</summary><p><button data-view="all">All four</button> <button data-view="A">Symmetrical</button> <button data-view="B">Twin</button> <button data-view="C">Atrium</button> <button data-view="R">Benchmark</button></p><p><button data-detail="roof">Crown</button> <button data-detail="entry">Entrance</button></p><span id="vault-status">Preparing Test City…</span><output id="vault-report" hidden></output>';
+  panel.innerHTML='<summary>Original Vault Offices</summary><p><button data-view="all">All four</button> <button data-view="A">Symmetrical</button> <button data-view="B">Twin</button> <button data-view="C">Atrium</button> <button data-view="R">Benchmark</button></p><p><button data-detail="roof">Roof</button> <button data-detail="entry">Entrance</button></p><span id="vault-status">Preparing Test City…</span><output id="vault-report" hidden></output>';
   for(const button of panel.querySelectorAll('button'))button.style.cssText='color:#173047;background:#edf4f6;border:1px solid #879eab;padding:4px 7px;margin:2px';
   document.body.append(panel);
   const development=document.querySelector('#bmo-development');if(development)development.open=false;
@@ -21,7 +21,7 @@
       const cost=p=>Math.hypot(p.x-(-255+i*163),p.z+75)+Math.abs(pcGrowableFacing(p).angle)*95;
       const p=Vh.properties.filter(p=>!used.has(p.id)&&pcVaultFit(p,type,floors).ok).sort((a,b)=>cost(a)-cost(b))[0];
       if(!p)throw Error('No compatible comparison lot for '+type);
-      const {record}=pcVaultFit(p,type,floors),asset=pcVaultAsset(record);
+      const {record:fit}=pcVaultFit(p,type,floors),record={...fit,parameters:{...fit.parameters,palette:i}},asset=pcVaultAsset(record);
       Vh.pcCatalogueAssignments??=new Map;
       Vh.pcCatalogueAssignments.set(p.id,asset.key);
       pcVaultRemember(Vh,p,asset);Vh.applyProperties([p],'offices');used.add(p.id);

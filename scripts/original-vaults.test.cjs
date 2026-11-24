@@ -15,7 +15,7 @@ function rectangle(archetype,angle,width=62,depth=52){
   return {id:archetype+angle,zone:'offices',area:width*depth,towardRoad:{x:Math.sin(angle),z:Math.cos(angle)},
     footprint:[[-width/2,-depth/2],[width/2,-depth/2],[width/2,depth/2],[-width/2,depth/2]].map(([x,z])=>({x:x*Math.cos(angle)+z*Math.sin(angle),z:z*Math.cos(angle)-x*Math.sin(angle)}))};
 }
-test('three designs fit native rotated parcels with supported opaque vaults at 20–40 storeys',()=>{
+test('three designs fit native rotated parcels with flat roofs and one glazing tint at 20–40 storeys',()=>{
   const a=api(),rt=a.pcVaultReady(),samples=[];
   for(const [i,type] of ['A','B','C'].entries())for(const [j,h] of [20,30,40].entries()){
     const angle=j*.48,lot=rectangle(type,angle,56+j*9,44+j*5),fit=a.pcVaultFit(lot,type,h);
@@ -25,18 +25,22 @@ test('three designs fit native rotated parcels with supported opaque vaults at 2
     assert.equal(r.placement.scale,1);assert.ok(Math.abs(r.placement.angle-angle)<.000001);
     assert.equal(s.storeys,h);assert.equal(s.floorHeight,3.35);
     assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(lot.footprint)))<.0001);
-    assert.ok(g.entrance.z>0&&Math.abs(g.entrance.x-g.atrium.x)<.001);
-    assert.equal(g.crowns.length,type==='B'?2:1);
-    assert.ok(type!=='B'||g.crowns[0].y<g.crowns[1].y);
-    if(type==='C')assert.ok(g.atrium.y>6&&g.crowns[0].x>s.width*.18);
+    assert.equal(g.roofTop,h*s.floorHeight);
+    assert.deepEqual(plain(g.groundRing),plain(g.slabs[0].ring));
+    assert.ok(g.entrance.z>0&&g.entrance.z===Math.max(...g.groundRing.map(p=>p[1])));
+    assert.equal('atrium' in g,false);assert.equal('crowns' in g,false);
     for(const slab of g.slabs.filter(v=>v.start>0)){
       const lower=g.slabs.find(v=>v.end===slab.start);
       assert.ok(a.sn(a.je(polygon(slab.ring),polygon(lower.ring)))<.001,type+' unsupported upper slab');
     }
-    for(const v of g.crowns){
-      const roof=g.slabs.find(s=>Math.abs(s.end-v.y)<.0001),along=v.length/2,wide=v.radius;
-      const extent=[[-along,-wide],[along,-wide],[along,wide],[-along,wide]].map(([a,c])=>v.axis==='x'?[v.x+a,v.z+c]:[v.x-c,v.z+a]);
-      assert.ok(a.sn(a.je(polygon(extent),polygon(roof.ring)))<.0001,type+' unsupported crown');
+    for(const [sample,palette] of [[model,s.palette],[other,(s.palette+1)%3]]){
+      const ribbon=sample.children.find(m=>m.name==='ribbon0'),door=sample.children.find(m=>m.name==='door0');
+      assert.equal(ribbon.material,rt.generator.materials["ribbon"+palette]);
+      assert.equal(door.material,rt.generator.materials["door"+palette]);
+      const pixel=(45*256+10)*4,rgba=ribbon.material.map.image.data,color=door.material.color.getHex();
+      const rgb=[color>>16,(color>>8)&255,color&255];
+      assert.equal(rgba[pixel+1]-rgba[pixel],rgb[1]-rgb[0]);
+      assert.equal(rgba[pixel+2]-rgba[pixel],rgb[2]-rgb[0]);
     }
     const modelCount=model.userData.triangles;
     assert.ok(modelCount<5000&&model.children.length<=9);
@@ -44,7 +48,7 @@ test('three designs fit native rotated parcels with supported opaque vaults at 2
       assert.equal(m.geometry,other.children[j].geometry);
       assert.equal(m.material.transparent,false);
       const p=m.geometry.attributes.position;
-      for(let k=0;k<p.count;k++)assert.ok(Math.abs(p.getX(k))<=s.width/2+1.1&&Math.abs(p.getZ(k))<=s.depth/2+1.1);
+      for(let k=0;k<p.count;k++)assert.ok(Math.abs(p.getX(k))<=s.width/2+1.1&&p.getZ(k)<=g.entrance.z+.1&&p.getY(k)<=g.roofTop+.06);
     }
     if(j===1)samples.push({type,width:s.width,depth:s.depth,storeys:h,triangles:modelCount,batches:model.children.length,utilization:a.sn(polygon(g.groundRing))/lot.area});
     rt.generator.release(model);rt.generator.release(other);
@@ -80,7 +84,12 @@ test('experimental growth is opt-in and supports picking, terrain foundations an
   assert.deepEqual(plain(a.pcVaultHistory(z)),records);
   assert.equal(n.redo(),true);z.rebuild();assert.ok(!z.buildings.some(item=>item.id===b.id));
   const fresh=network(api());
+  for(const [,record] of saved.lightweightVault.assignments){
+    record.grid.atrium={y:7};record.grid.crowns=[{rise:5}];
+    record.grid.roofTop+=5;record.grid.entrance.z=record.parameters.depth/2;
+  }
   fresh.n.historyParticipants.get('zoning').restore(saved);fresh.z.rebuild();
+  assert.deepEqual(plain(a.pcVaultHistory(fresh.z)),records);
   assert.equal(fresh.z.buildings.filter(b=>b.office.lightweightVault).length,3);
 });
 test('archived crown benchmark remains unchanged and outside the assembled runtime',()=>{
@@ -89,7 +98,7 @@ test('archived crown benchmark remains unchanged and outside the assembled runti
   assert.ok(!source.includes('barrelVaultReference')&&!source.includes('Barrel-vault skyscraper · fixed benchmark'));
 });
 
-test('the three atrium thresholds and perimeter foundations meet sloped terrain',()=>{
+test('the three street thresholds and perimeter foundations meet sloped terrain',()=>{
   const a=api(),{z}=network(a),rt=a.pcVaultReady(),terrain={heightAt:(x,z)=>22+x*.022-z*.016,revision:1};
   for(const type of ['A','B','C']){
     const p=z.properties.find(p=>a.pcVaultFit(p,type,30).ok),r=a.pcVaultFit(p,type,30).record;

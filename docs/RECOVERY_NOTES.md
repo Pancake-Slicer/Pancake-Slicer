@@ -589,3 +589,11 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Test City Pancake City - Original Vault Offices Test City - 20261124T173930Z.html (SHA-256 33b26a21587790dac4973f4f47f4570bfc7ba3a6754e37b8ab8bf0e9cbf287f5).
 - Nine fitted samples across 20, 30 and 40 storeys passed crown and slab support, rotation, envelope and material checks. Automated coverage also verified sloped thresholds, picking, history, and cold restore. Offline Chrome verified both exports, the default-off state, new opt-in Office growth and deterministic Twin Vault redevelopment. Captures are in .tools/original-vaults/.
 - Reproduce with npm run export:original-vaults. Checkpoint checkpoint/pre-original-vault-family-080e10b. Await visual approval before expanding the family.
+
+## Original Vault Offices flat-roof revision — 2026-11-24
+
+- Removed the roof and entrance vaults on the three experimental towers. Kept the tower and podium slabs and moved the thresholds to the street-facing podium walls. Each tower uses the same blue or green tint across its window bands and entrance glazing. The comparison shows blue A and C and green B beside the archived benchmark.
+- Saved prototypes regenerate the flat decks and street thresholds from their fitted parameters, retaining lot, size, storeys, seed and palette. The growth control remains off by default.
+- Geometry checks verified roof heights, door placement, matching glazing tints and saved-record migration. Offline Chrome verified the roofs, entrance and deterministic redevelopment. Captures are in .tools/original-vaults/flat-roofs/.
+- Playtest Pancake City - Original Vault Offices Playtest - 20261124T175040Z.html (SHA-256 ab3d3607eed3b852a7f55a080cddcb9397ff11d3d6638514cb3c542a183bd2a6).
+- Test City Pancake City - Original Vault Offices Test City - 20261124T175040Z.html (SHA-256 54eade6721906a98e615e9f6b6a348d01516cc5ea8d7f5b3daac673e88b928c2).
