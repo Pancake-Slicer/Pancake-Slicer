@@ -10,6 +10,7 @@ function applyVaultIntegration(source){
   replace('function pcGrowableFind(key){','function pcGrowableFind(key){const vault=pcVaultDefinitions.find(d=>d.key===key);if(vault)return vault;');
   replace('function pcGrowablePlacement(property,asset){','function pcGrowablePlacement(property,asset){if(asset.model.format==="lightweight-vault")return asset.record?pcCurvedPlacement(property,asset):null;');
   replace('function pcGrowableChoose(collection,property,forPaint=false){','function pcGrowableChoose(collection,property,forPaint=false){const vault=pcVaultChoose(collection,property,forPaint);if(vault)return vault;');
+  replace('for(const asset of candidates){ticket-=asset.selectionWeight;if(ticket<0)return asset;}return null;', 'for(const asset of candidates){ticket-=asset.selectionWeight;if(ticket<0)return asset;}return pcVaultChoose(collection,property,forPaint,true);');
   replace("...(asset.model.format==='lightweight-curved'?{lightweightCurved:structuredClone(asset.record)}:{})","...(asset.model.format==='lightweight-curved'?{lightweightCurved:structuredClone(asset.record)}:{}),...(asset.model.format==='lightweight-vault'?{lightweightVault:structuredClone(asset.record)}:{})");
   replace('pcCurvedRemember(collection,property,asset);','pcCurvedRemember(collection,property,asset);pcVaultRemember(collection,property,asset);');
   replace('waterfalls=[],curveds=[];','waterfalls=[],curveds=[],vaults=[];');

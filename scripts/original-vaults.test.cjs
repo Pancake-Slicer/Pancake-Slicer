@@ -3,7 +3,7 @@ const path=require('node:path'),crypto=require('node:crypto'),root=path.join(__d
 const source=fs.readFileSync(path.join(root,'web/assets/game.bundle.js'),'utf8'),plain=x=>JSON.parse(JSON.stringify(x));
 function api(){
   const c=vm.createContext({console,performance,structuredClone,atob,URL,document:{createElement:()=>({relList:{supports:()=>true},getContext:()=>({fillRect(){}})})}});
-  vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={zb,qb,Se,pS,Te,je,sn,pcVaultControl,pcVaultReady,pcVaultFit,pcVaultSetControl,pcVaultHistory,pcVaultInfo,pcVaultDefinitions,pcOfficeParcels,pcFacadeAttach,pcFacadeRelease,pcFacadeSites,get runtime(){return pcVaultRuntime;}};',c);
+  vm.runInContext(source.slice(0,source.indexOf('const LP='))+';globalThis.api={zb,qb,Se,pS,Pw,Te,je,sn,pcVaultControl,pcVaultReady,pcVaultFit,pcVaultSetControl,pcVaultHistory,pcVaultInfo,pcVaultDefinitions,pcOfficeParcels,pcFacadeAttach,pcFacadeRelease,pcFacadeSites,get runtime(){return pcVaultRuntime;}};',c);
   return c.api;
 }
 function network(a){
@@ -18,7 +18,7 @@ function rectangle(archetype,angle,width=62,depth=52){
 test('three designs fit native rotated parcels with contained rooftop plant and one glazing tint at 20–40 storeys',()=>{
   const a=api(),rt=a.pcVaultReady(),samples=[];
   for(const [i,type] of ['A','B','C'].entries())for(const [j,h] of [20,30,40].entries()){
-    const angle=j*.48,lot=rectangle(type,angle,56+j*9,44+j*5),fit=a.pcVaultFit(lot,type,h);
+    const angle=j*.48,lot=rectangle(type,angle,56+j*9,44+j*5),fit=a.pcVaultFit(lot,type,h,null);
     assert.ok(fit.ok,fit.reason);
     const r=fit.record,g=r.grid,s=r.parameters,model=rt.generator.generate(s),other=rt.generator.generate({...s,palette:(s.palette+1)%3});
     const polygon=ring=>a.Te(ring.map(([x,z])=>({x,z})));
@@ -65,9 +65,10 @@ test('three designs fit native rotated parcels with contained rooftop plant and 
   rt.generator.prune();assert.equal(rt.generator.cache.size,0);
   console.log('Vault sample assets',JSON.stringify(samples));
 });
-test('experimental growth is opt-in and supports picking, terrain foundations and history',()=>{
+test('explicit family selection preserves picking, terrain foundations and history',()=>{
   const a=api(),{n,z}=network(a);
-  assert.equal(a.runtime,null);assert.equal(a.pcVaultControl(z).enabled,false);
+  assert.equal(a.runtime,null);assert.equal(a.pcVaultControl(z).enabled,true);
+  a.pcVaultSetControl(z,{enabled:false,type:'mix'});
   z.applyProperties(z.properties.slice(0,2),'offices');assert.ok(z.buildings.every(b=>!b.office.lightweightVault));assert.equal(a.runtime,null);
   const sites=new Set(z.buildings.flatMap(b=>b.propertyIds));
   for(const type of ['A','B','C']){
@@ -101,6 +102,9 @@ test('experimental growth is opt-in and supports picking, terrain foundations an
   fresh.n.historyParticipants.get('zoning').restore(saved);fresh.z.rebuild();
   assert.deepEqual(plain(a.pcVaultHistory(fresh.z)),records);
   assert.equal(fresh.z.buildings.filter(b=>b.office.lightweightVault).length,3);
+  saved.lightweightVault.control={enabled:false,type:'C'};
+  fresh.n.historyParticipants.get('zoning').restore(saved);
+  assert.deepEqual(plain(a.pcVaultHistory(fresh.z).control),{enabled:true,type:'mix',catalogue:true});
 });
 test('archived crown benchmark remains unchanged and outside the assembled runtime',()=>{
   const bytes=fs.readFileSync(path.join(root,'architecture/barrel-vault-reference/model.js'));
@@ -123,4 +127,84 @@ test('the three street thresholds and perimeter foundations meet sloped terrain'
     a.pcFacadeRelease(model);rt.system.release(model);
   }
   rt.generator.prune();
+});
+
+test('15 production forms fit rotated lots, preserve native bays and carry supported vaults and plant',()=>{
+  const a=api(),rt=a.pcVaultReady(),measurements=[],polygon=ring=>a.Te(ring.map(([x,z])=>({x,z})));
+  for(const type of ['A','B','C']){
+    const shapes=new Set;
+    for(const [i,[w,d,h]] of [[52,38,20],[57,46,25],[64,53,30],[75,62,35],[84,66,40]].entries()){
+      const form=i%3,angle=.29*i,lot=rectangle(type,angle,w,d),fit=a.pcVaultFit(lot,type,h,form);
+      assert.ok(fit.ok,type+' '+h+': '+fit.reason);
+      const r=fit.record,g=r.grid,s=r.parameters,m=rt.generator.generate(s);
+      assert.deepEqual(plain(a.pcVaultFit({...lot},type,h,form).record),plain(r));
+      assert.equal(r.placement.scale,1);assert.ok(Math.abs(r.placement.angle-angle)<.00001);
+      assert.equal(s.form,form);assert.equal(s.storeys,h);assert.equal(g.entrance.x,0);
+      for(const value of [s.width,s.depth])assert.ok(Math.abs(value/2.4-Math.round(value/2.4))<.00001);
+      assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(lot.footprint)))<.001);
+      assert.ok(g.crowns.length>=1&&g.crowns.length<=2);
+      assert.equal(g.equipment.length,type==='B'?2:1);
+      for(const slab of g.slabs.slice(1)){
+        const lower=g.slabs.find(v=>v.end===slab.start);
+        assert.ok(a.sn(a.je(polygon(slab.ring),polygon(lower.ring)))<.001,type+' unsupported slab');
+      }
+      const placed=[];
+      for(const v of [...g.crowns,...g.equipment]){
+        const along=v.axis?v.length/2+.14:v.width/2,wide=v.axis?v.radius+.12:v.depth/2;
+        const ring=[[-along,-wide],[along,-wide],[along,wide],[-along,wide]].map(([x,z])=>v.axis==='z'?[v.x-z,v.z+x]:[v.x+x,v.z+z]);
+        const roof=g.slabs.find(slab=>slab.end===v.y),shape=polygon(ring);
+        assert.ok(a.sn(a.je(shape,polygon(roof.ring)))<.001,type+' unsupported roof attachment');
+        for(const p of placed.filter(p=>p.y===v.y))assert.ok(a.sn(shape)-a.sn(a.je(shape,p.shape))<.001,type+' overlapping roof attachments');
+        placed.push({y:v.y,shape});
+      }
+      const vault=m.children.find(mesh=>mesh.name==='vault0'),door=m.children.find(mesh=>mesh.name==='door0');
+      assert.equal(vault.material,rt.generator.materials['vault'+s.palette]);
+      assert.equal(door.material,rt.generator.materials['door'+s.palette]);
+      const data=vault.material.map.image.data,color=door.material.color.getHex(),pixel=(39*256+10)*4;
+      assert.equal(data[pixel+1]-data[pixel],((color>>8)&255)-(color>>16));
+      assert.equal(data[pixel+2]-data[pixel],(color&255)-(color>>16));
+      const n=vault.geometry.attributes.normal;
+      for(let k=0;k<n.count;k++)assert.ok(Math.abs(Math.hypot(n.getX(k),n.getY(k),n.getZ(k))-1)<.0001);
+      assert.ok(m.children.every(c=>!c.material.transparent));
+      assert.ok(m.userData.triangles<4400&&m.children.length<=7);
+      const fixed=rt.system.definition.layout({archetype:type,height:32,width:57.6,depth:43.2,storeys:32,form});
+      shapes.add(JSON.stringify([fixed.slabs,fixed.crowns]));
+      measurements.push([type,form,s.width,s.depth,h,m.userData.triangles,m.children.length]);
+      rt.generator.release(m);
+    }
+    assert.equal(shapes.size,3);
+  }
+  rt.generator.prune();
+  assert.equal(rt.generator.leases.size,0);
+  console.log('Production Vault sample [type,form,width,depth,floors,triangles,batches]',JSON.stringify(measurements));
+});
+test('normal mixed Office growth selects three Vault subfamilies and retains ordinary offices',()=>{
+  const a=api(),n=new a.zb,roads=[];
+  n.terrain=a.Pw({kind:'inland',seed:1138,hills:0,mountains:0,slope:0,river:0,coast:0},{size:900,tileSize:900});
+  for(const v of [-400,-220,-20,180,400])roads.push([{x:v,z:-400},{x:v,z:400}],[{x:-400,z:v},{x:400,z:v}]);
+  n.addBatch(roads);const z=new a.qb(n,{items:[]});z.setPropertyZone('offices');
+  assert.equal(a.pcVaultControl(z).enabled,true);
+  const lots=z.properties.filter(p=>['A','B','C'].some(t=>a.pcVaultFit(p,t).ok));
+  z.applyProperties(lots,'offices');
+  const towers=z.buildings.filter(b=>b.office.lightweightVault);
+  assert.deepEqual([...new Set(towers.map(b=>b.office.lightweightVault.parameters.archetype))].sort(),['A','B','C']);
+  assert.ok(towers.length<z.buildings.length);
+  const tower=towers[0],lot=lots.find(p=>p.id===tower.propertyIds[0]),record=plain(tower.office.lightweightVault);
+  assert.ok(z.demolish(tower.id));z.applyProperties([lot],'offices');
+  assert.deepEqual(plain(z.buildings.find(b=>b.propertyIds.includes(lot.id)).office.lightweightVault),record);
+});
+test('the three approved flat-roof benchmarks retain their exact geometry buffers',()=>{
+  const rt=api().pcVaultReady(),locks={
+    A:'844c755a52089978aa83360dab4fc5e2452b7820bef694c53a15f9e3c3598e23',
+    B:'e68397c391c3d449cc3c8945f925569b5a339925cfee821e11493b213d6dc413',
+    C:'db0827c0fc8e487edba54a89e3f4b737a13ae295e2d26a0bf7252b31bd4bd153'
+  };
+  for(const [archetype,expected] of Object.entries(locks)){
+    const model=rt.generator.generate({archetype}),hash=crypto.createHash('sha256');
+    for(const mesh of model.children){
+      hash.update(mesh.name);
+      for(const {array} of [mesh.geometry.index,...Object.values(mesh.geometry.attributes)])hash.update(Buffer.from(array.buffer,array.byteOffset,array.byteLength));
+    }
+    assert.equal(hash.digest('hex'),expected);rt.generator.release(model);
+  }
 });

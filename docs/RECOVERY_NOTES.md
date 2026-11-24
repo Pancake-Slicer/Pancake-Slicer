@@ -604,3 +604,15 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Geometry tests verify rooftop containment at all tested lot sizes and the correct number of installations. Earlier experimental records regenerate roof details from their saved fitted parameters. Offline Chrome verified all three roof views and redevelopment. Captures are in .tools/original-vaults/roof-equipment/.
 - Playtest Pancake City - Original Vault Offices Playtest - 20261124T175536Z.html (SHA-256 b840d17d94bf7cef33c0b9702cff570a5b2f467284dfe32e1bc67bd397e84c79).
 - Test City Pancake City - Original Vault Offices Test City - 20261124T175536Z.html (SHA-256 523accd7e564375ac3faa361ec8c9caaefe61f1618c9f45db6ab289880f49af7).
+
+## Postmodern Vault Offices in normal growth — 2026-11-24
+
+- Normal mixed Office zoning can select all three subfamilies after existing growable selections. Production assignments persist a seeded form with coordinated green or blue glazing across ribbons, roof and door. The three fixed flat-roof benchmarks keep their original geometry and saved assignments.
+- Symmetrical varies its front recess, stepped shoulders and single or split vaults. Twin varies wing proportions and relative height, with parallel or perpendicular crowns. Atrium varies its offset slabs and crown axis. Each has a centred podium entrance, native 2.4 m bay fitting, 3.35 m storeys, and 20–40 floors.
+- The shared fitter tests street-aligned decorated envelopes against the actual parcel polygon. It tries widths and depths in native bay increments and rejects incompatible lots. Production roof plant and vaults sit on supported decks with separate footprints.
+- Fifteen fitted 20–40-storey samples used 1,416–2,474 model triangles and seven material batches each. A supplemental check covered 1,599 supported width/depth/form combinations at 20 storeys. The measured geometry counts are fixture results. Hardware FPS was unmeasured.
+- Offline Chrome verified both exports, fifteen Test City specimens, the three fixed benchmarks, 20 Vault towers among 229 normally zoned offices, and deterministic Twin Vault redevelopment. The natural fixture used 142 Vault render batches including foundations and 7 shared maps. The SC4 reconstruction is confined to comparison.
+- Test City includes **15 variants**, **Fixed benchmarks**, and **Natural growth**. Captures are in .tools/original-vaults/production/.
+- Playtest Pancake City - Original Vault Offices Playtest - 20261124T180711Z.html (SHA-256 e223a015b042c4b0364ff7293e98ab6ad72111b82282d49d0e30c14328c68b50).
+- Test City Pancake City - Original Vault Offices Test City - 20261124T180711Z.html (SHA-256 fabca17d6b43a2279edacdcdff0272d446479f5d831218e0ad987fadd40147f8).
+- Checkpoint checkpoint/pre-parametric-vaults-77572e6.
