@@ -15,7 +15,7 @@ function rectangle(archetype,angle,width=62,depth=52){
   return {id:archetype+angle,zone:'offices',area:width*depth,towardRoad:{x:Math.sin(angle),z:Math.cos(angle)},
     footprint:[[-width/2,-depth/2],[width/2,-depth/2],[width/2,depth/2],[-width/2,depth/2]].map(([x,z])=>({x:x*Math.cos(angle)+z*Math.sin(angle),z:z*Math.cos(angle)-x*Math.sin(angle)}))};
 }
-test('three designs fit native rotated parcels with flat roofs and one glazing tint at 20–40 storeys',()=>{
+test('three designs fit native rotated parcels with contained rooftop plant and one glazing tint at 20–40 storeys',()=>{
   const a=api(),rt=a.pcVaultReady(),samples=[];
   for(const [i,type] of ['A','B','C'].entries())for(const [j,h] of [20,30,40].entries()){
     const angle=j*.48,lot=rectangle(type,angle,56+j*9,44+j*5),fit=a.pcVaultFit(lot,type,h);
@@ -25,7 +25,14 @@ test('three designs fit native rotated parcels with flat roofs and one glazing t
     assert.equal(r.placement.scale,1);assert.ok(Math.abs(r.placement.angle-angle)<.000001);
     assert.equal(s.storeys,h);assert.equal(s.floorHeight,3.35);
     assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(lot.footprint)))<.0001);
-    assert.equal(g.roofTop,h*s.floorHeight);
+    assert.equal(g.equipment.length,type==='B'?2:1);
+    assert.equal(g.roofTop,h*s.floorHeight+1.65);
+    for(const unit of g.equipment){
+      const roof=g.slabs.find(slab=>slab.end===unit.y);
+      const {x,z,width,depth}=unit, w=width/2, d=depth/2;
+      const footprint=[[x-w,z-d],[x+w,z-d],[x+w,z+d],[x-w,z+d]];
+      assert.ok(a.sn(a.je(polygon(footprint),polygon(roof.ring)))<.001,type+' equipment outside its roof');
+    }
     assert.deepEqual(plain(g.groundRing),plain(g.slabs[0].ring));
     assert.ok(g.entrance.z>0&&g.entrance.z===Math.max(...g.groundRing.map(p=>p[1])));
     assert.equal('atrium' in g,false);assert.equal('crowns' in g,false);
@@ -85,8 +92,11 @@ test('experimental growth is opt-in and supports picking, terrain foundations an
   assert.equal(n.redo(),true);z.rebuild();assert.ok(!z.buildings.some(item=>item.id===b.id));
   const fresh=network(api());
   for(const [,record] of saved.lightweightVault.assignments){
-    record.grid.atrium={y:7};record.grid.crowns=[{rise:5}];
-    record.grid.roofTop+=5;record.grid.entrance.z=record.parameters.depth/2;
+    delete record.grid.equipment;record.grid.roofTop=record.parameters.storeys*record.parameters.floorHeight;
+    if(record.parameters.archetype==='A'){
+      record.grid.atrium={y:7};record.grid.crowns=[{rise:5}];
+      record.grid.roofTop+=5;record.grid.entrance.z=record.parameters.depth/2;
+    }
   }
   fresh.n.historyParticipants.get('zoning').restore(saved);fresh.z.rebuild();
   assert.deepEqual(plain(a.pcVaultHistory(fresh.z)),records);

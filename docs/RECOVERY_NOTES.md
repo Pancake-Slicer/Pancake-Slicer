@@ -597,3 +597,10 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Geometry checks verified roof heights, door placement, matching glazing tints and saved-record migration. Offline Chrome verified the roofs, entrance and deterministic redevelopment. Captures are in .tools/original-vaults/flat-roofs/.
 - Playtest Pancake City - Original Vault Offices Playtest - 20261124T175040Z.html (SHA-256 ab3d3607eed3b852a7f55a080cddcb9397ff11d3d6638514cb3c542a183bd2a6).
 - Test City Pancake City - Original Vault Offices Test City - 20261124T175040Z.html (SHA-256 54eade6721906a98e615e9f6b6a348d01516cc5ea8d7f5b3daac673e88b928c2).
+
+## Original Vault Offices rooftop mechanical equipment — 2026-11-24
+
+- Added low-profile galvanized HVAC units, grilles, twin fans and adjacent duct housings on all three towers, including both roofs of Twin Vault. The equipment stays inside the existing roof decks and is at most 1.65 m tall.
+- Geometry tests verify rooftop containment at all tested lot sizes and the correct number of installations. Earlier experimental records regenerate roof details from their saved fitted parameters. Offline Chrome verified all three roof views and redevelopment. Captures are in .tools/original-vaults/roof-equipment/.
+- Playtest Pancake City - Original Vault Offices Playtest - 20261124T175536Z.html (SHA-256 b840d17d94bf7cef33c0b9702cff570a5b2f467284dfe32e1bc67bd397e84c79).
+- Test City Pancake City - Original Vault Offices Test City - 20261124T175536Z.html (SHA-256 523accd7e564375ac3faa361ec8c9caaefe61f1618c9f45db6ab289880f49af7).

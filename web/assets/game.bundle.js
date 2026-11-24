@@ -7757,7 +7757,7 @@ function croppedTexture(image,rect,width,height){
 
 
 const NAMES=Object.freeze({A:'Symmetrical Vault Tower',B:'Twin Vault Tower',C:'Asymmetric Atrium Tower'});
-const VERSION='0.1.0', FLOOR=3.35, MODULE=2.4;
+const VERSION='0.1.0', FLOOR=3.35, MODULE=2.4, EQUIPMENT_HEIGHT=1.65;
 const minimum={A:38.4,B:48,C:36};
 
 function normalize(input={}){
@@ -7808,8 +7808,11 @@ function layout(input){
     add(chamfer(.135*w,-.064*d,.55*w,.60*d,1.85),h-8,h-4);
     add(chamfer(.151*w,-.104*d,.45*w,.495*d,1.65),h-4,h);
   }
-  return {groundRing:podium,slabs,volumes:[],
-    entrance:{x:entranceX,z:front,width:7.5,doorWidth:6.2,height:3.25},roofTop:h*FLOOR};
+  const unit=(x,z,level)=>({x:x*w,z:z*d,y:level*FLOOR,width:Math.min(8,w*.17),depth:Math.min(4.8,d*.16),height:EQUIPMENT_HEIGHT});
+  const equipment=archetype==='B'?[unit(-.205,.025,h-6),unit(.193,-.083,h)]:
+    [archetype==='A'?unit(0,-.115,h):unit(.151,-.104,h)];
+  return {groundRing:podium,slabs,volumes:[],equipment,
+    entrance:{x:entranceX,z:front,width:7.5,doorWidth:6.2,height:3.25},roofTop:h*FLOOR+EQUIPMENT_HEIGHT};
 }
 const definition=Object.freeze({
   id:'original-vaults',version:VERSION, family:'office',maximumLot:{width:79.6,depth:60.4},envelopeMargin:2.2,
@@ -7845,7 +7848,9 @@ function createMaterials(){
   const materials={
     trim:make('silver frames','#dce1e1',.62),
     stone:make('silver-grey plinth','#b0afb5',.83),
-    deck:make('terrace paving','#dbd6da',.90,tile)
+    deck:make('terrace paving','#dbd6da',.90,tile),
+    mechanical:make('galvanized equipment','#a8adae',.76),
+    vent:make('dark vents','#454d50',.84)
   };
   for(const [palette,tint] of colors.entries()){
     materials['ribbon'+palette]=make('ribbons '+palette,'#ffffff',.66,ribbon([187,187,191],tint));
@@ -7881,10 +7886,32 @@ function entrance(batch,e){
   for(const x of [-half,-half/2,0,half/2,half])batch.box('trim',e.x+x,e.height/2,e.z+.043,.085,e.height,.055);
   batch.box('trim',e.x,e.height,e.z+.043,e.doorWidth+.09,.13,.095);
 }
+function roofEquipment(batch,{x,y,z,width,depth,height}){
+  const part=batch.begin('roof mechanical equipment');
+  batch.box('mechanical',x,y+.095,z,width,.19,depth);
+  const mainX=x-width*.12;
+  batch.box('mechanical',mainX,y+.78,z,width*.70,1.2,depth*.84);
+  batch.box('trim',mainX,y+1.42,z,width*.72,.12,depth*.88);
+  const face=z+depth*.422;
+  for(let i=0;i<5;i++)batch.box('vent',mainX,y+.38+i*.18,face,width*.59,.067,.055);
+  const fanRadius=Math.min(.68,depth*.16);
+  for(const offset of [-.17,.17]){
+    const fx=mainX+width*offset;
+    for(let step=0;step<12;step++){
+      const rim=i=>[fx+fanRadius*Math.sin(i*Math.PI/6),y+1.50,z+fanRadius*Math.cos(i*Math.PI/6)];
+      batch.triangle('vent',[[fx,y+1.50,z],rim(step),rim(step+1)]);
+    }
+    for(const shift of [-.50,0,.50])batch.box('mechanical',fx+fanRadius*shift,y+height-.04,z,.045,.08,fanRadius*1.65);
+  }
+  batch.box('mechanical',x+width*.365,y+.56,z,width*.19,.74,depth*.58);
+  batch.box('trim',x+width*.365,y+.95,z,width*.21,.10,depth*.61);
+  batch.end(part);
+}
 function buildVaultTower(input,materials){
   const s=normalize(input),plan=layout(s),batch=new ArchitectureBatch;
   for(const slab of plan.slabs)facade(batch,slab);
   entrance(batch,plan.entrance);
+  for(const unit of plan.equipment)roofEquipment(batch,unit);
   const model=batch.finish(materials,NAMES[s.archetype]);
   const deck=model.children.find(m=>m.name==='deck').geometry;
   for(let i=0;i<deck.attributes.position.count;i++)deck.attributes.uv.setXY(i,deck.attributes.position.getX(i)/6,deck.attributes.position.getZ(i)/6);
@@ -7941,8 +7968,8 @@ function pcVaultRestore(c,snapshot){
     pcVaultReady().system.validateRecord(r);
     if(id!==r.lotId||next.has(id))throw Error('Invalid vault assignment');
     const record=structuredClone(r);
-    // Refresh the derived roof and threshold geometry for saved domed prototypes.
-    if(record.grid?.atrium)record.grid=pcVaultReady().system.definition.layout(record.parameters);
+    // Refresh the derived roof and threshold geometry for earlier prototypes.
+    if(!record.grid?.equipment)record.grid=pcVaultReady().system.definition.layout(record.parameters);
     next.set(id,record);
   }
   c.pcVaultAssignments=next;c.pcVaultControl={enabled:!!snapshot?.control?.enabled,type};c.pcVaultRefresh?.();
