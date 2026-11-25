@@ -700,3 +700,9 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Extended the curved shaft 5 m toward the rear. It projects 4 m behind the attached service core and retains the same clearance at the podium equipment. The perimeter roof frame terminates at the service core facade.
 - Curved lobby columns use every second office mullion position. The curtain wall shows two distinct office windows above each lobby opening. Focused geometry tests verified the rear projection, clearance and column positions. The offline preview includes Curved lobby and Wing junction views.
 - Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T173358Z.html (SHA-256 362a69504f6beffaa78c13562d60a4506136713d03fd1160cbecd57f57e5fad7). Rollback checkpoint `checkpoint/pre-curved-postmodern-rear-lobby-407f5d5`.
+
+### Street-facing podium pier alignment
+
+- Carried the three marked masonry piers from the upper podium row to the sidewalk. The straight frontage now has four storefront bays, each spanning two upper window bays. The two revolving doors sit in the middle storefront bays.
+- Focused tests verified the pier positions and both doors. Offline Chrome verified the corrected frontage using the Entrances view. Normal gameplay is unchanged.
+- Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T174325Z.html (SHA-256 621af36ec7c2d8d39e9536a421ac7ad8600e627ba4f0961b64904995162b5552). Rollback checkpoint `checkpoint/pre-curved-postmodern-storefront-7914d99`.

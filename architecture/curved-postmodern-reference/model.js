@@ -10,6 +10,11 @@ export function createStudy(T,ArchitectureBatch){
     base: [[-27,-21,-17,17,14],[-21,-2,-17,22,11.4],[-2,16,-6,22,11.4],[16,23,-16,17,9.2]]
   });
   const {x:cx,z:cz,rx,rz}=study.curve;
+  const streetZ=study.front[3], frontageBays=4;
+  const frontage=[
+    [study.base[1][0],study.front[0]],
+    [study.front[0],study.front[1]]
+  ];
   const datum=n=>lobby+n*storey;
   const sill=.36, headroom=storey-.37;
   const hash = (x,y) => ((Math.imul(x+611,73856093)^Math.imul(y+952,19349663))>>>0)%251/250;
@@ -88,7 +93,7 @@ export function createStudy(T,ArchitectureBatch){
   };
   const atlas=index=>[(index*64+.5)/512,(index*64+63.5)/512];
   const rect=([x0,x1,z0,z1])=>[[x0,z1],[x1,z1],[x1,z0],[x0,z0]];
-  function facade(batch,a,b,lo,hi,bays,style){
+  function facade(batch,a,b,lo,hi,bays,style,doorBay=-1){
     const length=Math.hypot(b[0]-a[0],b[1]-a[1]), pitch=length/bays;
     const dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length;
     const point=(u,y,n)=>[a[0]+dx*u-dz*n,y,a[1]+dz*u+dx*n];
@@ -123,7 +128,7 @@ export function createStudy(T,ArchitectureBatch){
         batch.quad('reveal',[point(l,head,-.35),point(r,head,-.35),point(r,head,0),point(l,head,0)]);
         const [u0,u1]=atlas((i*3+floor*5+bays)%8);
         const glazed=(x0,x1,y0,y1)=>face('glass',x0,x1,y0,y1,-.34,[u0,0,u1,0,u1,1,u0,1]);
-        const revolving=entry && (i===1 || i===2);
+        const revolving=entry && i===doorBay;
         if(revolving){
           const halfDoor=1.19, canopy=2.88;
           glazed(l,c-halfDoor,bottom,canopy);
@@ -386,8 +391,18 @@ export function createStudy(T,ArchitectureBatch){
     const batch=new ArchitectureBatch;
     surround('Stepped street podium',batch,()=>{
       const front=[-21,16,-17,22,11.4];
-      facade(batch,[-21,22],[16,22],0,5.45,5,'entry');
-      facade(batch,[-21,22],[-2,22],5.45,11.4,4,'office');
+      const storefrontBays=frontageBays/2;
+      for(const [i,[left,right]] of frontage.entries()){
+        facade(batch,[left,streetZ],[right,streetZ],0,5.45,storefrontBays,'entry',i===0?1:0);
+      }
+      const [[left,split],[,right]]=frontage;
+      facade(batch,[left,streetZ],[split,streetZ],5.45,11.4,frontageBays,'office');
+      surround('Street-facing podium piers',batch,()=>{
+        const pierTop=front[4];
+        for(const x of [(left+split)/2,split,(split+right)/2]){
+          batch.box('panel',x,pierTop/2,streetZ,.48,pierTop,.22);
+        }
+      });
       facade(batch,[16,22],[16,-17],0,11.4,7,'wing');
       facade(batch,[16,-17],[-21,-17],0,11.4,8,'wing');
       deck(batch,front);
@@ -401,7 +416,7 @@ export function createStudy(T,ArchitectureBatch){
       const crown=datum(Math.floor((y-lobby)/storey)-1), crownHeight=y-crown;
       // The terrace meets the core along its back and passes into the curve at the inside corner.
       const curveJoin=curveFrontAt(x0);
-      facade(batch,[x0,z1],[x1,z1],5.45,crown,4,'office');
+      facade(batch,[x0,z1],[x1,z1],5.45,crown,frontageBays,'office');
       facade(batch,[x1,z1],[x1,z0],5.45,crown,5,'wing');
       facade(batch,[x0,curveJoin],[x0,z1],5.45,crown,3,'wing');
       facade(batch,[x0+.35,z1-.62],[x1-.35,z1-.62],crown,y,4,'crown');

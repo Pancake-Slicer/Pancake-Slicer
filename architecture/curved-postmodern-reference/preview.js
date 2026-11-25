@@ -18,14 +18,14 @@
   const direction=new T.Vector3(Math.sin(yaw)*Math.cos(elevation),Math.sin(elevation),Math.cos(yaw)*Math.cos(elevation));
   const controls=Gt.controls;
   function frame(view){
-    const [x,y,z,distance]={matched:[-1,59,4,351],roof:[-6,110,2,154],join:[3,102,4,144],lobby:[-13,18,13,49],entry:[-6,4,22,41]}[view];
+    const [x,y,z,distance]={matched:[-1,59,4,351],roof:[-6,110,2,154],join:[3,102,4,144],lobby:[-13,18,13,49],entry:[-2.5,8,22,40]}[view];
     const angle=view==='join'?78:view==='entry'?13:view==='lobby'?12:null;
-    const azimuth=view==='lobby'?-Math.PI/9:yaw;
+    const azimuth=view==='lobby'?-Math.PI/9:view==='entry'?Math.PI/30:yaw;
     const viewDirection=angle===null?direction:new T.Vector3(
       Math.sin(azimuth)*Math.cos(angle*Math.PI/180),Math.sin(angle*Math.PI/180),Math.cos(azimuth)*Math.cos(angle*Math.PI/180));
     controls.target.set(x,base+y,z);
     controls.object.position.copy(controls.target).addScaledVector(viewDirection,distance);
-    controls.object.fov=29;
+    controls.object.fov=view==='entry'?40:29;
     controls.object.updateProjectionMatrix();
     controls.enableDamping=false;
     controls.update();

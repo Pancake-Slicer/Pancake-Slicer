@@ -111,6 +111,8 @@ test('fixed benchmark uses aligned windows, joined wings, revolving doors and op
   const plantClearance=18.7-(2.08+.16)/2-(z+rz);
   assert.ok(plantClearance>.5 && plantClearance<1.5,'curved shaft sits just behind the podium plant');
 
+  const podiumPiers=columnCenters('Street-facing podium piers','panel');
+  assert.deepEqual(podiumPiers,[[-11.5,22],[-2,22],[7,22]],'street piers continue every second upper bay');
   const doors=model.userData.partRanges.filter(part=>part.label==='Revolving entrance doors' && part.material==='glass');
   assert.equal(doors.length,2);
   for(const door of doors){
