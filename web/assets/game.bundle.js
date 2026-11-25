@@ -8134,22 +8134,25 @@ const schemes={
     entries:[entrance(0,16.5,6.4,6.4)],groundRing:heritage,
     bands:[[insetCorners(16.1,14.4,1.45),17],[rect(-12.4,12.4,-11.1,11.1),4]],bay:3.6}
 };
-const revisedHeritage={
+const steppedHeritage={
   ...schemes.C,width:46,depth:40,
   groundRing:insetCorners(23,20,2.45),entries:[entrance(0,20,6.4,6.4)],
   bands:[[insetCorners(20.5,17.8,1.7),17],[rect(-18,18,-15.2,15.2),4]]
 };
+const heritageBlock=rect(-23,23,-20,20);
+const fullHeightHeritage={...steppedHeritage,groundRing:heritageBlock,bands:[[heritageBlock,21]]};
 const waterTanks={A:[15,-13.2],B:[-6.3,6.4],C:[12.2,-8.6]};
 const WATER_TANK_HEIGHT=6.68;
-const scheme=({archetype,revision})=>archetype==='C'&&revision===2?revisedHeritage:schemes[archetype];
-const margin=spec=>spec.revision===2?3.5:2.35;
+const heritageRevisions={2:steppedHeritage,3:fullHeightHeritage};
+const scheme=({archetype,revision})=>archetype==='C'?(heritageRevisions[revision]??schemes.C):schemes[archetype];
+const margin=spec=>spec.revision>=2?3.5:2.35;
 const NAMES=Object.freeze(Object.fromEntries(Object.entries(schemes).map(([key,v])=>[key,v.name])));
 function normalize(input={}){
   const archetype=input.archetype??'A',revision=input.revision??1;
-  if(!Object.hasOwn(schemes,archetype)||(input.version&&input.version!==VERSION)||![1,2].includes(revision))
+  if(!Object.hasOwn(schemes,archetype)||(input.version&&input.version!==VERSION)||![1,2,3].includes(revision)||(revision===3&&archetype!=='C'))
     throw Error('Unknown traditional Office benchmark');
   const s=scheme({archetype,revision}),storeys=s.base.length+s.bands.reduce((n,[,floors])=>n+floors,0);
-  return {archetype,version:VERSION,width:s.width,depth:s.depth,storeys,floorHeight:FLOOR,...(revision===2?{revision}:{})};
+  return {archetype,version:VERSION,width:s.width,depth:s.depth,storeys,floorHeight:FLOOR,...(revision>=2?{revision}:{})};
 }
 function layout(input){
   const spec=normalize(input),s=scheme(spec);
@@ -8161,7 +8164,7 @@ function layout(input){
     return {ring,floors,start,end:y};
   });
   const {archetype,revision}=spec;
-  const roofTop=y+(revision===2?WATER_TANK_HEIGHT:{A:3.35,B:2.96,C:4.55}[archetype]);
+  const roofTop=y+(revision>=2?WATER_TANK_HEIGHT:{A:3.35,B:2.96,C:4.55}[archetype]);
   return {groundRing:s.groundRing,entries:s.entries,entrance:s.entries[0],baseTop,tiers,roofTop};
 }
 const definition=Object.freeze({
@@ -8473,7 +8476,7 @@ function plant(batch,type,tiers){
   }
 }
 function buildStudy(spec,materials){
-  const {archetype,revision}=spec,revised=revision===2,s=scheme(spec);
+  const {archetype,revision}=spec,revised=revision>=2,s=scheme(spec);
   const style=revised?{...styles[archetype],...heavierMasonry[archetype]}:styles[archetype],grid=layout(spec),batch=new ArchitectureBatch;
   commercial(batch,s,grid,archetype,style,revised);
   deck(batch,{ring:s.groundRing,end:grid.baseTop},style,archetype,false,revised);
@@ -8560,7 +8563,7 @@ function pcTraditionalFit(lot,archetype){
   const capacity=lot.officeProfile?.maxFloors??80,minimum=lot.officeProfile?.minFloors??1;
   let fit={ok:false,reason:'Incompatible Office profile'};
   if(lot.zone==='offices'&&lot.towardRoad){
-    const system=pcTraditionalReady().system,parameters=system.definition.normalize({archetype,revision:2});
+    const system=pcTraditionalReady().system,parameters=system.definition.normalize({archetype,revision:archetype==='C'?3:2});
     if(parameters.storeys>=minimum&&parameters.storeys<=capacity)
       fit=system.fit(lot,{seed:'traditional:'+lot.id,parameters,capacity});
   }

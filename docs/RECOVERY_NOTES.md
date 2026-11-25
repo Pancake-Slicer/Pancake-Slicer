@@ -651,3 +651,10 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - The lot fitter accounts for the wider cornices. Earlier assignments retain their version-1 geometry and envelope. All 191 build checks passed, including exact geometry hashes for the older designs, tank support and cornice clearance. Offline Chrome verified the lineup and roof views, 17 revised towers among 78 mixed offices, and identical Heritage redevelopment. Captures are in .tools/original-traditional-offices/masonry/.
 - Playtest Pancake City - Traditional Offices Playtest - 20261125T021820Z.html (SHA-256 5af112b8ac5330c17abc0a186097d2b9b2c19cf380ede25281d8bfc53909c18b).
 - Test City Pancake City - Traditional Offices Test City - 20261125T021820Z.html (SHA-256 d2e2367ee1c768bfb9a128eb4de5e1eedcd838eb02d6e7087ef8156279532e80). Checkpoint checkpoint/pre-traditional-masonry-1d1fd13.
+
+### Heritage Commerce full-height massing — 2026-11-25
+
+- New Heritage growth uses a 46 × 40 m rectangular footprint across all 24 storeys. The retail base, shaft and roof align at the same perimeter. The projecting cornices, ornamental parapet and rooftop equipment remain part of the design.
+- Grand Courtyard and Metropolitan still use revision 2. Verified exact geometry hashes for both and for earlier saved Heritage revisions. Offline Chrome verified the full-height silhouette, roof and mixed growth.
+- Playtest Pancake City - Traditional Offices Playtest - 20261125T133849Z.html (SHA-256 8bf84472bad17a44948e396d83220b92ad88fbed8fd29a955f3170fe413acc49).
+- Test City Pancake City - Traditional Offices Test City - 20261125T133849Z.html (SHA-256 60a5cf69823c69c981ea03746cc83240dae89f45a3502b9fed442eb90c3fb69c). Captures are in .tools/original-traditional-offices/heritage-block/. Prior baseline ab1cf18.
