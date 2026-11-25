@@ -674,3 +674,11 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Offline Chrome verified both exports and grew 15 Traditional Offices among 285 normally zoned offices. The fixture used 271,458 active Traditional triangles nearby and 195,654 at a distance across 10 chunks. This is a geometry count, with hardware FPS unmeasured. Captures are in .tools/original-traditional-offices/parametric/.
 - Playtest Pancake City - Traditional Offices Playtest - 20261125T153133Z.html (SHA-256 17c32910db779fc2ea07296e8581738f0753e8e897fe8784fe9f269095771c9d).
 - Test City Pancake City - Traditional Offices Test City - 20261125T153133Z.html (SHA-256 515adb6f6a591853dc11d927ea7a0f742594156892355986ca58554234f1a86b). Use Fixed benchmarks, 15 variants and Natural growth. Recovery checkpoint checkpoint/pre-parametric-traditional-b67a27d.
+
+## Curved Postmodern Office reconstruction — 2026-11-25
+
+- One fixed, review-only benchmark with a semicircular curtain wall, lower front tower, taller rear core, recessed wing and stepped retail podium. Open steel frames use solid rails and individual braces on the two roof terraces. Dimensions, concealed elevations and material response were inferred from the supplied isometric image.
+- The model uses 59,272 triangles across 11 opaque shared-material batches. The normal runtime and growable catalogue contain no benchmark code. The original v52 hash and launcher are unchanged. Hardware frame rate was not measured.
+- `npm run build` and `node --test scripts/curved-postmodern-reference.test.cjs` passed. Offline Chrome verified the playable city, matched-angle comparison, roof and entrance views, and absence of external requests. The focused tests check frame rails, radial braces, open bays, and catalogue exclusion.
+- Rebuild with `node scripts/export-curved-postmodern-reference.cjs <reference.png>`. The supplied reference and captures are retained under `.tools/curved-postmodern-reference/`. Reference SHA-256 ac3f05c9810b07cf47a626d8dafdeb08aab5df5f6913779fba9a421bbadbff43.
+- Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T170756Z.html (SHA-256 6284c3415da1b916a7901d057d43b508e9003b42407e1188d7562cd14ea67471). The recovery checkpoint is `checkpoint/pre-curved-postmodern-reference-448a47a`. Await visual approval before developing original variants.
