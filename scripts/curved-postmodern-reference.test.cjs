@@ -41,7 +41,7 @@ test('fixed benchmark uses aligned windows, joined wings, revolving doors and op
     return false;
   }
   for(const [label,deckY,rail,brace,gap] of [
-    ['Curved roof perimeter frame',study.curve.roof,[-9.8,-20.1],[-11.57,-18.3],[-9.8,-18.3]],
+    ['Curved roof perimeter frame',study.curve.roof,[-9.8,study.curve.z-3.1],[-11.57,study.curve.z-1.3],[-9.8,study.curve.z-1.3]],
     ['Lower rounded roof perimeter frame',study.front[4],[4,25.9],[2,23.5],[4,23.5]]
   ]){
     const part=model.userData.partRanges.find(range=>range.label===label && range.material==='frame');
@@ -77,8 +77,16 @@ test('fixed benchmark uses aligned windows, joined wings, revolving doors and op
   const gravel=model.getObjectByName('gravel').geometry;
   assert.ok(covers(gravel,terrace,12,study.core[3]+.02),'the terrace reaches the service core');
   for(const x of [-1.8,4,14]){
-    assert.ok(covers(gravel,terrace,x,-2),'the former gap is roofed');
+    assert.ok(covers(gravel,terrace,x,study.core[3]+2),'the former gap is roofed');
   }
+
+  const {z,rz,roof,lobby,floors}=study.curve;
+  assert.equal(floors,28);
+  assert.ok(Math.abs((roof-lobby)/floors-96/26)<1e-8);
+  assert.equal(study.core[4],roof+1);
+  assert.ok(Math.min(z,study.core[2],study.front[2],study.wing[2])>=-8.5);
+  const plantClearance=18.7-(2.08+.16)/2-(z+rz);
+  assert.ok(plantClearance>.5 && plantClearance<1.5,'curved shaft sits just behind the podium plant');
 
   const doors=model.userData.partRanges.filter(part=>part.label==='Revolving entrance doors' && part.material==='glass');
   assert.equal(doors.length,2);

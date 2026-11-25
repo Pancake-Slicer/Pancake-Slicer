@@ -18,7 +18,7 @@
   const direction=new T.Vector3(Math.sin(yaw)*Math.cos(elevation),Math.sin(elevation),Math.cos(yaw)*Math.cos(elevation));
   const controls=Gt.controls;
   function frame(view){
-    const [x,y,z,distance]={matched:[-1,55,-1,338],roof:[-6,104,-6,148],join:[3,98,-3,130],entry:[-6,4,22,41]}[view];
+    const [x,y,z,distance]={matched:[-1,59,4,351],roof:[-6,110,2,154],join:[3,102,5,130],entry:[-6,4,22,41]}[view];
     const angle=view==='join'?78:view==='entry'?13:null;
     const viewDirection=angle===null?direction:new T.Vector3(
       Math.sin(yaw)*Math.cos(angle*Math.PI/180),Math.sin(angle*Math.PI/180),Math.cos(yaw)*Math.cos(angle*Math.PI/180));

@@ -1,14 +1,15 @@
 export function createStudy(T,ArchitectureBatch){
   // Metres, with +Z toward the street. Dimensions are inferred from the supplied view.
+  const storey=96/26, lobby=15, floors=28;
+  const roof=lobby+floors*storey, coreFront=3.5;
   const study = Object.freeze({
-    curve: {x:-9, z:-17, rx:17.5, rz:26, roof:111, floors:26, lobby:15},
-    core: [1,19,-18,-4.5,112],
-    front: [-2,16,-4.5,22,97.4],
-    wing: [16,23,-16,17,75.8],
+    curve: {x:-9, z:-7.5, rx:17.5, rz:24.15, roof, floors, lobby},
+    core: [1,19,-8.5,coreFront,roof+1],
+    front: [-2,16,coreFront,22,97.4],
+    wing: [16,23,-6.5,17,75.8],
     base: [[-27,-21,-17,17,14],[-21,-2,-17,22,11.4],[-2,16,-6,22,11.4],[16,23,-16,17,9.2]]
   });
-  const {x:cx,z:cz,rx,rz,roof,floors,lobby}=study.curve;
-  const storey=(roof-lobby)/floors;
+  const {x:cx,z:cz,rx,rz}=study.curve;
   const datum=n=>lobby+n*storey;
   const sill=.36, headroom=storey-.37;
   const hash = (x,y) => ((Math.imul(x+611,73856093)^Math.imul(y+952,19349663))>>>0)%251/250;
@@ -165,6 +166,7 @@ export function createStudy(T,ArchitectureBatch){
     deck(batch,volume);
   }
   const curvePoint=(t,y,offset=0)=>[cx+(rx+offset)*Math.cos(t),y,cz+(rz+offset)*Math.sin(t)];
+  const curveFrontAt=x=>cz+rz*Math.sqrt(1-((x-cx)/rx)**2);
   // Equidistant façade modules on the ellipse. Each module has two rendered facets.
   function equalArc(count){
     const samples=512,cumulative=[0];
@@ -275,9 +277,11 @@ export function createStudy(T,ArchitectureBatch){
   function frontFrame(batch){
     const y=study.front[4]+1.22,a=[],r=[];
     const pair=(x,z,xx,zz)=>{a.push([x,y-.87,z]);r.push([xx,y,zz]);};
-    pair(-1.82,3,-4.1,3);
-    pair(-1.82,9,-4.1,9);
-    pair(-1.82,15,-4.1,15);
+    const join=curveFrontAt(-1.82);
+    for(let i=0;i<3;i++){
+      const z=mix(join,21,i/3);
+      pair(-1.82,z,-4.1,z);
+    }
     pair(-1.82,21,-4.1,22);
     for(let i=1;i<=4;i++){
       const t=Math.PI*i/8;
@@ -288,12 +292,16 @@ export function createStudy(T,ArchitectureBatch){
       const t=Math.PI*i/8;
       pair(15.82,21.78,15.8+2.3*Math.sin(t),22+3.9*Math.cos(t));
     }
-    for(const z of [19,15,11,7,3])pair(15.82,z,18.1,z);
-    pair(18.78,-5.4,20.9,-5.4);
-    for(const z of [-8.6,-12,-15])pair(18.78,z,21.8,z);
+    for(const z of [19,15.5,12,8.5,5])pair(15.82,z,18.1,z);
+    pair(18.78,coreFront-.6,20.9,coreFront-.6);
+    const returnZ=study.core[2]+2;
+    for(let i=1;i<=3;i++){
+      const z=mix(coreFront-.6,returnZ,i/3);
+      pair(18.78,z,21.8,z);
+    }
     for(let i=1;i<=8;i++){
       const t=Math.PI*i/16;
-      pair(18.72,-15.8,19.1+2.7*Math.cos(t),-15-2.7*Math.sin(t));
+      pair(18.72,returnZ-.8,19.1+2.7*Math.cos(t),returnZ-2.7*Math.sin(t));
     }
     perimeterFrame(batch,a,r,y,[0,1,2,3,7,8,9,10,11,12,16,17,18,19,20,21,22,23,24,32]);
   }
@@ -348,17 +356,17 @@ export function createStudy(T,ArchitectureBatch){
     }
   }
   function equipment(batch){
-    for(const x of [-21,-17.8,-14.6,-8,-4.8,-1.6])ac(batch,x,-12,roof);
-    for(const z of [-.1,3.25])ac(batch,-10,z,roof,true);
-    for(const [x,z] of [[-20,-5.7],[-17.8,-4.9],[-5,-3],[-2.8,-2.3]])
-      cylinder(batch,'plant',x,z,roof,.70,.52);
+    for(const x of [-21,-17.8,-14.6,-8,-4.8,-1.6])ac(batch,x,cz+5,roof);
+    for(const offset of [16.9,20.25])ac(batch,-10,cz+offset,roof,true);
+    for(const [x,offset] of [[-20,11.3],[-17.8,12.1],[-5,14],[-2.8,14.7]])
+      cylinder(batch,'plant',x,cz+offset,roof,.70,.52);
     for(const x of [-8.3,-6.1]){
-      const z=-14.2;
+      const z=cz+2.8;
       batch.box('dark',x,roof+.15,z,.53,.30,.52);
       cylinder(batch,'plant',x,z,roof+.30,5.9,.092);
       for(const y of [roof+2.25,roof+3.2])batch.beam('plant',[x-.52,y,z],[x+.52,y,z],.073,.069);
     }
-    for(const x of [5.4,10,14.6])ac(batch,x,-8.8,study.core[4],true);
+    for(const x of [5.4,10,14.6])ac(batch,x,coreFront-4.3,study.core[4],true);
     for(const x of [1.4,4.8,8.2,11.6])ac(batch,x,13.6,study.front[4]);
     for(const x of [8.6,12.1])ac(batch,x,8.1,study.front[4],true);
     for(const x of [-17.6,-14.6,-11.6,-8.6,-5.6])ac(batch,x,18.7,study.base[1][4]);
@@ -382,7 +390,7 @@ export function createStudy(T,ArchitectureBatch){
       const [x0,x1,z0,z1,y]=study.front;
       const crown=datum(Math.floor((y-lobby)/storey)-1), crownHeight=y-crown;
       // The terrace meets the core along its back and passes into the curve at the inside corner.
-      const curveJoin=cz+rz*Math.sqrt(1-((x0-cx)/rx)**2);
+      const curveJoin=curveFrontAt(x0);
       facade(batch,[x0,z1],[x1,z1],5.45,crown,4,'office');
       facade(batch,[x1,z1],[x1,z0],5.45,crown,5,'wing');
       facade(batch,[x0,curveJoin],[x0,z1],5.45,crown,3,'wing');

@@ -688,3 +688,9 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - The curved curtain wall, front tower, service core and recessed wing now share a storey grid with matching window sills and heads. The front terrace extends into the curved wing and directly meets the service core. Two street entrances use static 3D revolving doors with curved side screens and four glazed leaves each.
 - The preview adds an overhead Wing junction view and a closer Entrances view. Geometry tests verified aligned glazing, continuous terrace coverage, both door assemblies and the open roof frames. Offline Chrome verified the review views and matched-angle comparison. The revised model uses 51,902 triangles and 11 opaque batches.
 - Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T171320Z.html (SHA-256 e2278bcd65e1f744c69b807fb5d0f917bae28984120c77df3362ee8a332110b5). Rollback checkpoint `checkpoint/pre-curved-postmodern-wing-join-c49b71f`.
+
+### Shallower tower and two extra upper storeys
+
+- Reduced tower depth above the podium from 40 m to 30.5 m. The curved shaft stops roughly 0.9 m behind the podium equipment row. Added two 3.69 m storeys to the curved shaft and attached service core. The front terrace still meets the core and the storefront retains its revolving doors.
+- Repositioned the roof frames and equipment with their supporting roofs. Focused geometry tests passed and offline Chrome verified the matched-angle comparison, overhead junction and entrance views.
+- Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T172152Z.html (SHA-256 144106b7520abaa59c2b8a902f099ad407ceb5825a3f80f8c7e25ce726548e80). Rollback checkpoint `checkpoint/pre-curved-postmodern-proportions-b8f3e41`.
