@@ -65,7 +65,9 @@
         selected=type;
         const {placement,grid}=record(b),height=grid.roofTop,front=grid.entrance;
         const radius=detail==='roof'?132:detail==='entry'?43:height*2.74;
-        const yaw=placement.angle+(detail==='entry'?.16:.41),elevation=detail==='roof'?.79:detail==='entry'?.50:.58;
+        const rearCourt=type==='C'&&detail==='roof';
+        const yaw=placement.angle+(rearCourt?Math.PI+.26:detail==='entry'?.16:.41);
+        const elevation=detail==='roof'?(rearCourt?.65:.79):detail==='entry'?.50:.58;
         const entranceOffset=type==='B'?9.5:0;
         const x=detail==='entry'?b.entrance.x+Math.cos(placement.angle)*entranceOffset:placement.x;
         const z=detail==='entry'?b.entrance.z-Math.sin(placement.angle)*entranceOffset:placement.z;

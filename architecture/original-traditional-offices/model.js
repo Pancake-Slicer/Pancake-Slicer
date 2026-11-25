@@ -27,15 +27,17 @@ const steppedHeritage={
 };
 const heritageBlock=rect(-23,23,-20,20);
 const fullHeightHeritage={...steppedHeritage,groundRing:heritageBlock,bands:[[heritageBlock,21]]};
+const heritageCourt=[[-23,20],[23,20],[23,-20],[7.5,-20],[7.5,-8],[-7.5,-8],[-7.5,-20],[-23,-20]];
+const courtyardHeritage={...fullHeightHeritage,groundRing:heritageCourt,bands:[[heritageCourt,21]]};
 const waterTanks={A:[15,-13.2],B:[-6.3,6.4],C:[12.2,-8.6]};
 const WATER_TANK_HEIGHT=6.68;
-const heritageRevisions={2:steppedHeritage,3:fullHeightHeritage};
+const heritageRevisions={2:steppedHeritage,3:fullHeightHeritage,4:courtyardHeritage};
 const scheme=({archetype,revision})=>archetype==='C'?(heritageRevisions[revision]??schemes.C):schemes[archetype];
 const margin=spec=>spec.revision>=2?3.5:2.35;
 export const NAMES=Object.freeze(Object.fromEntries(Object.entries(schemes).map(([key,v])=>[key,v.name])));
 export function normalize(input={}){
   const archetype=input.archetype??'A',revision=input.revision??1;
-  if(!Object.hasOwn(schemes,archetype)||(input.version&&input.version!==VERSION)||![1,2,3].includes(revision)||(revision===3&&archetype!=='C'))
+  if(!Object.hasOwn(schemes,archetype)||(input.version&&input.version!==VERSION)||![1,2,3,4].includes(revision)||(revision>=3&&archetype!=='C'))
     throw Error('Unknown traditional Office benchmark');
   const s=scheme({archetype,revision}),storeys=s.base.length+s.bands.reduce((n,[,floors])=>n+floors,0);
   return {archetype,version:VERSION,width:s.width,depth:s.depth,storeys,floorHeight:FLOOR,...(revision>=2?{revision}:{})};

@@ -47,7 +47,7 @@ function pcTraditionalFit(lot,archetype){
   const capacity=lot.officeProfile?.maxFloors??80,minimum=lot.officeProfile?.minFloors??1;
   let fit={ok:false,reason:'Incompatible Office profile'};
   if(lot.zone==='offices'&&lot.towardRoad){
-    const system=pcTraditionalReady().system,parameters=system.definition.normalize({archetype,revision:archetype==='C'?3:2});
+    const system=pcTraditionalReady().system,parameters=system.definition.normalize({archetype,revision:archetype==='C'?4:2});
     if(parameters.storeys>=minimum&&parameters.storeys<=capacity)
       fit=system.fit(lot,{seed:'traditional:'+lot.id,parameters,capacity});
   }

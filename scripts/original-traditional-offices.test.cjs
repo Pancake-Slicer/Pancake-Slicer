@@ -26,14 +26,14 @@ test('three fixed native shapes fit rotated parcels and keep supported terraces,
     assert.ok(fit.ok,fit.reason);const r=fit.record,s=r.parameters,g=r.grid;
     assert.deepEqual(plain(a.pcTraditionalFit({...site},type).record),plain(r));
     assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(site.footprint)))<.001);
-    assert.equal(s.revision,type==='C'?3:2);
+    assert.equal(s.revision,type==='C'?4:2);
     assert.equal(r.placement.scale,1);assert.ok(Math.abs(r.placement.angle-(.4+i*.27))<.001);
     assert.equal(a.pcTraditionalFit(lot(type+'-small',s.width,s.depth),type).ok,false);
     assert.equal(a.pcTraditionalFit({...site,officeProfile:{maxFloors:12}},type).ok,false);
     const poly=ring=>a.Te(ring.map(([x,z])=>({x,z})));
     const rings=[g.groundRing,...g.tiers.map(t=>t.ring)];
     for(let j=1;j<rings.length;j++)assert.ok(a.sn(a.je(poly(rings[j]),poly(rings[j-1])))<.001);
-    assert.equal(g.groundRing.length,{A:12,B:6,C:4}[type]);
+    assert.equal(g.groundRing.length,{A:12,B:6,C:8}[type]);
     assert.equal(g.entries.length,type==='B'?2:1);
     assert.equal(g.tiers.length,{A:2,B:3,C:1}[type]);
     const model=rt.generator.generate(s),copy=rt.generator.generate(s);
@@ -64,6 +64,13 @@ test('three fixed native shapes fit rotated parcels and keep supported terraces,
     if(type==='C'){
       assert.equal(s.width,46);assert.equal(s.depth,40);assert.equal(2*right,46);
       assert.deepEqual(plain(peak.ring),plain(g.groundRing));
+      assert.ok(Math.abs(a.sn(poly(g.groundRing))-(46*40-15*12))<.001);
+      const court=poly([[-7.5,-20],[7.5,-20],[7.5,-8],[-7.5,-8]]);
+      const roof=model.getObjectByName('roof').geometry,{position}=roof.attributes;
+      for(let i=0;i<roof.index.count;i+=3){
+        const face=poly([0,1,2].map(j=>{const k=roof.index.getX(i+j);return [position.getX(k),position.getZ(k)];}));
+        assert.ok(a.sn(face)-a.sn(a.je(face,court))<.001,'the roof must leave the courtyard open');
+      }
     }
     data.push([type,s.storeys,model.userData.triangles,model.children.length]);
     rt.generator.release(model);rt.generator.release(copy);
@@ -128,7 +135,8 @@ test('earlier saved designs retain their exact geometry and native fit envelope'
     B:'74804cc180c5c91a5711b68828340005415a27e8a6dfbe17a50b03cde8af6058',
     C:'8609bd60888a4ec79fd3adcee992ccf0f937e0280e85ac7b9c05a238e017e1a4'
   };
-  for(const [archetype,revision,expected] of [locks,approved].flatMap((set,i)=>Object.entries(set).map(([type,hash])=>[type,i+1,hash]))){
+  const previousHeritage={C:'799816a7eb335633df058faba8502f6d84a10a56ee625af8bda64ee2cfe1006e'};
+  for(const [archetype,revision,expected] of [locks,approved,previousHeritage].flatMap((set,i)=>Object.entries(set).map(([type,hash])=>[type,i+1,hash]))){
     const site=lot(archetype,58,50),parameters=rt.system.definition.normalize({archetype,revision});
     const fit=rt.system.fit(site,{parameters});
     assert.ok(fit.ok,fit.reason);assert.equal(fit.record.parameters.revision,revision===1?undefined:revision);

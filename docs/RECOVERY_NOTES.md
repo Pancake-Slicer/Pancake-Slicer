@@ -658,3 +658,10 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Grand Courtyard and Metropolitan still use revision 2. Verified exact geometry hashes for both and for earlier saved Heritage revisions. Offline Chrome verified the full-height silhouette, roof and mixed growth.
 - Playtest Pancake City - Traditional Offices Playtest - 20261125T133849Z.html (SHA-256 8bf84472bad17a44948e396d83220b92ad88fbed8fd29a955f3170fe413acc49).
 - Test City Pancake City - Traditional Offices Test City - 20261125T133849Z.html (SHA-256 60a5cf69823c69c981ea03746cc83240dae89f45a3502b9fed442eb90c3fb69c). Captures are in .tools/original-traditional-offices/heritage-block/. Prior baseline ab1cf18.
+
+### Heritage Commerce rear courtyard — 2026-11-25
+
+- New Heritage growth uses a U-shaped plan with a 15 × 12 m court open at the rear and through all 24 storeys. The 46 × 40 m overall dimensions and setback-free massing carry through. The Test City Roof view shows the rear opening.
+- Geometry checks verified the open roof and exact prior geometry for Grand Courtyard, Metropolitan and saved Heritage assignments. Offline Chrome verified the rear view and mixed Office growth.
+- Playtest Pancake City - Traditional Offices Playtest - 20261125T135533Z.html (SHA-256 aaa6eab0e8ef98d96d0bc7ac77948476b8f5da463f7cb8f97f4e628394757c49).
+- Test City Pancake City - Traditional Offices Test City - 20261125T135533Z.html (SHA-256 7ff9d6fedc21547b95f6c20fb9552e98b5f23338f3d9455fa0b1a4384c3d5d58). Capture in .tools/original-traditional-offices/heritage-court/. Prior baseline f0a335c.
