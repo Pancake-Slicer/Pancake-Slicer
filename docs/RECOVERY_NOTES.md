@@ -694,3 +694,9 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Reduced tower depth above the podium from 40 m to 30.5 m. The curved shaft stops roughly 0.9 m behind the podium equipment row. Added two 3.69 m storeys to the curved shaft and attached service core. The front terrace still meets the core and the storefront retains its revolving doors.
 - Repositioned the roof frames and equipment with their supporting roofs. Focused geometry tests passed and offline Chrome verified the matched-angle comparison, overhead junction and entrance views.
 - Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T172152Z.html (SHA-256 144106b7520abaa59c2b8a902f099ad407ceb5825a3f80f8c7e25ce726548e80). Rollback checkpoint `checkpoint/pre-curved-postmodern-proportions-b8f3e41`.
+
+### Rear extension and curved lobby bay alignment
+
+- Extended the curved shaft 5 m toward the rear. It projects 4 m behind the attached service core and retains the same clearance at the podium equipment. The perimeter roof frame terminates at the service core facade.
+- Curved lobby columns use every second office mullion position. The curtain wall shows two distinct office windows above each lobby opening. Focused geometry tests verified the rear projection, clearance and column positions. The offline preview includes Curved lobby and Wing junction views.
+- Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T173358Z.html (SHA-256 362a69504f6beffaa78c13562d60a4506136713d03fd1160cbecd57f57e5fad7). Rollback checkpoint `checkpoint/pre-curved-postmodern-rear-lobby-407f5d5`.

@@ -3,7 +3,7 @@ export function createStudy(T,ArchitectureBatch){
   const storey=96/26, lobby=15, floors=28;
   const roof=lobby+floors*storey, coreFront=3.5;
   const study = Object.freeze({
-    curve: {x:-9, z:-7.5, rx:17.5, rz:24.15, roof, floors, lobby},
+    curve: {x:-9, z:-12.5, rx:17.5, rz:29.15, roof, floors, lobby},
     core: [1,19,-8.5,coreFront,roof+1],
     front: [-2,16,coreFront,22,97.4],
     wing: [16,23,-6.5,17,75.8],
@@ -182,7 +182,9 @@ export function createStudy(T,ArchitectureBatch){
     });
   }
   function curvedTower(batch){
-    const angles=equalArc(68);
+    const officeBays=34, officeFacets=2, lobbyFacets=2*officeFacets;
+    const angles=equalArc(officeBays*officeFacets);
+    const mullionOffset=.025;
     const strip=(material,lo,hi,offset,uvFor)=>angles.slice(1).forEach((b,i)=>{
       const a=angles[i];
       batch.quad(material,[curvePoint(b,lo,offset),curvePoint(a,lo,offset),
@@ -192,20 +194,24 @@ export function createStudy(T,ArchitectureBatch){
     facade(batch,[first[0],first[2]],[last[0],last[2]],lobby,roof,10,'wing');
     strip('dark',8,lobby,-.34);
     strip('reveal',lobby-.08,roof,-.085);
-    for(let i=0;i<34;i+=2){
-      const a=angles[2*i],b=angles[2*i+3];
-      const [u0,u1]=atlas(i%8);
-      batch.quad('glass',[curvePoint(b,9.7,-.15),curvePoint(a,9.7,-.15),curvePoint(a,14.8,-.15),curvePoint(b,14.8,-.15)],[u0,0,u1,0,u1,1,u0,1]);
-      const [x,,z]=curvePoint(a,0,.15);
-      batch.box('panel',x,12.3,z,.59,5.5,.57);
-    }
+    // Sample one clear atlas pane per curved opening. The modelled mullions
+    // define the visible bay rhythm on both levels.
+    const paneUV=(variant,facet,facets)=>{
+      const u=(variant*64+3)/512, span=10/512;
+      const a=u+span*facet/facets, b=a+span/facets;
+      return [b,0,a,0,a,1,b,1];
+    };
+    strip('glass',9.7,14.8,-.12,i=>paneUV(Math.floor(i/lobbyFacets)%8,i%lobbyFacets,lobbyFacets));
+    surround('Curved lobby columns',batch,()=>{
+      for(let i=0;i<angles.length;i+=lobbyFacets){
+        const [x,,z]=curvePoint(angles[i],0,mullionOffset);
+        batch.box('panel',x,12.3,z,.59,5.5,.57);
+      }
+    });
     for(let n=0;n<floors;n++){
       const y=datum(n),crown=n>=floors-2;
-      strip('glass',y+sill,y+headroom,0,i=>{
-        const [u0,u1]=atlas((Math.floor(i/2)*5+n*3)%8);
-        const mid=(u0+u1)/2;
-        return i%2?[mid,0,u0,0,u0,1,mid,1]:[u1,0,mid,0,mid,1,u1,1];
-      });
+      strip('glass',y+sill,y+headroom,0,i=>
+        paneUV((Math.floor(i/officeFacets)*5+n*3)%8,i%officeFacets,officeFacets));
       const projection=crown?.61:.32, edge=y+(crown?.56:.29);
       strip('reveal',y+headroom,y+storey,0);
       strip('silver',y-.05,edge,projection);
@@ -214,10 +220,12 @@ export function createStudy(T,ArchitectureBatch){
         batch.quad('silver',[curvePoint(b,edge,projection),curvePoint(a,edge,projection),
           curvePoint(a,edge),curvePoint(b,edge)]);
       }
-      for(let i=0;i<angles.length-1;i+=2){
-        const [x,,z]=curvePoint(angles[i],0,.025);
-        batch.box(crown?'silver':'reveal',x,y+(sill+headroom)/2,z,crown?.20:.068,headroom-sill,crown?.20:.068);
-      }
+      surround('Curved office mullions',batch,()=>{
+        for(let i=0;i<angles.length;i+=officeFacets){
+          const [x,,z]=curvePoint(angles[i],0,mullionOffset);
+          batch.box(crown?'silver':'reveal',x,y+(sill+headroom)/2,z,crown?.20:.09,headroom-sill,crown?.20:.09);
+        }
+      });
     }
     strip('silver',roof-.23,roof+.44,.23);
     const center=[cx,roof,cz],map=([x,,z])=>[(x-cx)/7,(z-cz)/7];
@@ -251,9 +259,11 @@ export function createStudy(T,ArchitectureBatch){
     }
   }
   function curvedFrame(batch){
-    const angles=equalArc(52).slice(8),y=roof+.98;
+    const projection=3.1,y=roof+.98;
+    const junction=Math.asin((coreFront+.18-cz)/(rz+projection));
+    const angles=[junction,...equalArc(52).filter(t=>t>junction)];
     const anchors=angles.map(t=>curvePoint(t,roof+.35,-.24));
-    const rim=angles.map(t=>curvePoint(t,y,3.1));
+    const rim=angles.map(t=>curvePoint(t,y,projection));
     // Rounded turn from the semicircle to the straight rear run.
     for(let i=1;i<=6;i++){
       const t=Math.PI*i/12;

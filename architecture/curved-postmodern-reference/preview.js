@@ -18,10 +18,11 @@
   const direction=new T.Vector3(Math.sin(yaw)*Math.cos(elevation),Math.sin(elevation),Math.cos(yaw)*Math.cos(elevation));
   const controls=Gt.controls;
   function frame(view){
-    const [x,y,z,distance]={matched:[-1,59,4,351],roof:[-6,110,2,154],join:[3,102,5,130],entry:[-6,4,22,41]}[view];
-    const angle=view==='join'?78:view==='entry'?13:null;
+    const [x,y,z,distance]={matched:[-1,59,4,351],roof:[-6,110,2,154],join:[3,102,4,144],lobby:[-13,18,13,49],entry:[-6,4,22,41]}[view];
+    const angle=view==='join'?78:view==='entry'?13:view==='lobby'?12:null;
+    const azimuth=view==='lobby'?-Math.PI/9:yaw;
     const viewDirection=angle===null?direction:new T.Vector3(
-      Math.sin(yaw)*Math.cos(angle*Math.PI/180),Math.sin(angle*Math.PI/180),Math.cos(yaw)*Math.cos(angle*Math.PI/180));
+      Math.sin(azimuth)*Math.cos(angle*Math.PI/180),Math.sin(angle*Math.PI/180),Math.cos(azimuth)*Math.cos(angle*Math.PI/180));
     controls.target.set(x,base+y,z);
     controls.object.position.copy(controls.target).addScaledVector(viewDirection,distance);
     controls.object.fov=29;
@@ -33,7 +34,7 @@
   const tools=document.createElement('details');
   tools.open=true;
   tools.style.cssText='position:fixed;top:12px;left:12px;z-index:45;padding:10px 12px;background:#183031;color:#fff;font:14px system-ui;border-radius:6px';
-  tools.innerHTML='<summary>Curved Postmodern Office</summary><p><button data-view="matched">Reference angle</button> <button data-view="roof">Roof frames</button> <button data-view="join">Wing junction</button> <button data-view="entry">Entrances</button> <button data-view="compare">Side by side</button></p>';
+  tools.innerHTML='<summary>Curved Postmodern Office</summary><p><button data-view="matched">Reference angle</button> <button data-view="roof">Roof frames</button> <button data-view="join">Wing junction</button> <button data-view="lobby">Curved lobby</button> <button data-view="entry">Entrances</button> <button data-view="compare">Side by side</button></p>';
   for(const button of tools.querySelectorAll('button'))button.style.cssText='background:#edf3f0;color:#183031;border:1px solid #9caeaa;border-radius:3px;padding:4px 7px;cursor:pointer';
   document.body.append(tools);
   let comparison;

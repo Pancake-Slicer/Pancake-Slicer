@@ -84,7 +84,30 @@ test('fixed benchmark uses aligned windows, joined wings, revolving doors and op
   assert.equal(floors,28);
   assert.ok(Math.abs((roof-lobby)/floors-96/26)<1e-8);
   assert.equal(study.core[4],roof+1);
-  assert.ok(Math.min(z,study.core[2],study.front[2],study.wing[2])>=-8.5);
+  assert.ok(z<=study.core[2]-4 && z<=study.wing[2]-4,'curved shaft extends behind both right-hand volumes');
+
+  function columnCenters(label,material){
+    const part=model.userData.partRanges.find(range=>range.label===label && range.material===material);
+    const position=model.getObjectByName(material).geometry.getAttribute('position');
+    const result=[];
+    assert.equal((part.end-part.start)%24,0);
+    for(let start=part.start;start<part.end;start+=24){
+      let x=0,z=0;
+      for(let i=start;i<start+24;i++){
+        x+=position.getX(i);
+        z+=position.getZ(i);
+      }
+      result.push([x/24,z/24]);
+    }
+    return result;
+  }
+  const lobbyColumns=columnCenters('Curved lobby columns','panel');
+  const officeMullions=columnCenters('Curved office mullions','reveal');
+  assert.equal(officeMullions.length-1,2*(lobbyColumns.length-1));
+  for(const [i,[x,z]] of lobbyColumns.entries()){
+    const [upperX,upperZ]=officeMullions[2*i];
+    assert.ok(Math.hypot(x-upperX,z-upperZ)<.00001,'lobby column sits under every second office mullion');
+  }
   const plantClearance=18.7-(2.08+.16)/2-(z+rz);
   assert.ok(plantClearance>.5 && plantClearance<1.5,'curved shaft sits just behind the podium plant');
 
