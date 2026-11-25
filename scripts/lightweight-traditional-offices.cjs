@@ -14,12 +14,14 @@ function applyTraditionalOfficeIntegration(source){
   replace('function pcGrowableFind(key){','function pcGrowableFind(key){const traditional=pcTraditionalDefinitions.find(d=>d.key===key);if(traditional)return traditional;');
   replace('function pcGrowablePlacement(property,asset){','function pcGrowablePlacement(property,asset){if(asset.model.format==="lightweight-traditional")return asset.record?pcCurvedPlacement(property,asset):null;');
   replace('function pcGrowableChoose(collection,property,forPaint=false){','function pcGrowableChoose(collection,property,forPaint=false){const traditional=pcTraditionalChoose(collection,property,forPaint);if(traditional)return traditional;');
+  replace('return pcVaultChoose(collection,property,forPaint,true);','return pcVaultChoose(collection,property,forPaint,true)||pcTraditionalChoose(collection,property,forPaint,true);');
   replace("...(asset.model.format==='lightweight-vault'?{lightweightVault:structuredClone(asset.record)}:{})",
     "...(asset.model.format==='lightweight-vault'?{lightweightVault:structuredClone(asset.record)}:{}),...(asset.model.format==='lightweight-traditional'?{lightweightTraditional:structuredClone(asset.record)}:{})");
   replace('pcVaultRemember(collection,property,asset);','pcVaultRemember(collection,property,asset);pcTraditionalRemember(collection,property,asset);');
   replace('curveds=[],vaults=[];','curveds=[],vaults=[],traditionals=[];');
   replace("if(asset.model.format==='lightweight-vault'){vaults.push","if(asset.model.format==='lightweight-traditional'){traditionals.push(...buildings);continue;}if(asset.model.format==='lightweight-vault'){vaults.push");
-  replace('pcBmoFlush(vaults,group,pcVaultAdapter);','pcBmoFlush(vaults,group,pcVaultAdapter);pcBmoFlush(traditionals,group,pcTraditionalAdapter);');
+  replace('pcBmoFlush(vaults,group,pcVaultAdapter);','pcBmoFlush(vaults,group,pcVaultAdapter);pcTraditionalFlush(traditionals,group);');
+  replace('pcCurvedUpdateLOD(ut.position)&&(w(),I.requestShadows()),','pcTraditionalUpdateLOD(ut.position)&&(w(),I.requestShadows()),pcCurvedUpdateLOD(ut.position)&&(w(),I.requestShadows()),');
   replace('pcVaultRuntime?.generator.prune();E={','pcVaultRuntime?.generator.prune();pcTraditionalRuntime?.generator.prune();E={');
   replace('lightweightVault:pcVaultHistory(this)}','lightweightVault:pcVaultHistory(this),lightweightTraditional:pcTraditionalHistory(this)}');
   replace('s=pcVaultRestore(this,i?.lightweightVault)||s;','s=pcVaultRestore(this,i?.lightweightVault)||s;s=pcTraditionalRestore(this,i?.lightweightTraditional)||s;');

@@ -32,13 +32,108 @@ const courtyardHeritage={...fullHeightHeritage,groundRing:heritageCourt,bands:[[
 const waterTanks={A:[15,-13.2],B:[-6.3,6.4],C:[12.2,-8.6]};
 const WATER_TANK_HEIGHT=6.68;
 const heritageRevisions={2:steppedHeritage,3:fullHeightHeritage,4:courtyardHeritage};
-const scheme=({archetype,revision})=>archetype==='C'?(heritageRevisions[revision]??schemes.C):schemes[archetype];
+const scheme=spec=>spec.revision===PARAMETRIC_REVISION?parametricScheme(spec):spec.archetype==='C'?(heritageRevisions[spec.revision]??schemes.C):schemes[spec.archetype];
 const margin=spec=>spec.revision>=2?3.5:2.35;
 export const NAMES=Object.freeze(Object.fromEntries(Object.entries(schemes).map(([key,v])=>[key,v.name])));
+// Revision 5 uses whole bays. Earlier architectural revisions retain their saved dimensions.
+const PARAMETRIC_REVISION=5;
+const bayRules={
+  A:{width:4.12,depth:3.78,front:[7,17],side:[6,15]},
+  B:{width:4.62,depth:3.82,front:[6,15],side:[6,15]},
+  C:{width:3.68,depth:3.72,front:[7,19],side:[6,16]}
+};
+const roundMetric=n=>Math.round(n*100)/100;
+const midpoint=(a,b)=>(a+b)/2;
+function parametricSpec(archetype,input){
+  const rule=bayRules[archetype];
+  const {frontBays=10,sideBays=9,storeys=18,form=0}=input;
+  for(const [value,min,max] of [[frontBays,...rule.front],[sideBays,...rule.side],[storeys,12,26],[form,0,2]])
+    if(!Number.isInteger(value)||value<min||value>max)throw Error('Unsupported Traditional Office bay grid');
+  const width=roundMetric(frontBays*rule.width),depth=roundMetric(sideBays*rule.depth);
+  if(width/depth<.76||width/depth>2.25||(storeys*FLOOR+2)/Math.min(width,depth)>4.15)
+    throw Error('Unsupported Traditional Office proportions');
+  return {archetype,version:VERSION,revision:PARAMETRIC_REVISION,frontBays,sideBays,storeys,form,width,depth,floorHeight:FLOOR};
+}
+function fitParametric(input,{width,depth,setback}){
+  const rule=bayRules[input.archetype],room=3.5+2*setback;
+  let frontBays=Math.min(rule.front[1],Math.floor((width-room+1e-6)/rule.width));
+  let sideBays=Math.min(rule.side[1],Math.floor((depth-room+1e-6)/rule.depth));
+  frontBays=Math.min(frontBays,Math.floor(sideBays*rule.depth*2.22/rule.width));
+  sideBays=Math.min(sideBays,Math.floor(frontBays*rule.width/.78/rule.depth));
+  const limit=Math.floor((Math.min(frontBays*rule.width,sideBays*rule.depth)*4.15-2)/FLOOR);
+  const storeys=input.auto?Math.min(input.storeys,limit):input.storeys;
+  return parametricSpec(input.archetype,{...input,frontBays,sideBays,storeys});
+}
+function offsetRing(ring,clearance){
+  const normal=(a,b)=>{
+    const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+    return [-dz/length,dx/length];
+  };
+  return ring.map(([x,z],i)=>{
+    const a=normal(ring[(i+ring.length-1)%ring.length],ring[i]),b=normal(ring[i],ring[(i+1)%ring.length]);
+    return [x+(a[0]+b[0])*clearance,z+(a[1]+b[1])*clearance];
+  });
+}
+function parametricScheme(spec){
+  const {archetype,width,depth,frontBays,sideBays,storeys,form}=spec,rule=bayRules[archetype];
+  const x=width/2,z=depth/2,base=archetype==='A'?[[4.6,4.6],[4.85,4.35],[4.7,4.7]][form]:
+    archetype==='B'?[[4.65,4.05],[4.8,3.9],[4.9,4.25]][form]:[[4.55,3.75,3.65],[4.8,3.8,3.55],[4.65,3.75,3.75]][form];
+  const shaft=storeys-base.length;
+  const left=-x,right=x,back=-z,front=z;
+  let groundRing,entries,bands,roof;
+  if(archetype==='A'){
+    const wings=Math.max(2,Math.min(Math.floor((frontBays-3)/2),Math.round(frontBays*[.28,.33,.37][form])));
+    const cut=right-wings*rule.width;
+    const fore=front-Math.min([1,2,2][form],Math.floor((sideBays-2)/2))*rule.depth;
+    const aft=back+Math.min([1,1,3][form],Math.floor((sideBays-2)/2))*rule.depth;
+    groundRing=[[left,front],[-cut,front],[-cut,fore],[cut,fore],[cut,front],[right,front],
+      [right,back],[cut,back],[cut,aft],[-cut,aft],[-cut,back],[left,back]];
+    entries=[entrance(0,fore,Math.min(cut*1.2,[8.5,10.4,9.6][form]),[7.1,7.5,7.85][form])];
+    const crown=[2,3,2][form];
+    bands=[[groundRing,shaft-crown],[groundRing,crown]];
+    const wing=midpoint(cut,right);
+    roof={tank:[wing,back+3.65],hut:[-wing,back+4.0,[4.2,5.1,4.7][form],4.75,2.72],
+      units:[[-wing,front-3.45,3.2,2.8,1],...(form===1?[]:[[wing,front-3.65,3.8,3.2,1]])]};
+  }else if(archetype==='B'){
+    const wingBays=Math.max(4,Math.min(frontBays-2,Math.round(frontBays*[.56,.64,.70][form])));
+    const split=left+wingBays*rule.width;
+    const lowBack=back+Math.max(2,Math.min(sideBays-3,Math.round(sideBays*[.43,.58,.50][form])))*rule.depth;
+    groundRing=[[left,front],[right,front],[right,lowBack],[split,lowBack],[split,back],[left,back]];
+    const main=midpoint(left,split),secondary=midpoint(split,right);
+    entries=[entrance(main,front,[5.4,6.2,5.65][form],4.18)];
+    if(frontBays>=7)entries.push(entrance(secondary,front,[4.75,5.0,6.15][form],3.72,.42));
+    const lower=Math.max(4,Math.round(shaft*[.56,.45,.62][form])),upper=Math.min(3,Math.max(2,Math.round(shaft*.145)));
+    const middle=rect(left+.75,split-.9,back+1.15,front-1.1);
+    const cap=[left+1.85,split-[2.45,3.10,2.65][form],back+[2.65,4.45,3.20][form],front-[3.15,3.55,2.85][form]];
+    bands=[[groundRing,lower],[middle,shaft-lower-upper],[rect(...cap),upper]];
+    roof={tank:[cap[1]-3.7,cap[2]+3.6],units:[
+      [secondary,midpoint(lowBack,front),[4.8,5.6,4.1][form],3.2,0],
+      [cap[0]+3.45,cap[3]-3.65,[4.7,5.8,5.1][form],3.0,2,form!==0]
+    ]};
+  }else{
+    const courtBays=Math.max(2,Math.min(frontBays-4,Math.round(frontBays*[.28,.39,.34][form])));
+    const courtWidth=courtBays*rule.width;
+    const shift=form===2&&frontBays>=9?rule.width/2:0;
+    const cutLeft=-courtWidth/2+shift,cutRight=courtWidth/2+shift;
+    const ins=back+Math.min(sideBays-3,Math.max(2,Math.round(sideBays*[.32,.46,.42][form])))*rule.depth;
+    groundRing=[[left,front],[right,front],[right,back],[cutRight,back],[cutRight,ins],[cutLeft,ins],[cutLeft,back],[left,back]];
+    entries=form===1&&frontBays>=9?[entrance(-rule.width,front,5.2,6.45),entrance(rule.width,front,5.2,6.45)]:
+      [entrance(0,front,[6.4,7.0,7.65][form],[6.4,6.6,7.05][form])];
+    bands=[[groundRing,shaft]];
+    const wing=midpoint(cutRight,right);
+    const hut=[form===2?-rule.width:0,midpoint(ins,front),Math.min(width*.31,[10.6,12.8,10.0][form]),[4.8,5.4,5.1][form],3.7];
+    const unitWidth=[3.1,3.7,4.0][form];
+    const unitX=Math.min(midpoint(left,cutLeft),hut[0]-hut[2]/2-unitWidth/2-.35);
+    roof={tank:[wing,back+3.6],hut,units:[[unitX,front-3.5,unitWidth,2.8,0]]};
+  }
+  return {name:schemes[archetype].name,base,entries,groundRing,bands,bay:rule.width,roof};
+}
+
 export function normalize(input={}){
   const archetype=input.archetype??'A',revision=input.revision??1;
-  if(!Object.hasOwn(schemes,archetype)||(input.version&&input.version!==VERSION)||![1,2,3,4].includes(revision)||(revision>=3&&archetype!=='C'))
+  if(!Object.hasOwn(schemes,archetype)||(input.version&&input.version!==VERSION)||![1,2,3,4,PARAMETRIC_REVISION].includes(revision)||([3,4].includes(revision)&&archetype!=='C'))
     throw Error('Unknown traditional Office benchmark');
+  if(revision===PARAMETRIC_REVISION)return parametricSpec(archetype,input);
   const s=scheme({archetype,revision}),storeys=s.base.length+s.bands.reduce((n,[,floors])=>n+floors,0);
   return {archetype,version:VERSION,width:s.width,depth:s.depth,storeys,floorHeight:FLOOR,...(revision>=2?{revision}:{})};
 }
@@ -53,18 +148,21 @@ export function layout(input){
   });
   const {archetype,revision}=spec;
   const roofTop=y+(revision>=2?WATER_TANK_HEIGHT:{A:3.35,B:2.96,C:4.55}[archetype]);
-  return {groundRing:s.groundRing,entries:s.entries,entrance:s.entries[0],baseTop,tiers,roofTop};
+  return {groundRing:s.groundRing,entries:s.entries,entrance:s.entries[0],baseTop,tiers,roofTop,...(s.roof?{roof:s.roof}:{})};
 }
 export const definition=Object.freeze({
   id:'original-traditional-offices',version:VERSION,family:'office',
-  maximumLot:{width:80,depth:68},envelopeMargin:2.35,ratios:()=>[1],
+  maximumLot:{width:80,depth:68},envelopeMargin:2.35,
+  ratios:spec=>spec.revision===PARAMETRIC_REVISION?[1,.97,.92,.86,.79,.72]:[1],
   normalize,layout,
   envelope(spec){
+    if(spec.revision===PARAMETRIC_REVISION)return offsetRing(scheme(spec).groundRing,1.75);
     const clearance=margin(spec);
     const w=(spec.width+clearance)/2,d=(spec.depth+clearance)/2;
     return [[-w,-d],[w,-d],[w,d],[-w,d]];
   },
   fit(input,{width,depth,setback=.3}){
+    if(input.revision===PARAMETRIC_REVISION)return fitParametric(input,{width,depth,setback});
     const s=normalize(input);
     const clearance=margin(s)+2*setback;
     if(width<s.width+clearance||depth<s.depth+clearance)throw Error('Too small for this fixed Office design');
@@ -121,6 +219,19 @@ const heavierMasonry={
   B:{pierWidth:.64,pierDepth:.66,sillHeight:.48,bandHeight:1.14},
   C:{pierWidth:1.02,pierDepth:.86,sillHeight:.25,bandHeight:.95}
 };
+function officeStyle(spec){
+  const {archetype,revision,form}=spec, style=styles[archetype];
+  if(!(revision>=2))return style;
+  const masonry={...style,...heavierMasonry[archetype]};
+  if(revision!==PARAMETRIC_REVISION)return masonry;
+  return {
+    ...masonry,
+    pierWidth:masonry.pierWidth*[1,1.15,.92][form],
+    bandHeight:masonry.bandHeight+[0,.13,-.065][form],
+    glassSetback:masonry.glassSetback-[0,.07,.12][form],
+    groupPier:archetype==='B'?[.16,.33,.21][form]:undefined
+  };
+}
 function edge(batch,ring,index){
   const [x,z]=ring[index], [nextX,nextZ]=ring[(index+1)%ring.length];
   const length=Math.hypot(nextX-x,nextZ-z), dx=(nextX-x)/length,dz=(nextZ-z)/length;
@@ -246,18 +357,22 @@ function commercial(batch,s,grid,type,style,revised){
     if(!revised)cornice(e,grid.baseTop-.09,style.shelf,true);
   }
 }
-function stories(batch,tier,type,style,baySize){
+function stories(batch,tier,type,style,baySize,distant=false){
   for(let i=0;i<tier.ring.length;i++){
     const e=edge(batch,tier.ring,i),{length,box,panel,line}=e;
     if(length<1.95){
       panel(style.pier,0,length,tier.start,tier.end,-.04);continue;
     }
-    const count=Math.max(1,Math.round(length/baySize)),bay=length/count;
+    const pitch=typeof baySize==='number'?baySize:e.dx?baySize.horizontal:baySize.depth;
+    const count=Math.max(1,Math.round(length/pitch)),bay=length/count;
     const pier=Math.min(style.pierWidth,bay*.26),height=tier.end-tier.start;
     panel(style.spandrel,0,length,tier.start,tier.end,style.glassSetback-.10);
     for(let j=0;j<=count;j++){
-      box(style.pier,bay*j,tier.start+height/2,-.045,pier,height,style.pierDepth);
-      if(type!=='B'){
+      if(distant){
+        const centre=bay*j;
+        panel(style.pier,centre-pier/2,centre+pier/2,tier.start,tier.end,style.pierDepth/2-.045);
+      }else box(style.pier,bay*j,tier.start+height/2,-.045,pier,height,style.pierDepth);
+      if(!distant&&type!=='B'){
         box(type==='A'?'trim':'sand',bay*j,tier.start+height/2,.34,pier*.43,height,.12);
         box('trim',bay*j,tier.end-.47,.17,pier+.16,.25,.68);
       }
@@ -269,13 +384,17 @@ function stories(batch,tier,type,style,baySize){
         const variant=(i*3+floor*7+j*5+Math.floor(noise(j+i,floor)*4))%8;
         panel('glass',lo,hi,y+spandrel,y+FLOOR-.105,style.glassSetback,variant);
         panel(style.spandrel,lo,hi,y,y+spandrel,style.glassSetback+.12);
-        if(type==='B'&&hi-lo>2.6){
+        if(!distant&&type==='B'&&hi-lo>2.6){
           const head=FLOOR-.105,revised=style.bandHeight!==undefined;
-          box('ash',(lo+hi)/2,y+(revised?(head+spandrel)/2:2.14),-.32,.13,revised?head-spandrel:FLOOR-1.00,.18);
+          box('ash',(lo+hi)/2,y+(revised?(head+spandrel)/2:2.14),-.32,style.groupPier??.13,revised?head-spandrel:FLOOR-1.00,.18);
         }
       }
       const material=type==='B'?'ash':'trim';
-      if(floor>0)line(material,0,length,y+spandrel-.15,type==='B'?.08:-.16,type==='B'?.67:.31,style.sillHeight);
+      if(floor>0){
+        const sill=y+spandrel-.15,depth=type==='B'?.67:.31,offset=type==='B'?.08:-.16;
+        if(distant)panel(material,0,length,sill-style.sillHeight/2,sill+style.sillHeight/2,offset+depth/2);
+        else line(material,0,length,sill,offset,depth,style.sillHeight);
+      }
     }
   }
 }
@@ -301,8 +420,7 @@ function deck(batch,{ring,end},style,type,highest,revised){
     }
   }
 }
-function waterTank(batch,archetype,top){
-  const [x,z]=waterTanks[archetype];
+function waterTank(batch,archetype,top,[x,z]=waterTanks[archetype]){
   const part=batch.begin('rooftop water tower');
   const box=(key,cx,cz,y,w,h,d)=>batch.box(key,cx,top+y+h/2,cz,w,h,d);
   const shell=(key,bottom,upper,r0,r1,cap=false)=>{
@@ -328,7 +446,7 @@ function waterTank(batch,archetype,top){
   shell('steel',6.59,WATER_TANK_HEIGHT,1.12,.12,true);
   batch.end(part);
 }
-function plant(batch,type,tiers){
+function plant(batch,type,tiers,roof){
   const last=tiers.at(-1).end;
   const box=(key,x,z,y,w,h,d)=>batch.box(key,x,y+h/2,z,w,h,d);
   const hvac=(x,z,y,w,d)=>{
@@ -341,6 +459,20 @@ function plant(batch,type,tiers){
       batch.triangle('vent',[[fx,y+1.38,z],p(i+1),p(i)]);
     }
   };
+  if(roof){
+    if(roof.hut){
+      const [x,z,w,d,h]=roof.hut,stone=type==='A'?'stone':'sand';
+      box(stone,x,z,last,w,h,d);
+      box('trim',x,z,last+h-.03,w+.27,.27,d+.24);
+      for(let i=0;i<5;i++)box('vent',x,z+d/2+.018,last+.48+i*.30,w*.69,.09,.08);
+    }
+    for(const [x,z,w,d,tier,ducts] of roof.units){
+      const y=tiers[tier].end;hvac(x,z,y,w,d);
+      if(ducts)for(const dx of [-w*.25,0,w*.25])
+        batch.beam('steel',[x+dx,y+.25,z-d/2-1.1],[x+dx,y+.78,z-d/2],.24,.22);
+    }
+    return;
+  }
   if(type==='A'){
     for(const x of [-15,15]){
       box('stone',x,-6,last,4.9,2.86,5.5);
@@ -363,19 +495,20 @@ function plant(batch,type,tiers){
     hvac(7.4,-3,last,2.9,2.75);
   }
 }
-function buildStudy(spec,materials){
+function buildStudy(spec,materials,distant){
   const {archetype,revision}=spec,revised=revision>=2,s=scheme(spec);
-  const style=revised?{...styles[archetype],...heavierMasonry[archetype]}:styles[archetype],grid=layout(spec),batch=new ArchitectureBatch;
+  const style=officeStyle(spec),grid=layout(spec),batch=new ArchitectureBatch;
+  const bay=revision===PARAMETRIC_REVISION?{horizontal:s.bay,depth:bayRules[archetype].depth}:s.bay;
   commercial(batch,s,grid,archetype,style,revised);
   deck(batch,{ring:s.groundRing,end:grid.baseTop},style,archetype,false,revised);
   for(const [index,tier] of grid.tiers.entries()){
-    stories(batch,tier,archetype,style,s.bay);
+    stories(batch,tier,archetype,style,bay,distant);
     if(grid.tiers[index+1]?.ring!==tier.ring)deck(batch,tier,style,archetype,index===grid.tiers.length-1,revised);
     else if(revised)projectingCornice(batch,tier.ring,tier.end,.70);
     else for(let i=0;i<tier.ring.length;i++)cornice(edge(batch,tier.ring,i),tier.end-.05,.64);
   }
-  plant(batch,archetype,grid.tiers);
-  if(revised)waterTank(batch,archetype,grid.tiers.at(-1).end);
+  plant(batch,archetype,grid.tiers,s.roof);
+  if(revised)waterTank(batch,archetype,grid.tiers.at(-1).end,s.roof?.tank);
   const group=batch.finish(materials,s.name),roof=group.getObjectByName('roof').geometry.attributes;
   for(let i=0;i<roof.position.count;i++)roof.uv.setXY(i,roof.position.getX(i)/7,roof.position.getZ(i)/7);
   group.userData.triangles=group.children.reduce((n,m)=>n+m.geometry.index.count/3,0);
@@ -383,10 +516,11 @@ function buildStudy(spec,materials){
 }
 export class TraditionalOfficeGenerator{
   constructor(){this.materials=makeMaterials();this.cache=new Map;this.leases=new Map;}
-  generate(input){
-    const spec=normalize(input),key=spec.archetype+':'+(spec.revision??1);
+  generate(input,distant=false){
+    const spec=normalize(input);distant=distant&&spec.revision===PARAMETRIC_REVISION;
+    const key=JSON.stringify([spec,distant]);
     let entry=this.cache.get(key);
-    if(!entry){entry={model:buildStudy(spec,this.materials),users:0};this.cache.set(key,entry);}
+    if(!entry){entry={model:buildStudy(spec,this.materials,distant),users:0};this.cache.set(key,entry);}
     const model=entry.model.clone(true);
     entry.users++;this.leases.set(model,entry);
     return model;

@@ -3,7 +3,7 @@
   const panel=document.createElement('details');
   panel.open=true;
   panel.style.cssText='position:fixed;top:12px;left:12px;z-index:46;padding:11px 12px;background:#173044f5;color:white;font:13px system-ui;border-radius:6px';
-  panel.innerHTML='<summary>Traditional Offices</summary><p><button data-tr-view="all">Comparison</button> <button data-tr-view="A">Grand Courtyard</button> <button data-tr-view="B">Metropolitan</button> <button data-tr-view="C">Heritage</button></p><p><button data-tr-detail="roof">Roof</button> <button data-tr-detail="entry">Entrance</button> <button data-tr-mode="mixed">Mixed growth</button></p><span id="traditional-status">Preparing Test City…</span><output id="traditional-report" hidden></output>';
+  panel.innerHTML='<summary>Traditional Offices</summary><p><button data-tr-view="all">Fixed benchmarks</button> <button data-tr-view="A">Grand Courtyard</button> <button data-tr-view="B">Metropolitan</button> <button data-tr-view="C">Heritage</button></p><p><button data-tr-detail="roof">Roof</button> <button data-tr-detail="entry">Entrance</button> <button data-tr-mode="portfolio">15 variants</button> <button data-tr-mode="next" hidden>Next building</button> <button data-tr-mode="mixed">Natural growth</button></p><span id="traditional-status">Preparing Test City…</span><output id="traditional-report" hidden></output>';
   for(const button of panel.querySelectorAll('button'))button.style.cssText='background:#edf4f6;color:#173047;border:1px solid #879eab;border-radius:3px;padding:4px 7px;cursor:pointer';
   document.body.append(panel);
   const development=document.querySelector('#bmo-development');if(development)development.open=false;
@@ -16,40 +16,59 @@
     _e.addBatch(roads);Gt.drawRoads(_e);Vh.setPropertyZone('offices');
     const empty=structuredClone(_e.captureState().participants.zoning),controls=Gt.controls,subjects={};
     controls.enableDamping=false;
-    let selected='A',mode='lineup';
-    const fit=(lot,type)=>pcTraditionalFit(lot,type).ok;
+    let selected='A',mode='lineup',variantIndex=0;
+    const variants=[],nextButton=panel.querySelector('[data-tr-mode=next]');
     const record=b=>b.office?.lightweightTraditional;
     const towers=()=>Vh.buildings.filter(record);
     function reset(next){
       _e.historyParticipants.get('zoning').restore(structuredClone(empty));Vh.rebuild();
       for(const key of pcTraditionalTypes)delete subjects[key];
-      mode=next;
+      mode=next;variants.length=0;variantIndex=0;nextButton.hidden=next!=='portfolio';
+    }
+    function place(lot,type,options){
+      const fit=pcTraditionalFit(lot,type,options);
+      if(!fit.ok)throw Error(fit.reason);
+      const asset=pcTraditionalAsset(fit.record);
+      Vh.pcCatalogueAssignments??=new Map;
+      Vh.pcCatalogueAssignments.set(lot.id,asset.key);
+      pcTraditionalRemember(Vh,lot,asset);
+      Vh.applyProperties([lot],'offices');
+      const building=towers().find(b=>b.propertyIds.includes(lot.id));
+      if(!building)throw Error('Office zoning failed for '+asset.name);
+      return building;
     }
     function lineup(){
       reset('lineup');const used=new Set;
       for(const [index,type] of pcTraditionalTypes.entries()){
         const gx=80+index*56,gz=-434;
         const cost=lot=>Math.abs(lot.x-gx)+Math.abs(lot.z-gz)*2+Math.abs(pcGrowableFacing(lot).angle)*340;
-        const lot=Vh.properties.filter(p=>!used.has(p.id)&&fit(p,type)).sort((a,b)=>cost(a)-cost(b))[0];
+        const lot=Vh.properties.filter(p=>!used.has(p.id)&&pcTraditionalFit(p,type,{benchmark:true}).ok).sort((a,b)=>cost(a)-cost(b))[0];
         if(!lot)throw Error('No eligible Office lot for '+pcTraditionalNames[index]);
-        used.add(lot.id);pcTraditionalSetControl(Vh,{enabled:true,type});Vh.applyProperties([lot],'offices');
-        const building=towers().find(b=>b.propertyIds.includes(lot.id));
-        if(!building)throw Error('Office zoning failed for '+pcTraditionalNames[index]);
-        subjects[type]=building;
+        used.add(lot.id);subjects[type]=place(lot,type,{benchmark:true});
       }
-      pcTraditionalSetControl(Vh,{enabled:true,type:'mix'});
+      Gt.drawZoning();frame('all');
+    }
+    function portfolio(){
+      reset('portfolio');const used=new Set;
+      for(const [i,type] of pcTraditionalTypes.entries())for(const [j,storeys] of [12,15,19,23,26].entries()){
+        const options={storeys,form:j%3};
+        const cost=([p,f])=>Math.abs(f.record.parameters.width-(32+j*4))*20+Math.hypot(p.x-(-270+i*250),p.z-(-270+j*125));
+        const site=Vh.properties.filter(p=>!used.has(p.id))
+          .map(p=>[p,pcTraditionalFit(p,type,options)]).filter(([,f])=>f.ok).sort((a,b)=>cost(a)-cost(b))[0]?.[0];
+        if(!site)throw Error('No compatible '+storeys+'-storey specimen for '+type);
+        used.add(site.id);
+        const building=place(site,type,options);variants.push(building);subjects[type]??=building;
+      }
       Gt.drawZoning();frame('all');
     }
     function mixed(){
-      reset('mixed');pcTraditionalSetControl(Vh,{enabled:true,type:'mix'});
-      const lots=Vh.properties.filter(lot=>pcTraditionalTypes.some(type=>fit(lot,type)));
-      Vh.applyProperties(lots,'offices');
+      reset('mixed');Vh.applyProperties(Vh.properties,'offices');
       for(const building of towers())subjects[record(building).parameters.archetype]??=building;
       Gt.drawZoning();frame('all');
     }
     function frame(type,detail='tower'){
       if(type==='all'){
-        const city=mode==='mixed';
+        const city=mode!=='lineup';
         if(city){
           controls.target.set(0,50,0);controls.object.position.set(42,562,751);controls.object.fov=48;
         }else{
@@ -78,13 +97,20 @@
       }
       controls.object.updateProjectionMatrix();controls.update();
       status.textContent=type!=='all'?pcTraditionalNames[pcTraditionalTypes.indexOf(type)]+' · '+detail:
-        mode==='mixed'?'Mixed Office growth · '+towers().length+' traditional towers':'Three originals grown through Office zoning';
+        mode==='mixed'?'Natural Office growth · '+towers().length+' traditional towers':mode==='portfolio'?'15 fitted Traditional Office variants':'Three fixed benchmarks grown through Office zoning';
       output.textContent=JSON.stringify({type,detail,mode,towers:towers().length,totalOffices:Vh.buildings.length,
-        designs:[...new Set(towers().map(b=>record(b).parameters.archetype))],resources:pcTraditionalInfo()});
+        designs:[...new Set(towers().map(b=>record(b).parameters.archetype))],
+        specimens:variants.map(b=>record(b).parameters),resources:pcTraditionalInfo()});
     }
     for(const button of panel.querySelectorAll('[data-tr-view]'))button.onclick=()=>button.dataset.trView==='all'?lineup():frame(button.dataset.trView);
     for(const button of panel.querySelectorAll('[data-tr-detail]'))button.onclick=()=>frame(selected,button.dataset.trDetail);
     panel.querySelector('[data-tr-mode=mixed]').onclick=mixed;
+    panel.querySelector('[data-tr-mode=portfolio]').onclick=portfolio;
+    nextButton.onclick=()=>{
+      if(!variants.length)return;
+      const building=variants[variantIndex++%variants.length],type=record(building).parameters.archetype;
+      subjects[type]=building;frame(type);
+    };
     Gn('hand');Ui();lineup();
   }catch(error){status.textContent=error.message;throw error;}
 }

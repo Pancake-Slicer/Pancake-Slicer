@@ -665,3 +665,12 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Geometry checks verified the open roof and exact prior geometry for Grand Courtyard, Metropolitan and saved Heritage assignments. Offline Chrome verified the rear view and mixed Office growth.
 - Playtest Pancake City - Traditional Offices Playtest - 20261125T135533Z.html (SHA-256 aaa6eab0e8ef98d96d0bc7ac77948476b8f5da463f7cb8f97f4e628394757c49).
 - Test City Pancake City - Traditional Offices Test City - 20261125T135533Z.html (SHA-256 7ff9d6fedc21547b95f6c20fb9552e98b5f23338f3d9455fa0b1a4384c3d5d58). Capture in .tools/original-traditional-offices/heritage-court/. Prior baseline f0a335c.
+
+## Parametric Traditional Commercial Offices — 2026-11-25
+
+- Normal Office zoning selects 12–26-storey whole-bay Traditional Offices after existing growable choices. Grand Courtyard retains its H plan, Metropolitan its stepped L plan, and Heritage its full-height rear U court. Seeded schemes vary wing splits, recesses, entries, masonry and plant. The polygon fitter checks the complete decorated ring at native scale and rejects sites outside the supported proportions.
+- Fixed review revisions A2, B2 and C4 reproduce the approved geometry exactly. Earlier assignments retain their stored revisions and footprints. The SC4 reconstruction stays out of both exports.
+- Fifteen fitted configurations cover 12, 15, 19, 23 and 26 storeys in each subfamily. Checks verified polygon containment, street alignment, roof support, facade foundations, registration, picking, Undo/Redo and deterministic redevelopment. A separate sweep checked roof-plant support and separation in 825 supported bay-grid layouts.
+- Offline Chrome verified both exports and grew 15 Traditional Offices among 285 normally zoned offices. The fixture used 271,458 active Traditional triangles nearby and 195,654 at a distance across 10 chunks. This is a geometry count, with hardware FPS unmeasured. Captures are in .tools/original-traditional-offices/parametric/.
+- Playtest Pancake City - Traditional Offices Playtest - 20261125T153133Z.html (SHA-256 17c32910db779fc2ea07296e8581738f0753e8e897fe8784fe9f269095771c9d).
+- Test City Pancake City - Traditional Offices Test City - 20261125T153133Z.html (SHA-256 515adb6f6a591853dc11d927ea7a0f742594156892355986ca58554234f1a86b). Use Fixed benchmarks, 15 variants and Natural growth. Recovery checkpoint checkpoint/pre-parametric-traditional-b67a27d.
