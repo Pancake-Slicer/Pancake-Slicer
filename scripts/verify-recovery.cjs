@@ -19,7 +19,8 @@ const { applyReferenceOfficeRetirement } = require('./retire-reference-offices.c
 const { applyWaterfallIntegration } = require('./lightweight-waterfall.cjs');
 const { applyCurvedIntegration } = require('./lightweight-curved.cjs');
 const { applyVaultIntegration } = require('./lightweight-vaults.cjs');
-assert.deepEqual(read('web/assets/game.bundle.js'), Buffer.from(applyVaultIntegration(applyCurvedIntegration(applyWaterfallIntegration(applyReferenceOfficeRetirement(applyGrowableAssets(applyLandmarkPerformance(applyOfficeZoning(applyRenderingFixes(scripts[0][1]))))))))), 'Runtime differs from the reviewed rendering, landmark, Office and growable-asset changes applied to v52');
+const { applyTraditionalOfficeIntegration } = require('./lightweight-traditional-offices.cjs');
+assert.deepEqual(read('web/assets/game.bundle.js'), Buffer.from(applyTraditionalOfficeIntegration(applyVaultIntegration(applyCurvedIntegration(applyWaterfallIntegration(applyReferenceOfficeRetirement(applyGrowableAssets(applyLandmarkPerformance(applyOfficeZoning(applyRenderingFixes(scripts[0][1])))))))))), 'Runtime differs from the reviewed rendering, landmark, Office and growable-asset changes applied to v52');
 assert.deepEqual(read('web/assets/game.css'), Buffer.from(styles[0][1] + '\n' + read('web/features/offices.css').toString('utf8')), 'CSS differs from v52 plus the Office tabs');
 const shell = read('web/index.html').toString('utf8');
 assert.ok(shell.includes('./assets/game.bundle.js') && shell.includes('./assets/game.css'));

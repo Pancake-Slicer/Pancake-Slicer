@@ -635,3 +635,12 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 
 - Replaced the two shallow roof bands with mitered limestone courses and a patinated upper edge. The shelf projects 1.63 m from the facade and follows the open lightwell perimeter. Offline Chrome verified the projection and the matched-angle and roof views. The model uses 39,314 triangles and 12 opaque batches.
 - Playable Pancake City - Traditional High-Rise Test City - 20261124T203057Z.html (SHA-256 a1c4b7bfe001e9392c9e694b0456cfcf14f0ef6c4f5f40625418bbda7c92253b). Before this change, the benchmark was at fea5d9a.
+
+## Original Traditional Offices — 2026-11-24
+
+- Three original fixed growables for visual review. Grand Courtyard has a 24-storey H plan, symmetrical limestone piers and a two-storey entrance. Metropolitan has a 23-storey stepped L plan, grey horizontal spandrels, twin entrances and exposed rooftop ducts. Heritage has 24 storeys with recessed corners, a three-storey sandstone base and a narrower crown with a screened mechanical penthouse.
+- Office growth is opt-in through Experimental Traditional Offices in the development panel. Fixed designs fit eligible polygons at native scale and use the existing foundation, selection, batching and history path. The archived U-shaped benchmark is excluded from the normal catalogue and both new exports.
+- The build and 190 checks passed. Final native-envelope checks measured 13,692–18,254 triangles and 8–9 model batches per prototype. In offline Chrome, the Test City zoned the three-building lineup and grew 25 Traditional Offices among 106 offices in mixed mode. Metropolitan regrew identically after demolition and repainting. Hardware FPS was unmeasured. Captures are in .tools/original-traditional-offices/.
+- Playtest Pancake City - Traditional Offices Playtest - 20261125T014253Z.html (SHA-256 f2fe6f924d85539a16da398e2ef3b8456484b3c49b47f71300e105ccbabe8e06).
+- Test City Pancake City - Traditional Offices Test City - 20261125T014253Z.html (SHA-256 c857a1425ae2fd2989089755b90a8952e82b3855fc7aee753f13819eb10b6dd0). Recreate both exports with npm run export:original-traditional-offices.
+- Recovery checkpoint checkpoint/pre-original-traditional-offices-451b860. Await visual approval before expanding the family.
