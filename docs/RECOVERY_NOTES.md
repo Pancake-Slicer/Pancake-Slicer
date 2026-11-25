@@ -644,3 +644,10 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - Playtest Pancake City - Traditional Offices Playtest - 20261125T014253Z.html (SHA-256 f2fe6f924d85539a16da398e2ef3b8456484b3c49b47f71300e105ccbabe8e06).
 - Test City Pancake City - Traditional Offices Test City - 20261125T014253Z.html (SHA-256 c857a1425ae2fd2989089755b90a8952e82b3855fc7aee753f13819eb10b6dd0). Recreate both exports with npm run export:original-traditional-offices.
 - Recovery checkpoint checkpoint/pre-original-traditional-offices-451b860. Await visual approval before expanding the family.
+
+### Traditional Office masonry and roof revision
+
+- Revision 2 adds the fixed benchmark’s 1.63 m mitered roof cornice and braced cylindrical water tower to each design. Thickened masonry piers, storefront columns and floor bands reduce the glazing area. Heritage now has a 46 × 40 m base, a 41 m-wide shaft and a 36 m-wide upper stage.
+- The lot fitter accounts for the wider cornices. Earlier assignments retain their version-1 geometry and envelope. All 191 build checks passed, including exact geometry hashes for the older designs, tank support and cornice clearance. Offline Chrome verified the lineup and roof views, 17 revised towers among 78 mixed offices, and identical Heritage redevelopment. Captures are in .tools/original-traditional-offices/masonry/.
+- Playtest Pancake City - Traditional Offices Playtest - 20261125T021820Z.html (SHA-256 5af112b8ac5330c17abc0a186097d2b9b2c19cf380ede25281d8bfc53909c18b).
+- Test City Pancake City - Traditional Offices Test City - 20261125T021820Z.html (SHA-256 d2e2367ee1c768bfb9a128eb4de5e1eedcd838eb02d6e7087ef8156279532e80). Checkpoint checkpoint/pre-traditional-masonry-1d1fd13.

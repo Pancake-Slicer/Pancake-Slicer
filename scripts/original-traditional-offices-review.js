@@ -9,7 +9,7 @@
   const development=document.querySelector('#bmo-development');if(development)development.open=false;
   const status=panel.querySelector('#traditional-status'),output=panel.querySelector('#traditional-report');
   try{
-    const terrain=Pw({kind:'inland',seed:1138,hills:0,mountains:0,slope:0,river:0,coast:0},{size:900,tileSize:900});
+    const terrain=Pw({kind:'inland',seed:1138,hills:0,mountains:0,slope:0,river:0,coast:0},{size:920,tileSize:920});
     ll.setMap(terrain);await Gt.setTerrain(terrain,_e);
     const roads=[];
     for(const v of [-400,-220,-20,180,400])roads.push([{x:v,z:-400},{x:v,z:400}],[{x:-400,z:v},{x:400,z:v}]);
@@ -28,7 +28,7 @@
     function lineup(){
       reset('lineup');const used=new Set;
       for(const [index,type] of pcTraditionalTypes.entries()){
-        const gx=80+index*56,gz=-429;
+        const gx=80+index*56,gz=-434;
         const cost=lot=>Math.abs(lot.x-gx)+Math.abs(lot.z-gz)*2+Math.abs(pcGrowableFacing(lot).angle)*340;
         const lot=Vh.properties.filter(p=>!used.has(p.id)&&fit(p,type)).sort((a,b)=>cost(a)-cost(b))[0];
         if(!lot)throw Error('No eligible Office lot for '+pcTraditionalNames[index]);
@@ -54,9 +54,11 @@
           controls.target.set(0,50,0);controls.object.position.set(42,562,751);controls.object.fov=48;
         }else{
           const positions=Object.values(subjects).map(b=>record(b).placement);
-          const x=(Math.min(...positions.map(p=>p.x))+Math.max(...positions.map(p=>p.x)))/2;
-          const z=positions.reduce((sum,p)=>sum+p.z,0)/positions.length;
-          controls.target.set(x,48,z);controls.object.position.set(x+20,172,z+225);controls.object.fov=37;
+          const minX=Math.min(...positions.map(p=>p.x)),maxX=Math.max(...positions.map(p=>p.x));
+          const x=(minX+maxX)/2,z=positions.reduce((sum,p)=>sum+p.z,0)/positions.length;
+          const horizontalSpan=(maxX-minX+75)/Math.max(.6,controls.object.aspect);
+          const distance=Math.max(225,horizontalSpan*1.52);
+          controls.target.set(x,48,z);controls.object.position.set(x+distance*.075,48+distance*.55,z+distance);controls.object.fov=37;
         }
       }else{
         const b=subjects[type];if(!b)return;

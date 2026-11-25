@@ -26,6 +26,7 @@ test('three fixed native shapes fit rotated parcels and keep supported terraces,
     assert.ok(fit.ok,fit.reason);const r=fit.record,s=r.parameters,g=r.grid;
     assert.deepEqual(plain(a.pcTraditionalFit({...site},type).record),plain(r));
     assert.ok(a.sn(a.je(a.Te(r.footprint),a.Te(site.footprint)))<.001);
+    assert.equal(s.revision,2);
     assert.equal(r.placement.scale,1);assert.ok(Math.abs(r.placement.angle-(.4+i*.27))<.001);
     assert.equal(a.pcTraditionalFit(lot(type+'-small',s.width,s.depth),type).ok,false);
     assert.equal(a.pcTraditionalFit({...site,officeProfile:{maxFloors:12}},type).ok,false);
@@ -41,10 +42,27 @@ test('three fixed native shapes fit rotated parcels and keep supported terraces,
       assert.equal(mesh.material.transparent,false);assert.equal(mesh.geometry,copy.children[j].geometry);
       const p=mesh.geometry.attributes.position;
       for(let k=0;k<p.count;k++){
-        assert.ok(Math.abs(p.getX(k))<=s.width/2+1.176,type+' x envelope');
-        assert.ok(Math.abs(p.getZ(k))<=s.depth/2+1.176,type+' z envelope');
+        assert.ok(Math.abs(p.getX(k))<=s.width/2+1.751,type+' x envelope');
+        assert.ok(Math.abs(p.getZ(k))<=s.depth/2+1.751,type+' z envelope');
         assert.ok(p.getY(k)>=-.001&&p.getY(k)<=g.roofTop+.001,type+' roof envelope');
       }
+    }
+    const peak=g.tiers.at(-1),parts=label=>model.userData.partRanges.filter(r=>r.label===label);
+    const vertices=range=>{
+      const p=model.getObjectByName(range.material).geometry.attributes.position;
+      return Array.from({length:range.end-range.start},(_,j)=>[p.getX(range.start+j),p.getY(range.start+j),p.getZ(range.start+j)]);
+    };
+    const cornice=vertices(parts('projecting cornice').filter(r=>r.material==='trim').at(-1));
+    const right=Math.max(...peak.ring.map(([x])=>x));
+    assert.ok(Math.abs(Math.max(...cornice.map(([x])=>x))-right-1.63)<.001);
+    const tower=parts('rooftop water tower').flatMap(vertices);
+    assert.ok(Math.abs(Math.min(...tower.map(([,y])=>y))-peak.end)<.001);
+    assert.ok(Math.abs(Math.max(...tower.map(([,y])=>y))-g.roofTop)<.001);
+    const minX=Math.min(...tower.map(p=>p[0])),maxX=Math.max(...tower.map(p=>p[0]));
+    const minZ=Math.min(...tower.map(p=>p[2])),maxZ=Math.max(...tower.map(p=>p[2]));
+    assert.ok(a.sn(a.je(poly([[minX,minZ],[maxX,minZ],[maxX,maxZ],[minX,maxZ]]),poly(peak.ring)))<.001);
+    if(type==='C'){
+      assert.equal(s.width,46);assert.equal(s.depth,40);assert.equal(2*right,36);
     }
     data.push([type,s.storeys,model.userData.triangles,model.children.length]);
     rt.generator.release(model);rt.generator.release(copy);
@@ -96,4 +114,26 @@ test('explicit zoning selection retains foundations, picking, undo, cold restora
   const supported=a.pcFacadeAttach(sloped,rt.system.generate(r),rt,r);
   assert.ok(supported.children.some(mesh=>mesh.userData.pcFacadeOwned));
   a.pcFacadeRelease(supported);rt.system.release(supported);
+});
+
+test('earlier saved designs retain their exact geometry and native fit envelope',()=>{
+  const rt=api().pcTraditionalReady(),locks={
+    A:'18ba24aa17ab047ee79f72b3deaa59042e88440c1e7951f7b23bea0eb92dfd21',
+    B:'3f1cadd47466166cb826e396eeba026cce5dcfb21cfacda7d4df0f9c8992ac35',
+    C:'bc6f79645836665108109def2c4911ab6b37dfa7e288c595eed32b74ad136d0d'
+  };
+  for(const [archetype,expected] of Object.entries(locks)){
+    const site=lot(archetype,58,50),parameters=rt.system.definition.normalize({archetype});
+    const fit=rt.system.fit(site,{parameters});
+    assert.ok(fit.ok,fit.reason);assert.equal(fit.record.parameters.revision,undefined);
+    const [left,right]=fit.record.footprint;
+    assert.ok(Math.abs(right.x-left.x-parameters.width-2.35)<.001);
+    const model=rt.system.generate(plain(fit.record)),hash=crypto.createHash('sha256');
+    for(const mesh of model.children){
+      hash.update(mesh.name);
+      for(const {array} of [mesh.geometry.index,...Object.values(mesh.geometry.attributes)])hash.update(Buffer.from(array.buffer,array.byteOffset,array.byteLength));
+    }
+    assert.equal(hash.digest('hex'),expected);
+    rt.system.release(model);
+  }
 });
