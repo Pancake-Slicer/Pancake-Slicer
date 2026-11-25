@@ -10,7 +10,7 @@ const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const bundle=read('web/assets/game.bundle.js');
 const strip=source=>source.replace(/^import .*;\r?$/gm,'').replace(/^export /gm,'');
 
-test('fixed benchmark uses opaque batches and open, supported roof frames',()=>{
+test('fixed benchmark uses aligned windows, joined wings, revolving doors and open roof frames',()=>{
   const context=vm.createContext({console,performance,structuredClone,atob,URL,
     document:{createElement:()=>({relList:{supports:()=>true}})}});
   const prefix=bundle.slice(0,bundle.indexOf('const LP='));
@@ -26,10 +26,9 @@ test('fixed benchmark uses opaque batches and open, supported roof frames',()=>{
   assert.ok(study.core[4]>study.curve.roof && study.curve.roof>study.front[4] && study.front[4]>study.wing[4]);
 
   const frame=model.getObjectByName('frame').geometry;
-  const position=frame.getAttribute('position');
-  const index=frame.index.array;
   const area=(px,pz,qx,qz,rx,rz)=>(qx-px)*(rz-pz)-(qz-pz)*(rx-px);
-  function covers(range,x,z){
+  function covers(geometry,range,x,z){
+    const position=geometry.getAttribute('position'),index=geometry.index.array;
     for(let i=0;i<index.length;i+=3){
       const a=index[i],b=index[i+1],c=index[i+2];
       if([a,b,c].some(vertex=>vertex<range.start || vertex>=range.end))continue;
@@ -47,12 +46,46 @@ test('fixed benchmark uses opaque batches and open, supported roof frames',()=>{
   ]){
     const part=model.userData.partRanges.find(range=>range.label===label && range.material==='frame');
     assert.ok(part,label);
+    const position=frame.getAttribute('position');
     const heights=Array.from({length:part.end-part.start},(_,i)=>position.getY(part.start+i));
     assert.ok(Math.min(...heights)<deckY+.5);
     assert.ok(Math.max(...heights)>deckY+1.2);
-    assert.ok(covers(part,...rail),label+' continuous outer rail');
-    assert.ok(covers(part,...brace),label+' solid radial brace');
-    assert.equal(covers(part,...gap),false,label+' open bay');
+    assert.ok(covers(frame,part,...rail),label+' continuous outer rail');
+    assert.ok(covers(frame,part,...brace),label+' solid radial brace');
+    assert.equal(covers(frame,part,...gap),false,label+' open bay');
+  }
+
+  const glass=model.getObjectByName('glass').geometry.getAttribute('position');
+  const windows=['Curved curtain wall and main roof','Front tower','Rear service core','Recessed right wing'];
+  for(const label of windows){
+    const range=model.userData.partRanges.find(part=>part.label===label && part.material==='glass');
+    assert.ok(range,label);
+    const heights=Array.from({length:range.end-range.start},(_,i)=>glass.getY(range.start+i))
+      .filter(y=>y>20 && y<70).map(y=>y.toFixed(3));
+    const expected=[];
+    const {roof,lobby,floors}=study.curve,storey=(roof-lobby)/floors;
+    for(let floor=0;floor<floors;floor++){
+      for(const y of [lobby+floor*storey+.36,lobby+(floor+1)*storey-.37]){
+        if(y>20 && y<70)expected.push(y.toFixed(3));
+      }
+    }
+    assert.deepEqual([...new Set(heights)].sort(),expected.sort(),label+' window sills and heads');
+  }
+
+  assert.equal(study.front[2],study.core[3]);
+  const terrace=model.userData.partRanges.find(part=>part.label==='Front tower' && part.material==='gravel');
+  const gravel=model.getObjectByName('gravel').geometry;
+  assert.ok(covers(gravel,terrace,12,study.core[3]+.02),'the terrace reaches the service core');
+  for(const x of [-1.8,4,14]){
+    assert.ok(covers(gravel,terrace,x,-2),'the former gap is roofed');
+  }
+
+  const doors=model.userData.partRanges.filter(part=>part.label==='Revolving entrance doors' && part.material==='glass');
+  assert.equal(doors.length,2);
+  for(const door of doors){
+    assert.equal(door.end-door.start,(12+4)*8,'each door has curved screens and four two-sided leaves');
+    const positions=Array.from({length:door.end-door.start},(_,i)=>glass.getZ(door.start+i));
+    assert.ok(Math.min(...positions)<21.4 && Math.max(...positions)>22.4,'the drum straddles the storefront');
   }
 });
 

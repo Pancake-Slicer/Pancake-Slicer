@@ -3,10 +3,14 @@ export function createStudy(T,ArchitectureBatch){
   const study = Object.freeze({
     curve: {x:-9, z:-17, rx:17.5, rz:26, roof:111, floors:26, lobby:15},
     core: [1,19,-18,-4.5,112],
-    front: [-2,16,2,22,97.4],
+    front: [-2,16,-4.5,22,97.4],
     wing: [16,23,-16,17,75.8],
     base: [[-27,-21,-17,17,14],[-21,-2,-17,22,11.4],[-2,16,-6,22,11.4],[16,23,-16,17,9.2]]
   });
+  const {x:cx,z:cz,rx,rz,roof,floors,lobby}=study.curve;
+  const storey=(roof-lobby)/floors;
+  const datum=n=>lobby+n*storey;
+  const sill=.36, headroom=storey-.37;
   const hash = (x,y) => ((Math.imul(x+611,73856093)^Math.imul(y+952,19349663))>>>0)%251/250;
   const mix = (a,b,t) => a+(b-a)*t;
   function texture(w,h,pixel){
@@ -83,72 +87,83 @@ export function createStudy(T,ArchitectureBatch){
   };
   const atlas=index=>[(index*64+.5)/512,(index*64+63.5)/512];
   const rect=([x0,x1,z0,z1])=>[[x0,z1],[x1,z1],[x1,z0],[x0,z0]];
-  function facade(batch,a,b,lo,hi,bays,floors,style){
-    const length=Math.hypot(b[0]-a[0],b[1]-a[1]), pitch=length/bays, height=(hi-lo)/floors;
+  function facade(batch,a,b,lo,hi,bays,style){
+    const length=Math.hypot(b[0]-a[0],b[1]-a[1]), pitch=length/bays;
     const dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length;
     const point=(u,y,n)=>[a[0]+dx*u-dz*n,y,a[1]+dz*u+dx*n];
     const face=(material,x0,x1,y0,y1,n,uv)=>batch.quad(material,
       [point(x0,y0,n),point(x1,y0,n),point(x1,y1,n),point(x0,y1,n)],uv);
-    const beam=(material,x0,x1,y,n,depth,h)=>batch.beam(material,point(x0,y,n),point(x1,y,n),depth,h);
     const cladding=style==='wing' || (dz<-.9 && a[0]>0)?'sidePanel':'panel';
     face('joint',0,length,lo,hi,-.36);
     const entry=style==='entry', crown=style==='crown', service=style==='core', wing=style==='wing', blind=style==='blind';
-    for(let floor=0;floor<floors;floor++){
-      const y=lo+floor*height;
+    const first=entry?0:Math.floor((lo-lobby)/storey+1e-7);
+    const end=entry?1:Math.ceil((hi-lobby)/storey-1e-7);
+    for(let floor=first;floor<end;floor++){
+      const y=entry?lo:datum(floor);
+      const bottom=entry?lo+.10:y+sill, head=entry?lo+(hi-lo)*.81:y+headroom;
+      const rowLo=Math.max(lo,y),rowHi=entry?hi:Math.min(hi,y+storey);
+      if(rowHi-rowLo<=.048)continue;
+      const fullWindow=bottom>rowLo && head<rowHi;
       for(let i=0;i<bays;i++){
         const left=i*pitch,right=left+pitch,c=(left+right)*.5;
-        const opening=blind?0:service?(i===bays-2?pitch*.43:0):pitch*(entry?.83:crown?.88:wing?.62:.72);
+        const opening=blind || !fullWindow?0:service?(i===bays-2?pitch*.43:0):pitch*(entry?.83:crown?.88:wing?.62:.72);
         if(!opening){
-          face(cladding,left+.028,right-.028,y+.024,y+height-.024,0);
+          face(cladding,left+.028,right-.028,rowLo+.024,rowHi-.024,0);
           continue;
         }
-        const bottom=y+(entry?.10:height*(crown?.055:.18)),head=y+height*(crown?.95:entry?.81:.80);
         const l=c-opening/2,r=c+opening/2;
-        face(cladding,left+.028,l,y+.024,y+height-.024,0);
-        face(cladding,r,right-.028,y+.024,y+height-.024,0);
-        face(cladding,l,r,y+.024,bottom,0);
-        face(cladding,l,r,head,y+height-.024,0);
+        face(cladding,left+.028,l,rowLo+.024,rowHi-.024,0);
+        face(cladding,r,right-.028,rowLo+.024,rowHi-.024,0);
+        face(cladding,l,r,rowLo+.024,bottom,0);
+        face(cladding,l,r,head,rowHi-.024,0);
         batch.quad('reveal',[point(l,bottom,0),point(r,bottom,0),point(r,bottom,-.35),point(l,bottom,-.35)]);
         batch.quad('reveal',[point(l,bottom,-.35),point(l,head,-.35),point(l,head,0),point(l,bottom,0)]);
         batch.quad('reveal',[point(r,bottom,0),point(r,head,0),point(r,head,-.35),point(r,bottom,-.35)]);
         batch.quad('reveal',[point(l,head,-.35),point(r,head,-.35),point(r,head,0),point(l,head,0)]);
         const [u0,u1]=atlas((i*3+floor*5+bays)%8);
-        face('glass',l,r,bottom,head,-.34,[u0,0,u1,0,u1,1,u0,1]);
-        beam('silver',l,r,mix(bottom,head,entry?.73:.58),-.28,.10,.10);
-        if(!entry && !service && !crown)beam('reveal',l,r,mix(bottom,head,.34),-.29,.08,.06);
+        const glazed=(x0,x1,y0,y1)=>face('glass',x0,x1,y0,y1,-.34,[u0,0,u1,0,u1,1,u0,1]);
+        const revolving=entry && (i===1 || i===2);
+        if(revolving){
+          const halfDoor=1.19, canopy=2.88;
+          glazed(l,c-halfDoor,bottom,canopy);
+          glazed(c+halfDoor,r,bottom,canopy);
+          glazed(l,r,canopy,head);
+          const [x,,z]=point(c,0,-.33);
+          surround('Revolving entrance doors',batch,()=>revolvingDoor(batch,x,z));
+        }else{
+          glazed(l,r,bottom,head);
+        }
+        const transom=entry?3.33:mix(bottom,head,.58);
+        face('silver',l,r,transom-.05,transom+.05,-.28);
+        if(!entry && !service && !crown){
+          const lower=mix(bottom,head,.34);
+          face('reveal',l,r,lower-.03,lower+.03,-.29);
+        }
         if(entry){
-          for(const x of [c-opening*.22,c,c+opening*.22]){
+          const divisions=revolving?[c-opening*.29,c+opening*.29]:[c-opening*.22,c,c+opening*.22];
+          for(const x of divisions){
             const [xx,,zz]=point(x,0,-.23);
             batch.box('frame',xx,(bottom+head)/2,zz,.10,head-bottom,.10);
-          }
-          if(i===1||i===2){
-            beam('frame',c-.84,c+.84,bottom+2.65,-.15,.12,.11);
-            for(const off of [-.12,.12]){
-              const [x,,z]=point(c+off,0,-.12);
-              batch.box('silver',x,bottom+1.32,z,.045,.39,.055);
-            }
           }
         }
       }
     }
   }
-  function deck(batch,volume){
+  function deck(batch,volume,parapet=[...rect(volume),rect(volume)[0]]){
     const [x0,x1,z0,z1,y]=volume;
     top(batch,'gravel',x0,x1,z0,z1,y);
-    const corners=rect(volume);
-    for(let i=0;i<4;i++){
-      const [x,z]=corners[i],[nx,nz]=corners[(i+1)%4];
+    for(let i=1;i<parapet.length;i++){
+      const [x,z]=parapet[i-1],[nx,nz]=parapet[i];
       batch.beam('panel',[x,y+.26,z],[nx,y+.26,nz],.27,.52);
       batch.beam('silver',[x,y+.53,z],[nx,y+.53,nz],.33,.09);
     }
   }
-  function rectangularVolume(batch,volume,y0,floors,bays,style){
+  function rectangularVolume(batch,volume,y0,bays,style){
     const outline=rect(volume);
     for(let i=0;i<4;i++)facade(batch,outline[i],outline[(i+1)%4],y0,volume[4],
-      bays[i],floors,i===0?style:style==='core'?'blind':'wing');
+      bays[i],i===0?style:style==='core'?'blind':'wing');
     deck(batch,volume);
   }
-  const {x:cx,z:cz,rx,rz,roof,floors,lobby}=study.curve;
   const curvePoint=(t,y,offset=0)=>[cx+(rx+offset)*Math.cos(t),y,cz+(rz+offset)*Math.sin(t)];
   // Equidistant façade modules on the ellipse. Each module has two rendered facets.
   function equalArc(count){
@@ -165,14 +180,14 @@ export function createStudy(T,ArchitectureBatch){
     });
   }
   function curvedTower(batch){
-    const angles=equalArc(68),floor=(roof-lobby)/floors;
+    const angles=equalArc(68);
     const strip=(material,lo,hi,offset,uvFor)=>angles.slice(1).forEach((b,i)=>{
       const a=angles[i];
       batch.quad(material,[curvePoint(b,lo,offset),curvePoint(a,lo,offset),
         curvePoint(a,hi,offset),curvePoint(b,hi,offset)],uvFor?.(i));
     });
     const last=curvePoint(Math.PI,0),first=curvePoint(0,0);
-    facade(batch,[first[0],first[2]],[last[0],last[2]],lobby,roof,10,floors,'wing');
+    facade(batch,[first[0],first[2]],[last[0],last[2]],lobby,roof,10,'wing');
     strip('dark',8,lobby,-.34);
     strip('reveal',lobby-.08,roof,-.085);
     for(let i=0;i<34;i+=2){
@@ -183,13 +198,14 @@ export function createStudy(T,ArchitectureBatch){
       batch.box('panel',x,12.3,z,.59,5.5,.57);
     }
     for(let n=0;n<floors;n++){
-      const y=lobby+n*floor,crown=n>=floors-2;
-      strip('glass',y+.36,y+floor,.0,i=>{
+      const y=datum(n),crown=n>=floors-2;
+      strip('glass',y+sill,y+headroom,0,i=>{
         const [u0,u1]=atlas((Math.floor(i/2)*5+n*3)%8);
         const mid=(u0+u1)/2;
         return i%2?[mid,0,u0,0,u0,1,mid,1]:[u1,0,mid,0,mid,1,u1,1];
       });
       const projection=crown?.61:.32, edge=y+(crown?.56:.29);
+      strip('reveal',y+headroom,y+storey,0);
       strip('silver',y-.05,edge,projection);
       for(let i=0;i<angles.length-1;i++){
         const a=angles[i],b=angles[i+1];
@@ -198,7 +214,7 @@ export function createStudy(T,ArchitectureBatch){
       }
       for(let i=0;i<angles.length-1;i+=2){
         const [x,,z]=curvePoint(angles[i],0,.025);
-        batch.box(crown?'silver':'reveal',x,y+(floor+.25)/2,z,crown?.20:.068,floor-.28,crown?.20:.068);
+        batch.box(crown?'silver':'reveal',x,y+(sill+headroom)/2,z,crown?.20:.068,headroom-sill,crown?.20:.068);
       }
     }
     strip('silver',roof-.23,roof+.44,.23);
@@ -289,6 +305,37 @@ export function createStudy(T,ArchitectureBatch){
       batch.triangle(material,[[x,y+height,z],p(b,y+height),p(a,y+height)]);
     }
   }
+  function revolvingDoor(batch,x,z){
+    const radius=1.17, canopy=2.88;
+    cylinder(batch,'frame',x,z,canopy-.16,.16,radius+.045);
+    cylinder(batch,'silver',x,z,.018,.07,radius+.015);
+    batch.box('silver',x,1.40,z,.12,2.64,.12);
+    const p=(angle,y,r=radius)=>[x+r*Math.cos(angle),y,z+r*Math.sin(angle)];
+    const glassPair=(a,b,c,d)=>{
+      const [u0,u1]=atlas(2);
+      batch.quad('glass',[a,b,c,d],[u0,0,u1,0,u1,1,u0,1]);
+      batch.quad('glass',[b,a,d,c],[u1,0,u0,0,u0,1,u1,1]);
+    };
+    // Two curved side screens leave the street and lobby openings clear.
+    for(const side of [0,Math.PI]){
+      for(let i=0;i<6;i++){
+        const a=side+(i-3)*Math.PI/15,b=a+Math.PI/15;
+        glassPair(p(a,.10),p(b,.10),p(b,2.70),p(a,2.70));
+        batch.beam('frame',p(a,.13),p(b,.13),.05,.075);
+      }
+      for(const angle of [side-Math.PI/5,side,side+Math.PI/5]){
+        const [px,,pz]=p(angle,0);
+        batch.box('silver',px,1.40,pz,.065,2.67,.065);
+      }
+    }
+    for(let i=0;i<4;i++){
+      const angle=Math.PI/4+i*Math.PI/2;
+      glassPair(p(angle,.14,.075),p(angle,.14,1.10),p(angle,2.67,1.10),p(angle,2.67,.075));
+      for(const y of [.18,1.25,2.64])batch.beam('frame',p(angle,y,.08),p(angle,y,1.10),.052,.062);
+      const [px,,pz]=p(angle,0,1.10);
+      batch.box('silver',px,1.40,pz,.06,2.55,.06);
+    }
+  }
   function ac(batch,x,z,y,wide=false){
     const size=wide?3.08:2.08;
     batch.box('dark',x,y+.11,z,size+.16,.22,size+.16);
@@ -321,30 +368,34 @@ export function createStudy(T,ArchitectureBatch){
     const batch=new ArchitectureBatch;
     surround('Stepped street podium',batch,()=>{
       const front=[-21,16,-17,22,11.4];
-      facade(batch,[-21,22],[16,22],0,5.45,5,1,'entry');
-      facade(batch,[-21,22],[-2,22],5.45,11.4,4,1,'office');
-      facade(batch,[16,22],[16,-17],0,11.4,7,2,'wing');
-      facade(batch,[16,-17],[-21,-17],0,11.4,8,2,'wing');
+      facade(batch,[-21,22],[16,22],0,5.45,5,'entry');
+      facade(batch,[-21,22],[-2,22],5.45,11.4,4,'office');
+      facade(batch,[16,22],[16,-17],0,11.4,7,'wing');
+      facade(batch,[16,-17],[-21,-17],0,11.4,8,'wing');
       deck(batch,front);
-      rectangularVolume(batch,study.base[0],0,3,[1,6,1,6],'core');
-      rectangularVolume(batch,study.base[3],0,2,[2,5,2,5],'wing');
+      rectangularVolume(batch,study.base[0],0,[1,6,1,6],'core');
+      rectangularVolume(batch,study.base[3],0,[2,5,2,5],'wing');
     });
     surround('Curved curtain wall and main roof',batch,()=>curvedTower(batch));
-    surround('Recessed right wing',batch,()=>rectangularVolume(batch,study.wing,9.2,13,[1,6,1,6],'wing'));
+    surround('Recessed right wing',batch,()=>rectangularVolume(batch,study.wing,9.2,[1,6,1,6],'wing'));
     surround('Front tower',batch,()=>{
-      const [x0,x1,z0,z1,y]=study.front,outline=rect(study.front),crown=y-4.1;
-      for(let i=0;i<4;i++)facade(batch,outline[i],outline[(i+1)%4],5.45,crown,4,14,i===0?'office':'wing');
-      facade(batch,[x0+.35,z1-.62],[x1-.35,z1-.62],crown,y,4,1,'crown');
-      facade(batch,[x1-.42,z1-.62],[x1-.42,z0],crown,y,4,1,'crown');
-      facade(batch,[x0+.3,z0],[x0+.3,z1],crown,y,4,1,'wing');
-      facade(batch,[x1-.42,z0],[x0+.3,z0],crown,y,4,1,'wing');
-      for(let i=0;i<=4;i++)batch.box('silver',mix(x0+.16,x1-.16,i/4),crown+2.08,z1-.12,.53,4.16,.67);
-      for(let i=1;i<=4;i++)batch.box('silver',x1-.10,crown+2.08,mix(z1-.16,z0+.16,i/4),.60,4.16,.49);
+      const [x0,x1,z0,z1,y]=study.front;
+      const crown=datum(Math.floor((y-lobby)/storey)-1), crownHeight=y-crown;
+      // The terrace meets the core along its back and passes into the curve at the inside corner.
+      const curveJoin=cz+rz*Math.sqrt(1-((x0-cx)/rx)**2);
+      facade(batch,[x0,z1],[x1,z1],5.45,crown,4,'office');
+      facade(batch,[x1,z1],[x1,z0],5.45,crown,5,'wing');
+      facade(batch,[x0,curveJoin],[x0,z1],5.45,crown,3,'wing');
+      facade(batch,[x0+.35,z1-.62],[x1-.35,z1-.62],crown,y,4,'crown');
+      facade(batch,[x1-.42,z1-.62],[x1-.42,z0],crown,y,5,'crown');
+      facade(batch,[x0+.3,curveJoin],[x0+.3,z1],crown,y,3,'wing');
+      for(let i=0;i<=4;i++)batch.box('silver',mix(x0+.16,x1-.16,i/4),crown+crownHeight/2,z1-.12,.53,crownHeight,.67);
+      for(let i=1;i<=5;i++)batch.box('silver',x1-.10,crown+crownHeight/2,mix(z1-.16,z0+.16,i/5),.60,crownHeight,.49);
       batch.beam('silver',[x0,crown,z1],[x1,crown,z1],.79,.31);
       batch.beam('silver',[x1,crown,z1],[x1,crown,z0],.79,.31);
-      deck(batch,study.front);
+      deck(batch,study.front,[[x0,curveJoin],[x0,z1],[x1,z1],[x1,z0]]);
     });
-    surround('Rear service core',batch,()=>rectangularVolume(batch,study.core,0,26,[5,3,5,3],'core'));
+    surround('Rear service core',batch,()=>rectangularVolume(batch,study.core,0,[5,3,5,3],'core'));
     surround('Curved roof perimeter frame',batch,()=>curvedFrame(batch));
     surround('Lower rounded roof perimeter frame',batch,()=>frontFrame(batch));
     surround('Mechanical equipment and twin antennas',batch,()=>equipment(batch));

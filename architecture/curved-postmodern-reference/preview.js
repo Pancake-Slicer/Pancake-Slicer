@@ -18,9 +18,12 @@
   const direction=new T.Vector3(Math.sin(yaw)*Math.cos(elevation),Math.sin(elevation),Math.cos(yaw)*Math.cos(elevation));
   const controls=Gt.controls;
   function frame(view){
-    const [x,y,z,distance]={matched:[-1,55,-1,338],roof:[-6,104,-6,148],entry:[-2,8,19,88]}[view];
+    const [x,y,z,distance]={matched:[-1,55,-1,338],roof:[-6,104,-6,148],join:[3,98,-3,130],entry:[-6,4,22,41]}[view];
+    const angle=view==='join'?78:view==='entry'?13:null;
+    const viewDirection=angle===null?direction:new T.Vector3(
+      Math.sin(yaw)*Math.cos(angle*Math.PI/180),Math.sin(angle*Math.PI/180),Math.cos(yaw)*Math.cos(angle*Math.PI/180));
     controls.target.set(x,base+y,z);
-    controls.object.position.copy(controls.target).addScaledVector(direction,distance);
+    controls.object.position.copy(controls.target).addScaledVector(viewDirection,distance);
     controls.object.fov=29;
     controls.object.updateProjectionMatrix();
     controls.enableDamping=false;
@@ -30,7 +33,7 @@
   const tools=document.createElement('details');
   tools.open=true;
   tools.style.cssText='position:fixed;top:12px;left:12px;z-index:45;padding:10px 12px;background:#183031;color:#fff;font:14px system-ui;border-radius:6px';
-  tools.innerHTML='<summary>Curved Postmodern Office</summary><p><button data-view="matched">Reference angle</button> <button data-view="roof">Roof frames</button> <button data-view="entry">Entrances</button> <button data-view="compare">Side by side</button></p>';
+  tools.innerHTML='<summary>Curved Postmodern Office</summary><p><button data-view="matched">Reference angle</button> <button data-view="roof">Roof frames</button> <button data-view="join">Wing junction</button> <button data-view="entry">Entrances</button> <button data-view="compare">Side by side</button></p>';
   for(const button of tools.querySelectorAll('button'))button.style.cssText='background:#edf3f0;color:#183031;border:1px solid #9caeaa;border-radius:3px;padding:4px 7px;cursor:pointer';
   document.body.append(tools);
   let comparison;

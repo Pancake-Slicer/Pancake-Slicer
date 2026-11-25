@@ -682,3 +682,9 @@ Enable **Experimental Vault Offices** under **Development → Lightweight office
 - `npm run build` and `node --test scripts/curved-postmodern-reference.test.cjs` passed. Offline Chrome verified the playable city, matched-angle comparison, roof and entrance views, and absence of external requests. The focused tests check frame rails, radial braces, open bays, and catalogue exclusion.
 - Rebuild with `node scripts/export-curved-postmodern-reference.cjs <reference.png>`. The supplied reference and captures are retained under `.tools/curved-postmodern-reference/`. Reference SHA-256 ac3f05c9810b07cf47a626d8dafdeb08aab5df5f6913779fba9a421bbadbff43.
 - Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T170756Z.html (SHA-256 6284c3415da1b916a7901d057d43b508e9003b42407e1188d7562cd14ea67471). The recovery checkpoint is `checkpoint/pre-curved-postmodern-reference-448a47a`. Await visual approval before developing original variants.
+
+### Window alignment, wing junction and revolving doors
+
+- The curved curtain wall, front tower, service core and recessed wing now share a storey grid with matching window sills and heads. The front terrace extends into the curved wing and directly meets the service core. Two street entrances use static 3D revolving doors with curved side screens and four glazed leaves each.
+- The preview adds an overhead Wing junction view and a closer Entrances view. Geometry tests verified aligned glazing, continuous terrace coverage, both door assemblies and the open roof frames. Offline Chrome verified the review views and matched-angle comparison. The revised model uses 51,902 triangles and 11 opaque batches.
+- Playable preview Pancake City - Curved Postmodern Office Preview - 20261125T171320Z.html (SHA-256 e2278bcd65e1f744c69b807fb5d0f917bae28984120c77df3362ee8a332110b5). Rollback checkpoint `checkpoint/pre-curved-postmodern-wing-join-c49b71f`.
